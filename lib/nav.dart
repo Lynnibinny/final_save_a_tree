@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:save_a_tree/startgoals_widget.dart';
+import 'package:save_a_tree/startmap_widget.dart';
+import 'package:save_a_tree/startcomunity_widget.dart';
+import 'package:save_a_tree/startprofile_widget.dart';
 
 class Nav extends StatefulWidget {
   @override
@@ -17,12 +20,15 @@ class _NavState extends State<Nav> {
     //selected Widget = Widget list
 
     StartGoalsWidget(),
+    StartMapWidget(),
+    StartComunityWidget(),
+    StartProfileWidget(),
 
-    Text('Map'),
+    //Text('Map'),
 
-    Text('Comunity'),
+    //Text('Comunity'),
 
-    Text('Profile'),
+    //Text('Profile'),
   ];
 
   void onTabTapped(int index) {
