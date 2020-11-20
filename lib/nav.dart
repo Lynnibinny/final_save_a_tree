@@ -40,9 +40,9 @@ class _NavState extends State<Nav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Bottom Nav Bar'),
-      ),
+      //appBar: AppBar(
+        //title: Text('Bottom Nav Bar'),
+      //),
       body: Center(
         child: _widgetOptions.elementAt(_currentIndex),
       ),
