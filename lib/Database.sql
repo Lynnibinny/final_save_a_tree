@@ -3,7 +3,7 @@ USE Save_A_Tree;
 CREATE TABLE TProfile (
 Mail VARCHAR(35) PRIMARY KEY,
 UserName VARCHAR(35),
-ProfilePicture IMAGE,
+ProfilePicture LONGBLOB,
 SavedTrees INT,
 Donated DECIMAL(7.2),
 Password VARCHAR(100),
