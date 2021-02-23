@@ -1,10 +1,14 @@
-CREATE DATABASE Save_A_Tree DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;;
+CREATE DATABASE Save_A_Tree DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE Save_A_Tree;
 CREATE TABLE TProfile (
-Mail VARCHAR(35) PRIMARY KEY,
-UserName VARCHAR(35),
-ProfilePicture LONGBLOB,
-SavedTrees INT,
-Donated DECIMAL(7.2),
-Password VARCHAR(100),
+    ProMail VARCHAR(35) PRIMARY KEY,
+    ProUserName VARCHAR(35),
+    ProPicture LONGBLOB,
+    ProSavedTrees INT,
+    ProDonated DECIMAL(7,2),
+    ProPassword VARCHAR(100)
 );
+INSERT INTO TProfile VALUES ('lynn.nuesch@me.com','lynni',NULL,0,0.0,'Uk$12?HB7');
+
+select * from TProfile;
+
