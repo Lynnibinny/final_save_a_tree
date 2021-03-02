@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
-
 import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
 
-
 class StartProfileWidget extends StatelessWidget {
+  Widget build(BuildContext context) {
+    Row(
+      children: <Widget>[
+        Expanded(
+          child: FittedBox(
+            fit: BoxFit.contain,
+            //width: 200.0,
+            //height: 300.0,
+            child: const Card(child: Text('Hello!')),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/*class StartProfileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     const SizedBox(height: 30);
     return Center(
@@ -26,7 +41,7 @@ class StartProfileWidget extends StatelessWidget {
     );
   }
 }
-
+*/
 /*void main () async{
   class Profile {
     final int id;
