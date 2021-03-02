@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+/*
 var ProMail = "uiuiuiuiui@me.com";
 var ProUserName = "lele";
 var ProPicture = "00110";
@@ -46,6 +47,7 @@ class Album {
     );
   }
 }
+*/
 
 void main() => runApp(MyApp());
 

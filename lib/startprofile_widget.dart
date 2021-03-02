@@ -12,8 +12,7 @@ class StartProfileWidget extends StatelessWidget {
     return Center(
       child: RaisedButton(
         onPressed: () {},
-        child: const Text('Enabled Button', style: TextStyle(fontSize: 20)),
-        
+        child: const Text('Jetzt spenden!', style: TextStyle(fontSize: 20)),
       ),
     );
   }
