@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 
-/*import 'dart:async';
+import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
-*/
+
 
 class StartProfileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
+    SizedBox(
+      width: 200.0,
+      height: 300.0,
+      child: const Card(child: Text('Hello World!')),
+    );
     const SizedBox(height: 30);
 
     return Center(
       child: RaisedButton(
         onPressed: () {},
-        child: const Text('Enabled Button', style: TextStyle(fontSize: 20)),
-        
+        child: const Text('jetzt spenden', style: TextStyle(fontSize: 20)),
       ),
     );
   }
