@@ -12,12 +12,12 @@ class StartProfileWidget extends StatelessWidget {
       height: 300.0,
       child: const Card(child: Text('Hello World!')),
     );
-    const SizedBox(height: 30);
 
+    const SizedBox(height: 30);
     return Center(
       child: RaisedButton(
         onPressed: () {},
-        child: const Text('jetzt spenden', style: TextStyle(fontSize: 20)),
+        child: const Text('Jetzt spenden!', style: TextStyle(fontSize: 20)),
       ),
     );
   }
