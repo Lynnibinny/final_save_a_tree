@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-/*import 'dart:async';
+import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
-*/
+
 
 class StartProfileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
