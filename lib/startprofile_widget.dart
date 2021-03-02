@@ -1,23 +1,30 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
 
 class StartProfileWidget extends StatelessWidget {
+  List<bool> _selections = List.generate(3, (_) => false);
   Widget build(BuildContext context) {
-    Row(
-      children: <Widget>[
-        Expanded(
-          child: FittedBox(
-            fit: BoxFit.contain,
-            //width: 200.0,
-            //height: 300.0,
-            child: const Card(child: Text('Hello!')),
-          ),
-        ),
-      ],
+    return Center(
+      child: ToggleButtons(
+          children: <Widget>[
+            Icon(Icons.eco),
+            Icon(Icons.group_rounded),
+            Icon(Icons.cake),
+          ],
+          isSelected: _selections,
+          onPressed: (int index) {
+            setState(() {
+              _selections[index] = !_selections[index];
+            });
+          }),
     );
   }
+
+  void setState(Null Function() param0) {}
 }
 
 /*class StartProfileWidget extends StatelessWidget {
