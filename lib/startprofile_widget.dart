@@ -7,12 +7,16 @@ import 'package:path/path.dart';
 
 class StartProfileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
-    SizedBox(
+    const SizedBox(height: 30);
+    return Center(
+        child: SizedBox(
       width: 200.0,
       height: 300.0,
       child: const Card(child: Text('Hello World!')),
-    );
+    ));
+  }
 
+  Widget buildButton(BuildContext context) {
     const SizedBox(height: 30);
     return Center(
       child: RaisedButton(
