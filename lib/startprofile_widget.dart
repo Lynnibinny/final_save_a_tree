@@ -1,32 +1,19 @@
-import 'dart:html';
-
+//import 'dart:html';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
 
 class StartProfileWidget extends StatelessWidget {
-  List<bool> _selections = List.generate(3, (_) => false);
   Widget build(BuildContext context) {
     return Center(
-      child: ToggleButtons(
-          children: <Widget>[
-            Icon(Icons.eco),
-            Icon(Icons.group_rounded),
-            Icon(Icons.cake),
-          ],
-          isSelected: _selections,
-          onPressed: (int index) {
-            setState(() {
-              _selections[index] = !_selections[index];
-            });
-          }),
+      child: ElevatedButton(
+        child: Text("Button"),
+        onPressed: () {},
+      ),
     );
   }
-
-  void setState(Null Function() param0) {}
 }
-
 /*class StartProfileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     const SizedBox(height: 30);
