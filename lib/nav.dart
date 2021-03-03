@@ -22,13 +22,7 @@ class _NavState extends State<Nav> {
     StartGoalsWidget(),
     StartMapWidget(),
     StartComunityWidget(),
-    StartProfileWidget(),
-
-    //Text('Map'),
-
-    //Text('Comunity'),
-
-    //Text('Profile'),
+    StartProfile(),
   ];
 
   void onTabTapped(int index) {
@@ -40,9 +34,9 @@ class _NavState extends State<Nav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: AppBar(
-        //title: Text('Bottom Nav Bar'),
-      //),
+      appBar: AppBar(
+        title: Text('Save A Tree'),
+      ),
       body: Center(
         child: _widgetOptions.elementAt(_currentIndex),
       ),

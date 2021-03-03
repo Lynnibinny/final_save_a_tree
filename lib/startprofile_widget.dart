@@ -1,19 +1,106 @@
 //import 'dart:html';
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
+import 'package:save_a_tree/startgoals_widget.dart';
 
-class StartProfileWidget extends StatelessWidget {
+class StartProfile extends StatefulWidget {
+  @override
+  StartProfileState createState() => new StartProfileState();
+}
+
+class StartProfileState extends State<StartProfile> {
+  void function() {}
+  @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
+    return new Scaffold(
+        body: new RaisedButton(
+      onPressed: function,
+      child: new Row(children: <Widget>[
+        new Icon(Icons.cake),
+        new Text("en guete"),
+      ]),
+    ));
+  }
+}
+
+//
+//
+/*class Nav extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _NavState();
+  }
+}
+
+class _NavState extends State<Nav> {
+  int _currentIndex = 0; //current Index to describe wheter button was pressed or not
+
+  void onPressedPressed() {
+    setState(() {
+      _currentIndex = 1;
+    });
+  }
+
+  Widget buildButton(BuildContext context) {
+    return new Scaffold(
+      body: new ElevatedButton(
         child: Text("Button"),
-        onPressed: () {},
+        child: Icon(Icons.access_alarm),
+        onPressed: onPressedPressed,
       ),
     );
   }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      if (_currentIndex == 1) then {
+        body: Center(
+          child: StartGoalsWidget(),
+        ),
+      }
+      
+    );
+  }
+
 }
+*/
+//
+//
+//
+/*class StartProfileWidget extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _SPWState();
+  }
+}
+
+class _SPWState extends State {
+  int _currentIndex = 0;
+
+  void onPressPressed(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: StartGoalsWidget.elementAt(_currentIndex),
+      ),
+      child: RaisedButton(
+        child: Text("Button"),
+        onPressed: onPressPressed,
+      ),
+    );
+  }
+}*/
 /*class StartProfileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     const SizedBox(height: 30);
@@ -46,5 +133,4 @@ class StartProfileWidget extends StatelessWidget {
 
     Profile({this.id, this.name, this.age});
   }
-}
-*/
+}*/
