@@ -1,30 +1,46 @@
-import 'dart:html';
+//import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
+import 'package:save_a_tree/main.dart';
+import 'package:save_a_tree/startgoals_widget.dart';
+
+var ProUserName = "Yarina";
 
 class StartProfileWidget extends StatelessWidget {
   List<bool> _selections = List.generate(3, (_) => false);
   Widget build(BuildContext context) {
     return Center(
-      child: ToggleButtons(
-          children: <Widget>[
-            Icon(Icons.eco),
-            Icon(Icons.group_rounded),
-            Icon(Icons.cake),
-          ],
-          isSelected: _selections,
-          onPressed: (int index) {
-            setState(() {
-              _selections[index] = !_selections[index];
-            });
-          }),
+      child: Column(children: <Widget>[
+        SizedBox(
+          height: 250.0,
+        ),
+        CircleAvatar(
+          backgroundColor: Colors.white,
+          radius: 50,
+          child: Icon(
+            Icons.local_florist,
+            color: Colors.red.shade900,
+            size: 50,
+          ),
+        ),
+        Text(
+          ProUserName,
+          textScaleFactor: 2.0,
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        /* TextFormField(
+  decoration: InputDecoration(
+    labelText: 'Enter your username'
+  ),
+);*/
+      ]),
     );
   }
-
-  void setState(Null Function() param0) {}
 }
 
 /*class StartProfileWidget extends StatelessWidget {
