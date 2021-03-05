@@ -34,9 +34,9 @@ class _NavState extends State<Nav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         title: Text('Save A Tree'),
-      ),
+      ),*/
       body: Center(
         child: _widgetOptions.elementAt(_currentIndex),
       ),

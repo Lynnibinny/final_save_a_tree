@@ -1,33 +1,96 @@
 //import 'dart:html';
-import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
+import 'package:save_a_tree/startcomunity_widget.dart';
 import 'package:save_a_tree/startgoals_widget.dart';
 
 class StartProfile extends StatefulWidget {
   @override
-  StartProfileState createState() => new StartProfileState();
-}
-
-class StartProfileState extends State<StartProfile> {
-  void function() {}
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-        body: new RaisedButton(
-      onPressed: function,
-      child: new Row(children: <Widget>[
-        new Icon(Icons.cake),
-        new Text("en guete"),
-      ]),
-    ));
+  State<StatefulWidget> createState() {
+    return _StartProfileState();
   }
 }
 
-//
+class _StartProfileState extends State<StartProfile> {
+  int _currentIndex = 0;
+  void function() {
+    setState(() {
+      _currentIndex = 1;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      //Container(
+      //width: 50,
+      //height: 50,
+      children: [
+        FittedBox(
+          alignment: Alignment.center,
+          child: //<Widget> [
+              ElevatedButton(
+            onPressed: function,
+            child: Column(children: <Widget>[
+              Icon(Icons.cake),
+              Text("en guete"),
+            ]),
+          ),
+        ),
+        FittedBox(
+          alignment: Alignment.center,
+          child: //<Widget> [
+              ElevatedButton(
+            onPressed: function,
+            child: Column(children: <Widget>[
+              Icon(Icons.play_arrow_outlined),
+              Text("viel Spass"),
+            ]),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _Container extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return Container(
+//      margin: new EdgeInsets.all(8.0),
+      child: ListBody(
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Container(
+                width: 200,
+                padding: EdgeInsets.fromLTRB(5, 5, 5, 0),
+                child: new TextFormField(
+                  decoration: const InputDecoration(
+                      labelText: 'Product Name', border: OutlineInputBorder()),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/*class _AppBar extends State<StartProfile> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Profile'),
+      ),
+    );
+  }
+}
+*/
 //
 /*class Nav extends StatefulWidget {
   @override
