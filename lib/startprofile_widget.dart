@@ -16,19 +16,34 @@ class StartProfile extends StatefulWidget {
 
 class _StartProfileState extends State<StartProfile> {
   int _currentIndex = 0;
-  void function() {
+
+  void function1() {
     setState(() {
       _currentIndex = 1;
     });
   }
 
+  void function1() {
+    setState(() {
+      _currentIndex = 2;
+    });
+  }
+
+  List<Widget> _widgetoptions = Widget[
+    StartProfile(),
+    StartGoalsWidget(),
+    StartMapWidget(),
+  ]
+
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       //Container(
       //width: 50,
       //height: 50,
       children: [
+        child: _widgetOptions.elementAt(_currentIndex),
+        backgroundColor: Colors.green,
         FittedBox(
           alignment: Alignment.center,
           child: //<Widget> [
@@ -37,6 +52,7 @@ class _StartProfileState extends State<StartProfile> {
             child: Column(children: <Widget>[
               Icon(Icons.cake),
               Text("en guete"),
+              currentIndex: _currentIndex;
             ]),
           ),
         ),
