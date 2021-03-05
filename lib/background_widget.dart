@@ -16,11 +16,8 @@ class _NavState extends State<Nav> {
     //selected Widget = Widget list
 
     StartGoalsWidget(),
-
     Text('Map'),
-
     Text('Comunity'),
-
     Text('Profile'),
   ];
 
