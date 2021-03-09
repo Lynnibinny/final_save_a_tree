@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
-<<<<<<< HEAD
 import 'package:save_a_tree/startcomunity_widget.dart';
 import 'package:save_a_tree/startgoals_widget.dart';
 
@@ -14,9 +13,6 @@ class StartProfile extends StatefulWidget {
     return _StartProfileState();
   }
 }
-
-Hallo das ist scheisse... 
-Kein Debuggen, keine Fehlermeldungen, nichts!! Hääää?
 
 class _StartProfileState extends State<StartProfile> {
   int _currentIndex = 0;
@@ -138,12 +134,10 @@ class _NavState extends State<Nav> {
     );
   }
 
-=======
 import 'package:save_a_tree/main.dart';
 import 'package:save_a_tree/startgoals_widget.dart';
 
 var ProUserName = "Yarina";
->>>>>>> b6650f21916188a4fb4c36b504b570646ea598c9
 
 class StartProfileWidget extends StatelessWidget {
   List<bool> _selections = List.generate(3, (_) => false);
