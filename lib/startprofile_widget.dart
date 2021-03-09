@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
+<<<<<<< HEAD
 import 'package:save_a_tree/startcomunity_widget.dart';
 import 'package:save_a_tree/startgoals_widget.dart';
 
@@ -137,52 +138,47 @@ class _NavState extends State<Nav> {
     );
   }
 
+=======
+import 'package:save_a_tree/main.dart';
+import 'package:save_a_tree/startgoals_widget.dart';
 
-  @override
+var ProUserName = "Yarina";
+>>>>>>> b6650f21916188a4fb4c36b504b570646ea598c9
+
+class StartProfileWidget extends StatelessWidget {
+  List<bool> _selections = List.generate(3, (_) => false);
   Widget build(BuildContext context) {
-    return Scaffold(
-      if (_currentIndex == 1) then {
-        body: Center(
-          child: StartGoalsWidget(),
+    return Center(
+      child: Column(children: <Widget>[
+        SizedBox(
+          height: 250.0,
         ),
-      }
-      
+        CircleAvatar(
+          backgroundColor: Colors.white,
+          radius: 50,
+          child: Icon(
+            Icons.local_florist,
+            color: Colors.red.shade900,
+            size: 50,
+          ),
+        ),
+        Text(
+          ProUserName,
+          textScaleFactor: 2.0,
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        /* TextFormField(
+  decoration: InputDecoration(
+    labelText: 'Enter your username'
+  ),
+);*/
+      ]),
     );
   }
-
-}
-*/
-//
-//
-//
-/*class StartProfileWidget extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _SPWState();
-  }
 }
 
-class _SPWState extends State {
-  int _currentIndex = 0;
-
-  void onPressPressed(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
-
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: StartGoalsWidget.elementAt(_currentIndex),
-      ),
-      child: RaisedButton(
-        child: Text("Button"),
-        onPressed: onPressPressed,
-      ),
-    );
-  }
-}*/
 /*class StartProfileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     const SizedBox(height: 30);
@@ -215,4 +211,5 @@ class _SPWState extends State {
 
     Profile({this.id, this.name, this.age});
   }
-}*/
+}
+*/

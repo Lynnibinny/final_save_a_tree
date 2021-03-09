@@ -22,7 +22,7 @@ class _NavState extends State<Nav> {
     StartGoalsWidget(),
     StartMapWidget(),
     StartComunityWidget(),
-    StartProfile(),
+    StartProfileWidget(),
   ];
 
   void onTabTapped(int index) {
