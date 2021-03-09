@@ -6,7 +6,6 @@ import 'dart:convert';
 //import 'dart:html';
 import 'package:http/http.dart' as http;
 
-
 /*var ProUserName = "lele";
 
 var ProPicture = "00110";
@@ -14,15 +13,12 @@ var ProSavedTrees = "4";
 var ProDonated = "5.5";
 var ProPassword = "ililil";
 */
-<<<<<<< HEAD
-=======
 
 /*"ProUserName": ProUserName,
 "ProPicture": ProPicture,
 "ProSavedTrees": ProSavedTrees,
 "ProDonated": ProDonated,
 "ProPassword": ProPassword*/
->>>>>>> b6650f21916188a4fb4c36b504b570646ea598c9
 
 /*var ProMail = "uiuiuiuiui@me.com";
 /*
