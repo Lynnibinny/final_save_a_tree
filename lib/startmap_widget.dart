@@ -7,12 +7,12 @@ class StartMapWidget extends StatelessWidget {
       appBar: AppBar(
         title: Text('Map'),
       ),
-    );
-    return Center(
+    
+    body: Center(
       child: RaisedButton(
         onPressed: () {},
         child: const Text('Enabled Button', style: TextStyle(fontSize: 20)),
       ),
-    );
+    ));
   }
 }

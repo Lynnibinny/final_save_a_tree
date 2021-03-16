@@ -4,14 +4,13 @@ import 'package:save_a_tree/startmap_widget.dart';
 class StartProfileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     const SizedBox(height: 30);
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     title: Text('Profile'),
-    //   ),
-    // );
-    return Center(
-      //create Button
-      child: RaisedButton(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Profile'),
+      ),
+      body: Center(
+        //create Button
+        child: RaisedButton(
           child: const Text('Enabled Button', style: TextStyle(fontSize: 20)),
           //change current Widget when pressed
           onPressed: () {
@@ -19,7 +18,9 @@ class StartProfileWidget extends StatelessWidget {
               context,
               MaterialPageRoute(builder: (context) => StartMapWidget()),
             );
-          }),
+          },
+        ),
+      ),
     );
   }
 }
