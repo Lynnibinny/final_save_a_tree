@@ -54,7 +54,7 @@ class StartGoalsWidget extends StatelessWidget {
       RaisedButton(onPressed: () async {
         var response = await createUser('test');
         print(response);
-        print(response.body);
+        //print(response.body);
       }),
     ]);
   }

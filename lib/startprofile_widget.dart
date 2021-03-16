@@ -1,5 +1,30 @@
-//import 'dart:html';
+import 'package:flutter/material.dart';
+import 'package:save_a_tree/startmap_widget.dart';
 
+class StartProfileWidget extends StatelessWidget {
+  Widget build(BuildContext context) {
+    const SizedBox(height: 30);
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     title: Text('Profile'),
+    //   ),
+    // );
+    return Center(
+      //create Button
+      child: RaisedButton(
+          child: const Text('Enabled Button', style: TextStyle(fontSize: 20)),
+          //change current Widget when pressed
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => StartMapWidget()),
+            );
+          }),
+    );
+  }
+}
+
+/*
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/widgets.dart';
@@ -23,7 +48,7 @@ class _StartProfileState extends State<StartProfile> {
     });
   }
 
-  void function1() {
+  void function2() {
     setState(() {
       _currentIndex = 2;
     });
@@ -33,7 +58,7 @@ class _StartProfileState extends State<StartProfile> {
     StartProfile(),
     StartGoalsWidget(),
     StartMapWidget(),
-  ]
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +120,7 @@ class _Container extends StatelessWidget {
     );
   }
 }
+*/
 
 /*class _AppBar extends State<StartProfile> {
   @override
@@ -163,16 +189,17 @@ class StartProfileWidget extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        /* TextFormField(
+        */
+/* TextFormField(
   decoration: InputDecoration(
     labelText: 'Enter your username'
   ),
-);*/
+);
       ]),
     );
   }
 }
-
+*/
 /*class StartProfileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     const SizedBox(height: 30);
