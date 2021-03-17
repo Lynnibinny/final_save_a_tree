@@ -17,7 +17,7 @@ class User {
 class StartGoalsWidget extends StatelessWidget {
   //var promail = "uiuiuiuiui@me.com";
   Future<User> createUser(String promail) async {
-    
+    //future da es in der Zukunft einen User machen wird. Es blockt also den Code nicht.
     final response = await http.post(
       Uri.https('i-kf.ch', '/SaveATree/lib/insertdata.php'),
       headers: <String, String>{
@@ -27,7 +27,8 @@ class StartGoalsWidget extends StatelessWidget {
         'ProMail': promail,
       }),
     );
-    print(response.statusCode);
+    
+    //print(response.statusCode);
     if (response.statusCode == 200) {
       print('hurraa');
     } else {
