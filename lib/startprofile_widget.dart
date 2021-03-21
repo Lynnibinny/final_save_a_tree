@@ -1,12 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:save_a_tree/startmap_widget.dart';
+import 'package:save_a_tree/profileSettings_widget.dart';
 
 class StartProfileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     const SizedBox(height: 30);
     return Scaffold(
+      //create appbar
       appBar: AppBar(
+        //create title which will be showed in the appbar
         title: Text('Profile'),
+        //create button to navigat to the profilesettings
+        actions: <Widget>[
+          IconButton(
+            //set the setting-icon as a button
+            icon: Icon(
+              Icons.settings,
+              color: Colors.white,
+            ),
+            //change current Widget when button was pressed
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ProfileSettingsWidget()),
+              );
+            },
+          ),
+        ],
       ),
       body: Center(
         //create Button
@@ -14,10 +35,11 @@ class StartProfileWidget extends StatelessWidget {
           child: const Text('Enabled Button', style: TextStyle(fontSize: 20)),
           //change current Widget when pressed
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => StartMapWidget()),
-            );
+            null;
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => StartMapWidget()),
+            // );
           },
         ),
       ),
