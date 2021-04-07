@@ -10,6 +10,8 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="save_a_tree"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyDVkYduE-eHhvK3gn2CRLmNTH_eAY0OoO4"/>
         <!--meta-data android:name="com.google.android.geo.API_KEY"
                android:value="YOAIzaSyDVkYduE-eHhvK3gn2CRLmNTH_eAY0OoO4"/-->
         <activity
