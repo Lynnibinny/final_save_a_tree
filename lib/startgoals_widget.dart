@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:save_a_tree/nav.dart';
 import 'dart:async';
 import 'dart:convert';
-//import 'dart:html';
 import 'package:http/http.dart' as http;
 
-class User {
-  final String promail;
-
-  User({this.promail});
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(promail: json['ProMail']);
-  }
-}
 
 class StartGoalsWidget extends StatelessWidget {
+  Widget build(BuildContext context) {
+    const SizedBox(height: 30);
+
+    return Center(
+      child: RaisedButton(
+        onPressed: () {},
+        child: const Text('Enabled Button', style: TextStyle(fontSize: 20)),
+      ),
+    );
+  }
+}
+/*class StartGoalsWidget extends StatelessWidget {
   //var promail = "uiuiuiuiui@me.com";
   Future<User> createUser(String promail) async {
     //future da es in der Zukunft einen User machen wird. Es blockt also den Code nicht.
@@ -60,4 +62,4 @@ class StartGoalsWidget extends StatelessWidget {
       ]),
     );
   }
-}
+}*/

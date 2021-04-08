@@ -1,22 +1,91 @@
 import 'package:flutter/material.dart';
-import 'package:save_a_tree/startmap_widget.dart';
+import 'package:save_a_tree/services.dart';
 import 'package:save_a_tree/profileSettings_widget.dart';
+import 'package:save_a_tree/startcomunity_widget.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'User.dart';
+import 'nav.dart';
 
-class StartProfileWidget extends StatelessWidget {
+var savedtrees = 100;
+
+class StartProfileWidget extends StatefulWidget {
+  @override
+  _StartProfileWidgetState createState() => _StartProfileWidgetState();
+}
+
+class _StartProfileWidgetState extends State<StartProfileWidget> {
+  List<bool> _selections = List.generate(3, (_) => false);
+
+  User _filterUser;
+
+  List<User> _user = [];
+  void asyncState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var id = prefs.getString('registeredUserId');
+    getUser(id);
+    //hand id over. Therefore getUser methode is able to compare them
+    //async State because void initState does not allow async
+  }
+
+  void initState() {
+    //_user = [];
+    //_filterUser = [];
+    //_isUpdating = false;
+    // _titleProgress = widget.title;
+    //_scaffoldKey = GlobalKey(); // key to get the context to show a SnackBar
+    //_proUserNameController = TextEditingController();
+    asyncState();
+    super.initState();
+  }
+
+  void getUser(String id) {
+    //_showProgress('Loading Employees...');
+    Services.getUser().then((user) {
+      setState(() {
+        _user = user;
+        // Initialize to the list from Server when reloading...
+        _filterUser =
+            user.where((userElement) => userElement.id == id).toList().first;
+        //output has to be one single user
+        //.toList cause "where" does not return a List it just returns a where list
+        //we can just use first cause in this list there is one single entry anyways
+      });
+      //_showProgress(widget.title); // Reset the title...
+      // print("Length ${user.length}");
+    });
+  }
+
+  final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
+    onPrimary: Colors.black87,
+    primary: Colors.white,
+    minimumSize: Size(88, 36),
+    padding: EdgeInsets.symmetric(horizontal: 16),
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(2)),
+    ),
+  );
+
   Widget build(BuildContext context) {
     const SizedBox(height: 30);
+
     return Scaffold(
       //create appbar
       appBar: AppBar(
+        //foregroundColor: Colors.white,
         //create title which will be showed in the appbar
-        title: Text('Profile'),
+
+        title: const Text('Profile',
+            style: TextStyle(
+              color: Colors.black,
+            )),
         //create button to navigat to the profilesettings
         actions: <Widget>[
           IconButton(
             //set the setting-icon as a button
             icon: Icon(
               Icons.settings,
-              color: Colors.white,
+              color: Colors.black,
             ),
             //change current Widget when button was pressed
             onPressed: () {
@@ -29,19 +98,196 @@ class StartProfileWidget extends StatelessWidget {
           ),
         ],
       ),
+      backgroundColor: Colors.blue.shade100,
       body: Center(
-        //create Button
-        child: RaisedButton(
-          child: const Text('Enabled Button', style: TextStyle(fontSize: 20)),
-          //change current Widget when pressed
-          onPressed: () {
-            null;
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => StartMapWidget()),
-            // );
-          },
-        ),
+        //child: CircularProgressIndicator(),
+        child: _filterUser == null
+            ? CircularProgressIndicator()
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                    /*SizedBox(
+                  height: 200.0,
+                ),*/
+                    Spacer(
+                      flex: 2,
+                    ),
+                    Expanded(
+                      child: Container(
+                        height: 150,
+                        child: Align(
+                          alignment: Alignment(0.0, 0.0),
+                          //child: Center(
+                          child: AspectRatio(
+                            aspectRatio: 1.5,
+                            child: CircleAvatar(
+                              backgroundColor: Colors.white,
+                              radius: 50,
+                              child: Container(
+                                alignment: Alignment.center,
+                                // color: Colors.grey,
+                                padding: const EdgeInsets.all(10.0),
+
+                                child: FittedBox(
+                                  fit: BoxFit.fill,
+                                  child: Icon(
+                                    Icons.local_florist,
+                                    color: Colors.red.shade900,
+                                    size: 50,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Text(
+                      _filterUser.proUserName,
+                      textScaleFactor: 2.0,
+                      //style: TextStyle(color: Colors.black),
+                      style: TextStyle(fontSize: 30.0),
+                    ),
+                    Spacer(),
+                    /* SizedBox(
+                  height: 40,
+                ),*/
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            height: 110,
+                            child: Align(
+                              alignment: Alignment(0.6, 0.0),
+                              //child: Center(
+                              child: AspectRatio(
+                                aspectRatio: 1.5,
+                                child: ElevatedButton(
+                                  style: raisedButtonStyle,
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ProfileSettingsWidget()),
+                                    );
+                                  },
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    // color: Colors.grey,
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Container(
+                                      child: Column(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.eco,
+                                            size: 40.0,
+                                          ),
+                                          AutoSizeText(
+                                            "gerettete Bäume: 5",
+                                            style: TextStyle(fontSize: 20.0),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            //color: Colors.amber,
+                            height: 110,
+                            child: Align(
+                              alignment: Alignment(-0.6, 0.0),
+                              //child: Center(
+                              child: AspectRatio(
+                                aspectRatio: 1.5,
+                                child: ElevatedButton(
+                                  style: raisedButtonStyle,
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ProfileSettingsWidget()),
+                                    );
+                                  },
+                                  //height:
+                                  //150, //take care this hight has an effect on the width
+
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    //color: Colors.grey,
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Container(
+                                      child: Column(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.emoji_people_sharp,
+                                            size: 40.0,
+                                          ),
+                                          AutoSizeText(
+                                            "dein Team",
+                                            style: TextStyle(fontSize: 20.0),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        //),
+                      ],
+                    ),
+                    Spacer(),
+                    Expanded(
+                      child: Container(
+                        //color: Colors.amber,
+                        height: 80,
+                        child: Align(
+                          alignment: Alignment(0.0, 0.0),
+                          //child: Center(
+                          child: AspectRatio(
+                            aspectRatio: 9 / 2,
+                            child: ElevatedButton(
+                              style: raisedButtonStyle,
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          ProfileSettingsWidget()),
+                                );
+                              },
+                              //height:
+                              //150, //take care this hight has an effect on the width
+
+                              child: Container(
+                                alignment: Alignment.center,
+                                //color: Colors.grey,
+                                padding: const EdgeInsets.all(10.0),
+                                child: Container(
+                                  child: AutoSizeText(
+                                    "Jetzt Spenden",
+                                    style: TextStyle(fontSize: 30.0),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Spacer(
+                      flex: 1,
+                    ),
+                  ]),
       ),
     );
   }
