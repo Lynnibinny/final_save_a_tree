@@ -51,10 +51,13 @@ class _FirstScreenState extends State<FirstScreen> {
     _showProgress('Adding Employee...');
     Services.addUser(_proMailController.text, _proUserNameController.text)
         .then((result) async {
-      if ('success' == result) {
+      if ('error' == result) {
+        Text('konnte nicht registriert werden.');
+      } else {
         //do würe mir 5 becho
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.setString('registeredUserId', '5'); //später statt 5 result
+        await prefs.setString(
+            'registeredUserId', result); //später statt 5 result
         //_getEmployees(); // Refresh the List after adding each employee...
         //_clearValues();
       }
