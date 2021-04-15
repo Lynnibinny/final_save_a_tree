@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:save_a_tree/startmap_widget.dart';
+//import 'package:save_a_tree/startmap_widget.dart';
 import 'package:save_a_tree/profileSettings_widget.dart';
 
 class StartProfileWidget extends StatelessWidget {
