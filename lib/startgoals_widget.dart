@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:save_a_tree/nav.dart';
 import 'dart:async';
 import 'dart:convert';
-//import 'dart:html';
+import 'dart:html';
 import 'package:http/http.dart' as http;
 
 class User {
   final String promail;
 
-  User({this.promail});
+  User({required this.promail});
   factory User.fromJson(Map<String, dynamic> json) {
     return User(promail: json['ProMail']);
   }
@@ -27,13 +27,14 @@ class StartGoalsWidget extends StatelessWidget {
         'ProMail': promail,
       }),
     );
-    
+
     //print(response.statusCode);
-    if (response.statusCode == 200) {
-      print('hurraa');
+    if (response.statusCode != 200) {
+      throw Exception('hurraa');
     } else {
       throw Exception('Faillll');
     }
+    //throw Exception('hö?');
   }
 
   Widget build(BuildContext context) {
