@@ -10,9 +10,7 @@ class Services {
   static const _GET_ALL_ACTION = 'GET_ALL';
   static const _ADD_USER_ACTION = 'ADD_USER';
   static const _UPDATE_USER_ACTION = 'UPDATE_USER';
-  
 
-  
   static Future<String> createTable() async {
     try {
       // add the parameters to pass to the request. ich glaub da bruche mir gar nüm
@@ -41,10 +39,11 @@ class Services {
         List<User> list = parseResponse(response.body);
         return list;
       } else {
-        return List<User>();
+        throw Exception('uuuuuuuuuuuuu'); //return "error"; //List<User>();
       }
     } catch (e) {
-      return List<User>(); // return an empty list on exception/error
+      throw Exception(
+          'uuuuuuuuuuuuu'); //return List<User>(); // return an empty list on exception/error
     }
   }
 
@@ -52,7 +51,7 @@ class Services {
     final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
     return parsed.map<User>((json) => User.fromJson(json)).toList();
   }
-  
+
   // Method to add user to the database...
   static Future<String> addUser(String proMail, String proUserName) async {
     try {
@@ -73,8 +72,7 @@ class Services {
   }
 
   // Method to update a user in Database...
-  static Future<String> updateUser(
-      String proMail, String proUserName) async {
+  static Future<String> updateUser(String proMail, String proUserName) async {
     try {
       var map = Map<String, dynamic>();
       map['action'] = _UPDATE_USER_ACTION;
@@ -91,6 +89,4 @@ class Services {
       return "error";
     }
   }
-
-  
 }

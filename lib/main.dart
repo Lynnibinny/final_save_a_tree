@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => SplashScreen(),
         // When navigating to the "/second" route, build the SecondScreen widget.
         '/second': (context) => Nav(),
-        '/first': (context) => FirstScreen(),
+        '/first': (context) => FirstScreen(title: 'BELLLLOOOO',),
       },
     );
   }
