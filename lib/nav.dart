@@ -20,7 +20,7 @@ class _NavState extends State<Nav> {
     //selected Widget = Widget list
 
     StartGoalsWidget(),
-    StartMapWidget(),
+    HomePage(),
     StartComunityWidget(),
     StartProfileWidget(),
   ];

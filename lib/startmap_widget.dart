@@ -3,12 +3,12 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:save_a_tree/mapStyle.dart';
 import 'package:save_a_tree/marker.dart';
 
-class StartMapWidget extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  State<StartMapWidget> createState() => StartMapWidgetState();
+  State<HomePage> createState() => HomePageState();
 }
 
-class StartMapWidgetState extends State<StartMapWidget> {
+class HomePageState extends State<HomePage> {
   Set<Marker> markers = {};
 
   late BitmapDescriptor customMarker;
@@ -36,7 +36,7 @@ class StartMapWidgetState extends State<StartMapWidget> {
 
   void createCustomMarker() async {
     customMarker =
-        await getBitmapDescriptorFromSvgAsset(context, 'assets/Tree2.svg');
+        await getBitmapDescriptorFromSvgAsset(context, 'assets/Tree3.svg');
   }
 
   @override
@@ -45,6 +45,7 @@ class StartMapWidgetState extends State<StartMapWidget> {
     createCustomMarker();
   }
 
+  @override 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Map')),
