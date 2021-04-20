@@ -4,6 +4,12 @@ import 'package:save_a_tree/splash_screen.dart';
 
 import 'firstscreen.dart';
 import 'nav.dart';
+import 'package:save_a_tree/nav.dart';
+//import 'dart:async';
+//import 'dart:convert';
+
+//import 'dart:html';
+//import 'package:http/http.dart' as http;
 
 class Routes {
   static const SplashScreenRoute = '/'; //String den wir überall benutzen können

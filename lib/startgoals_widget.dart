@@ -360,27 +360,14 @@ class StartGoalsWidget extends StatelessWidget {
   }
 
   Widget build(BuildContext context) {
-    const SizedBox(height: 30);
     return Scaffold(
-      body: Column(children: <Widget>[
-        SizedBox(
-          height: 250.0,
-        ),
-        RaisedButton(onPressed: () async {
-          var response = await createUser('babybaum');
-          print(response);
-          //print(response.body);
-        }),
-        RaisedButton(
-          onPressed: () {},
-          child: const Text('Enabled Button', style: TextStyle(fontSize: 20)),
-        ),
-        RaisedButton(onPressed: () async {
-          var response = await createUser('test');
-          print(response);
-          //print(response.body);
-        }),
-      ]),
+      appBar: AppBar(
+        title: Text('Spaceholderscreen for "StartGoalsWidget"'),
+      ),
+      body: Center(
+        child: RaisedButton(
+            onPressed: () {}, color: Colors.green, child: Text(':)')),
+      ),
     );
   }
 }*/

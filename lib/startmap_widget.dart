@@ -1,53 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'dart:async';
+import 'package:save_a_tree/mapStyle.dart';
+import 'package:save_a_tree/marker.dart';
 
-class StartMapWidget extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  State<StartMapWidget> createState() => StartMapWidgetState();
+  State<HomePage> createState() => HomePageState();
 }
 
-class StartMapWidgetState extends State<StartMapWidget> {
-  Completer<GoogleMapController> _controller = Completer();
-  MapType type;
-  static final CameraPosition _cameraPosition = CameraPosition(
-    target: LatLng(-38, -70),
-    zoom: 4,
+class HomePageState extends State<HomePage> {
+  Set<Marker> markers = {};
+
+  BitmapDescriptor customMarker;
+
+  CameraPosition _initialCameraPosition = CameraPosition(
+    target: LatLng(50, 70),
+    zoom: 2,
   );
+
+  void _onMapCreated(GoogleMapController controller) {
+    controller.setMapStyle(MapStyle.mapStyle);
+  }
+
+  void _ontap(LatLng position) {
+    int markerId = markers.length + 1;
+    setState(() {
+      markers.add(Marker(
+        markerId: new MarkerId('$markerId'),
+        position: position,
+        icon: customMarker,
+      ));
+    });
+    //print(markerId);
+  }
+
+  void createCustomMarker() async {
+    customMarker =
+        await getBitmapDescriptorFromSvgAsset(context, 'assets/Tree3.svg');
+  }
 
   @override
   void initState() {
     super.initState();
-    type = MapType.hybrid;
-    markers = Set.from([]);
+    createCustomMarker();
   }
 
-  Set<Marker> markers;
-
-  @override
+  @override 
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: Stack(
-        children: <Widget>[
-          GoogleMap(
-            markers: markers,
-            mapType: type,
-            onTap: (position) {
-              Marker mk1 = Marker(
-                markerId: MarkerId('1'),
-                position: position,
-              );
-              setState(() {
-                markers.add(mk1);
-              });
-            },
-            initialCameraPosition: _cameraPosition,
-            onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
-            },
-          ),
-          //SizedBox(child: Image.asset('assets/baum.jpg', fit: BoxFit.contain)),
-        ],
+    return Scaffold(
+      appBar: AppBar(title: Text('Map')),
+      body: GoogleMap(
+        markers: markers,
+        initialCameraPosition: _initialCameraPosition,
+        onMapCreated: _onMapCreated,
+        onTap: _ontap,
       ),
     );
   }

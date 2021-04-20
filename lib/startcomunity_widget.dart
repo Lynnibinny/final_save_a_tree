@@ -5,7 +5,7 @@ class StartComunityWidget extends StatelessWidget {
     const SizedBox(height: 30);
 
     return Center(
-      child: RaisedButton(
+      child: ElevatedButton(
         onPressed: () {},
         child: const Text('Enabled Button', style: TextStyle(fontSize: 20)),
       ),
