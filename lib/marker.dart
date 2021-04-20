@@ -27,6 +27,6 @@ Future<BitmapDescriptor> getBitmapDescriptorFromSvgAsset(
   );
   final image = await picture.toImage(width, height);
   final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-  final uInt8List = byteData?.buffer.asUint8List();
-  return BitmapDescriptor.fromBytes(uInt8List!);
+  final uInt8List = byteData.buffer.asUint8List();
+  return BitmapDescriptor.fromBytes(uInt8List);
 }

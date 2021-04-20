@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
   Set<Marker> markers = {};
 
-  late BitmapDescriptor customMarker;
+  BitmapDescriptor customMarker;
 
   CameraPosition _initialCameraPosition = CameraPosition(
     target: LatLng(50, 70),
