@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:save_a_tree/startgoals_widget.dart'; //komisch mit save a tree pfad
-import 'package:save_a_tree/startmap_widget.dart';
+import 'package:save_a_tree/startgoals_widget.dart'; 
 import 'package:save_a_tree/startcomunity_widget.dart';
-import 'startprofile_widget.dart';
+import 'package:save_a_tree/startprofile_widget.dart';
+import 'startmap_widget.dart';
+
 
 class Nav extends StatefulWidget {
   @override
@@ -13,23 +14,20 @@ class Nav extends StatefulWidget {
 }
 
 class _NavState extends State<Nav> {
-  int _currentIndex =
-      0; // current Index to describe which Icon in the Nav Bar is pressed
+  int _currentIndex = 0; // current Index to describe which Icon in the Nav Bar is pressed
 
   List<Widget> _widgetOptions = <Widget>[
-    //selected Widget = Widget list
-
     StartGoalsWidget(),
     HomePage(),
     StartComunityWidget(),
     StartProfileWidget(),
-  ];
+  ];//selected Widget = Widget list
 
   void onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
-  }
+  } //index saved in current index
 
   @override
   Widget build(BuildContext context) {

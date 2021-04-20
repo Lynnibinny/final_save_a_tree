@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:save_a_tree/startprofile_widget.dart';
+import 'package:save_a_tree/splash_screen.dart';
+
+import 'firstscreen.dart';
+import 'nav.dart';
 import 'package:save_a_tree/nav.dart';
 //import 'dart:async';
 //import 'dart:convert';
@@ -6,48 +11,17 @@ import 'package:save_a_tree/nav.dart';
 //import 'dart:html';
 //import 'package:http/http.dart' as http;
 
-/*var ProUserName = "lele";
+class Routes {
+  static const SplashScreenRoute = '/'; //String den wir überall benutzen können
+  static const FirstScreenRoute = '/first';
+  static const StartProfileRoute = '/second';
+}
 
-var ProPicture = "00110";
-var ProSavedTrees = "4";
-var ProDonated = "5.5";
-var ProPassword = "ililil";
-*/
+void main() async {
+  runApp(new MyApp()); //hiet kann ich etwas mitgeben, prefs MyApp übergeben
+}
 
-/*"ProUserName": ProUserName,
-"ProPicture": ProPicture,
-"ProSavedTrees": ProSavedTrees,
-"ProDonated": ProDonated,
-"ProPassword": ProPassword*/
-
-/*var ProMail = "uiuiuiuiui@me.com";
-/*
-var ProUserName = "lele";
-var ProPicture = "00110";
-var ProSavedTrees = "4";
-var ProDonated = "5.5";
-var ProPassword = "ililil"; */
-
-Future<http.Response> createUser(String ProMail) {
-  return http.post(
-    Uri.https("https://i-kf.ch/SaveATree/lib/insertdata.php", "ProMail"),
-    headers: <String, String>{
-      "Content-Type": "application/json; charset=UFT-8",
-    },
-    body: jsonEncode(<String, String>{
-      "ProMail": ProMail,
-    /*"ProUserName": ProUserName,
-      "ProPicture": ProPicture,
-      "ProSavedTrees": ProSavedTrees,
-      "ProDonated": ProDonated,
-      "ProPassword": ProPassword*/
-    }),
-  );
-} */
-
-void main() => runApp(MyApp());
-
- class MyApp extends StatelessWidget {
+/*class MyApp extends StatelessWidget {
   
 
   @override
@@ -57,6 +31,29 @@ void main() => runApp(MyApp());
       title: 'Bottom Nav Bar',
       color: Colors.black,
       home: Nav(),
+    );
+  }
+}*/
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      title: 'Named Routes Demo',
+      theme: ThemeData(
+          appBarTheme: AppBarTheme(
+        color: Colors.white,
+      )
+      ),
+      // Start the app with the "/" named route. In this case, the app starts
+      // on the FirstScreen widget.
+      initialRoute: Routes.SplashScreenRoute,
+      routes: {
+        // When navigating to the "/" route, build the FirstScreen widget.
+        '/': (context) => SplashScreen(),
+        // When navigating to the "/second" route, build the SecondScreen widget.
+        '/second': (context) => Nav(),
+        '/first': (context) => FirstScreen(title: 'BELLLLOOOO',),
+      },
     );
   }
 }
