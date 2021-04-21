@@ -45,15 +45,26 @@ class HomePageState extends State<HomePage> {
     createCustomMarker();
   }
 
-  @override 
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Map')),
-      body: GoogleMap(
-        markers: markers,
-        initialCameraPosition: _initialCameraPosition,
-        onMapCreated: _onMapCreated,
-        onTap: _ontap,
+    final title = 'Karte';
+    return MaterialApp(
+      title: title,
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: Text(title,
+              style: TextStyle(
+                color: Colors.black,
+              )),
+        ),
+        //appBar: AppBar(title: Text('Map')),
+        body: GoogleMap(
+          markers: markers,
+          initialCameraPosition: _initialCameraPosition,
+          onMapCreated: _onMapCreated,
+          onTap: _ontap,
+        ),
       ),
     );
   }
