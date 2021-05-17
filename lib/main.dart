@@ -41,9 +41,9 @@ class MyApp extends StatelessWidget {
       title: 'Named Routes Demo',
       theme: ThemeData(
           appBarTheme: AppBarTheme(
-        color: Colors.white,
-      )
-      ),
+            color: Colors.white,
+          ),
+          scaffoldBackgroundColor: Colors.transparent),
       // Start the app with the "/" named route. In this case, the app starts
       // on the FirstScreen widget.
       initialRoute: Routes.SplashScreenRoute,
@@ -52,7 +52,9 @@ class MyApp extends StatelessWidget {
         '/': (context) => SplashScreen(),
         // When navigating to the "/second" route, build the SecondScreen widget.
         '/second': (context) => Nav(),
-        '/first': (context) => FirstScreen(title: 'BELLLLOOOO',),
+        '/first': (context) => FirstScreen(
+              title: 'BELLLLOOOO',
+            ),
       },
     );
   }

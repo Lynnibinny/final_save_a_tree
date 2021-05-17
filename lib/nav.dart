@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:save_a_tree/startgoals_widget.dart'; 
+import 'package:save_a_tree/info_widget.dart';
 import 'package:save_a_tree/startcomunity_widget.dart';
 import 'package:save_a_tree/startprofile_widget.dart';
 import 'startmap_widget.dart';
-
 
 class Nav extends StatefulWidget {
   @override
@@ -14,14 +13,15 @@ class Nav extends StatefulWidget {
 }
 
 class _NavState extends State<Nav> {
-  int _currentIndex = 0; // current Index to describe which Icon in the Nav Bar is pressed
+  int _currentIndex =
+      0; // current Index to describe which Icon in the Nav Bar is pressed
 
   List<Widget> _widgetOptions = <Widget>[
     StartGoalsWidget(),
     HomePage(),
-    StartComunityWidget(),
+    //StartComunityWidget(),
     StartProfileWidget(),
-  ];//selected Widget = Widget list
+  ]; //selected Widget = Widget list
 
   void onTabTapped(int index) {
     setState(() {
@@ -31,6 +31,20 @@ class _NavState extends State<Nav> {
 
   @override
   Widget build(BuildContext context) {
+    /*return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          stops: [0.1, 0.5, 0.7, 0.9],
+          colors: [
+            Colors.lightGreen[200],
+            Colors.lightGreen[300],
+            Colors.lightGreen[400],
+            Colors.lightGreen[500],
+          ],
+        ),
+      ),*/
     return Scaffold(
       /*appBar: AppBar(
         title: Text('Save A Tree'),
@@ -38,10 +52,11 @@ class _NavState extends State<Nav> {
       body: Center(
         child: _widgetOptions.elementAt(_currentIndex),
       ),
-      backgroundColor: Colors.green,
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTabTapped,
-
+        //elevation: 0.5,
+        //backgroundColor: Color(0x00000000),
+        backgroundColor: Colors.white12,
         currentIndex: _currentIndex,
 
         type: BottomNavigationBarType
@@ -53,40 +68,54 @@ class _NavState extends State<Nav> {
 
             icon: new Icon(
               Icons.eco,
-              color: Colors.black,
+              color: Colors.white,
             ),
 
-            title: new Text('Goals'),
+            title: new Text(
+              'Goals',
+              style: TextStyle(color: Colors.white),
+            ),
           ),
           BottomNavigationBarItem(
             //index 1
 
             icon: new Icon(
               Icons.map_outlined,
-              color: Colors.black,
+              color: Colors.white,
             ),
 
-            title: new Text('Map'),
-          ),
-          BottomNavigationBarItem(
-            //index 2
-
-            icon: Icon(
-              Icons.chat_bubble_outline,
-              color: Colors.black,
+            title: new Text(
+              'Map',
+              style: TextStyle(color: Colors.white),
             ),
-
-            title: Text('Community'),
           ),
+
+          /*BottomNavigationBarItem(
+              //index 2
+
+              icon: Icon(
+                Icons.chat_bubble_outline,
+                color: Colors.black,
+              ),
+
+              title: Text(
+                'Community',
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+            */
           BottomNavigationBarItem(
             //index 3
 
             icon: Icon(
               Icons.person,
-              color: Colors.black,
+              color: Colors.white,
             ),
 
-            title: Text('Profile'),
+            title: Text(
+              'Profile',
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ],
       ),

@@ -10,7 +10,8 @@ class ProfileSettingsWidget extends StatelessWidget {
         body: Center(
           child: ElevatedButton(
             onPressed: () {},
-            child: const Text('This is a button', style: TextStyle(fontSize: 20)),
+            child:
+                const Text('This is a button', style: TextStyle(fontSize: 20)),
           ),
         ));
   }
