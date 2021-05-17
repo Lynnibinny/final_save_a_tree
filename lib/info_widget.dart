@@ -12,13 +12,13 @@ import 'package:save_a_tree/infoCulture_widget.dart';
 class StartGoalsWidget extends StatelessWidget {
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     onPrimary: Colors.black87, //Button Text color
-    primary: Colors.lightGreen[500], //Button background color
+    primary: Colors.lightGreen[300], //Button background color
     minimumSize: Size(88, 36),
 
     shadowColor: Colors.white54, //?
     padding: EdgeInsets.symmetric(horizontal: 16),
     shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(2)),
+      borderRadius: BorderRadius.all(Radius.circular(5)),
     ),
   );
 
