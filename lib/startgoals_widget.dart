@@ -11,6 +11,7 @@ class StartGoalsWidget extends StatelessWidget {
       title: title,
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.white,
           title: Text(title,
               style: TextStyle(
                 color: Colors.black,
@@ -24,7 +25,8 @@ class StartGoalsWidget extends StatelessWidget {
             children: <Widget>[
               Container(
                 child: new MaterialButton(
-                  padding: EdgeInsets.all(20.0), //space between picture and all the widgets in it and the boarder
+                  padding: EdgeInsets.all(
+                      20.0), //space between picture and all the widgets in it and the boarder
                   textColor: Colors.black,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20.0))),
