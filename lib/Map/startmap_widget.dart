@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:save_a_tree/mapStyle.dart';
+import 'package:save_a_tree/Map/mapstyle.dart';
 import 'package:save_a_tree/Map/marker.dart';
 
 class HomePage extends StatefulWidget {
