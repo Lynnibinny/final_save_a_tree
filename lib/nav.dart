@@ -4,6 +4,7 @@ import 'package:save_a_tree/Info/info_widget.dart';
 import 'package:save_a_tree/startcomunity_widget.dart';
 
 import 'Map/startmap_widget.dart';
+import 'Profile/startprofile_widget.dart';
 
 class Nav extends StatefulWidget {
   @override
@@ -20,7 +21,7 @@ class _NavState extends State<Nav> {
     StartGoalsWidget(),
     HomePage(),
     //StartComunityWidget(),
-    //StartProfileWidget(),
+    StartProfileWidget(),
   ]; //selected Widget = Widget list
 
   void onTabTapped(int index) {
