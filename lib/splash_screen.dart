@@ -26,36 +26,16 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     isRegistered(context);
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          stops: [0.1, 0.5, 0.7, 0.9],
-          colors: [
-            Colors.lightGreen[200],
-            Colors.lightGreen[300],
-            Colors.lightGreen[400],
-            Colors.lightGreen[500],
-          ],
-        ),
+    return Scaffold(
+      body: Center(
+        child: Text('Wilkommen'),
+        // this is the first text the user sees the first time he loggs in
       ),
-      child: Scaffold(
-        backgroundColor: Color(0x00000000),
-        body: Center(
-          child: Container(
-    width: 75.0,
-    height: 75.0,
-    decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage("assets/tree.png"),
-             
-            fit: BoxFit.cover
-        )
-    ),
-)
+    
+      
+    
 
-      ),),
+    
     );
   }
 }

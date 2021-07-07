@@ -49,10 +49,10 @@ class MyApp extends StatelessWidget {
       initialRoute: Routes.SplashScreenRoute,
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
-        //'/': (context) => SplashScreen(),
+        '/': (context) => SplashScreen(),
         // When navigating to the "/second" route, build the SecondScreen widget.
         '/second': (context) => Nav(),
-        '/': (context) => FirstScreen(
+        '/first': (context) => FirstScreen(
               title: 'BELLLLOOOO',
             ),
       },

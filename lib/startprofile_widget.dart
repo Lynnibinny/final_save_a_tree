@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+
+
 import 'package:save_a_tree/services.dart';
-//import 'package:save_a_tree/startmap_widget.dart';
-import 'package:save_a_tree/startcomunity_widget.dart';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'Profile/profileArea_widget.dart';
 import 'Profile/profileSettings_widget.dart';
+import 'Profile/profileTree_widget.dart';
 import 'User.dart';
-import 'nav.dart';
+
 
 class StartProfileWidget extends StatefulWidget {
   @override
@@ -61,7 +64,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
     minimumSize: Size(88, 36),
     padding: EdgeInsets.symmetric(horizontal: 16),
     shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(2)),
+      borderRadius: BorderRadius.all(Radius.circular(8)),
     ),
   );
 
@@ -120,9 +123,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
               : Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                      /*SizedBox(
-                  height: 200.0,
-                ),*/
+                      
                       Spacer(
                         flex: 2,
                       ),
@@ -183,14 +184,17 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                ProfileSettingsWidget()),
+                                                ProfileTree()),
                                       );
                                     },
                                     child: Container(
+                                      
                                       alignment: Alignment.center,
                                       // color: Colors.grey,
-                                      padding: const EdgeInsets.all(10.0),
+                                      padding: const EdgeInsets.all(10.0), //space text edge
+                                      
                                       child: Container(
+                                        
                                         child: Column(
                                           children: <Widget>[
                                             Icon(
@@ -200,7 +204,6 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                             AutoSizeText(
                                               "gerettete Bäume:",
                                               style: TextStyle(fontSize: 20.0),
-                                              
                                             ),
                                           ],
                                         ),
@@ -227,7 +230,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                ProfileSettingsWidget()),
+                                                ProfileArea()),
                                       );
                                     },
                                     //height:
@@ -245,7 +248,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                               size: 40.0,
                                             ),
                                             AutoSizeText(
-                                              "Fläche",
+                                              "Fläche:",
                                               style: TextStyle(fontSize: 20.0),
                                             ),
                                           ],

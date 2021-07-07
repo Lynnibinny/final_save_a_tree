@@ -5,7 +5,7 @@ import 'package:save_a_tree/startcomunity_widget.dart';
 import 'package:save_a_tree/startprofile_widget.dart';
 
 import 'Map/startmap_widget.dart';
-import 'Profile/startprofile_widget.dart';
+
 
 class Nav extends StatefulWidget {
   @override
@@ -74,6 +74,7 @@ class _NavState extends State<Nav> {
             ),
 
             title: new Text(
+              
               'Info',
               style: TextStyle(color: Colors.white),
             ),
