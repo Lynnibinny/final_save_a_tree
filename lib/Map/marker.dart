@@ -7,7 +7,6 @@ Future<BitmapDescriptor> getBitmapDescriptorFromSvgAsset(
   BuildContext context,
   String svgAssetLink, {
   Size size = const Size(20, 20),
-  Color colour = const Color(0xFFFF9000),
 }) async {
   String svgString = await DefaultAssetBundle.of(context).loadString(
     svgAssetLink,

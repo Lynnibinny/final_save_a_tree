@@ -153,8 +153,7 @@ class InfoBio extends StatelessWidget {
                         child: AutoSizeText(
                           'Jetzt spenden',
                           style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w500),
+                              fontSize: 20.0, fontWeight: FontWeight.w500),
                         ),
                       )),
                   SizedBox(
