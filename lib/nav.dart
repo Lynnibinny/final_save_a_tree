@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:save_a_tree/Info/info_widget.dart';
 import 'package:save_a_tree/startcomunity_widget.dart';
+import 'package:save_a_tree/startprofile_widget.dart';
 
 import 'Map/startmap_widget.dart';
 
@@ -20,7 +21,7 @@ class _NavState extends State<Nav> {
     StartGoalsWidget(),
     HomePage(),
     //StartComunityWidget(),
-    //StartProfileWidget(),
+    StartProfileWidget(),
   ]; //selected Widget = Widget list
 
   void onTabTapped(int index) {
