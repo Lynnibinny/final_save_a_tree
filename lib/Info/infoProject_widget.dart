@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
-class InfoDeforestation extends StatelessWidget {
+class InfoProject extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -39,7 +39,7 @@ class InfoDeforestation extends StatelessWidget {
                 padding: const EdgeInsets.all(30.0),
                 child: Column(
                   children: [
-                    Text('Unsere wertvollste Resource',
+                    Text('Unsere Projekteeeee',
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 25.0,

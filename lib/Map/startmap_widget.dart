@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:save_a_tree/mapStyle.dart';
+//import 'package:save_a_tree/mapStyle.dart';
 import 'package:save_a_tree/Map/marker.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,9 +28,9 @@ class HomePageState extends State<HomePage> {
     zoom: 2,
   );
 
-  void _onMapCreated(GoogleMapController controller) {
-    controller.setMapStyle(MapStyle.mapStyle);
-  }
+ // void _onMapCreated(GoogleMapController controller) {
+ //   controller.setMapStyle(MapStyle.mapStyle);
+ // }
 
   void _ontap(LatLng position) {
     int markerId = markers.length + 1;
@@ -76,7 +76,8 @@ class HomePageState extends State<HomePage> {
       title: title,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.blue[200],
+          backgroundColor: Color.fromARGB(255,170,218,255),
+          elevation: 0.0,
           title: Text(title,
               style: TextStyle(
                 color: Colors.black,
@@ -87,7 +88,7 @@ class HomePageState extends State<HomePage> {
           markers: markers,
           polygons: _polygons,
           initialCameraPosition: _initialCameraPosition,
-          onMapCreated: _onMapCreated,
+          //onMapCreated: _onMapCreated,
           onTap: _ontap,
         ),
       ),

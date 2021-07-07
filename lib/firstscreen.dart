@@ -94,7 +94,7 @@ class _FirstScreenState extends State<FirstScreen> {
       style: style,
       decoration: InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Username",
+          hintText: "Benutzername",
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
@@ -136,25 +136,37 @@ class _FirstScreenState extends State<FirstScreen> {
     );
 
     return Scaffold(
+      backgroundColor: Colors.white,
+      //resizeToAvoidBottomInset: false,
+      
       body: Center(
+        
+  
+      child: SingleChildScrollView(
         child: Container(
-          color: Colors.white,
+        
           child: Padding(
             padding: const EdgeInsets.all(36.0),
+            
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                //SizedBox(
+               //  height: 155.0,
+  
+                //),
                 SizedBox(
-                  height: 155.0,
-                  //child: Image.asset(
-                  //"assets/logo.png",
-                  //fit: BoxFit.contain,
-                  //),
+                 height: 155.0,
+                  child: Image.asset(
+                  "assets/tree.png",
+                  height: 10,
+                 fit: BoxFit.contain,
+                  ),
                 ),
                 SizedBox(height: 45.0), //SizedBox as a space
                 proMailField,
-                SizedBox(height: 45.0),
+                SizedBox(height: 25.0),
                 proUserNameField,
                 SizedBox(height: 25.0),
                 passwordField,
@@ -170,6 +182,7 @@ class _FirstScreenState extends State<FirstScreen> {
               ],
             ),
           ),
+        ),
         ),
       ),
     );

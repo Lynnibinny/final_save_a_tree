@@ -3,16 +3,15 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:save_a_tree/infoAboutus_widget.dart';
-import 'package:save_a_tree/infoDeforestation_widget.dart';
-import 'package:save_a_tree/profileSettings_widget.dart';
-import 'package:save_a_tree/infoBio_widget.dart';
-import 'package:save_a_tree/infoCulture_widget.dart';
+import 'package:save_a_tree/Info/infoAboutus_widget.dart';
+import 'package:save_a_tree/Info/infoProject_widget.dart';
+import 'package:save_a_tree/Info/infoBio_widget.dart';
+import 'package:save_a_tree/Info/infoCulture_widget.dart';
 
 class StartGoalsWidget extends StatelessWidget {
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     onPrimary: Colors.black87, //Button Text color
-    primary: Colors.lightGreen[300], //Button background color
+    primary: Color.fromARGB(255, 155, 203, 99), //Button background color
     minimumSize: Size(88, 36),
 
     shadowColor: Colors.white54, //?
@@ -71,12 +70,12 @@ class StartGoalsWidget extends StatelessWidget {
                           15), // to make the corners round from the pictures
 
                       image: DecorationImage(
-                          image: AssetImage('assets/Biodiv.jpeg'),
+                          image: AssetImage('assets/BigTree.jpeg'),
                           fit: BoxFit.cover),
                     ),
                     child: Align(
                       alignment: Alignment(0.0,
-                          0.8), //to have the text and the button in the under 80 percentage
+                          0.8), //to have the text and the button in the under 20 percentage
                       child: FittedBox(
                         //this way it has to fit his parent
                         child: Column(
@@ -87,8 +86,8 @@ class StartGoalsWidget extends StatelessWidget {
                                 width: 300,
                                 //height: (MediaQuery.of(context).viewPadding),
                                 child: Center(
-                                  child: Text(
-                                    "Biodiversität",
+                                  child: AutoSizeText(
+                                    "Projekte",
                                     style: TextStyle(
                                       fontSize: 25.0,
                                       color: Colors.white,
@@ -122,7 +121,7 @@ class StartGoalsWidget extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => InfoBio()),
+                      MaterialPageRoute(builder: (context) => InfoProject()),
                     );
                   },
                 ),
@@ -149,7 +148,7 @@ class StartGoalsWidget extends StatelessWidget {
                       alignment: Alignment(0.0,
                           0.8), //to have the text and the button in the under 80 percentage
                       child: FittedBox(
-                        //this way it has to fit his parent
+                        //this way it has to fit his parent and it also makes the Alignement work
                         child: Column(
                           //  padding: const EdgeInsets.all(8.0),
 
@@ -215,7 +214,7 @@ class StartGoalsWidget extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
-                          image: AssetImage('assets/BigTree.jpeg'),
+                          image: AssetImage('assets/Biodiv.jpeg'),
                           fit: BoxFit.cover),
                     ),
                     child: Align(
@@ -231,7 +230,7 @@ class StartGoalsWidget extends StatelessWidget {
                               width: 300,
                               child: Center(
                                 child: Text(
-                                  "Abholzung",
+                                  "Biodiversität",
                                   style: TextStyle(
                                       fontSize: 25.0, color: Colors.white),
                                 ),
@@ -250,7 +249,7 @@ class StartGoalsWidget extends StatelessWidget {
                                   child: AutoSizeText(
                                     'Jetzt spenden',
                                     style: TextStyle(
-                                        //fontSize: 25.0,
+                                        //fontSize: 30.0,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 )),
@@ -261,9 +260,10 @@ class StartGoalsWidget extends StatelessWidget {
                   ),
                   // ),
                   onPressed: () {
-                     Navigator.push(
+                    Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => InfoDeforestation()),
+                      MaterialPageRoute(
+                          builder: (context) => InfoBio()),
                     );
                   },
                 ),
@@ -327,15 +327,13 @@ class StartGoalsWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  
+
                   onPressed: () {
-                     Navigator.push(
+                    Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => InfoAboutUs()),
                     );
                   },
-
-                  
                 ),
               ),
             ],

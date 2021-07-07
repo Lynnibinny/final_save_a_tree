@@ -131,6 +131,9 @@ class InfoBio extends StatelessWidget {
                           ),
                         ),
                       ),
+                      onPressed: () {
+                        
+                      },
                     ),
                   ),
                   SizedBox(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:save_a_tree/startprofile_widget.dart';
+
 import 'package:save_a_tree/splash_screen.dart';
 
 import 'firstscreen.dart';
@@ -49,10 +49,10 @@ class MyApp extends StatelessWidget {
       initialRoute: Routes.SplashScreenRoute,
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
-        '/': (context) => SplashScreen(),
+        //'/': (context) => SplashScreen(),
         // When navigating to the "/second" route, build the SecondScreen widget.
         '/second': (context) => Nav(),
-        '/first': (context) => FirstScreen(
+        '/': (context) => FirstScreen(
               title: 'BELLLLOOOO',
             ),
       },

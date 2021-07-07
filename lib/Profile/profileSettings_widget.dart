@@ -1,9 +1,10 @@
+import 'package:save_a_tree/User.dart';
 import 'package:save_a_tree/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'User.dart';
+
 
 class ProfileSettingsWidget extends StatefulWidget {
   @override

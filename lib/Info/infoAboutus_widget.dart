@@ -21,7 +21,7 @@ class InfoAboutUs extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Biodiversität',
+            'Über uns',
             style: TextStyle(color: Colors.black),
           ),
           backgroundColor: Color(0x00000000),
@@ -39,7 +39,7 @@ class InfoAboutUs extends StatelessWidget {
                 padding: const EdgeInsets.all(30.0),
                 child: Column(
                   children: [
-                    Text('Unsere wertvollste Resource',
+                    Text('Sagittaria blabla',
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 25.0,
