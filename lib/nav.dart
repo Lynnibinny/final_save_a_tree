@@ -5,6 +5,7 @@ import 'package:save_a_tree/startcomunity_widget.dart';
 import 'package:save_a_tree/startprofile_widget.dart';
 
 import 'Map/startmap_widget.dart';
+import 'Profile/startprofile_widget.dart';
 
 class Nav extends StatefulWidget {
   @override
