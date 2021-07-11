@@ -56,11 +56,12 @@ class HomePageState extends State<HomePage> {
 
   void _onMapCreated(GoogleMapController controller) {
     //set map's colors
+    //GoogleMapController controller;
     controller.setMapStyle(MapStyle.mapStyle);
-    addPolygon(pos25ha);
+    /* addPolygon(pos25ha);
     addPolygon(pos300ha);
     addMarker(posMarker1);
-    addMarker(posMarker2);
+    addMarker(posMarker2); */
   }
 
   /* //Test
@@ -80,6 +81,11 @@ class HomePageState extends State<HomePage> {
 
   void addMarker(LatLng position) {
     int markerId = _markers.length + 1;
+
+    //child: CircularProgressIndicator(),
+    //customMarker == null
+    // ? CircularProgressIndicator()
+    //:
     setState(() {
       _markers.add(Marker(
         markerId: MarkerId('$markerId'),
@@ -107,14 +113,23 @@ class HomePageState extends State<HomePage> {
   }
 
   void createCustomMarker() async {
+    // GoogleMapController controller;
+
     customMarker =
         await getBitmapDescriptorFromSvgAsset(context, 'assets/Tree3.svg');
+
+    //  await controller.setMapStyle(MapStyle.mapStyle);
+    addPolygon(pos25ha);
+    addPolygon(pos300ha);
+    addMarker(posMarker1);
+    addMarker(posMarker2);
   }
 
   @override
   void initState() {
-    super.initState();
     createCustomMarker();
+    //_onMapCreated();
+    super.initState();
   }
 
   @override
@@ -124,7 +139,7 @@ class HomePageState extends State<HomePage> {
       title: title,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255,170,218,255),
+          backgroundColor: Color.fromARGB(255, 170, 218, 255),
           elevation: 0.0,
           title: Text(title,
               style: TextStyle(
@@ -132,12 +147,18 @@ class HomePageState extends State<HomePage> {
               )),
         ),
         //appBar: AppBar(title: Text('Map')),
-        body: GoogleMap(
-          markers: _markers,
-          polygons: _polygons,
-          initialCameraPosition: _initialCameraPosition,
-          onMapCreated: _onMapCreated,
-          //onTap: _ontap,
+        body: Center(
+          //child: CircularProgressIndicator(),
+          child: customMarker == null
+              ? CircularProgressIndicator()
+              : GoogleMap(
+                  markers: _markers,
+                  polygons: _polygons,
+                  initialCameraPosition: _initialCameraPosition,
+                  onMapCreated: _onMapCreated,
+                  //onMapCreated: createCustomMarker,
+                  //onTap: _ontap,
+                ),
         ),
       ),
     );

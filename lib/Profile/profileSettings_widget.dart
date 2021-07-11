@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:save_a_tree/User.dart';
 import 'package:save_a_tree/services.dart';
 import 'package:flutter/material.dart';
@@ -5,16 +6,27 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class ProfileSettingsWidget extends StatefulWidget {
   @override
   _ProfileSettingsWidgetState createState() => _ProfileSettingsWidgetState();
 }
 
 class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
+  final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
+    onPrimary: Colors.black87, //Button Text color
+    primary: Color.fromARGB(255, 155, 203, 99), //Button background color
+    minimumSize: Size(88, 36),
+
+    shadowColor: Colors.white54, //?
+    padding: EdgeInsets.symmetric(horizontal: 16),
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(5)),
+    ),
+  );
   List<bool> _selections = List.generate(3, (_) => false);
 
   User _filterUser;
+  TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
 
   List<User> _user = [];
   void asyncState() async {
@@ -68,32 +80,59 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
     super.dispose();
   }
 
+  TextEditingController _proUserNameController;
   Widget _editTitleTextField() {
     if (_isEditingText)
       return Center(
         child: TextField(
+          autofocus: true,
+          obscureText: false,
+          style: style,
+          decoration: InputDecoration(
+              contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+              hintText: "Email",
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(32.0))),
+
+          controller: _proUserNameController,
           onSubmitted: (newValue) {
             setState(() {
               _filterUser.proUserName = newValue;
               _isEditingText = false;
             });
           },
-          autofocus: true,
-          controller: _editingController,
+
+          // controller: _editingController,
         ),
       );
+
+    /*  decoration: InputDecoration(
+          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+          hintText: "Email",
+          border:
+              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+    );*/
     return InkWell(
       onTap: () {
         setState(() {
           _isEditingText = true;
         });
       },
-      child: Text(
-        _filterUser.proUserName,
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 18.0,
-        ),
+      child: Row(
+        children: <Widget>[
+          Text(
+            _filterUser.proUserName,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 18.0,
+            ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.edit),
+            color: Colors.black,
+            onPressed: () {},
+          )
+        ],
       ),
     );
   }
@@ -125,17 +164,39 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
             color: Colors.black, //to make the back button black
           ),
         ),
-        body: _filterUser == null
-            ? CircularProgressIndicator()
-            : Center(
-                child: AspectRatio(
-                  aspectRatio: 1 / 2,
-                  child: Container(
-                    padding: const EdgeInsets.all(30.0),
-                    child: _editTitleTextField(),
+        body: Center(
+          child: _filterUser == null
+              ? CircularProgressIndicator()
+              : Center(
+                  child: ListView(
+                    //child: AspectRatio(
+                    // aspectRatio: 1 / 2,
+                    children: <Widget>[
+                      Container(
+                        padding: const EdgeInsets.all(30.0),
+                        child: _editTitleTextField(),
+                      ),
+                      FractionallySizedBox(
+                        widthFactor: 0.8, //means 80% of app width
+                        child: (ElevatedButton(
+                          // style: raisedButtonStyle,
+                          onPressed: () {
+                            print('Tapped');
+                          },
+                          child: Container(
+                            child: AutoSizeText(
+                              'abmelden',
+                              style: TextStyle(
+                                  //fontSize: 25.0,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        )),
+                      ),
+                    ],
                   ),
                 ),
-              ),
+        ),
       ),
     );
   }
