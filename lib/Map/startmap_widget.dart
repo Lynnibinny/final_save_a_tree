@@ -40,6 +40,40 @@ class HomePageState extends State<HomePage> {
     LatLng(-26.9559028, -54.9362750),
   ];
 
+  final List<LatLng> ColoniaDelicia = [
+    //Polygon's edges
+    LatLng(27.23813056, 54.38782778),
+    LatLng(27.23260556, 54.35243889),
+    LatLng(27.23967222, 54.35005),
+    LatLng(27.24286667, 54.357375),
+    LatLng(27.24620556, 54.35780833),
+    LatLng(27.25083889, 54.34773611),
+    LatLng(27.25454444, 54.34881667),
+    LatLng(27.24928333, 54.36295278),
+    LatLng(27.24089722, 54.362725),
+    LatLng(27.24531389, 54.38560833),
+  ];
+
+  final List<LatLng> TupambaE = [
+    //Polygon's edges
+    LatLng(26.99685, 26.057425),
+    LatLng(26.99925833, 26.05991944),
+    LatLng(27.00076389, 27.05899722),
+    LatLng(26.99992778, 26.0604638),
+    LatLng(27.00327222, 27.06044167),
+    LatLng(27.008075, 27.05334167),
+    LatLng(27.00616389, 27.05259722),
+    LatLng(27.00416667, 27.05451944),
+    LatLng(27.00243611, 27.05400278),
+    LatLng(27.00140833, 27.05663611),
+    LatLng(27.00081944, 27.05653611),
+    LatLng(27.00132222, 27.054225),
+    LatLng(27.00073611, 27.05390833),
+    LatLng(27.00128611, 27.05217778),
+    LatLng(26.99974722, 26.05150833),
+    LatLng(26.99835556, 26.04930556),
+  ];
+
   LatLng posMarker1 = LatLng(-26.969627380371094, -55.189170837402344);
   LatLng posMarker2 = LatLng(-26.945327758789062, -54.92672348022461);
   //LatLng posMarker = LatLng(, );
@@ -80,7 +114,7 @@ class HomePageState extends State<HomePage> {
   */
 
   void addMarker(LatLng position) {
-    int markerId = _markers.length + 1;
+    int markerId = _markers.length;
 
     //child: CircularProgressIndicator(),
     //customMarker == null
@@ -121,6 +155,8 @@ class HomePageState extends State<HomePage> {
     //  await controller.setMapStyle(MapStyle.mapStyle);
     addPolygon(pos25ha);
     addPolygon(pos300ha);
+    addPolygon(ColoniaDelicia);
+    addPolygon(TupambaE);
     addMarker(posMarker1);
     addMarker(posMarker2);
   }
