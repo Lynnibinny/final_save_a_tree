@@ -1,5 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:save_a_tree/User.dart';
+import 'package:save_a_tree/firstscreen.dart';
+import 'package:save_a_tree/login.dart';
+import 'package:save_a_tree/main.dart';
 import 'package:save_a_tree/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -47,7 +50,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
         _user = user;
         // Initialize to the list from Server when reloading...
         _filterUser =
-            user.where((userElement) => userElement.id == id).toList().first;
+            user.where((userElement) => userElement.useId == id).toList().first;
         //output has to be one single user
         //.toList cause "where" does not return a List it just returns a where list
         //we can just use first cause in this list there is one single entry anyways
@@ -97,7 +100,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
           controller: _proUserNameController,
           onSubmitted: (newValue) {
             setState(() {
-              _filterUser.proUserName = newValue;
+              _filterUser.useUserName = newValue;
               _isEditingText = false;
             });
           },
@@ -121,7 +124,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
       child: Row(
         children: <Widget>[
           Text(
-            _filterUser.proUserName,
+            _filterUser.useUserName,
             style: TextStyle(
               color: Colors.black,
               fontSize: 18.0,
@@ -136,6 +139,22 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
       ),
     );
   }
+
+  _deleteUser() {
+    Services.deleteUser(_filterUser.useId); //.then((user) {
+    /*setState(() {
+        _user = user;
+        // Initialize to the list from Server when reloading...
+      });*/
+
+    //print("Length ${user.length}");
+    //);
+  }
+
+  
+  
+    
+    
 
   Widget build(BuildContext context) {
     return Container(
@@ -177,22 +196,53 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                         child: _editTitleTextField(),
                       ),
                       FractionallySizedBox(
-                        widthFactor: 0.8, //means 80% of app width
-                        child: (ElevatedButton(
-                          // style: raisedButtonStyle,
-                          onPressed: () {
-                            print('Tapped');
-                          },
-                          child: Container(
-                            child: AutoSizeText(
-                              'abmelden',
-                              style: TextStyle(
-                                  //fontSize: 25.0,
-                                  fontWeight: FontWeight.bold),
+                          widthFactor: 0.8, //means 80% of app width
+                          child: (ElevatedButton(
+                              // style: raisedButtonStyle,
+                              onPressed: () async {
+                                SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
+                                prefs.remove('registeredUserId');
+                                Navigator.pushAndRemoveUntil(context,
+                                MaterialPageRoute(builder: (BuildContext context) => Login()),
+    ModalRoute.withName('/login'));
+                              },
+                              child: Container(
+                                  child: Column(children: <Widget>[
+                                AutoSizeText(
+                                  'abmelden',
+                                  style: TextStyle(
+                                      //fontSize: 25.0,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ]))))),
+                      FractionallySizedBox(
+                          widthFactor: 0.8, //means 80% of app width
+                          child: (ElevatedButton(
+                            onPressed: () async {
+                              SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+                              prefs.remove(
+                                  'registeredUserId'); //to delete Userid in the Instance
+                              _deleteUser(); //to delete User in database
+                              //Navigator.pushNamed(context, '/first');
+                              Navigator.pushAndRemoveUntil(context,
+                                MaterialPageRoute(builder: (BuildContext context) => FirstScreen()),
+    ModalRoute.withName('/first'));
+                            },
+                            child: Container(
+                              child: Column(
+                                children: <Widget>[
+                                  AutoSizeText(
+                                    'Konto löschen',
+                                    style: TextStyle(
+                                        //fontSize: 25.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        )),
-                      ),
+                          )))
                     ],
                   ),
                 ),

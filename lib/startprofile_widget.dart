@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:save_a_tree/firstscreen.dart';
 
 import 'package:save_a_tree/services.dart';
 
@@ -9,7 +9,6 @@ import 'Profile/profileArea_widget.dart';
 import 'Profile/profileSettings_widget.dart';
 import 'Profile/profileTree_widget.dart';
 import 'User.dart';
-
 
 class StartProfileWidget extends StatefulWidget {
   @override
@@ -22,6 +21,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
   User _filterUser;
 
   List<User> _user = [];
+
   void asyncState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var id = prefs.getString('registeredUserId');
@@ -48,7 +48,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
         _user = user;
         // Initialize to the list from Server when reloading...
         _filterUser =
-            user.where((userElement) => userElement.id == id).toList().first;
+            user.where((userElement) => userElement.useId == id).toList().first;
         //output has to be one single user
         //.toList cause "where" does not return a List it just returns a where list
         //we can just use first cause in this list there is one single entry anyways
@@ -61,6 +61,18 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     onPrimary: Colors.black87,
     primary: Colors.white,
+    elevation: 0,
+    minimumSize: Size(88, 36),
+    padding: EdgeInsets.symmetric(horizontal: 16),
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(8)),
+    ),
+  );
+
+  final ButtonStyle raisedButtonStyle1 = ElevatedButton.styleFrom(
+    onPrimary: Colors.black87,
+    primary: Colors.white,
+    elevation: 8,
     minimumSize: Size(88, 36),
     padding: EdgeInsets.symmetric(horizontal: 16),
     shape: const RoundedRectangleBorder(
@@ -77,10 +89,10 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
           end: Alignment.bottomLeft,
           stops: [0.1, 0.5, 0.7, 0.9],
           colors: [
-            Colors.cyan[100],
-            Colors.cyan[200],
-            Colors.cyan[300],
-            Colors.cyan[400],
+            Colors.lightGreen[200],
+            Colors.lightGreen[300],
+            Colors.lightGreen[400],
+            Colors.lightGreen[500],
           ],
         ),
       ),
@@ -96,7 +108,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
               )),
           backgroundColor: Color(0x00000000),
           elevation: 0.0,
-          //create button to navigat to the profilesettings
+          //create button to navigate to the profilesettings
           actions: <Widget>[
             IconButton(
               //set the setting-icon as a button
@@ -117,17 +129,16 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
         ),
         backgroundColor: Color(0x00000000),
         body: Center(
-          //child: CircularProgressIndicator(),
           child: _filterUser == null
               ? CircularProgressIndicator()
-              : Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+              : //String trees = _filterUser.UseSavedTrees;
+              Column(
+                  //mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                      
                       Spacer(
-                        flex: 2,
+                        flex: 1,
                       ),
-                      Expanded(
+                      /*Expanded(
                         child: Container(
                           height: 150,
                           child: Align(
@@ -141,7 +152,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                 child: Container(
                                   alignment: Alignment.center,
                                   // color: Colors.grey,
-                                  padding: const EdgeInsets.all(10.0),
+                                  padding: const EdgeInsets.all(7.0),
 
                                   child: FittedBox(
                                     fit: BoxFit.fill,
@@ -157,13 +168,14 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                           ),
                         ),
                       ),
+                      //SizedBox(height: 20),*/
                       Text(
-                        _filterUser.proUserName,
+                        _filterUser.useUserName,
                         textScaleFactor: 2.0,
                         //style: TextStyle(color: Colors.black),
                         style: TextStyle(fontSize: 30.0),
                       ),
-                      Spacer(),
+                      Spacer(flex: 2),
                       /* SizedBox(
                   height: 40,
                 ),*/
@@ -180,30 +192,36 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                   child: ElevatedButton(
                                     style: raisedButtonStyle,
                                     onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ProfileTree()),
-                                      );
+                                      print('tapped');
                                     },
                                     child: Container(
-                                      
                                       alignment: Alignment.center,
                                       // color: Colors.grey,
-                                      padding: const EdgeInsets.all(10.0), //space text edge
-                                      
+                                      padding: const EdgeInsets.all(
+                                          10.0), //space text edge
+
                                       child: Container(
-                                        
                                         child: Column(
                                           children: <Widget>[
-                                            Icon(
-                                              Icons.eco,
-                                              size: 40.0,
-                                            ),
-                                            AutoSizeText(
-                                              "gerettete Bäume:",
-                                              style: TextStyle(fontSize: 20.0),
+                                            SizedBox(
+                                              child: Column(
+                                                children: <Widget>[
+                                                  FittedBox(
+                                                    child: Icon(
+                                                      Icons.eco,
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 5),
+                                                  AutoSizeText(
+                                                    "gerettete Bäume: ${_filterUser.useSavedTrees}",
+                                                    style: TextStyle(
+                                                        fontSize: 17.0),
+                                                  ),
+                                                  /* AutoSizeText(
+                                                    _filterUser.UseSavedTrees,
+                                                  ),*/
+                                                ],
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -235,21 +253,31 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                     },
                                     //height:
                                     //150, //take care this hight has an effect on the width
-
                                     child: Container(
                                       alignment: Alignment.center,
-                                      //color: Colors.grey,
-                                      padding: const EdgeInsets.all(10.0),
+                                      // color: Colors.grey,
+                                      padding: const EdgeInsets.all(
+                                          10.0), //space text edge
                                       child: Container(
                                         child: Column(
                                           children: <Widget>[
-                                            Icon(
-                                              Icons.emoji_people_sharp,
-                                              size: 40.0,
-                                            ),
-                                            AutoSizeText(
-                                              "Fläche:",
-                                              style: TextStyle(fontSize: 20.0),
+                                            SizedBox(
+                                              child: Column(
+                                                children: <Widget>[
+                                                  FittedBox(
+                                                    child: Icon(Icons.favorite),
+                                                  ),
+                                                  SizedBox(height: 5),
+                                                  AutoSizeText(
+                                                    "gespendetes Geld: ${_filterUser.useDonated}",
+                                                    style: TextStyle(
+                                                        fontSize: 17.0),
+                                                  ),
+                                                  /* AutoSizeText(
+                                                    _filterUser.UseSavedTrees,
+                                                  ),*/
+                                                ],
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -260,10 +288,126 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                               ),
                             ),
                           ),
+
                           //),
                         ],
                       ),
-                      Spacer(),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              height: 110,
+                              child: Align(
+                                alignment: Alignment(0.6, 0.0),
+                                //child: Center(
+                                child: AspectRatio(
+                                  aspectRatio: 1.5,
+                                  child: ElevatedButton(
+                                    style: raisedButtonStyle,
+                                    onPressed: () {
+                                      print('tapped');
+                                    },
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      // color: Colors.grey,
+                                      padding: const EdgeInsets.all(
+                                          10.0), //space text edge
+
+                                      child: Container(
+                                        child: Column(
+                                          children: <Widget>[
+                                            SizedBox(
+                                              child: Column(
+                                                children: <Widget>[
+                                                  FittedBox(
+                                                    child: Icon(
+                                                      Icons.eco,
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 5),
+                                                  AutoSizeText(
+                                                    "gerettete Bäume: ${_filterUser.useSavedTrees}",
+                                                    style: TextStyle(
+                                                        fontSize: 17.0),
+                                                  ),
+                                                  /* AutoSizeText(
+                                                    _filterUser.UseSavedTrees,
+                                                  ),*/
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              //color: Colors.amber,
+                              height: 110,
+                              child: Align(
+                                alignment: Alignment(-0.6, 0.0),
+                                //child: Center(
+                                child: AspectRatio(
+                                  aspectRatio: 1.5,
+                                  child: ElevatedButton(
+                                    style: raisedButtonStyle,
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ProfileArea()),
+                                      );
+                                    },
+                                    //height:
+                                    //150, //take care this hight has an effect on the width
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      // color: Colors.grey,
+                                      padding: const EdgeInsets.all(
+                                          10.0), //space text edge
+                                      child: Container(
+                                        child: Column(
+                                          children: <Widget>[
+                                            SizedBox(
+                                              child: Column(
+                                                children: <Widget>[
+                                                  FittedBox(
+                                                    child: Icon(Icons.favorite),
+                                                  ),
+                                                  //CircularProgressIndicator(value )
+                                                  /*SizedBox(height: 5),
+                                                  AutoSizeText(
+                                                    "gespendetes Geld: ${_filterUser.useDonated}",
+                                                    style: TextStyle(
+                                                        fontSize: 17.0),
+                                                  ),*/
+                                                  /* AutoSizeText(
+                                                    _filterUser.UseSavedTrees,
+                                                  ),*/
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+
+                          //),
+                        ],
+                      ),
+                      SizedBox(height: 20),
                       Expanded(
                         child: Container(
                           //color: Colors.amber,
@@ -274,7 +418,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                             child: AspectRatio(
                               aspectRatio: 9 / 2,
                               child: ElevatedButton(
-                                style: raisedButtonStyle,
+                                style: raisedButtonStyle1,
                                 onPressed: () {
                                   Navigator.push(
                                     context,

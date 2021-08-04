@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:save_a_tree/login.dart';
 
 import 'package:save_a_tree/splash_screen.dart';
 
@@ -18,7 +19,7 @@ class Routes {
 }
 
 void main() async {
-  runApp(new MyApp()); //hiet kann ich etwas mitgeben, prefs MyApp übergeben
+  runApp(new MyApp()); //hier kann ich etwas mitgeben, prefs MyApp übergeben
 }
 
 /*class MyApp extends StatelessWidget {
@@ -52,9 +53,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => SplashScreen(),
         // When navigating to the "/second" route, build the SecondScreen widget.
         '/second': (context) => Nav(),
-        '/first': (context) => FirstScreen(
-              title: 'BELLLLOOOO',
-            ),
+        '/first': (context) => FirstScreen(),
+        '/login': (context) => Login()
       },
     );
   }
