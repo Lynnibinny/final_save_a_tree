@@ -14,6 +14,7 @@ class StartGoalsWidget extends StatefulWidget {
 }
 
 class StartGoalsState extends State<StartGoalsWidget> {
+  
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     onPrimary: Colors.black87, //Button Text color
     primary: Color.fromARGB(255, 155, 203, 99), //Button background color

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:save_a_tree/nav.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'User.dart';
 import 'services.dart';
 import 'main.dart';
 
-class FirstScreen extends StatefulWidget {
-  FirstScreen({Key key, this.title}) : super(key: key);
+class Login extends StatefulWidget {
+  Login({Key key, this.title}) : super(key: key);
 
   // This widget is used as our register form. After the splash screen will the user
   // get on this page if he has never logged in before.
@@ -14,18 +13,16 @@ class FirstScreen extends StatefulWidget {
   final String title;
 
   @override
-  _FirstScreenState createState() => _FirstScreenState();
+  _LoginState createState() => _LoginState();
 }
 
-class _FirstScreenState extends State<FirstScreen> {
+class _LoginState extends State<Login> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   List<User> _user;
   List<User> _filterUser;
-  TextEditingController _UseMailController;
   TextEditingController _UseUserNameController;
   TextEditingController _UsePasswordController;
-  TextEditingController _UseCompareController;
-  bool passwordfail = false;
+  bool loginfail = false;
 
   String _titleProgress;
   @override
@@ -36,10 +33,10 @@ class _FirstScreenState extends State<FirstScreen> {
     //_isUpdating = false;
     _titleProgress = widget.title;
     //_scaffoldKey = GlobalKey(); // key to get the context to show a SnackBar
-    _UseMailController = TextEditingController();
+
     _UseUserNameController = TextEditingController();
     _UsePasswordController = TextEditingController();
-    _UseCompareController = TextEditingController();
+
     //_getEmployees();
   }
 
@@ -49,48 +46,39 @@ class _FirstScreenState extends State<FirstScreen> {
     });
   }
 
-  _addUser() {
-    if (_UseMailController.text.isEmpty ||
-        _UseUserNameController.text.isEmpty ||
-        _UsePasswordController.text.isEmpty || _UseCompareController.text.isEmpty) {
+  _loginUser() {
+    if (_UseUserNameController.text.isEmpty ||
+        _UsePasswordController.text.isEmpty) {
       print('Empty Fields');
       return;
     }
-    if (_UseMailController.text.isNotEmpty ||
-        _UseUserNameController.text.isNotEmpty ||
-        _UsePasswordController.text.isNotEmpty || _UseCompareController.text.isNotEmpty) {
-      print('$_UseMailController, $_UseUserNameController, $_UseCompareController, $_UsePasswordController');
+    if (_UseUserNameController.text.isNotEmpty ||
+        _UsePasswordController.text.isNotEmpty) {
+      print('$_UseUserNameController');
     } //just to find errors
-    _showProgress('Adding User...');
-    if (_UsePasswordController.text != _UseCompareController.text) {
-     // if ("hallo" != "hallo"){
-      setState(() {
-        passwordfail = true; //loginfail is bool
-        print('passwörter ungleich');
-      });
-    } else {
-      Services.addUser(_UseMailController.text, _UseUserNameController.text,
-              _UsePasswordController.text)
-          .then((result) async {
-        if ('error' == result) {
-          print('konnte nicht registriert werden.');
-        } else {
-          print('konnte fast registriert werden');
-          //here we get the id
 
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          await prefs.setString(
-              'registeredUserId', result); //später statt 5 result
-          //_getEmployees(); // Refresh the List after adding each employee...
-          //_clearValues();
-          print('wurde registriert werden');
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (BuildContext context) => Nav()),
-              ModalRoute.withName('/second'));
-        }
-      });
-    }
+    Services.loginUser(
+      _UseUserNameController.text,
+      _UsePasswordController.text,
+    ).then((result) async {
+      if ('error' == result) {
+        print('konnte sich nicht einlogen.');
+        //Navigator.pushNamed(context, '/first');
+        // logError;
+        setState((){
+           loginfail = true; //loginfail is bool
+          });
+      } else {
+        print('konnte sich fast einlogen');
+        //here we get the id
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString(
+            'registeredUserId', result);
+            Navigator.pushReplacementNamed(context, '/second'); 
+        //_getEmployees(); // Refresh the List after adding each employee...
+        //_clearValues();
+      }
+    });
   }
 
   _getUser() {
@@ -107,21 +95,13 @@ class _FirstScreenState extends State<FirstScreen> {
   }
 
   Widget build(BuildContext context) {
-    final UseMailField = TextField(
-      controller: _UseMailController,
-      obscureText: false,
-      style: style,
-      decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Email",
-          border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
+    final logError = Text("konnte nicht einlogen");
     final UseUserNameField = TextField(
       controller: _UseUserNameController,
       obscureText: false,
       style: style,
       decoration: InputDecoration(
+        errorText: loginfail ? 'Benutzername oder Passwort stimmen nicht überein' : null,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Benutzername",
           border:
@@ -135,26 +115,27 @@ class _FirstScreenState extends State<FirstScreen> {
       obscureText: true,
       style: style,
       decoration: InputDecoration(
+        errorText: loginfail ? 'Benutzername oder Passwort stimmen nicht überein' : null,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Passwort",
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-      /* inputStyle: TextStyle(fontSize: 26),
-              suffixIcon: Icon(
-                Icons.smartphone,
-                color: Colors.red,    
-    ),*/
     );
-    final UsePasswordCompareField = TextField(
-      controller: _UseCompareController,
-      obscureText: true,
-      style: style,
-      decoration: InputDecoration(
-          errorText: passwordfail ? 'Passwörter stimmen nicht überein' : null,
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Passwort bestätigen",
-          border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+    final backRegistrationButon = Material(
+      elevation: 5.0,
+      borderRadius: BorderRadius.circular(30.0),
+      color: Color(0xff01A0C7),
+      child: MaterialButton(
+        minWidth: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        onPressed: () {
+          Navigator.pushNamed(context, '/first');
+        },
+        child: Text("zurück zur Registration",
+            textAlign: TextAlign.center,
+            style: style.copyWith(
+                color: Colors.white, fontWeight: FontWeight.bold)),
+      ),
     );
     final loginButon = Material(
       elevation: 5.0,
@@ -164,28 +145,12 @@ class _FirstScreenState extends State<FirstScreen> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
-          Navigator.pushNamed(context, '/login');
+          _loginUser();
+          _getUser();
+          
+          
         },
         child: Text("Login",
-            textAlign: TextAlign.center,
-            style: style.copyWith(
-                color: Colors.white, fontWeight: FontWeight.bold)),
-      ),
-    );
-    final registrationButon = Material(
-      elevation: 5.0,
-      borderRadius: BorderRadius.circular(30.0),
-      color: Color(0xff01A0C7),
-      child: MaterialButton(
-        minWidth: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () {
-          _addUser();
-          _getUser();
-
-          //Navigator.pushReplacementNamed(context, '/second');
-        },
-        child: Text("Registrieren",
             textAlign: TextAlign.center,
             style: style.copyWith(
                 color: Colors.white, fontWeight: FontWeight.bold)),
@@ -218,21 +183,19 @@ class _FirstScreenState extends State<FirstScreen> {
                     ),
                   ),
                   SizedBox(height: 45.0), //SizedBox as a space
-                  UseMailField,
-                  SizedBox(height: 25.0),
+
                   UseUserNameField,
                   SizedBox(height: 25.0),
                   UsePasswordField,
-                  SizedBox(height: 25.0),
-                  UsePasswordCompareField,
+
                   SizedBox(
                     height: 35.0,
                   ),
-                  registrationButon,
+                  loginButon,
                   SizedBox(
                     height: 15.0,
                   ),
-                  loginButon,
+                  backRegistrationButon,
                   SizedBox(
                     height: 15.0,
                   ),
