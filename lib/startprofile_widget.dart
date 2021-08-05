@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:save_a_tree/firstscreen.dart';
-
+import 'dart:async';
 import 'package:save_a_tree/services.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
@@ -21,6 +21,11 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
   User _filterUser;
 
   List<User> _user = [];
+  double _height;
+  double _width;
+
+  var percent = 0;
+  var filterUserPercent = 70;
 
   void asyncState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -31,6 +36,17 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
   }
 
   void initState() {
+    Timer timer;
+    timer = Timer.periodic(Duration(milliseconds: 300), (_) {
+      print('Percent Update');
+      setState(() {
+        percent += 1;
+        if (percent >= filterUserPercent) {
+          timer.cancel();
+          // percent=0;
+        }
+      });
+    });
     //_user = [];
     //_filterUser = [];
     //_isUpdating = false;
@@ -81,7 +97,13 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
   );
 
   Widget build(BuildContext context) {
+    final size = 50.0;
+    _height = MediaQuery.of(context).size.height;
+    _width = MediaQuery.of(context).size.width;
     const SizedBox(height: 30);
+
+    //),
+
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -368,36 +390,65 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                     //height:
                                     //150, //take care this hight has an effect on the width
                                     child: Container(
-                                      alignment: Alignment.center,
-                                      // color: Colors.grey,
-                                      padding: const EdgeInsets.all(
-                                          10.0), //space text edge
-                                      child: Container(
-                                        child: Column(
-                                          children: <Widget>[
-                                            SizedBox(
-                                              child: Column(
-                                                children: <Widget>[
-                                                  FittedBox(
-                                                    child: Icon(Icons.favorite),
+                                        alignment: Alignment.center,
+                                        // color: Colors.grey,
+                                        padding: const EdgeInsets.all(
+                                            10.0), //space text edge
+                                        child: Container(
+                                            height: _height,
+                                            width: _width,
+                                            padding: EdgeInsets.all(20),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                Stack(children: [
+                                                  ShaderMask(
+                                                    shaderCallback: (rect) {
+                                                      return LinearGradient(
+                                                        begin: Alignment
+                                                            .bottomLeft,
+                                                        end: Alignment.topLeft,
+                                                        stops: [
+                                                          percent / 100,
+                                                          percent / 100
+                                                        ],
+                                                        colors: [
+                                                          Colors
+                                                              .lightGreen[500],
+                                                          Colors.white,
+                                                          //Colors.lightGreen[400],
+                                                          // Colors.lightGreen[500],
+                                                        ],
+                                                      ).createShader(rect);
+                                                    },
+                                                    child: Container(
+                                                      width: size,
+                                                      height: size,
+                                                      decoration: BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          image: DecorationImage(
+                                                              image: AssetImage(
+                                                                  'assets/TreeGreen.png'))),
+                                                    ),
                                                   ),
-                                                  //CircularProgressIndicator(value )
-                                                  /*SizedBox(height: 5),
-                                                  AutoSizeText(
-                                                    "gespendetes Geld: ${_filterUser.useDonated}",
-                                                    style: TextStyle(
-                                                        fontSize: 17.0),
-                                                  ),*/
-                                                  /* AutoSizeText(
-                                                    _filterUser.UseSavedTrees,
-                                                  ),*/
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
+
+                                                  /*Container(
+                      width: size - 100,
+                      height: size - 100,
+                      decoration: BoxDecoration(
+                          color: Colors.white, shape: BoxShape.circle),
+                      child: Center(
+                          child: Text(
+                        "$percent",
+                        style: TextStyle(fontSize: 40),
+                      )),
+                    
+                  ),*/
+                                                ]),
+                                              ],
+                                            ))),
                                   ),
                                 ),
                               ),
@@ -455,199 +506,3 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
     );
   }
 }
-
-/*
-import 'package:flutter/material.dart';
-import 'dart:async';
-import 'package:flutter/widgets.dart';
-import 'package:path/path.dart';
-import 'package:save_a_tree/startcomunity_widget.dart';
-import 'package:save_a_tree/startgoals_widget.dart';
-class StartProfile extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _StartProfileState();
-  }
-}
-class _StartProfileState extends State<StartProfile> {
-  int _currentIndex = 0;
-  void function1() {
-    setState(() {
-      _currentIndex = 1;
-    });
-  }
-  void function2() {
-    setState(() {
-      _currentIndex = 2;
-    });
-  }
-  List<Widget> _widgetoptions = Widget[
-    StartProfile(),
-    StartGoalsWidget(),
-    StartMapWidget(),
-  ];
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      //Container(
-      //width: 50,
-      //height: 50,
-      children: [
-        child: _widgetOptions.elementAt(_currentIndex),
-        backgroundColor: Colors.green,
-        FittedBox(
-          alignment: Alignment.center,
-          child: //<Widget> [
-              ElevatedButton(
-            onPressed: function,
-            child: Column(children: <Widget>[
-              Icon(Icons.cake),
-              Text("en guete"),
-              currentIndex: _currentIndex;
-            ]),
-          ),
-        ),
-        FittedBox(
-          alignment: Alignment.center,
-          child: //<Widget> [
-              ElevatedButton(
-            onPressed: function,
-            child: Column(children: <Widget>[
-              Icon(Icons.play_arrow_outlined),
-              Text("viel Spass"),
-            ]),
-          ),
-        ),
-      ],
-    );
-  }
-}
-class _Container extends StatelessWidget {
-  Widget build(BuildContext context) {
-    return Container(
-//      margin: new EdgeInsets.all(8.0),
-      child: ListBody(
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              Container(
-                width: 200,
-                padding: EdgeInsets.fromLTRB(5, 5, 5, 0),
-                child: new TextFormField(
-                  decoration: const InputDecoration(
-                      labelText: 'Product Name', border: OutlineInputBorder()),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-*/
-
-/*class _AppBar extends State<StartProfile> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Profile'),
-      ),
-    );
-  }
-}
-*/
-//
-/*class Nav extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _NavState();
-  }
-}
-class _NavState extends State<Nav> {
-  int _currentIndex = 0; //current Index to describe wheter button was pressed or not
-  void onPressedPressed() {
-    setState(() {
-      _currentIndex = 1;
-    });
-  }
-  Widget buildButton(BuildContext context) {
-    return new Scaffold(
-      body: new ElevatedButton(
-        child: Text("Button"),
-        child: Icon(Icons.access_alarm),
-        onPressed: onPressedPressed,
-      ),
-    );
-  }
-import 'package:save_a_tree/main.dart';
-import 'package:save_a_tree/startgoals_widget.dart';
-var ProUserName = "Yarina";
-class StartProfileWidget extends StatelessWidget {
-  List<bool> _selections = List.generate(3, (_) => false);
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(children: <Widget>[
-        SizedBox(
-          height: 250.0,
-        ),
-        CircleAvatar(
-          backgroundColor: Colors.white,
-          radius: 50,
-          child: Icon(
-            Icons.local_florist,
-            color: Colors.red.shade900,
-            size: 50,
-          ),
-        ),
-        Text(
-          ProUserName,
-          textScaleFactor: 2.0,
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        */
-/* TextFormField(
-  decoration: InputDecoration(
-    labelText: 'Enter your username'
-  ),
-);
-      ]),
-    );
-  }
-}
-*/
-/*class StartProfileWidget extends StatelessWidget {
-  Widget build(BuildContext context) {
-    const SizedBox(height: 30);
-    return Center(
-        child: SizedBox(
-      width: 200.0,
-      height: 300.0,
-      child: const Card(child: Text('Hello World!')),
-    ));
-  }
-  Widget buildButton(BuildContext context) {
-    const SizedBox(height: 30);
-    return Center(
-      child: RaisedButton(
-        onPressed: () {},
-        child: const Text('Jetzt spenden!', style: TextStyle(fontSize: 20)),
-      ),
-    );
-  }
-}
-*/
-/*void main () async{
-  class Profile {
-    final int id;
-    final String name;
-    final Image picture;
-    final int trees;
-    final int money;
-    Profile({this.id, this.name, this.age});
-  }
-}
-*/
