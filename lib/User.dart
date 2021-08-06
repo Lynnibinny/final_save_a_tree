@@ -5,6 +5,7 @@ class User {
   String useSavedTrees;
   String useDonated;
   String usePassword;
+  String useGoals;
 
   User(
       {this.useId,
@@ -12,7 +13,8 @@ class User {
       this.useUserName,
       this.useSavedTrees,
       this.useDonated,
-      this.usePassword});
+      this.usePassword,
+      this.useGoals});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
@@ -22,6 +24,7 @@ class User {
       useSavedTrees: json['UseSavedTrees'] as String,
       useDonated: json['UseDonated'] as String,
       usePassword: json['UsePassword'] as String,
+      useGoals: json['UseGoals'] as String,
     );
   }
 }

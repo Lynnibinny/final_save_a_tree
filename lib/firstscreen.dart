@@ -3,7 +3,7 @@ import 'package:save_a_tree/nav.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'User.dart';
 import 'services.dart';
-import 'main.dart';
+
 
 class FirstScreen extends StatefulWidget {
   FirstScreen({Key key, this.title}) : super(key: key);
@@ -83,7 +83,7 @@ class _FirstScreenState extends State<FirstScreen> {
               'registeredUserId', result); //später statt 5 result
           //_getEmployees(); // Refresh the List after adding each employee...
           //_clearValues();
-          print('wurde registriert werden');
+          print('wurde registriert');
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (BuildContext context) => Nav()),
@@ -94,7 +94,7 @@ class _FirstScreenState extends State<FirstScreen> {
   }
 
   _getUser() {
-    _showProgress('Loading Employees...');
+    _showProgress('Loading User...');
     Services.getUser().then((user) {
       setState(() {
         _user = user;

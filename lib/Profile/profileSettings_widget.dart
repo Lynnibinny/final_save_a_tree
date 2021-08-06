@@ -2,12 +2,14 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:save_a_tree/User.dart';
 import 'package:save_a_tree/firstscreen.dart';
 import 'package:save_a_tree/login.dart';
-import 'package:save_a_tree/main.dart';
+
 import 'package:save_a_tree/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../nav.dart';
 
 class ProfileSettingsWidget extends StatefulWidget {
   @override
@@ -15,9 +17,10 @@ class ProfileSettingsWidget extends StatefulWidget {
 }
 
 class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
+
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     onPrimary: Colors.black87, //Button Text color
-    primary: Color.fromARGB(255, 155, 203, 99), //Button background color
+    primary: Colors.green,//Color.fromARGB(255, 155, 203, 99), //Button background color
     minimumSize: Size(88, 36),
 
     shadowColor: Colors.white54, //?
@@ -40,6 +43,35 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
     //async State because void initState does not allow async
   }
 
+  _deleteUser() {
+    Services.deleteUser(_filterUser.useId); //.then((user) {
+    //print("Length ${user.length}");
+    //);
+  }
+
+  _updateUser() {
+    Services.updateUser(
+            _filterUser.useId,
+            _filterUser.useMail,
+            _filterUser.useUserName,
+            //_useUserNameController.text,
+            _filterUser.useSavedTrees,
+            _filterUser.useDonated,
+            _filterUser.useGoals)
+        .then(
+      (result) async {
+        if ('error' == result) {
+          print('konnte nicht upgedated werden.');
+          // error control print("'${_filterUser.useId}', '${_filterUser.useUserName}', '${_filterUser.useMail}', '${_filterUser.useSavedTrees}', '${_filterUser.useDonated}', '${_filterUser.useGoals}'");
+        } else {
+          print('konnte ubgedated werden');
+          //here we get the id
+
+        }
+      },
+    );
+  }
+
   bool _isEditingText = false;
   TextEditingController _editingController;
   String initialText = "neuer Name";
@@ -60,16 +92,6 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
     });
   }
 
-  /*void updateUser(String id) {
-    Services.updateUser().then((user) {
-      setState(() {
-        _user = user;
-        user.where((userElement) => userElement.id == id).toList().first =
-            _filterUser;
-      });
-    });
-  }*/
-
   @override
   void initState() {
     super.initState();
@@ -83,7 +105,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
     super.dispose();
   }
 
-  TextEditingController _proUserNameController;
+  TextEditingController _useUserNameController;
   Widget _editTitleTextField() {
     if (_isEditingText)
       return Center(
@@ -93,19 +115,17 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
           style: style,
           decoration: InputDecoration(
               contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-              hintText: "Email",
+              hintText: "neuer Benutzername",
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(32.0))),
-
-          controller: _proUserNameController,
+          controller: _useUserNameController,
           onSubmitted: (newValue) {
             setState(() {
               _filterUser.useUserName = newValue;
               _isEditingText = false;
             });
+            _updateUser();
           },
-
-          // controller: _editingController,
         ),
       );
 
@@ -140,22 +160,6 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
     );
   }
 
-  _deleteUser() {
-    Services.deleteUser(_filterUser.useId); //.then((user) {
-    /*setState(() {
-        _user = user;
-        // Initialize to the list from Server when reloading...
-      });*/
-
-    //print("Length ${user.length}");
-    //);
-  }
-
-  
-  
-    
-    
-
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -164,10 +168,10 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
           end: Alignment.bottomLeft,
           stops: [0.1, 0.5, 0.7, 0.9],
           colors: [
-            Colors.cyan[100],
-            Colors.cyan[200],
-            Colors.cyan[300],
-            Colors.cyan[400],
+            Colors.lightGreen[200],
+            Colors.lightGreen[300],
+            Colors.lightGreen[400],
+            Colors.lightGreen[500],
           ],
         ),
       ),
@@ -182,6 +186,20 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
           iconTheme: IconThemeData(
             color: Colors.black, //to make the back button black
           ),
+          actions: <Widget>[
+            IconButton(
+              onPressed: () => Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (BuildContext context) => Nav()),
+                  ModalRoute.withName('/first')), //_updateUserWithRoot,
+              //() => Navigator.pop(context),
+              icon: Icon(
+                Icons.done,
+                size: 30.0,
+                color: Colors.green,
+              ),
+            ),
+          ],
         ),
         body: Center(
           child: _filterUser == null
@@ -198,19 +216,22 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                       FractionallySizedBox(
                           widthFactor: 0.8, //means 80% of app width
                           child: (ElevatedButton(
-                              // style: raisedButtonStyle,
+                              style: raisedButtonStyle,
                               onPressed: () async {
                                 SharedPreferences prefs =
                                     await SharedPreferences.getInstance();
                                 prefs.remove('registeredUserId');
-                                Navigator.pushAndRemoveUntil(context,
-                                MaterialPageRoute(builder: (BuildContext context) => Login()),
-    ModalRoute.withName('/login'));
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            Login()),
+                                    ModalRoute.withName('/login'));
                               },
                               child: Container(
                                   child: Column(children: <Widget>[
                                 AutoSizeText(
-                                  'abmelden',
+                                  'Abmelden',
                                   style: TextStyle(
                                       //fontSize: 25.0,
                                       fontWeight: FontWeight.bold),
@@ -219,6 +240,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                       FractionallySizedBox(
                           widthFactor: 0.8, //means 80% of app width
                           child: (ElevatedButton(
+                            style: raisedButtonStyle,
                             onPressed: () async {
                               SharedPreferences prefs =
                                   await SharedPreferences.getInstance();
@@ -226,9 +248,12 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                                   'registeredUserId'); //to delete Userid in the Instance
                               _deleteUser(); //to delete User in database
                               //Navigator.pushNamed(context, '/first');
-                              Navigator.pushAndRemoveUntil(context,
-                                MaterialPageRoute(builder: (BuildContext context) => FirstScreen()),
-    ModalRoute.withName('/first'));
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          FirstScreen()),
+                                  ModalRoute.withName('/first'));
                             },
                             child: Container(
                               child: Column(
