@@ -119,20 +119,33 @@ class Services {
   }
 
   // Method to update a user in Database...
-  static Future<String> updateUser(String UseMail, String UseUserName) async {
+  static Future<String> updateUser(
+      String useId,
+      String useMail,
+      String useUserName,
+      String useSavedTrees,
+      String useDonated,
+      String useGoals) async {
     try {
       var map = Map<String, dynamic>();
       map['action'] = _UPDATE_USER_ACTION;
-      map['UseMail'] = UseMail;
-      map['UseUserName'] = UseUserName;
+      map['UseId'] = useId;
+      map['UseMail'] = useMail;
+      map['UseUserName'] = useUserName;
+      map['UseSavedTrees'] = useSavedTrees;
+      map['UseDonated'] = useDonated;
+      map['UseGoals'] = useGoals;
+      print(map);
       final response = await http.post(ROOT, body: map);
-      print('updateEmployee Response: ${response.body}');
+      print('updateUser Response: ${response.body}');
+      print('guliguli');
       if (200 == response.statusCode) {
         return response.body;
       } else {
         return "error";
       }
     } catch (e) {
+      print("updateUser:" + e.toString());
       return "error";
     }
   }
