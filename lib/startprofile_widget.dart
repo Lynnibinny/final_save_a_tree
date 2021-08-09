@@ -413,7 +413,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                                 SizedBox(height: 5),
                                                 FittedBox(
                                                   child: AutoSizeText(
-                                                    "${_filterUser.useGoals} Bäume zu retten \nist Dein Ziel",
+                                                    "${_filterUser.useGoals} Bäume zu \nretten ist Dein Ziel",
                                                     style: TextStyle(
                                                         fontSize: 17.0,
                                                         fontWeight:
@@ -535,7 +535,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                       "Jetzt Ziel setzen",
                                       style: TextStyle(
                                           fontSize: 30.0,
-                                          fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.w500),
                                     ),
                                   ),
                                 ),
