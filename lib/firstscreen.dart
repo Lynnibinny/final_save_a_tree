@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'User.dart';
 import 'services.dart';
 
-
 class FirstScreen extends StatefulWidget {
   FirstScreen({Key key, this.title}) : super(key: key);
 
@@ -52,25 +51,28 @@ class _FirstScreenState extends State<FirstScreen> {
   _addUser() {
     if (_UseMailController.text.isEmpty ||
         _UseUserNameController.text.isEmpty ||
-        _UsePasswordController.text.isEmpty || _UseCompareController.text.isEmpty) {
+        _UsePasswordController.text.isEmpty ||
+        _UseCompareController.text.isEmpty) {
       print('Empty Fields');
       return;
     }
     if (_UseMailController.text.isNotEmpty ||
         _UseUserNameController.text.isNotEmpty ||
-        _UsePasswordController.text.isNotEmpty || _UseCompareController.text.isNotEmpty) {
-      print('$_UseMailController, $_UseUserNameController, $_UseCompareController, $_UsePasswordController');
+        _UsePasswordController.text.isNotEmpty ||
+        _UseCompareController.text.isNotEmpty) {
+      print(
+          '$_UseMailController, $_UseUserNameController, $_UseCompareController, $_UsePasswordController');
     } //just to find errors
     _showProgress('Adding User...');
     if (_UsePasswordController.text != _UseCompareController.text) {
-     // if ("hallo" != "hallo"){
+      // if ("hallo" != "hallo"){
       setState(() {
         passwordfail = true; //loginfail is bool
         print('passwörter ungleich');
       });
     } else {
       Services.addUser(_UseMailController.text, _UseUserNameController.text,
-              _UsePasswordController.text)
+              _UsePasswordController.text, 0, 0.0, 0)
           .then((result) async {
         if ('error' == result) {
           print('konnte nicht registriert werden.');
@@ -79,8 +81,8 @@ class _FirstScreenState extends State<FirstScreen> {
           //here we get the id
 
           SharedPreferences prefs = await SharedPreferences.getInstance();
-          await prefs.setString(
-              'registeredUserId', result); //später statt 5 result
+          await prefs.setInt(
+              'registeredUserId', int.parse(result)); //später statt 5 result
           //_getEmployees(); // Refresh the List after adding each employee...
           //_clearValues();
           print('wurde registriert');
@@ -88,6 +90,8 @@ class _FirstScreenState extends State<FirstScreen> {
               context,
               MaterialPageRoute(builder: (BuildContext context) => Nav()),
               ModalRoute.withName('/second'));
+
+          _getUser();
         }
       });
     }
@@ -159,7 +163,7 @@ class _FirstScreenState extends State<FirstScreen> {
     final loginButon = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
-      color: Color(0xff01A0C7),
+      color: Colors.lightGreen[700],
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -175,13 +179,13 @@ class _FirstScreenState extends State<FirstScreen> {
     final registrationButon = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
-      color: Color(0xff01A0C7),
+      color: Colors.lightGreen[700],
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
           _addUser();
-          _getUser();
+          //_getUser();
 
           //Navigator.pushReplacementNamed(context, '/second');
         },

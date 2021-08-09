@@ -9,18 +9,18 @@ import 'package:flutter/rendering.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../nav.dart';
+import 'nav.dart';
 
-class ProfileSettingsWidget extends StatefulWidget {
+class ProfileGoalsWidget extends StatefulWidget {
   @override
-  _ProfileSettingsWidgetState createState() => _ProfileSettingsWidgetState();
+  _ProfileGoalsWidgetState createState() => _ProfileGoalsWidgetState();
 }
 
-class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
-
+class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     onPrimary: Colors.black87, //Button Text color
-    primary: Colors.green,//Color.fromARGB(255, 155, 203, 99), //Button background color
+    primary: Colors
+        .green, //Color.fromARGB(255, 155, 203, 99), //Button background color
     minimumSize: Size(88, 36),
 
     shadowColor: Colors.white54, //?
@@ -75,7 +75,6 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
   bool _isEditingText = false;
   TextEditingController _editingController;
   String initialText = "neuer Name";
-
   void getUser(int id) {
     //_showProgress('Loading Employees...');
     Services.getUser().then((user) {
@@ -106,7 +105,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
     super.dispose();
   }
 
-  TextEditingController _useUserNameController;
+  TextEditingController _useGoalsController;
   Widget _editTitleTextField() {
     if (_isEditingText)
       return Center(
@@ -116,13 +115,13 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
           style: style,
           decoration: InputDecoration(
               contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-              hintText: "neuer Benutzername",
+              hintText: "Dein Ziel",
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(32.0))),
-          controller: _useUserNameController,
+          controller: _useGoalsController,
           onSubmitted: (newValue) {
             setState(() {
-              _filterUser.useUserName = newValue;
+              _filterUser.useGoals = int.parse(newValue);
               _isEditingText = false;
             });
             _updateUser();
@@ -145,7 +144,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
       child: Row(
         children: <Widget>[
           Text(
-            _filterUser.useUserName,
+            _filterUser.useGoals.toString(),
             style: TextStyle(
               color: Colors.black,
               fontSize: 18.0,
@@ -179,7 +178,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Einstellungen',
+            'Ziel',
             style: TextStyle(color: Colors.black),
           ),
           backgroundColor: Color(0x00000000),
@@ -206,70 +205,26 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
           child: _filterUser == null
               ? CircularProgressIndicator()
               : Center(
-                  child: ListView(
+                  child: Center(
+                    child: Column(
                     //child: AspectRatio(
                     // aspectRatio: 1 / 2,
                     children: <Widget>[
-                      Container(
+                      Icon(
+                        Icons.assistant_photo_rounded,
+                        size: 50
+                      ),
+                      Text(
+                        "Wieviele Bäume möchtest du retten?",
+                        style: TextStyle(
+                            fontSize: 17.0, fontWeight: FontWeight.w500),
+                      ),
+                       Container(
                         padding: const EdgeInsets.all(30.0),
                         child: _editTitleTextField(),
                       ),
-                      FractionallySizedBox(
-                          widthFactor: 0.8, //means 80% of app width
-                          child: (ElevatedButton(
-                              style: raisedButtonStyle,
-                              onPressed: () async {
-                                SharedPreferences prefs =
-                                    await SharedPreferences.getInstance();
-                                prefs.remove('registeredUserId');
-                                Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            Login()),
-                                    ModalRoute.withName('/login'));
-                              },
-                              child: Container(
-                                  child: Column(children: <Widget>[
-                                AutoSizeText(
-                                  'Abmelden',
-                                  style: TextStyle(
-                                      //fontSize: 25.0,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ]))))),
-                      FractionallySizedBox(
-                          widthFactor: 0.8, //means 80% of app width
-                          child: (ElevatedButton(
-                            style: raisedButtonStyle,
-                            onPressed: () async {
-                              SharedPreferences prefs =
-                                  await SharedPreferences.getInstance();
-                              prefs.remove(
-                                  'registeredUserId'); //to delete Userid in the Instance
-                              _deleteUser(); //to delete User in database
-                              //Navigator.pushNamed(context, '/first');
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          FirstScreen()),
-                                  ModalRoute.withName('/first'));
-                            },
-                            child: Container(
-                              child: Column(
-                                children: <Widget>[
-                                  AutoSizeText(
-                                    'Konto löschen',
-                                    style: TextStyle(
-                                        //fontSize: 25.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )))
                     ],
+                  ),
                   ),
                 ),
         ),

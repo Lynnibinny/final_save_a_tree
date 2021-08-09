@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'User.dart';
 import 'services.dart';
 
-
 class Login extends StatefulWidget {
   Login({Key key, this.title}) : super(key: key);
 
@@ -65,16 +64,15 @@ class _LoginState extends State<Login> {
         print('konnte sich nicht einlogen.');
         //Navigator.pushNamed(context, '/first');
         // logError;
-        setState((){
-           loginfail = true; //loginfail is bool
-          });
+        setState(() {
+          loginfail = true; //loginfail is bool
+        });
       } else {
         print('konnte sich fast einlogen');
         //here we get the id
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.setString(
-            'registeredUserId', result);
-            Navigator.pushReplacementNamed(context, '/second'); 
+        await prefs.setInt('registeredUserId', int.parse(result));
+        Navigator.pushReplacementNamed(context, '/second');
         //_getEmployees(); // Refresh the List after adding each employee...
         //_clearValues();
       }
@@ -101,7 +99,9 @@ class _LoginState extends State<Login> {
       obscureText: false,
       style: style,
       decoration: InputDecoration(
-        errorText: loginfail ? 'Benutzername oder Passwort stimmen nicht überein' : null,
+          errorText: loginfail
+              ? 'Benutzername oder Passwort stimmen nicht überein'
+              : null,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Benutzername",
           border:
@@ -115,7 +115,9 @@ class _LoginState extends State<Login> {
       obscureText: true,
       style: style,
       decoration: InputDecoration(
-        errorText: loginfail ? 'Benutzername oder Passwort stimmen nicht überein' : null,
+          errorText: loginfail
+              ? 'Benutzername oder Passwort stimmen nicht überein'
+              : null,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Passwort",
           border:
@@ -124,7 +126,7 @@ class _LoginState extends State<Login> {
     final backRegistrationButon = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
-      color: Color(0xff01A0C7),
+      color: Colors.lightGreen[700],
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -137,18 +139,16 @@ class _LoginState extends State<Login> {
                 color: Colors.white, fontWeight: FontWeight.bold)),
       ),
     );
-    final loginButon = Material(
+    final loginButton = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
-      color: Color(0xff01A0C7),
+      color: Colors.lightGreen[700],
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
           _loginUser();
           _getUser();
-          
-          
         },
         child: Text("Login",
             textAlign: TextAlign.center,
@@ -191,7 +191,7 @@ class _LoginState extends State<Login> {
                   SizedBox(
                     height: 35.0,
                   ),
-                  loginButon,
+                  loginButton,
                   SizedBox(
                     height: 15.0,
                   ),

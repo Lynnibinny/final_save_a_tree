@@ -3,16 +3,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'main.dart';
 
 class SplashScreen extends StatelessWidget {
-  
   Future<void> isRegistered(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //in shared preferences the userids get saved to figure out if the user has registered before or not
-    var id = prefs.getString('registeredUserId');
-    if (id == null || id.isEmpty) {
+    var id = prefs.getInt('registeredUserId');
+    if (id == null || id == 0) {
       Navigator.pushNamedAndRemoveUntil(
           context, Routes.FirstScreenRoute, (route) => false);
     } else {
-      print(id);
+      print('RegisteredUserId is: $id' );
       Navigator.pushNamedAndRemoveUntil(
           context, Routes.StartProfileRoute, (route) => false);
       //the files which are underneath get removed until they recieve true. But we never want to go back to the SplashScreen. Therefore we have it always on false. with Remove Untile

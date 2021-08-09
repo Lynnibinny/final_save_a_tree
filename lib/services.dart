@@ -39,22 +39,25 @@ class Services {
       final response = await http.post(ROOT, body: map);
       print('getUser Response: ${response.body}');
       if (200 == response.statusCode) {
+        print('in the if services get user');
         List<User> list = parseResponse(response.body);
+
         return list;
       } else {
         throw Exception(
             'cannot get the User'); //return "error"; //List<User>();
       }
     } catch (e) {
+      print("sys_get_user_excpt:" + e.toString());
       throw Exception(
           'cannot get the User'); //return List<User>(); // return an empty list on exception/error
     }
   }
 
-  static Future<List<User>> deleteUser(String UseId) async {
+  static Future<List<User>> deleteUser(int UseId) async {
     var map = Map<String, dynamic>();
     map['action'] = _DELETE_USER_ACTION;
-    map['UseId'] = UseId;
+    map['UseId'] = UseId.toString();
     final response = await http.post(ROOT, body: map);
     print('deleteUser Response: ${response.body}');
   }
@@ -69,15 +72,18 @@ class Services {
     String useMail,
     String useUserName,
     String usePassword,
+    int useSavedTrees,
+    double useDonated,
+    int useGoals
   ) async {
     try {
       var map = Map<String, dynamic>();
       map['action'] = _ADD_USER_ACTION;
       map['UseMail'] = useMail;
       map['UseUserName'] = useUserName;
-      //map['UsePicture'] = 0;
-      //map['UseSavedTrees'] = useSavedTrees;
-      //map['UseDonated'] = 0;
+      map['UseSavedTrees'] = useSavedTrees.toString();
+      map['UseDonated'] = useDonated.toString();
+      map['UseGoals'] = useGoals.toString();
       map['UsePassword'] = usePassword;
       print(map);
       final response = await http.post(ROOT, body: map);
@@ -120,21 +126,21 @@ class Services {
 
   // Method to update a user in Database...
   static Future<String> updateUser(
-      String useId,
+      int useId,
       String useMail,
       String useUserName,
-      String useSavedTrees,
-      String useDonated,
-      String useGoals) async {
+      int useSavedTrees,
+      double useDonated,
+      int useGoals) async {
     try {
       var map = Map<String, dynamic>();
       map['action'] = _UPDATE_USER_ACTION;
-      map['UseId'] = useId;
+      map['UseId'] = useId.toString();
       map['UseMail'] = useMail;
       map['UseUserName'] = useUserName;
-      map['UseSavedTrees'] = useSavedTrees;
-      map['UseDonated'] = useDonated;
-      map['UseGoals'] = useGoals;
+      map['UseSavedTrees'] = useSavedTrees.toString();
+      map['UseDonated'] = useDonated.toString();
+      map['UseGoals'] = useGoals.toString();
       print(map);
       final response = await http.post(ROOT, body: map);
       print('updateUser Response: ${response.body}');
