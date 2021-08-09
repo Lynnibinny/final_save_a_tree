@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:save_a_tree/User.dart';
 import 'package:save_a_tree/firstscreen.dart';
@@ -17,6 +19,11 @@ class ProfileGoalsWidget extends StatefulWidget {
 }
 
 class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
+  double _height;
+  double _width;
+
+  var percent = 0;
+  double filterUserPercent = 0;
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     onPrimary: Colors.black87, //Button Text color
     primary: Colors
@@ -94,6 +101,22 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
 
   @override
   void initState() {
+    Timer timer;
+
+    timer = Timer.periodic(Duration(milliseconds: 300), (_) {
+      print('Percent Update');
+      setState(() {
+        percent += 1;
+        /* if (_filterUser != null) {
+          filterUserPercent =
+              calcPercent(_filterUser.useGoals, _filterUser.useSavedTrees);
+        }*/
+        if (percent >= filterUserPercent) {
+          timer.cancel();
+          // percent=0;
+        }
+      });
+    });
     super.initState();
     asyncState();
     _editingController = TextEditingController(text: initialText);
@@ -161,6 +184,10 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
   }
 
   Widget build(BuildContext context) {
+    final size = 50.0;
+    _height = MediaQuery.of(context).size.height;
+    _width = MediaQuery.of(context).size.width;
+    const SizedBox(height: 30);
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -207,24 +234,59 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
               : Center(
                   child: Center(
                     child: Column(
-                    //child: AspectRatio(
-                    // aspectRatio: 1 / 2,
-                    children: <Widget>[
-                      Icon(
-                        Icons.assistant_photo_rounded,
-                        size: 50
-                      ),
-                      Text(
-                        "Wieviele Bäume möchtest du retten?",
-                        style: TextStyle(
-                            fontSize: 17.0, fontWeight: FontWeight.w500),
-                      ),
-                       Container(
-                        padding: const EdgeInsets.all(30.0),
-                        child: _editTitleTextField(),
-                      ),
-                    ],
-                  ),
+                      //child: AspectRatio(
+                      // aspectRatio: 1 / 2,
+                      children: <Widget>[
+                        SizedBox(height: _height / 20),
+                        Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white, shape: BoxShape.circle),
+                            height: _height / 6,
+                            //width: _width / 3,
+                            //padding: EdgeInsets.all(20),
+                            //color: Colors.white,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Stack(children: [
+                                  ShaderMask(
+                                    shaderCallback: (rect) {
+                                      return LinearGradient(
+                                        begin: Alignment.bottomLeft,
+                                        end: Alignment.topLeft,
+                                        stops: [percent / 100, percent / 100],
+                                        colors: [
+                                          Colors.lightGreen[500],
+                                          Colors.white,
+                                          //Colors.lightGreen[400],
+                                          // Colors.lightGreen[500],
+                                        ],
+                                      ).createShader(rect);
+                                    },
+                                    child: Container(
+                                      height: _height / 8,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/TreeGreen.png'))),
+                                    ),
+                                  ),
+                                ]),
+                              ],
+                            )),
+                        SizedBox(height: _height / 20),
+                        Text(
+                          "Wieviele Bäume möchtest du retten?",
+                          style: TextStyle(
+                              fontSize: 17.0, fontWeight: FontWeight.w500),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(30.0),
+                          child: _editTitleTextField(),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
         ),
