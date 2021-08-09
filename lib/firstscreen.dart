@@ -160,7 +160,7 @@ class _FirstScreenState extends State<FirstScreen> {
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
-    final loginButon = Material(
+    final loginButton = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
       color: Colors.lightGreen[700],
@@ -176,7 +176,7 @@ class _FirstScreenState extends State<FirstScreen> {
                 color: Colors.white, fontWeight: FontWeight.bold)),
       ),
     );
-    final registrationButon = Material(
+    final registrationButton = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
       color: Colors.lightGreen[700],
@@ -232,11 +232,11 @@ class _FirstScreenState extends State<FirstScreen> {
                   SizedBox(
                     height: 35.0,
                   ),
-                  registrationButon,
+                  registrationButton,
                   SizedBox(
                     height: 15.0,
                   ),
-                  loginButon,
+                  loginButton,
                   SizedBox(
                     height: 15.0,
                   ),
