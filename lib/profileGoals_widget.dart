@@ -150,14 +150,12 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
             _updateUser();
           },
         ),
-      );
-
-    /*  decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Email",
-          border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );*/
+   
+      
+ 
+      
+          
+    );
     return InkWell(
       onTap: () {
         setState(() {
@@ -165,7 +163,9 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
         });
       },
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,  
         children: <Widget>[
+          SizedBox(width: _width/13,),
           Text(
             _filterUser.useGoals.toString(),
             style: TextStyle(
@@ -218,7 +218,9 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
               onPressed: () => Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (BuildContext context) => Nav()),
-                  ModalRoute.withName('/first')), //_updateUserWithRoot,
+                  ModalRoute.withName('/first')),
+
+              //_updateUserWithRoot,
               //() => Navigator.pop(context),
               icon: Icon(
                 Icons.done,
@@ -228,68 +230,63 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
             ),
           ],
         ),
-        body: Center(
-          child: _filterUser == null
-              ? CircularProgressIndicator()
-              : Center(
-                  child: Center(
-                    child: Column(
-                      //child: AspectRatio(
-                      // aspectRatio: 1 / 2,
-                      children: <Widget>[
-                        SizedBox(height: _height / 20),
-                        Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white, shape: BoxShape.circle),
-                            height: _height / 6,
-                            //width: _width / 3,
-                            //padding: EdgeInsets.all(20),
-                            //color: Colors.white,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Stack(children: [
-                                  ShaderMask(
-                                    shaderCallback: (rect) {
-                                      return LinearGradient(
-                                        begin: Alignment.bottomLeft,
-                                        end: Alignment.topLeft,
-                                        stops: [percent / 100, percent / 100],
-                                        colors: [
-                                          Colors.lightGreen[500],
-                                          Colors.white,
-                                          //Colors.lightGreen[400],
-                                          // Colors.lightGreen[500],
-                                        ],
-                                      ).createShader(rect);
-                                    },
-                                    child: Container(
-                                      height: _height / 8,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          image: DecorationImage(
-                                              image: AssetImage(
-                                                  'assets/TreeGreen.png'))),
-                                    ),
-                                  ),
-                                ]),
-                              ],
-                            )),
-                        SizedBox(height: _height / 20),
-                        Text(
-                          "Wieviele Bäume möchtest du retten?",
-                          style: TextStyle(
-                              fontSize: 17.0, fontWeight: FontWeight.w500),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.all(30.0),
-                          child: _editTitleTextField(),
-                        ),
-                      ],
-                    ),
+        body: _filterUser == null
+            ? CircularProgressIndicator()
+            : Column(
+                //child: AspectRatio(
+                // aspectRatio: 1 / 2,
+                children: <Widget>[
+                  SizedBox(height: _height / 20),
+                  Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white, shape: BoxShape.circle),
+                      height: _height / 6,
+                      //width: _width / 3,
+                      //padding: EdgeInsets.all(20),
+                      //color: Colors.white,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Stack(children: [
+                            ShaderMask(
+                              shaderCallback: (rect) {
+                                return LinearGradient(
+                                  begin: Alignment.bottomLeft,
+                                  end: Alignment.topLeft,
+                                  stops: [percent / 100, percent / 100],
+                                  colors: [
+                                    Colors.lightGreen[500],
+                                    Colors.white,
+                                    //Colors.lightGreen[400],
+                                    // Colors.lightGreen[500],
+                                  ],
+                                ).createShader(rect);
+                              },
+                              child: Container(
+                                height: _height / 8,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/TreeGreen.png'))),
+                              ),
+                            ),
+                          ]),
+                        ],
+                      )),
+                  SizedBox(height: _height / 20),
+                  Text(
+                    "Wieviele Bäume möchtest du retten?",
+                    style:
+                        TextStyle(fontSize: 17.0, fontWeight: FontWeight.w500),
                   ),
-                ),
-        ),
+                   Container(
+                      padding: const EdgeInsets.all(30.0),
+                      child: _editTitleTextField(),
+                    
+                  ),
+                ],
+              ),
       ),
     );
   }
