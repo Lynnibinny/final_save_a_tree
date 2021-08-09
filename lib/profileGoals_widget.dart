@@ -19,11 +19,61 @@ class ProfileGoalsWidget extends StatefulWidget {
 }
 
 class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
+
+  void asyncState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var id = prefs.getInt('registeredUserId');
+    getUser(id);
+    //hand id over. Therefore getUser methode is able to compare them
+    //async State because void initState does not allow async
+  }
+
+
+  void initState() {
+    Timer timer;
+
+    timer = Timer.periodic(Duration(milliseconds: 300), (_) {
+      print('Percent Update');
+      setState(() {
+        percent += 1;
+        print('in setState');
+        if (_filterUser != null) {
+          print('in if filterUser != null');
+          filterUserPercent =
+              calcPercent(_filterUser.useGoals, _filterUser.useSavedTrees);
+          print(
+              'Percent: $filterUserPercent ${_filterUser.useGoals} ${_filterUser.useSavedTrees}');
+        }
+        if (percent >= filterUserPercent) {
+          timer.cancel();
+          //percent=0;
+        }
+      });
+    });
+    asyncState();
+    super.initState();
+    
+    _editingController = TextEditingController(text: initialText);
+  }
+  double calcPercent(int goals, int savedTrees) {
+    if (goals > 0) {
+      return (savedTrees*100/goals);
+    } else {
+      return (0);
+    }
+  }
+
+  @override
+  void dispose() {
+    _editingController.dispose();
+    super.dispose();
+  }
   double _height;
   double _width;
 
   var percent = 0;
   double filterUserPercent = 0;
+  
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     onPrimary: Colors.black87, //Button Text color
     primary: Colors
@@ -42,14 +92,7 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
 
   List<User> _user = [];
-  void asyncState() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var id = prefs.getInt('registeredUserId');
-    getUser(id);
-    //hand id over. Therefore getUser methode is able to compare them
-    //async State because void initState does not allow async
-  }
-
+  
   _deleteUser() {
     Services.deleteUser(_filterUser.useId); //.then((user) {
     //print("Length ${user.length}");
@@ -99,34 +142,7 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
     });
   }
 
-  @override
-  void initState() {
-    Timer timer;
-
-    timer = Timer.periodic(Duration(milliseconds: 300), (_) {
-      print('Percent Update');
-      setState(() {
-        percent += 1;
-        /* if (_filterUser != null) {
-          filterUserPercent =
-              calcPercent(_filterUser.useGoals, _filterUser.useSavedTrees);
-        }*/
-        if (percent >= filterUserPercent) {
-          timer.cancel();
-          // percent=0;
-        }
-      });
-    });
-    super.initState();
-    asyncState();
-    _editingController = TextEditingController(text: initialText);
-  }
-
-  @override
-  void dispose() {
-    _editingController.dispose();
-    super.dispose();
-  }
+  
 
   TextEditingController _useGoalsController;
   Widget _editTitleTextField() {
@@ -214,6 +230,7 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
             color: Colors.black, //to make the back button black
           ),
           actions: <Widget>[
+            
             IconButton(
               onPressed: () => Navigator.pushAndRemoveUntil(
                   context,
@@ -274,6 +291,9 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
                           ]),
                         ],
                       )),
+                  SizedBox(height: _height / 20),
+                  Text("$percent %", style:
+                        TextStyle(fontSize: 17.0, fontWeight: FontWeight.w500),),
                   SizedBox(height: _height / 20),
                   Text(
                     "Wieviele Bäume möchtest du retten?",

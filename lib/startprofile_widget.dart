@@ -26,7 +26,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
   double _width;
 
   var percent = 0;
-  double filterUserPercent = 0;
+  double filterUserPercent = 70;
 
   void asyncState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -43,13 +43,17 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
       print('Percent Update');
       setState(() {
         percent += 1;
-       /* if (_filterUser != null) {
+        print('in setState');
+        if (_filterUser != null) {
+          print('in if filterUser != null');
           filterUserPercent =
               calcPercent(_filterUser.useGoals, _filterUser.useSavedTrees);
-        }*/
+          print(
+              'Percent: $filterUserPercent ${_filterUser.useGoals} ${_filterUser.useSavedTrees}');
+        }
         if (percent >= filterUserPercent) {
           timer.cancel();
-          // percent=0;
+          //percent=0;
         }
       });
     });
@@ -63,13 +67,13 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
     super.initState();
   }
 
-  /*double calcPercent(int savedTrees, int goals) {
+  double calcPercent(int goals, int savedTrees) {
     if (goals > 0) {
-      return (100 / goals * savedTrees);
+      return (savedTrees*100/goals);
     } else {
       return (0);
     }
-  }*/
+  }
 
   void getUser(int id) {
     //_showProgress('Loading Employees...');
@@ -77,7 +81,8 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
       setState(() {
         _user = user;
         // Initialize to the list from Server when reloading...
-        _filterUser = user.where((userElement) => userElement.useId == id).toList().first;
+        _filterUser =
+            user.where((userElement) => userElement.useId == id).toList().first;
         //output has to be one single user
         //.toList cause "where" does not return a List it just returns a where list
         //we can just use first cause in this list there is one single entry anyways
@@ -364,7 +369,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                           //),
                         ],
                       ), //The two top Widgets of the for end here
-                      SizedBox(height: _height / 40),
+                      SizedBox(height: _height / 80),
 
                       Row(
                         children: [
