@@ -9,6 +9,7 @@ import 'Profile/profileArea_widget.dart';
 import 'Profile/profileSettings_widget.dart';
 
 import 'User.dart';
+import 'profileGoals_widget.dart';
 
 class StartProfileWidget extends StatefulWidget {
   @override
@@ -25,11 +26,11 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
   double _width;
 
   var percent = 0;
-  var filterUserPercent = 70;
+  double filterUserPercent = 0;
 
   void asyncState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var id = prefs.getString('registeredUserId');
+    var id = prefs.getInt('registeredUserId');
     getUser(id);
     //hand id over. Therefore getUser methode is able to compare them
     //async State because void initState does not allow async
@@ -37,10 +38,15 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
 
   void initState() {
     Timer timer;
+
     timer = Timer.periodic(Duration(milliseconds: 300), (_) {
       print('Percent Update');
       setState(() {
         percent += 1;
+       /* if (_filterUser != null) {
+          filterUserPercent =
+              calcPercent(_filterUser.useGoals, _filterUser.useSavedTrees);
+        }*/
         if (percent >= filterUserPercent) {
           timer.cancel();
           // percent=0;
@@ -57,14 +63,21 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
     super.initState();
   }
 
-  void getUser(String id) {
+  /*double calcPercent(int savedTrees, int goals) {
+    if (goals > 0) {
+      return (100 / goals * savedTrees);
+    } else {
+      return (0);
+    }
+  }*/
+
+  void getUser(int id) {
     //_showProgress('Loading Employees...');
     Services.getUser().then((user) {
       setState(() {
         _user = user;
         // Initialize to the list from Server when reloading...
-        _filterUser =
-            user.where((userElement) => userElement.useId == id).toList().first;
+        _filterUser = user.where((userElement) => userElement.useId == id).toList().first;
         //output has to be one single user
         //.toList cause "where" does not return a List it just returns a where list
         //we can just use first cause in this list there is one single entry anyways
@@ -75,9 +88,11 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
   }
 
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
-    onPrimary: Colors.black87,
-    primary: Colors.white,
+    onPrimary: Colors.black87, //Textcolor
+    primary: Colors.white, //Backgroundcolor
     elevation: 0,
+    onSurface: Colors.amber,
+
     minimumSize: Size(88, 36),
     padding: EdgeInsets.symmetric(horizontal: 16),
     shape: const RoundedRectangleBorder(
@@ -88,7 +103,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
   final ButtonStyle raisedButtonStyle1 = ElevatedButton.styleFrom(
     onPrimary: Colors.black87,
     primary: Colors.white,
-    elevation: 8,
+    elevation: 30,
     minimumSize: Size(88, 36),
     padding: EdgeInsets.symmetric(horizontal: 16),
     shape: const RoundedRectangleBorder(
@@ -153,54 +168,72 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
         body: Center(
           child: _filterUser == null
               ? CircularProgressIndicator()
-              : //String trees = _filterUser.UseSavedTrees;
-              Column(
-                  //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                      Spacer(
-                        flex: 1,
-                      ),
-                      /*Expanded(
-                        child: Container(
-                          height: 150,
-                          child: Align(
-                            alignment: Alignment(0.0, 0.0),
-                            //child: Center(
-                            child: AspectRatio(
-                              aspectRatio: 1.5,
-                              child: CircleAvatar(
-                                backgroundColor: Colors.white,
-                                radius: 50,
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  // color: Colors.grey,
-                                  padding: const EdgeInsets.all(7.0),
+              :
+              //String trees = _filterUser.UseSavedTrees;
 
-                                  child: FittedBox(
-                                    fit: BoxFit.fill,
-                                    child: Icon(
-                                      Icons.local_florist,
-                                      color: Colors.red.shade900,
-                                      size: 50,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      //SizedBox(height: 20),*/
+              Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                      //Spacer(flex: 1),
+                      Center(
+                        child: Container(
+                            alignment: Alignment.center,
+                            // color: Colors.grey,
+                            //padding:const EdgeInsets.all(10.0), //space text edge
+                            child: Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    shape: BoxShape.circle),
+                                height: _height / 6,
+                                //width: _width / 3,
+                                //padding: EdgeInsets.all(20),
+                                //color: Colors.white,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Stack(children: [
+                                      ShaderMask(
+                                        shaderCallback: (rect) {
+                                          return LinearGradient(
+                                            begin: Alignment.bottomLeft,
+                                            end: Alignment.topLeft,
+                                            stops: [
+                                              percent / 100,
+                                              percent / 100
+                                            ],
+                                            colors: [
+                                              Colors.lightGreen[500],
+                                              Colors.white,
+                                              //Colors.lightGreen[400],
+                                              // Colors.lightGreen[500],
+                                            ],
+                                          ).createShader(rect);
+                                        },
+                                        child: Container(
+                                          height: _height / 8,
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              image: DecorationImage(
+                                                  image: AssetImage(
+                                                      'assets/TreeGreen.png'))),
+                                        ),
+                                      ),
+                                    ]),
+                                  ],
+                                ))),
+                      ), //Tree
+
+                      SizedBox(height: 20),
                       Text(
                         _filterUser.useUserName,
                         textScaleFactor: 2.0,
                         //style: TextStyle(color: Colors.black),
                         style: TextStyle(fontSize: 30.0),
                       ),
-                      Spacer(flex: 2),
-                      /* SizedBox(
-                  height: 40,
-                ),*/
+                      SizedBox(height: _height / 30), //UserName
+                      //Spacer(flex:1),
+
                       Row(
                         children: [
                           Expanded(
@@ -211,244 +244,249 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                 //child: Center(
                                 child: AspectRatio(
                                   aspectRatio: 1.5,
-                                  child: ElevatedButton(
-                                    style: raisedButtonStyle,
-                                    onPressed: () {
-                                      print('tapped');
-                                    },
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      // color: Colors.grey,
-                                      padding: const EdgeInsets.all(
-                                          10.0), //space text edge
-
-                                      child: Container(
-                                        child: Column(
-                                          children: <Widget>[
-                                            SizedBox(
-                                              child: Column(
-                                                children: <Widget>[
-                                                  FittedBox(
-                                                    child: Icon(
-                                                      Icons.eco,
-                                                    ),
-                                                  ),
-                                                  SizedBox(height: 5),
-                                                  AutoSizeText(
-                                                    "gerettete Bäume: ${_filterUser.useSavedTrees}",
-                                                    style: TextStyle(
-                                                        fontSize: 17.0),
-                                                  ),
-                                                  /* AutoSizeText(
-                                                    _filterUser.UseSavedTrees,
-                                                  ),*/
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.white,
                                       ),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(8)),
+                                      color: Colors.white,
                                     ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              //color: Colors.amber,
-                              height: 110,
-                              child: Align(
-                                alignment: Alignment(-0.6, 0.0),
-                                //child: Center(
-                                child: AspectRatio(
-                                  aspectRatio: 1.5,
-                                  child: ElevatedButton(
-                                    style: raisedButtonStyle,
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ProfileArea()),
-                                      );
-                                    },
-                                    //height:
-                                    //150, //take care this hight has an effect on the width
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      // color: Colors.grey,
-                                      padding: const EdgeInsets.all(
-                                          10.0), //space text edge
-                                      child: Container(
-                                        child: Column(
-                                          children: <Widget>[
-                                            SizedBox(
-                                              child: Column(
-                                                children: <Widget>[
-                                                  FittedBox(
-                                                    child: Icon(Icons.favorite),
-                                                  ),
-                                                  SizedBox(height: 5),
-                                                  AutoSizeText(
-                                                    "gespendetes Geld: ${_filterUser.useDonated}",
-                                                    style: TextStyle(
-                                                        fontSize: 17.0),
-                                                  ),
-                                                  /* AutoSizeText(
-                                                    _filterUser.UseSavedTrees,
-                                                  ),*/
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
 
-                          //),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              height: 110,
-                              child: Align(
-                                alignment: Alignment(0.6, 0.0),
-                                //child: Center(
-                                child: AspectRatio(
-                                  aspectRatio: 1.5,
-                                  child: ElevatedButton(
-                                    style: raisedButtonStyle,
-                                    onPressed: () {
-                                      print('tapped');
-                                    },
-                                    child: Container(
+                                    //color: Colors.white,
+                                    // ),
+                                    padding: const EdgeInsets.all(
+                                        10.0), //space text edge
+                                    child: Align(
                                       alignment: Alignment.center,
-                                      // color: Colors.grey,
-                                      padding: const EdgeInsets.all(
-                                          10.0), //space text edge
+                                      //color: Colors.white,
 
-                                      child: Container(
-                                        child: Column(
-                                          children: <Widget>[
-                                            SizedBox(
-                                              child: Column(
-                                                children: <Widget>[
-                                                  FittedBox(
-                                                    child: Icon(
-                                                      Icons.eco,
-                                                    ),
-                                                  ),
-                                                  SizedBox(height: 5),
-                                                  AutoSizeText(
-                                                    "gerettete Bäume: ${_filterUser.useSavedTrees}",
-                                                    style: TextStyle(
-                                                        fontSize: 17.0),
-                                                  ),
-                                                  /* AutoSizeText(
-                                                    _filterUser.UseSavedTrees,
-                                                  ),*/
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              //color: Colors.amber,
-                              height: 110,
-                              child: Align(
-                                alignment: Alignment(-0.6, 0.0),
-                                //child: Center(
-                                child: AspectRatio(
-                                  aspectRatio: 1.5,
-                                  child: ElevatedButton(
-                                    style: raisedButtonStyle,
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ProfileArea()),
-                                      );
-                                    },
-                                    //height:
-                                    //150, //take care this hight has an effect on the width
-                                    child: Container(
-                                        alignment: Alignment.center,
-                                        // color: Colors.grey,
-                                        padding: const EdgeInsets.all(
-                                            10.0), //space text edge
-                                        child: Container(
-                                            height: _height,
-                                            width: _width,
-                                            padding: EdgeInsets.all(20),
+                                      child: Column(
+                                        children: <Widget>[
+                                          SizedBox(
                                             child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                Stack(children: [
-                                                  ShaderMask(
-                                                    shaderCallback: (rect) {
-                                                      return LinearGradient(
-                                                        begin: Alignment
-                                                            .bottomLeft,
-                                                        end: Alignment.topLeft,
-                                                        stops: [
-                                                          percent / 100,
-                                                          percent / 100
-                                                        ],
-                                                        colors: [
-                                                          Colors
-                                                              .lightGreen[500],
-                                                          Colors.white,
-                                                          //Colors.lightGreen[400],
-                                                          // Colors.lightGreen[500],
-                                                        ],
-                                                      ).createShader(rect);
-                                                    },
-                                                    child: Container(
-                                                      width: size,
-                                                      height: size,
-                                                      decoration: BoxDecoration(
-                                                          shape:
-                                                              BoxShape.circle,
-                                                          image: DecorationImage(
-                                                              image: AssetImage(
-                                                                  'assets/TreeGreen.png'))),
-                                                    ),
+                                              children: <Widget>[
+                                                FittedBox(
+                                                  child: Icon(
+                                                    Icons.eco,
                                                   ),
+                                                ),
+                                                SizedBox(height: 5),
+                                                FittedBox(
+                                                  child: AutoSizeText(
+                                                    "Gerettete \nBäume: ${_filterUser.useSavedTrees}",
+                                                    style: TextStyle(
+                                                        fontSize: 17.0,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                ),
+                                                //first we had it all in ElevatedButtons so we could define the buttonstyle on top. But we couldn't
+                                                //delete the on Pressed function so the user would always see that it is a button. Now we wrapped it in a container with decorations. To still have the
+                                                //Button Textsize we used FontWeight.w500.
 
-                                                  /*Container(
-                      width: size - 100,
-                      height: size - 100,
-                      decoration: BoxDecoration(
-                          color: Colors.white, shape: BoxShape.circle),
-                      child: Center(
-                          child: Text(
-                        "$percent",
-                        style: TextStyle(fontSize: 40),
-                      )),
-                    
-                  ),*/
-                                                ]),
+                                                /* AutoSizeText(
+                                                    _filterUser.UseSavedTrees,
+                                                  ),*/
                                               ],
-                                            ))),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              //color: Colors.amber,
+                              height: 110,
+                              child: Align(
+                                alignment: Alignment(-0.6, 0.0),
+                                //child: Center(
+                                child: AspectRatio(
+                                  aspectRatio: 1.5,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.white,
+                                      ),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(8)),
+                                      color: Colors.white,
+                                    ),
+
+                                    //color: Colors.white,
+                                    // ),
+                                    padding: const EdgeInsets.all(
+                                        10.0), //space text edge
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      //color: Colors.white,
+
+                                      child: Column(
+                                        children: <Widget>[
+                                          SizedBox(
+                                            child: Column(
+                                              children: <Widget>[
+                                                FittedBox(
+                                                  child: Icon(Icons.favorite),
+                                                ),
+                                                SizedBox(height: 5),
+                                                FittedBox(
+                                                  child: AutoSizeText(
+                                                    "Gespendetes \nGeld: ${_filterUser.useDonated}",
+                                                    style: TextStyle(
+                                                        fontSize: 17.0,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                ),
+
+                                                /* AutoSizeText(
+                                                    _filterUser.UseSavedTrees,
+                                                  ),*/
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+
+                          //),
+                        ],
+                      ), //The two top Widgets of the for end here
+                      SizedBox(height: _height / 40),
+
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              height: 110,
+                              child: Align(
+                                alignment: Alignment(0.6, 0.0),
+                                //child: Center(
+                                child: AspectRatio(
+                                  aspectRatio: 1.5,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.white,
+                                      ),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(8)),
+                                      color: Colors.white,
+                                    ),
+
+                                    //color: Colors.white,
+                                    // ),
+                                    padding: const EdgeInsets.all(
+                                        10.0), //space text edge
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      //color: Colors.white,
+
+                                      child: Column(
+                                        children: <Widget>[
+                                          SizedBox(
+                                            child: Column(
+                                              children: <Widget>[
+                                                FittedBox(
+                                                  child: Icon(
+                                                    Icons
+                                                        .assistant_photo_rounded,
+                                                  ),
+                                                ),
+                                                SizedBox(height: 5),
+                                                FittedBox(
+                                                  child: AutoSizeText(
+                                                    "${_filterUser.useGoals} Bäume zu retten \nist Dein Ziel",
+                                                    style: TextStyle(
+                                                        fontSize: 17.0,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                ),
+
+                                                /* AutoSizeText(
+                                                    _filterUser.UseSavedTrees,
+                                                  ),*/
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+
+                          Expanded(
+                            child: Container(
+                              //color: Colors.amber,
+                              height: 110,
+                              child: Align(
+                                alignment: Alignment(-0.6, 0.0),
+                                //child: Center(
+                                child: AspectRatio(
+                                  aspectRatio: 1.5,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.white,
+                                      ),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(8)),
+                                      color: Colors.white,
+                                    ),
+
+                                    //color: Colors.white,
+                                    // ),
+                                    padding: const EdgeInsets.all(
+                                        10.0), //space text edge
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      //color: Colors.white,
+
+                                      child: Column(
+                                        children: <Widget>[
+                                          SizedBox(
+                                            child: Column(
+                                              children: <Widget>[
+                                                FittedBox(
+                                                  child:
+                                                      Icon(Icons.celebration),
+                                                ),
+                                                SizedBox(height: 5),
+                                                FittedBox(
+                                                  child: AutoSizeText(
+                                                    "$percent % hast Du \nbereits erreicht",
+                                                    style: TextStyle(
+                                                        fontSize: 17.0,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                ),
+
+                                                /* AutoSizeText(
+                                                    _filterUser.UseSavedTrees,
+                                                  ),*/
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -458,6 +496,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                           //),
                         ],
                       ),
+
                       SizedBox(height: 20),
                       Expanded(
                         child: Container(
@@ -475,7 +514,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            ProfileSettingsWidget()),
+                                            ProfileGoalsWidget()),
                                   );
                                 },
                                 //height:
@@ -485,10 +524,13 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                   alignment: Alignment.center,
                                   //color: Colors.grey,
                                   padding: const EdgeInsets.all(10.0),
+
                                   child: Container(
                                     child: AutoSizeText(
-                                      "Jetzt Spenden",
-                                      style: TextStyle(fontSize: 30.0),
+                                      "Jetzt Ziel setzten",
+                                      style: TextStyle(
+                                          fontSize: 30.0,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ),

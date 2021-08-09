@@ -11,7 +11,6 @@ class StartGoalsWidget extends StatefulWidget {
 }
 
 class StartGoalsState extends State<StartGoalsWidget> {
-  
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     onPrimary: Colors.black87, //Button Text color
     primary: Color.fromARGB(255, 155, 203, 99), //Button background color
@@ -75,310 +74,300 @@ class StartGoalsState extends State<StartGoalsWidget> {
           backgroundColor: Color(0x00000000),
           elevation: 0.0,
         ),
-        body: /*Center(
+        body:
+            /*Center(
           child: BigTree == null
               ? CircularProgressIndicator()
               : */
+            Container(
+          margin: EdgeInsets.symmetric(vertical: 20.0),
+          //height: 200.0,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: <Widget>[
               Container(
-                  margin: EdgeInsets.symmetric(vertical: 20.0),
-                  //height: 200.0,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: <Widget>[
-                      Container(
-                        child: new MaterialButton(
-                          padding: EdgeInsets.all(
-                              20.0), //space between picture and all the widgets in it and the boarder
-                          textColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
+                child: new MaterialButton(
+                  padding: EdgeInsets.all(
+                      20.0), //space between picture and all the widgets in it and the boarder
+                  textColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))),
 
-                          //minWidth: 200.0,
-                          splashColor:
-                              Colors.greenAccent, //Fill color on pressed
-                          elevation: 8.0,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                  15), // to make the corners round from the pictures
+                  //minWidth: 200.0,
+                  splashColor: Colors.greenAccent, //Fill color on pressed
+                  elevation: 8.0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                          15), // to make the corners round from the pictures
 
-                              image: DecorationImage(
-                                  image: AssetImage('assets/BigTree.jpeg'), fit: BoxFit.cover),
-                            ),
-                            child: Align(
-                              alignment: Alignment(0.0,
-                                  0.8), //to have the text and the button in the under 20 percentage
-                              child: FittedBox(
-                                //this way it has to fit his parent
-                                child: Column(children: [
-                                  SizedBox(
-                                    width: 300,
-                                    //height: (MediaQuery.of(context).viewPadding),
-                                    child: Center(
-                                      child: AutoSizeText(
-                                        "Projekte",
-                                        style: TextStyle(
-                                          fontSize: 25.0,
-                                          color: Colors.white,
-                                          //fontWeight: FontWeight.bold //to make the text thicker
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ), // as a Space in between
-
-                                  ElevatedButton(
-                                    style: raisedButtonStyle,
-                                    onPressed: () {
-                                      print('Tapped');
-                                    },
-                                    child: Container(
-                                      child: AutoSizeText(
-                                        'Jetzt spenden',
-                                        style: TextStyle(
-                                            //fontSize: 25.0,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                  ),
-                                ]),
-                              ),
-                            ),
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => InfoProject()),
-                            );
-                          },
-                        ),
-                      ),
-                      Container(
-                        child: new MaterialButton(
-                          padding: EdgeInsets.all(
-                              20.0), //space between picture and all the widgets in it and the boarder
-                          textColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
-
-                          minWidth: 200.0,
-                          splashColor: Colors.greenAccent,
-                          //elevation: 8.0,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                  image: AssetImage('assets/Kids.jpg'),
-                                  fit: BoxFit.cover),
-                            ),
-                            child: Align(
-                              alignment: Alignment(0.0,
-                                  0.8), //to have the text and the button in the under 80 percentage
-                              child: FittedBox(
-                                //this way it has to fit his parent and it also makes the Alignement work
-                                child: Column(
-                                  //  padding: const EdgeInsets.all(8.0),
-
-                                  children: [
-                                    SizedBox(
-                                      width: 300,
-                                      child: Center(
-                                        child: Text(
-                                          "Kultur",
-                                          style: TextStyle(
-                                            fontSize: 25.0,
-                                            color: Colors.white,
-                                            //fontWeight: FontWeight.bold //to make the text thicker
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ), // as a Space in between
-
-                                    ElevatedButton(
-                                        style: raisedButtonStyle,
-                                        onPressed: () {
-                                          print('Tapped');
-                                        },
-                                        child: Container(
-                                          child: AutoSizeText(
-                                            'Jetzt spenden',
-                                            style: TextStyle(
-                                                //fontSize: 25.0,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        )),
-                                    // ),
-                                  ],
+                      image: DecorationImage(
+                          image: AssetImage('assets/BigTree.jpeg'),
+                          fit: BoxFit.cover),
+                    ),
+                    child: Align(
+                      alignment: Alignment(0.0,
+                          0.8), //to have the text and the button in the under 20 percentage
+                      child: FittedBox(
+                        //this way it has to fit his parent
+                        child: Column(children: [
+                          SizedBox(
+                            width: 300,
+                            //height: (MediaQuery.of(context).viewPadding),
+                            child: Center(
+                              child: AutoSizeText(
+                                "Projekte",
+                                style: TextStyle(
+                                  fontSize: 25.0,
+                                  color: Colors.white,
+                                  //fontWeight: FontWeight.bold //to make the text thicker
                                 ),
                               ),
                             ),
                           ),
+                          SizedBox(
+                            height: 20,
+                          ), // as a Space in between
 
-                          // ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => InfoCulture()),
-                            );
-                          },
-                        ),
-                      ),
-                      Container(
-                        child: new MaterialButton(
-                          padding: EdgeInsets.all(
-                              20.0), //space between picture and all the widgets in it and the boarder
-                          textColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
-
-                          minWidth: 200.0,
-                          splashColor: Colors.greenAccent,
-                          //elevation: 8.0,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                  image: AssetImage('assets/Biodiv.jpeg'),
-                                  fit: BoxFit.cover),
-                            ),
-                            child: Align(
-                              alignment: Alignment(0.0,
-                                  0.8), //to have the text and the button in the under 80 percentage
-                              child: FittedBox(
-                                //this way it has to fit his parent
-                                child: Column(
-                                  //  padding: const EdgeInsets.all(8.0),
-
-                                  children: [
-                                    SizedBox(
-                                      width: 300,
-                                      child: Center(
-                                        child: Text(
-                                          "Biodiversität",
-                                          style: TextStyle(
-                                              fontSize: 25.0,
-                                              color: Colors.white),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ), // as a Space in between
-
-                                    ElevatedButton(
-                                        style: raisedButtonStyle,
-                                        onPressed: () {
-                                          print('Tapped');
-                                        },
-                                        child: Container(
-                                          child: AutoSizeText(
-                                            'Jetzt spenden',
-                                            style: TextStyle(
-                                                //fontSize: 30.0,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        )),
-                                  ],
-                                ),
+                          ElevatedButton(
+                            style: raisedButtonStyle,
+                            onPressed: () {
+                              print('Tapped');
+                            },
+                            child: Container(
+                              child: AutoSizeText(
+                                'Jetzt spenden',
+                                style: TextStyle(
+                                    //fontSize: 25.0,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
-                          // ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => InfoBio()),
-                            );
-                          },
-                        ),
+                        ]),
                       ),
-                      Container(
-                        child: new MaterialButton(
-                          padding: EdgeInsets.all(
-                              20.0), //space between picture and all the widgets in it and the boarder
-                          textColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
-
-                          minWidth: 200.0,
-                          splashColor: Colors.greenAccent,
-                          //elevation: 8.0,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                  image: AssetImage('assets/Leguan.jpeg'),
-                                  fit: BoxFit.cover),
-                            ),
-                            child: Align(
-                              alignment: Alignment(0.0,
-                                  0.8), //to have the text and the button in the under 80 percentage
-                              child: FittedBox(
-                                //this way it has to fit his parent
-                                child: Column(
-                                  //  padding: const EdgeInsets.all(8.0),
-
-                                  children: [
-                                    SizedBox(
-                                      width: 300,
-                                      child: Center(
-                                        child: Text(
-                                          "Über uns",
-                                          style: TextStyle(
-                                              fontSize: 25.0,
-                                              color: Colors.white),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ), // as a Space in between
-
-                                    ElevatedButton(
-                                        style: raisedButtonStyle,
-                                        onPressed: () {
-                                          print('Tapped');
-                                        },
-                                        child: Container(
-                                          child: AutoSizeText(
-                                            'Jetzt spenden',
-                                            style: TextStyle(
-                                                //fontSize: 25.0,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        )),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => InfoAboutUs()),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => InfoProject()),
+                    );
+                  },
                 ),
+              ),
+              Container(
+                child: new MaterialButton(
+                  padding: EdgeInsets.all(
+                      20.0), //space between picture and all the widgets in it and the boarder
+                  textColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))),
+
+                  minWidth: 200.0,
+                  splashColor: Colors.greenAccent,
+                  //elevation: 8.0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                          image: AssetImage('assets/Kids.jpg'),
+                          fit: BoxFit.cover),
+                    ),
+                    child: Align(
+                      alignment: Alignment(0.0,
+                          0.8), //to have the text and the button in the under 80 percentage
+                      child: FittedBox(
+                        //this way it has to fit his parent and it also makes the Alignement work
+                        child: Column(
+                          //  padding: const EdgeInsets.all(8.0),
+
+                          children: [
+                            SizedBox(
+                              width: 300,
+                              child: Center(
+                                child: Text(
+                                  "Kultur",
+                                  style: TextStyle(
+                                    fontSize: 25.0,
+                                    color: Colors.white,
+                                    //fontWeight: FontWeight.bold //to make the text thicker
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ), // as a Space in between
+
+                            ElevatedButton(
+                                style: raisedButtonStyle,
+                                onPressed: () {
+                                  print('Tapped');
+                                },
+                                child: Container(
+                                  child: AutoSizeText(
+                                    'Jetzt spenden',
+                                    style: TextStyle(
+                                        //fontSize: 25.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                )),
+                            // ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  // ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => InfoCulture()),
+                    );
+                  },
+                ),
+              ),
+              Container(
+                child: new MaterialButton(
+                  padding: EdgeInsets.all(
+                      20.0), //space between picture and all the widgets in it and the boarder
+                  textColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))),
+
+                  minWidth: 200.0,
+                  splashColor: Colors.greenAccent,
+                  //elevation: 8.0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                          image: AssetImage('assets/Biodiv.jpeg'),
+                          fit: BoxFit.cover),
+                    ),
+                    child: Align(
+                      alignment: Alignment(0.0,
+                          0.8), //to have the text and the button in the under 80 percentage
+                      child: FittedBox(
+                        //this way it has to fit his parent
+                        child: Column(
+                          //  padding: const EdgeInsets.all(8.0),
+
+                          children: [
+                            SizedBox(
+                              width: 300,
+                              child: Center(
+                                child: Text(
+                                  "Biodiversität",
+                                  style: TextStyle(
+                                      fontSize: 25.0, color: Colors.white),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ), // as a Space in between
+
+                            ElevatedButton(
+                                style: raisedButtonStyle,
+                                onPressed: () {
+                                  print('Tapped');
+                                },
+                                child: Container(
+                                  child: AutoSizeText(
+                                    'Jetzt spenden',
+                                    style: TextStyle(
+                                        //fontSize: 30.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                )),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  // ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => InfoBio()),
+                    );
+                  },
+                ),
+              ),
+              Container(
+                child: new MaterialButton(
+                  padding: EdgeInsets.all(
+                      20.0), //space between picture and all the widgets in it and the boarder
+                  textColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))),
+
+                  minWidth: 200.0,
+                  splashColor: Colors.greenAccent,
+                  //elevation: 8.0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                          image: AssetImage('assets/Leguan.jpeg'),
+                          fit: BoxFit.cover),
+                    ),
+                    child: Align(
+                      alignment: Alignment(0.0,
+                          0.8), //to have the text and the button in the under 80 percentage
+                      child: FittedBox(
+                        //this way it has to fit his parent
+                        child: Column(
+                          //  padding: const EdgeInsets.all(8.0),
+
+                          children: [
+                            SizedBox(
+                              width: 300,
+                              child: Center(
+                                child: Text(
+                                  "Über uns",
+                                  style: TextStyle(
+                                      fontSize: 25.0, color: Colors.white),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ), // as a Space in between
+
+                            ElevatedButton(
+                                style: raisedButtonStyle,
+                                onPressed: () {
+                                  print('Tapped');
+                                },
+                                child: Container(
+                                  child: AutoSizeText(
+                                    'Jetzt spenden',
+                                    style: TextStyle(
+                                        //fontSize: 25.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                )),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => InfoAboutUs()),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
-      
+      ),
     );
   }
 }

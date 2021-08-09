@@ -1,11 +1,11 @@
 class User {
-  String useId;
+  int useId;
   String useMail;
   String useUserName;
-  String useSavedTrees;
-  String useDonated;
-  String usePassword;
-  String useGoals;
+  int useSavedTrees;
+  double useDonated;
+  int useGoals;
+  //String usePassword;
 
   User(
       {this.useId,
@@ -13,19 +13,19 @@ class User {
       this.useUserName,
       this.useSavedTrees,
       this.useDonated,
-      this.usePassword,
-      this.useGoals});
+      this.useGoals
+      //this.usePassword
+      });
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      useId: json['UseId'] as String,
-      useMail: json['UseMail'] as String,
-      useUserName: json['UseUserName'] as String,
-      useSavedTrees: json['UseSavedTrees'] as String,
-      useDonated: json['UseDonated'] as String,
-      usePassword: json['UsePassword'] as String,
-      useGoals: json['UseGoals'] as String,
-    );
+        useId: int.parse(json['UseId']),
+        useMail: json['UseMail'] as String,
+        useUserName: json['UseUserName'] as String,
+        useSavedTrees: int.parse(json['UseSavedTrees']), 
+        useDonated: double.parse(json['UseDonated']), //usePassword: json['UsePassword'] as String,
+        useGoals: int.parse(json['UseGoals'])
+        );
   }
 }
-//data return to database
+//data return to database useDonated: json['UseDonated'] as double, useGoals: json['UseGoals'] as int,

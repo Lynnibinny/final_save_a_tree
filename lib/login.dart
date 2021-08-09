@@ -71,7 +71,7 @@ class _LoginState extends State<Login> {
         print('konnte sich fast einlogen');
         //here we get the id
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.setString('registeredUserId', result);
+        await prefs.setInt('registeredUserId', int.parse(result));
         Navigator.pushReplacementNamed(context, '/second');
         //_getEmployees(); // Refresh the List after adding each employee...
         //_clearValues();
@@ -139,7 +139,7 @@ class _LoginState extends State<Login> {
                 color: Colors.white, fontWeight: FontWeight.bold)),
       ),
     );
-    final loginButon = Material(
+    final loginButton = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
       color: Colors.lightGreen[700],
@@ -191,7 +191,7 @@ class _LoginState extends State<Login> {
                   SizedBox(
                     height: 35.0,
                   ),
-                  loginButon,
+                  loginButton,
                   SizedBox(
                     height: 15.0,
                   ),
