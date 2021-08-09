@@ -73,6 +73,7 @@ class _LoginState extends State<Login> {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setInt('registeredUserId', int.parse(result));
         Navigator.pushReplacementNamed(context, '/second');
+        _getUser();
         //_getEmployees(); // Refresh the List after adding each employee...
         //_clearValues();
       }
@@ -100,7 +101,7 @@ class _LoginState extends State<Login> {
       style: style,
       decoration: InputDecoration(
           errorText: loginfail
-              ? 'Benutzername oder Passwort stimmen nicht überein'
+              ? 'Benutzername oder Passwort stimmen nicht'
               : null,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Benutzername",
@@ -116,7 +117,7 @@ class _LoginState extends State<Login> {
       style: style,
       decoration: InputDecoration(
           errorText: loginfail
-              ? 'Benutzername oder Passwort stimmen nicht überein'
+              ? 'Benutzername oder Passwort stimmen nicht'
               : null,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Passwort",
@@ -148,7 +149,7 @@ class _LoginState extends State<Login> {
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
           _loginUser();
-          _getUser();
+          
         },
         child: Text("Login",
             textAlign: TextAlign.center,

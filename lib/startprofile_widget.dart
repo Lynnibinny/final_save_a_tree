@@ -528,7 +528,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
 
                                   child: Container(
                                     child: AutoSizeText(
-                                      "Jetzt Ziel setzten",
+                                      "Jetzt Ziel setzen",
                                       style: TextStyle(
                                           fontSize: 30.0,
                                           fontWeight: FontWeight.bold),
