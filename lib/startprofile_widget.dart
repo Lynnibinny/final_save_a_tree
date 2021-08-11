@@ -26,7 +26,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
   double _width;
 
   var percent = 0;
-  double filterUserPercent = 0;
+  double filterUserPercent = 70;
 
   void asyncState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -43,13 +43,17 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
       print('Percent Update');
       setState(() {
         percent += 1;
-        /* if (_filterUser != null) {
+        print('in setState');
+        if (_filterUser != null) {
+          print('in if filterUser != null');
           filterUserPercent =
               calcPercent(_filterUser.useGoals, _filterUser.useSavedTrees);
-        }*/
+          print(
+              'Percent: $filterUserPercent ${_filterUser.useGoals} ${_filterUser.useSavedTrees}');
+        }
         if (percent >= filterUserPercent) {
           timer.cancel();
-          // percent=0;
+          //percent=0;
         }
       });
     });
@@ -63,13 +67,13 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
     super.initState();
   }
 
-  /*double calcPercent(int savedTrees, int goals) {
+  double calcPercent(int goals, int savedTrees) {
     if (goals > 0) {
-      return (100 / goals * savedTrees);
+      return (savedTrees * 100 / goals);
     } else {
       return (0);
     }
-  }*/
+  }
 
   void getUser(int id) {
     //_showProgress('Loading Employees...');
@@ -365,7 +369,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                           //),
                         ],
                       ), //The two top Widgets of the for end here
-                      SizedBox(height: _height / 40),
+                      SizedBox(height: _height / 80),
 
                       Row(
                         children: [
@@ -409,7 +413,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                                 SizedBox(height: 5),
                                                 FittedBox(
                                                   child: AutoSizeText(
-                                                    "${_filterUser.useGoals} Bäume zu retten \nist Dein Ziel",
+                                                    "${_filterUser.useGoals} Bäume zu \nretten ist Dein Ziel",
                                                     style: TextStyle(
                                                         fontSize: 17.0,
                                                         fontWeight:
@@ -531,7 +535,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                       "Jetzt Ziel setzen",
                                       style: TextStyle(
                                           fontSize: 30.0,
-                                          fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.w500),
                                     ),
                                   ),
                                 ),
