@@ -25,14 +25,13 @@ class _FirstScreenState extends State<FirstScreen> {
   TextEditingController _UsePasswordController;
   TextEditingController _UseCompareController;
   bool passwordfail = false;
+  bool registerfail = false;
 
   String _titleProgress;
   @override
   void initState() {
     super.initState();
     _user = [];
-    //_filterEmployees = [];
-    //_isUpdating = false;
     _titleProgress = widget.title;
     //_scaffoldKey = GlobalKey(); // key to get the context to show a SnackBar
     _UseMailController = TextEditingController();
@@ -54,6 +53,7 @@ class _FirstScreenState extends State<FirstScreen> {
         _UsePasswordController.text.isEmpty ||
         _UseCompareController.text.isEmpty) {
       print('Empty Fields');
+      registerfail = true;
       return;
     }
     if (_UseMailController.text.isNotEmpty ||
@@ -63,12 +63,12 @@ class _FirstScreenState extends State<FirstScreen> {
       print(
           '$_UseMailController, $_UseUserNameController, $_UseCompareController, $_UsePasswordController');
     } //just to find errors
-    _showProgress('Adding User...');
+
     if (_UsePasswordController.text != _UseCompareController.text) {
       // if ("hallo" != "hallo"){
       setState(() {
         passwordfail = true; //loginfail is bool
-        print('passwörter ungleich');
+        print('Passwörter ungleich');
       });
     } else {
       Services.addUser(_UseMailController.text, _UseUserNameController.text,
@@ -76,6 +76,7 @@ class _FirstScreenState extends State<FirstScreen> {
           .then((result) async {
         if ('error' == result) {
           print('konnte nicht registriert werden.');
+          registerfail = true;
         } else {
           print('konnte fast registriert werden');
           //here we get the id
@@ -116,6 +117,7 @@ class _FirstScreenState extends State<FirstScreen> {
       obscureText: false,
       style: style,
       decoration: InputDecoration(
+          errorText: registerfail ? 'leere Felder' : null,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Email",
           border:
@@ -126,14 +128,14 @@ class _FirstScreenState extends State<FirstScreen> {
       obscureText: false,
       style: style,
       decoration: InputDecoration(
+          errorText: registerfail ? 'leere Felder' : null,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Benutzername",
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
     final UsePasswordField =
-        /*PasswordField(
-      controller: _UsePasswordController,*/
+        
         TextField(
       controller: _UsePasswordController,
       obscureText: true,
@@ -143,11 +145,7 @@ class _FirstScreenState extends State<FirstScreen> {
           hintText: "Passwort",
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-      /* inputStyle: TextStyle(fontSize: 26),
-              suffixIcon: Icon(
-                Icons.smartphone,
-                color: Colors.red,    
-    ),*/
+      
     );
     final UsePasswordCompareField = TextField(
       controller: _UseCompareController,
@@ -209,10 +207,6 @@ class _FirstScreenState extends State<FirstScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  //SizedBox(
-                  //  height: 155.0,
-
-                  //),
                   SizedBox(
                     height: 155.0,
                     child: Image.asset(
@@ -229,17 +223,11 @@ class _FirstScreenState extends State<FirstScreen> {
                   UsePasswordField,
                   SizedBox(height: 25.0),
                   UsePasswordCompareField,
-                  SizedBox(
-                    height: 35.0,
-                  ),
+                  SizedBox(height: 35.0),
                   registrationButton,
-                  SizedBox(
-                    height: 15.0,
-                  ),
+                  SizedBox(height: 15.0),
                   loginButton,
-                  SizedBox(
-                    height: 15.0,
-                  ),
+                  SizedBox(height: 15.0),
                 ],
               ),
             ),

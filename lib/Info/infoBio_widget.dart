@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 class InfoBio extends StatelessWidget {
@@ -46,9 +45,6 @@ class InfoBio extends StatelessWidget {
         body: ListView(
           scrollDirection: Axis.vertical,
           children: <Widget>[
-            //AspectRatio(
-            // aspectRatio: 1 / 2,
-            // child:
             Container(
               padding: const EdgeInsets.all(30.0),
               child: Column(
@@ -61,27 +57,10 @@ class InfoBio extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-
                   Text(
                     'Die Vielfalt der Tiere und Pflanzen ist von grosser Wichtigkeit. Zusammen leben sie in einer Balance, die von uns Menschen ins schwanken gebracht wird. Durch die Zerstörung von Lebensräumen einiger Arten werden wiederum andere Pflanzen oder Tiere, welche in einer Symbiose lebten aussterben.',
                     style: TextStyle(fontSize: 20.0),
                   ),
-
-                  /*Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                            image: AssetImage('assets/BigTree.jpeg'),
-                            fit: BoxFit.cover),
-                      ),
-                      child: FittedBox(
-                        child: SizedBox(
-                          height: 50,
-                        ),
-                      ),
-                    ),*/
-
-                  //Bild einfügen?!
                   SizedBox(
                     height: 20,
                   ),
@@ -115,31 +94,19 @@ class InfoBio extends StatelessWidget {
                                 SizedBox(
                               width: 200,
                               height: 400,
-                              child: Center(
-                                  /*child: Text(
-                                  "Kultur",
-                                  style: TextStyle(
-                                    fontSize: 25.0,
-                                    color: Colors.white,
-                                    //fontWeight: FontWeight.bold //to make the text thicker
-                                  ),
-                                ),*/
-                                  ),
+                              child: Center(),
                             ),
 
                             // ),
                           ),
                         ),
                       ),
-                      onPressed: () {
-                        
-                      },
+                      onPressed: () {},
                     ),
                   ),
                   SizedBox(
                     height: 20,
                   ),
-
                   Text(
                     'Die Gefahr der schrumpfenden Biodiversität ist, dass einzele Pflanzen oder Tiere die überhand nehmen. Die Wahrscheinlichkeit, dass einzelne Arten überleben im Falle einer Klimakrise Parasitenbefall, oder bei Krankheiten ist viel geringer als sie wäre bei einer grossen Diversität. Dies kann auch für uns Menschen schwere folgen haben, da unsere Wirtschaft auf der Landwirtschaft basiert die bei immer geringerer Biodiversität schlecht auf andere Sorten umsteigen kann.',
                     style: TextStyle(fontSize: 20.0),
@@ -147,7 +114,7 @@ class InfoBio extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  ElevatedButton(
+                  /*ElevatedButton(
                       style: raisedButtonStyle,
                       onPressed: () {
                         print('Tapped');
@@ -158,7 +125,7 @@ class InfoBio extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 20.0, fontWeight: FontWeight.w500),
                         ),
-                      )),
+                      )),*/
                   SizedBox(
                     height: 20,
                   ),

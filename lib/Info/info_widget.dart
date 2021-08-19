@@ -24,6 +24,9 @@ class StartGoalsState extends State<StartGoalsWidget> {
   );
 
   AssetImage BigTree;
+  double iTop = 10.0;
+  double iRight = 10.0;
+  double iSize = 27.0;
 
   void asyncState() async {
     BigTree = AssetImage('assets/BigTree.jpeg');
@@ -50,6 +53,7 @@ class StartGoalsState extends State<StartGoalsWidget> {
 
   Widget build(BuildContext context) {
     final title = 'Info';
+    
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -70,6 +74,7 @@ class StartGoalsState extends State<StartGoalsWidget> {
           title: Text(title,
               style: TextStyle(
                 color: Colors.black,
+                fontSize: 25,
               )),
           backgroundColor: Color(0x00000000),
           elevation: 0.0,
@@ -80,7 +85,7 @@ class StartGoalsState extends State<StartGoalsWidget> {
               ? CircularProgressIndicator()
               : */
             Container(
-          margin: EdgeInsets.symmetric(vertical: 20.0),
+          margin: EdgeInsets.symmetric(vertical: 0.0),
           //height: 200.0,
           child: ListView(
             scrollDirection: Axis.horizontal,
@@ -105,47 +110,56 @@ class StartGoalsState extends State<StartGoalsWidget> {
                           image: AssetImage('assets/BigTree.jpeg'),
                           fit: BoxFit.cover),
                     ),
-                    child: Align(
-                      alignment: Alignment(0.0,
-                          0.8), //to have the text and the button in the under 20 percentage
-                      child: FittedBox(
-                        //this way it has to fit his parent
-                        child: Column(children: [
-                          SizedBox(
-                            width: 300,
-                            //height: (MediaQuery.of(context).viewPadding),
-                            child: Center(
-                              child: AutoSizeText(
-                                "Projekte",
-                                style: TextStyle(
-                                  fontSize: 25.0,
-                                  color: Colors.white,
-                                  //fontWeight: FontWeight.bold //to make the text thicker
+                    child: Stack(children: [
+                      Positioned(
+                        top: iTop,
+                        right: iRight,
+                        child: Icon(
+                          Icons.info_rounded,
+                          size: iSize,
+                        ),
+                      ),
+                      Align(
+                          alignment: Alignment(0.0,
+                              0.8), //to have the text and the button in the under 20 percentage
+                          child: FittedBox(
+                            //this way it has to fit his parent
+                            child: Column(children: [
+                              SizedBox(
+                                width: 300,
+                                //height: (MediaQuery.of(context).viewPadding),
+                                child: Center(
+                                  child: AutoSizeText(
+                                    "Projekte",
+                                    style: TextStyle(
+                                      fontSize: 25.0,
+                                      color: Colors.white,
+                                      //fontWeight: FontWeight.bold //to make the text thicker
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ), // as a Space in between
+                              SizedBox(
+                                height: 20,
+                              ), // as a Space in between
 
-                          ElevatedButton(
-                            style: raisedButtonStyle,
-                            onPressed: () {
-                              print('Tapped');
-                            },
-                            child: Container(
-                              child: AutoSizeText(
-                                'Jetzt spenden',
-                                style: TextStyle(
-                                    //fontSize: 25.0,
-                                    fontWeight: FontWeight.bold),
+                              ElevatedButton(
+                                style: raisedButtonStyle,
+                                onPressed: () {
+                                  print('Tapped');
+                                },
+                                child: Container(
+                                  child: AutoSizeText(
+                                    'Jetzt spenden',
+                                    style: TextStyle(
+                                        //fontSize: 25.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                        ]),
-                      ),
-                    ),
+                            ]),
+                          ))
+                    ]),
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -173,50 +187,60 @@ class StartGoalsState extends State<StartGoalsWidget> {
                           image: AssetImage('assets/Kids.jpg'),
                           fit: BoxFit.cover),
                     ),
-                    child: Align(
-                      alignment: Alignment(0.0,
-                          0.8), //to have the text and the button in the under 80 percentage
-                      child: FittedBox(
-                        //this way it has to fit his parent and it also makes the Alignement work
-                        child: Column(
-                          //  padding: const EdgeInsets.all(8.0),
+                    child: Stack(children: [
+                      Positioned(
+                        top: iTop,
+                        right: iRight,
+                        child: Icon(
+                          Icons.info_rounded,
+                          size: iSize,
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment(0.0,
+                            0.8), //to have the text and the button in the under 80 percentage
+                        child: FittedBox(
+                          //this way it has to fit his parent and it also makes the Alignement work
+                          child: Column(
+                            //  padding: const EdgeInsets.all(8.0),
 
-                          children: [
-                            SizedBox(
-                              width: 300,
-                              child: Center(
-                                child: Text(
-                                  "Kultur",
-                                  style: TextStyle(
-                                    fontSize: 25.0,
-                                    color: Colors.white,
-                                    //fontWeight: FontWeight.bold //to make the text thicker
+                            children: [
+                              SizedBox(
+                                width: 300,
+                                child: Center(
+                                  child: Text(
+                                    "Kultur",
+                                    style: TextStyle(
+                                      fontSize: 25.0,
+                                      color: Colors.white,
+                                      //fontWeight: FontWeight.bold //to make the text thicker
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ), // as a Space in between
+                              SizedBox(
+                                height: 20,
+                              ), // as a Space in between
 
-                            ElevatedButton(
-                                style: raisedButtonStyle,
-                                onPressed: () {
-                                  print('Tapped');
-                                },
-                                child: Container(
-                                  child: AutoSizeText(
-                                    'Jetzt spenden',
-                                    style: TextStyle(
-                                        //fontSize: 25.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                )),
-                            // ),
-                          ],
+                              ElevatedButton(
+                                  style: raisedButtonStyle,
+                                  onPressed: () {
+                                    print('Tapped');
+                                  },
+                                  child: Container(
+                                    child: AutoSizeText(
+                                      'Jetzt spenden',
+                                      style: TextStyle(
+                                          //fontSize: 25.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  )),
+                              // ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
+                    ]),
                   ),
 
                   // ),
@@ -240,53 +264,62 @@ class StartGoalsState extends State<StartGoalsWidget> {
                   splashColor: Colors.greenAccent,
                   //elevation: 8.0,
                   child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                          image: AssetImage('assets/Biodiv.jpeg'),
-                          fit: BoxFit.cover),
-                    ),
-                    child: Align(
-                      alignment: Alignment(0.0,
-                          0.8), //to have the text and the button in the under 80 percentage
-                      child: FittedBox(
-                        //this way it has to fit his parent
-                        child: Column(
-                          //  padding: const EdgeInsets.all(8.0),
-
-                          children: [
-                            SizedBox(
-                              width: 300,
-                              child: Center(
-                                child: Text(
-                                  "Biodiversität",
-                                  style: TextStyle(
-                                      fontSize: 25.0, color: Colors.white),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ), // as a Space in between
-
-                            ElevatedButton(
-                                style: raisedButtonStyle,
-                                onPressed: () {
-                                  print('Tapped');
-                                },
-                                child: Container(
-                                  child: AutoSizeText(
-                                    'Jetzt spenden',
-                                    style: TextStyle(
-                                        //fontSize: 30.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                )),
-                          ],
-                        ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                            image: AssetImage('assets/Biodiv.jpeg'),
+                            fit: BoxFit.cover),
                       ),
-                    ),
-                  ),
+                      child: Stack(children: [
+                        Positioned(
+                          top: iTop,
+                          right: iRight,
+                          child: Icon(
+                            Icons.info_rounded,
+                            size: iSize,
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment(0.0,
+                              0.8), //to have the text and the button in the under 80 percentage
+                          child: FittedBox(
+                            //this way it has to fit his parent
+                            child: Column(
+                              //  padding: const EdgeInsets.all(8.0),
+
+                              children: [
+                                SizedBox(
+                                  width: 300,
+                                  child: Center(
+                                    child: Text(
+                                      "Biodiversität",
+                                      style: TextStyle(
+                                          fontSize: 25.0, color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ), // as a Space in between
+
+                                ElevatedButton(
+                                    style: raisedButtonStyle,
+                                    onPressed: () {
+                                      print('Tapped');
+                                    },
+                                    child: Container(
+                                      child: AutoSizeText(
+                                        'Jetzt spenden',
+                                        style: TextStyle(
+                                            //fontSize: 30.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    )),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ])),
                   // ),
                   onPressed: () {
                     Navigator.push(
@@ -314,46 +347,56 @@ class StartGoalsState extends State<StartGoalsWidget> {
                           image: AssetImage('assets/Leguan.jpeg'),
                           fit: BoxFit.cover),
                     ),
-                    child: Align(
-                      alignment: Alignment(0.0,
-                          0.8), //to have the text and the button in the under 80 percentage
-                      child: FittedBox(
-                        //this way it has to fit his parent
-                        child: Column(
-                          //  padding: const EdgeInsets.all(8.0),
-
-                          children: [
-                            SizedBox(
-                              width: 300,
-                              child: Center(
-                                child: Text(
-                                  "Über uns",
-                                  style: TextStyle(
-                                      fontSize: 25.0, color: Colors.white),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ), // as a Space in between
-
-                            ElevatedButton(
-                                style: raisedButtonStyle,
-                                onPressed: () {
-                                  print('Tapped');
-                                },
-                                child: Container(
-                                  child: AutoSizeText(
-                                    'Jetzt spenden',
-                                    style: TextStyle(
-                                        //fontSize: 25.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                )),
-                          ],
+                    child: Stack(children: [
+                      Positioned(
+                        top: iTop,
+                        right: iRight,
+                        child: Icon(
+                          Icons.info_rounded,
+                          size: iSize,
                         ),
                       ),
-                    ),
+                      Align(
+                        alignment: Alignment(0.0,
+                            0.8), //to have the text and the button in the under 80 percentage
+                        child: FittedBox(
+                          //this way it has to fit his parent
+                          child: Column(
+                            //  padding: const EdgeInsets.all(8.0),
+
+                            children: [
+                              SizedBox(
+                                width: 300,
+                                child: Center(
+                                  child: Text(
+                                    "Über uns",
+                                    style: TextStyle(
+                                        fontSize: 25.0, color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ), // as a Space in between
+
+                              ElevatedButton(
+                                  style: raisedButtonStyle,
+                                  onPressed: () {
+                                    print('Tapped');
+                                  },
+                                  child: Container(
+                                    child: AutoSizeText(
+                                      'Jetzt spenden',
+                                      style: TextStyle(
+                                          //fontSize: 25.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  )),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ]),
                   ),
 
                   onPressed: () {

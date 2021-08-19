@@ -190,9 +190,6 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                     color: Colors.white,
                                     shape: BoxShape.circle),
                                 height: _height / 6,
-                                //width: _width / 3,
-                                //padding: EdgeInsets.all(20),
-                                //color: Colors.white,
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
@@ -243,7 +240,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                         children: [
                           Expanded(
                             child: Container(
-                              height: 110,
+                              height: _height / 7.4,
                               child: Align(
                                 alignment: Alignment(0.6, 0.0),
                                 //child: Center(
@@ -308,7 +305,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                           Expanded(
                             child: Container(
                               //color: Colors.amber,
-                              height: 110,
+                              height: _height / 7.4,
                               child: Align(
                                 alignment: Alignment(-0.6, 0.0),
                                 //child: Center(
@@ -375,7 +372,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                         children: [
                           Expanded(
                             child: Container(
-                              height: 110,
+                              height: _height / 7.4,
                               child: Align(
                                 alignment: Alignment(0.6, 0.0),
                                 //child: Center(
@@ -439,7 +436,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                           Expanded(
                             child: Container(
                               //color: Colors.amber,
-                              height: 110,
+                              height: _height / 7.4,
                               child: Align(
                                 alignment: Alignment(-0.6, 0.0),
                                 //child: Center(

@@ -107,7 +107,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
   }
 
   TextEditingController _useUserNameController;
-  Widget _editTitleTextField() {
+  Widget _editTextField() {
     if (_isEditingText)
       return Center(
         child: TextField(
@@ -212,7 +212,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
                     children: <Widget>[
                       Container(
                         padding: const EdgeInsets.all(30.0),
-                        child: _editTitleTextField(),
+                        child: _editTextField(),
                       ),
                       FractionallySizedBox(
                           widthFactor: 0.8, //means 80% of app width
