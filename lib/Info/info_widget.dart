@@ -270,18 +270,19 @@ class StartGoalsState extends State<StartGoalsWidget> {
                             ), // as a Space in between
 
                             ElevatedButton(
-                                style: raisedButtonStyle,
-                                onPressed: () {
-                                  print('Tapped');
-                                },
-                                child: Container(
-                                  child: AutoSizeText(
-                                    'Jetzt spenden',
-                                    style: TextStyle(
-                                        //fontSize: 30.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                )),
+                              style: raisedButtonStyle,
+                              onPressed: () {
+                                print('Tapped');
+                              },
+                              child: Container(
+                                child: AutoSizeText(
+                                  'Jetzt spenden',
+                                  style: TextStyle(
+                                      //fontSize: 30.0,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
