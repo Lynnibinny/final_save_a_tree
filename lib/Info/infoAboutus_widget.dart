@@ -45,60 +45,42 @@ class InfoAboutUs extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                  Text('Save A Tree ist die App von Sagittaria. "Sagittaria – Schweizerische Vereinigung für Naturschutz in Argentinien" ist ein Verein mit Sitz in Baden, Schweiz. Dieser Verein veranstaltet verschiedene Anlässe und verucht mit herzblut Spenden für die, in Projekte beschriebenen Anliegen zu sammeln. Derzeit ist Sagittaria ein vergleichsweise kleiner Verein, dem alles daran liegt den Urwald zu erhalten. All die Spenden, die an Sagittaria gehen werden direkt und ohne Abzug für Bürokratisches, für die Urwalderhaltung verwendet. Sobald genug Geld zusammen ist für eine neu zu kaufende Fläche wird dies sofort getan.',
                     style: TextStyle(fontSize: 20.0),
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  Container(
-                    child: new MaterialButton(
-                      //padding: EdgeInsets.all(
-                      // 20.0), //space between picture and all the widgets in it and the boarder
-                      textColor: Colors.white,
-                      //shape: RoundedRectangleBorder(
-                      //  borderRadius:
-                      //       BorderRadius.all(Radius.circular(20.0))),
-
-                      height: 200.0,
-                      splashColor: Colors.greenAccent,
-                      //elevation: 8.0,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                              image: AssetImage('assets/Kids.jpg'),
-                              fit: BoxFit.cover),
-                        ),
-                        child: Align(
-                          //alignment: Alignment(0.0,
-                          //   0.8), //to have the text and the button in the under 80 percentage
-                          child: FittedBox(
-                            //this way it has to fit his parent
-                            child:
-                                //  padding: const EdgeInsets.all(8.0),
-
-                                SizedBox(
-                              width: 200,
-                              height: 400,
-                              child: Center(),
+                   Container(
+                          height: 450.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                            image: DecorationImage(
+                              image: AssetImage('assets/harpe.jpeg'),
+                              fit: BoxFit.cover,
                             ),
-
-                            // ),
                           ),
                         ),
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
                   SizedBox(
                     height: 20,
                   ),
                   Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                    'Unsere Phylosophie ist es, dass niemand zu klein ist, etwas an eine bessere Welt beizutragen. In den Medien wird viel vom Klimawandel und seinen Folgen gesprochen, dies kann das Gefühl von Überforderung auslösen. Es gibt so viele Probleme auf der Welt, ach wo soll ich helfen und wo ist mein Platz? Vielleicht sollten wir alle ein zwei Anligen suchen und uns für deren Bekämpfung einsetzten. Wir müssen nicht die ganze Welt retten, wir sind ja nicht alleine.',
                     style: TextStyle(fontSize: 20.0),
                   ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                   Container(
+                          height: 300.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                            image: DecorationImage(
+                              image: AssetImage('assets/Butterfly.jpg'),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
                   SizedBox(
                     height: 20,
                   ),

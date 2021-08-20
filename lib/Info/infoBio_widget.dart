@@ -65,45 +65,15 @@ class InfoBio extends StatelessWidget {
                     height: 20,
                   ),
                   Container(
-                    child: new MaterialButton(
-                      //padding: EdgeInsets.all(
-                      // 20.0), //space between picture and all the widgets in it and the boarder
-                      textColor: Colors.white,
-                      //shape: RoundedRectangleBorder(
-                      //  borderRadius:
-                      //       BorderRadius.all(Radius.circular(20.0))),
-
-                      height: 200.0,
-                      splashColor: Colors.greenAccent,
-                      //elevation: 8.0,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                              image: AssetImage('assets/Kids.jpg'),
-                              fit: BoxFit.cover),
-                        ),
-                        child: Align(
-                          //alignment: Alignment(0.0,
-                          //   0.8), //to have the text and the button in the under 80 percentage
-                          child: FittedBox(
-                            //this way it has to fit his parent
-                            child:
-                                //  padding: const EdgeInsets.all(8.0),
-
-                                SizedBox(
-                              width: 200,
-                              height: 400,
-                              child: Center(),
+                          height: 200.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                            image: DecorationImage(
+                              image: AssetImage('assets/Tukan.jpg'),
+                              fit: BoxFit.cover,
                             ),
-
-                            // ),
                           ),
                         ),
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
                   SizedBox(
                     height: 20,
                   ),

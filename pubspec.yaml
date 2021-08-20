@@ -71,6 +71,16 @@ flutter:
      - assets/Tree3.svg
      - assets/tree.png
      - assets/TreeGreen.png
+     - assets/manChild.jpeg
+     - assets/riverForest.jpeg
+     - assets/youngLeader.jpeg
+     - assets/forestPalm.jpeg
+     - assets/aroundFire.jpeg
+     - assets/indHouse.jpeg
+     - assets/Tukan.jpg
+     - assets/Kurt.jpeg
+     - assets/harpe.jpeg
+     - assets/Butterfly.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

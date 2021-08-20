@@ -60,43 +60,13 @@ class InfoProject extends StatelessWidget {
                     height: 20,
                   ),
                   Container(
-                    child: new MaterialButton(
-                      //padding: EdgeInsets.all(
-                      // 20.0), //space between picture and all the widgets in it and the boarder
-                      textColor: Colors.white,
-                      //shape: RoundedRectangleBorder(
-                      //  borderRadius:
-                      //       BorderRadius.all(Radius.circular(20.0))),
-
-                      height: 200.0,
-                      splashColor: Colors.greenAccent,
-                      //elevation: 8.0,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                              image: AssetImage('assets/Kids.jpg'),
-                              fit: BoxFit.cover),
-                        ),
-                        child: Align(
-                          //alignment: Alignment(0.0,
-                          //   0.8), //to have the text and the button in the under 80 percentage
-                          child: FittedBox(
-                            //this way it has to fit his parent
-                            child:
-                                //  padding: const EdgeInsets.all(8.0),
-
-                                SizedBox(
-                              width: 200,
-                              height: 400,
-                              child: Center(),
-                            ),
-
-                            // ),
-                          ),
-                        ),
+                    height: 200.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      image: DecorationImage(
+                        image: AssetImage('assets/manChild.jpeg'),
+                        fit: BoxFit.cover,
                       ),
-                      onPressed: () {},
                     ),
                   ),
                   SizedBox(
@@ -126,16 +96,15 @@ class InfoProject extends StatelessWidget {
                         ),
                         Container(
                           height: 200.0,
-                          
                           decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
                             image: DecorationImage(
-                              image: AssetImage('assets/Kids.jpg'),
-                              //fit: BoxFit.fill,
+                              image: AssetImage('assets/riverForest.jpeg'),
+                              fit: BoxFit.cover,
                             ),
-                            
                           ),
                         ),
-                         SizedBox(
+                        SizedBox(
                           height: 20,
                         ),
                         Text("Westlich von Takuapí:",
@@ -150,14 +119,13 @@ class InfoProject extends StatelessWidget {
                           height: 20,
                         ),
                         Container(
-                          height: 200.0,
-                          
+                          height: 350.0,
                           decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
                             image: DecorationImage(
-                              image: AssetImage('assets/Kids.jpg'),
-                              //fit: BoxFit.fill,
+                              image: AssetImage('assets/youngLeader.jpeg'),
+                              fit: BoxFit.cover,
                             ),
-                            
                           ),
                         ),
                         SizedBox(
@@ -171,6 +139,19 @@ class InfoProject extends StatelessWidget {
                         Text(
                             "300 Hektaren könnten angrenzend an den Provinzpark „Valle del Cuña Pirú“ erworben werden.  Dieser unberührte Wald wäre aus ökologischer Sicht und für die Mbyá von grosser Bedeutung. In ihm leben Jaguare. Mario Borjas von Kaa'á Kupé möchte eine neue Gemeinschaft gründen und mit ihr in diesem Wald leben. ",
                             style: TextStyle(fontSize: 20.0)),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          height: 250.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                            image: DecorationImage(
+                              image: AssetImage('assets/forestPalm.jpeg'),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
                         SizedBox(
                           height: 20,
                         ),
