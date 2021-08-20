@@ -4,12 +4,12 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:save_a_tree/Map/mapstyle.dart';
 import 'package:save_a_tree/Map/marker.dart';
 
-class HomePage extends StatefulWidget {
+class StartMapWidget extends StatefulWidget {
   @override
-  State<HomePage> createState() => HomePageState();
+  State<StartMapWidget> createState() => StartMapWidgetState();
 }
 
-class HomePageState extends State<HomePage> {
+class StartMapWidgetState extends State<StartMapWidget> {
   Set<Marker> _markers = {};
   Set<Polygon> _polygons = {};
 
@@ -24,7 +24,7 @@ class HomePageState extends State<HomePage> {
   ];
   */
 
-  final List<LatLng> pos25ha = [
+  final List<LatLng> fPuertoLeoni = [
     //Polygon's edges
     LatLng(-26.9701194, -55.191528),
     LatLng(-26.974547, -55.190064),
@@ -32,7 +32,7 @@ class HomePageState extends State<HomePage> {
     LatLng(-26.968797, -55.186753),
   ];
 
-  final List<LatLng> pos300ha = [
+  final List<LatLng> fProvincialPark = [
     //Polygon's edges
     LatLng(-26.9417833, -54.9236667),
     LatLng(-26.9417847, -54.9095361),
@@ -40,7 +40,7 @@ class HomePageState extends State<HomePage> {
     LatLng(-26.9559028, -54.9362750),
   ];
 
-  final List<LatLng> ColoniaDelicia = [
+  final List<LatLng> fColoniaDelicia = [
     //Polygon's edges
     LatLng(27.23813056, 54.38782778),
     LatLng(27.23260556, 54.35243889),
@@ -54,7 +54,7 @@ class HomePageState extends State<HomePage> {
     LatLng(27.24531389, 54.38560833),
   ];
 
-  final List<LatLng> TupambaE = [
+  final List<LatLng> fTupambaE = [
     //Polygon's edges
     LatLng(26.99685, 26.057425),
     LatLng(26.99925833, 26.05991944),
@@ -74,8 +74,8 @@ class HomePageState extends State<HomePage> {
     LatLng(26.99835556, 26.04930556),
   ];
 
-  LatLng posMarker1 = LatLng(-26.969627380371094, -55.189170837402344);
-  LatLng posMarker2 = LatLng(-26.945327758789062, -54.92672348022461);
+  LatLng mPuertoLeoni = LatLng(-26.969627380371094, -55.189170837402344);
+  LatLng mProvincialPark = LatLng(-26.945327758789062, -54.92672348022461);
   //LatLng posMarker = LatLng(, );
 
   //PolygonId _polygonId = PolygonId('1');
@@ -130,13 +130,14 @@ class HomePageState extends State<HomePage> {
   }
 
   void addPolygon(List position) {
-    //add Polygon on the map
-    int _polygonId = _polygons.length;
-    print(_polygonId);
+    //function to add a Polygon to the list of polygons
+    int _polygonId = _polygons
+        .length; //use the current length of the list to give each polygon a unique id
+    //print(_polygonId); //test to see if it works
     setState(() {
       _polygons.add(
         Polygon(
-          polygonId: PolygonId('$_polygonId'), //_polygonId,
+          polygonId: PolygonId('$_polygonId'),
           points: position,
           strokeColor: Colors.green.withOpacity(0.5),
           fillColor: Colors.green.withOpacity(0.5),
@@ -153,12 +154,12 @@ class HomePageState extends State<HomePage> {
         await getBitmapDescriptorFromSvgAsset(context, 'assets/Tree3.svg');
 
     //  await controller.setMapStyle(MapStyle.mapStyle);
-    addPolygon(pos25ha);
-    addPolygon(pos300ha);
-    addPolygon(ColoniaDelicia);
-    addPolygon(TupambaE);
-    addMarker(posMarker1);
-    addMarker(posMarker2);
+    addPolygon(fPuertoLeoni); //Add areas to the list of polygons
+    addPolygon(fProvincialPark);
+    addPolygon(fColoniaDelicia);
+    addPolygon(fTupambaE); //Add markers to the list of markers
+    addMarker(mPuertoLeoni);
+    addMarker(mProvincialPark);
   }
 
   @override
@@ -182,9 +183,7 @@ class HomePageState extends State<HomePage> {
                 color: Colors.black,
               )),
         ),
-        //appBar: AppBar(title: Text('Map')),
         body: Center(
-          //child: CircularProgressIndicator(),
           child: customMarker == null
               ? CircularProgressIndicator()
               : GoogleMap(
@@ -192,8 +191,6 @@ class HomePageState extends State<HomePage> {
                   polygons: _polygons,
                   initialCameraPosition: _initialCameraPosition,
                   onMapCreated: _onMapCreated,
-                  //onMapCreated: createCustomMarker,
-                  //onTap: _ontap,
                 ),
         ),
       ),

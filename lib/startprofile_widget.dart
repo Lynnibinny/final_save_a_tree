@@ -69,7 +69,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
 
   double calcPercent(int goals, int savedTrees) {
     if (goals > 0) {
-      return (savedTrees*100/goals);
+      return (savedTrees * 100 / goals);
     } else {
       return (0);
     }
