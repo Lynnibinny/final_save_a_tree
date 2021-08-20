@@ -4,6 +4,7 @@ import 'package:save_a_tree/Info/infoAboutus_widget.dart';
 import 'package:save_a_tree/Info/infoProject_widget.dart';
 import 'package:save_a_tree/Info/infoBio_widget.dart';
 import 'package:save_a_tree/Info/infoCulture_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class StartGoalsWidget extends StatefulWidget {
   @override
@@ -50,6 +51,24 @@ class StartGoalsState extends State<StartGoalsWidget> {
     //precacheImage(new AssetImage('assets/BigTree.jpeg'),context);
     super.initState();
   }
+  void main() {
+  runApp(new Scaffold(
+    body: new Center(
+      child: new ElevatedButton(
+        onPressed: _launchURL,
+        child: new Text('Show Flutter homepage'),
+      ),
+    ),
+  ));
+}
+  _launchURL() async {
+  const url = 'https://sagittaria.prostevia.ch/spenden/';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
 
   Widget build(BuildContext context) {
     final title = 'Info';
@@ -145,9 +164,8 @@ class StartGoalsState extends State<StartGoalsWidget> {
 
                               ElevatedButton(
                                 style: raisedButtonStyle,
-                                onPressed: () {
-                                  print('Tapped');
-                                },
+                                onPressed: _launchURL,
+                                
                                 child: Container(
                                   child: AutoSizeText(
                                     'Jetzt spenden',
@@ -224,9 +242,7 @@ class StartGoalsState extends State<StartGoalsWidget> {
 
                               ElevatedButton(
                                   style: raisedButtonStyle,
-                                  onPressed: () {
-                                    print('Tapped');
-                                  },
+                                  onPressed: _launchURL,
                                   child: Container(
                                     child: AutoSizeText(
                                       'Jetzt spenden',
@@ -304,9 +320,7 @@ class StartGoalsState extends State<StartGoalsWidget> {
 
                                 ElevatedButton(
                                     style: raisedButtonStyle,
-                                    onPressed: () {
-                                      print('Tapped');
-                                    },
+                                    onPressed: _launchURL,
                                     child: Container(
                                       child: AutoSizeText(
                                         'Jetzt spenden',
@@ -381,9 +395,7 @@ class StartGoalsState extends State<StartGoalsWidget> {
 
                               ElevatedButton(
                                   style: raisedButtonStyle,
-                                  onPressed: () {
-                                    print('Tapped');
-                                  },
+                                  onPressed: _launchURL,
                                   child: Container(
                                     child: AutoSizeText(
                                       'Jetzt spenden',
