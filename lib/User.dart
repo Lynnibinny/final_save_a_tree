@@ -29,3 +29,4 @@ class User {
   }
 }
 //data return to database useDonated: json['UseDonated'] as double, useGoals: json['UseGoals'] as int,
+

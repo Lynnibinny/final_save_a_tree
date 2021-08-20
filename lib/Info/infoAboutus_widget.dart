@@ -21,7 +21,7 @@ class InfoAboutUs extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Über uns',
+            'Über Uns',
             style: TextStyle(color: Colors.black),
           ),
           backgroundColor: Color(0x00000000),
@@ -33,31 +33,80 @@ class InfoAboutUs extends StatelessWidget {
         body: ListView(
           scrollDirection: Axis.vertical,
           children: <Widget>[
-            AspectRatio(
-              aspectRatio: 1 / 2,
-              child: Container(
-                padding: const EdgeInsets.all(30.0),
-                child: Column(
-                  children: [
-                    Text('Sagittaria blabla',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 25.0,
-                            fontWeight: FontWeight.bold)),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      'Die Vielfalt der Tiere und Pflanzen ist von grosser Wichtigkeit. Zusammen leben sie in einer Balance, die von uns Menschen ins schwanken gebracht wird. Durch die Zerstörung von Lebensräumen einiger Arten werden wiederum andere Pflanzen oder Tiere, welche in einer Symbiose lebten aussterben. Die Gefahr der schrumpfenden Biodiversität ist, dass einzele Pflanzen oder Tiere die überhand nehmen. Die Wahrscheinlichkeit, dass einzelne Arten überleben im Falle einer Klimakrise Parasitenbefall, oder bei Krankheiten ist viel geringer als sie wäre bei einer grossen Diversität. Dies kann auch für uns Menschen schwere folgen haben, da unsere Wirtschaft auf der Landwirtschaft basiert die bei immer geringerer Biodiversität schlecht auf andere Sorten umsteigen kann.',
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                  ],
-                ),
+            Container(
+              padding: const EdgeInsets.all(30.0),
+              child: Column(
+                children: [
+                  Text('Save a Tree und Sagittaria',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.bold)),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text('Save A Tree ist die App von Sagittaria. "Sagittaria – Schweizerische Vereinigung für Naturschutz in Argentinien" ist ein Verein mit Sitz in Baden, Schweiz. Dieser Verein veranstaltet verschiedene Anlässe und verucht mit herzblut Spenden für die, in Projekte beschriebenen Anliegen zu sammeln. Derzeit ist Sagittaria ein vergleichsweise kleiner Verein, dem alles daran liegt den Urwald zu erhalten. All die Spenden, die an Sagittaria gehen werden direkt und ohne Abzug für Bürokratisches, für die Urwalderhaltung verwendet. Sobald genug Geld zusammen ist für eine neu zu kaufende Fläche wird dies sofort getan.',
+                    style: TextStyle(fontSize: 20.0),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                   Container(
+                          height: 450.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                            image: DecorationImage(
+                              image: AssetImage('assets/harpe.jpeg'),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'Unsere Phylosophie ist es, dass niemand zu klein ist, etwas an eine bessere Welt beizutragen. In den Medien wird viel vom Klimawandel und seinen Folgen gesprochen, dies kann das Gefühl von Überforderung auslösen. Es gibt so viele Probleme auf der Welt, ach wo soll ich helfen und wo ist mein Platz? Vielleicht sollten wir alle ein zwei Anligen suchen und uns für deren Bekämpfung einsetzten. Wir müssen nicht die ganze Welt retten, wir sind ja nicht alleine.',
+                    style: TextStyle(fontSize: 20.0),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                   Container(
+                          height: 300.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                            image: DecorationImage(
+                              image: AssetImage('assets/Butterfly.jpg'),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  /*ElevatedButton(
+                      style: raisedButtonStyle,
+                      onPressed: () {
+                        print('Tapped');
+                      },
+                      child: Container(
+                        child: AutoSizeText(
+                          'Jetzt spenden',
+                          style: TextStyle(
+                              fontSize: 20.0, fontWeight: FontWeight.w500),
+                        ),
+                      )),*/
+                  SizedBox(
+                    height: 20,
+                  ),
+                ],
               ),
+              //),
             ),
           ],
         ),
       ),
     );
+  
   }
 }
