@@ -76,9 +76,10 @@ class StartMapWidgetState extends State<StartMapWidget> {
 
   LatLng mPuertoLeoni = LatLng(-26.969627380371094, -55.189170837402344);
   LatLng mProvincialPark = LatLng(-26.945327758789062, -54.92672348022461);
-  //LatLng posMarker = LatLng(, );
+  LatLng mColoniaDelicia = LatLng(27.24620556, 54.35780833);
+  LatLng mTupambaE = LatLng(27.00416667, 27.05451944);
 
-  //PolygonId _polygonId = PolygonId('1');
+  //LatLng posMarker = LatLng(, );
 
   BitmapDescriptor customMarker; //class for our custom Marker
 
@@ -160,6 +161,8 @@ class StartMapWidgetState extends State<StartMapWidget> {
     addPolygon(fTupambaE); //Add markers to the list of markers
     addMarker(mPuertoLeoni);
     addMarker(mProvincialPark);
+    addMarker(mColoniaDelicia);
+    addMarker(mTupambaE);
   }
 
   @override
