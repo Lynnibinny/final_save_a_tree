@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-
 class InfoAboutUs extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
@@ -45,22 +44,23 @@ class InfoAboutUs extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  Text('Save A Tree ist die App von Sagittaria. "Sagittaria – Schweizerische Vereinigung für Naturschutz in Argentinien" ist ein Verein mit Sitz in Baden, Schweiz. Dieser Verein veranstaltet verschiedene Anlässe und verucht mit herzblut Spenden für die, in Projekte beschriebenen Anliegen zu sammeln. Derzeit ist Sagittaria ein vergleichsweise kleiner Verein, dem alles daran liegt den Urwald zu erhalten. All die Spenden, die an Sagittaria gehen werden direkt und ohne Abzug für Bürokratisches, für die Urwalderhaltung verwendet. Sobald genug Geld zusammen ist für eine neu zu kaufende Fläche wird dies sofort getan.',
+                  Text(
+                    'Save A Tree ist die App von Sagittaria. "Sagittaria – Schweizerische Vereinigung für Naturschutz in Argentinien" ist ein Verein mit Sitz in Baden, Schweiz. Dieser Verein veranstaltet verschiedene Anlässe und versucht mit herzblut Spenden für die, in Projekte beschriebenen Anliegen zu sammeln. Derzeit ist Sagittaria ein vergleichsweise kleiner Verein, dem alles daran liegt den Urwald zu erhalten. All die Spenden, die an Sagittaria gehen werden direkt und ohne Abzug für Bürokratisches, für die Urwalderhaltung verwendet. Sobald genug Geld zusammen ist für eine neu zu kaufende Fläche wird dies sofort getan.',
                     style: TextStyle(fontSize: 20.0),
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                   Container(
-                          height: 450.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            image: DecorationImage(
-                              image: AssetImage('assets/harpe.jpeg'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
+                  Container(
+                    height: 450.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      image: DecorationImage(
+                        image: AssetImage('assets/harpe.jpeg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                   SizedBox(
                     height: 20,
                   ),
@@ -71,16 +71,16 @@ class InfoAboutUs extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                   Container(
-                          height: 300.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            image: DecorationImage(
-                              image: AssetImage('assets/Butterfly.jpg'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
+                  Container(
+                    height: 300.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      image: DecorationImage(
+                        image: AssetImage('assets/Butterfly.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                   SizedBox(
                     height: 20,
                   ),
@@ -107,6 +107,5 @@ class InfoAboutUs extends StatelessWidget {
         ),
       ),
     );
-  
   }
 }
