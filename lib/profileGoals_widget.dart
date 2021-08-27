@@ -28,30 +28,32 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
   }
 
   void initState() {
-    Timer timer;
+    
+      Timer timer;
 
-    timer = Timer.periodic(Duration(milliseconds: 300), (_) {
-      print('Percent Update');
-      setState(() {
-        percent += 1;
-        print('in setState');
-        if (_filterUser != null) {
-          print('in if filterUser != null');
-          filterUserPercent =
-              calcPercent(_filterUser.useGoals, _filterUser.useSavedTrees);
-          print(
-              'Percent: $filterUserPercent ${_filterUser.useGoals} ${_filterUser.useSavedTrees}');
-        }
-        if (percent >= filterUserPercent) {
-          timer.cancel();
-          //percent=0;
-        }
+      timer = Timer.periodic(Duration(milliseconds: 300), (_) {
+        print('Percent Update');
+        setState(() {
+          //percent += 1;
+          print('in setState');
+          if (_filterUser != null) {
+            print('in if filterUser != null');
+            filterUserPercent =
+                calcPercent(_filterUser.useGoals, _filterUser.useSavedTrees);
+            print(
+                'Percent: $filterUserPercent ${_filterUser.useGoals} ${_filterUser.useSavedTrees}');
+          }
+          if (percent >= filterUserPercent) {
+            timer.cancel();
+            //percent=0;
+          } else {percent += 1;}
+        });
       });
-    });
-    asyncState();
-    super.initState();
+      asyncState();
+      super.initState();
 
-    _editingController = TextEditingController(text: initialText);
+      _editingController = TextEditingController(text: initialText);
+    
   }
 
   double calcPercent(int goals, int savedTrees) {
@@ -71,8 +73,8 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
   double _height;
   double _width;
 
-  var percent = 0;
-  double filterUserPercent = 0;
+  var percent = -5;
+  double filterUserPercent = 70;
 
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     onPrimary: Colors.black87, //Button Text color
@@ -146,24 +148,26 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
   Widget _editTitleTextField() {
     if (_isEditingText)
       return Center(
-        child: TextField(
-          autofocus: true,
-          obscureText: false,
-          style: style,
-          decoration: InputDecoration(
-              contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-              hintText: "Dein Ziel",
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(32.0))),
-          controller: _useGoalsController,
-          onSubmitted: (newValue) {
-            setState(() {
-              _filterUser.useGoals = int.parse(newValue);
-              _isEditingText = false;
-            });
-            _updateUser();
-          },
-        ),
+        child: Container(
+            width: _width / 1.3,
+            child: TextField(
+              autofocus: true,
+              obscureText: false,
+              style: style,
+              decoration: InputDecoration(
+                  contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                  hintText: "Dein Ziel",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(32.0))),
+              controller: _useGoalsController,
+              onSubmitted: (newValue) {
+                setState(() {
+                  _filterUser.useGoals = int.parse(newValue);
+                  _isEditingText = false;
+                });
+                _updateUser();
+              },
+            )),
       );
     return InkWell(
       onTap: () {
@@ -360,7 +364,9 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
                                     ),
                                     Container(
                                       padding: const EdgeInsets.all(30.0),
-                                      child: _editTitleTextField(),
+                                      child: FittedBox(
+                                        child: _editTitleTextField(),
+                                      ),
                                     ),
                                     //SizedBox(height: _height / 20),
                                     //SizedBox(height: _height / 40),
@@ -371,8 +377,14 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
                                           fontWeight: FontWeight.w500),
                                     ),
                                     SizedBox(height: _height / 20),
-                                    Text(
-                                      "$percent %",
+                                    percent<0 ?
+                                      Text("0%", style: TextStyle(
+                                        fontSize: 45.0,
+                                        //fontWeight: FontWeight.w800
+                                      ),)
+                                      :
+                                      Text(
+                                      "$percent%",
                                       style: TextStyle(
                                         fontSize: 45.0,
                                         //fontWeight: FontWeight.w800

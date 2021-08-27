@@ -25,7 +25,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
   double _height;
   double _width;
 
-  var percent = 0;
+  var percent = -5;
   double filterUserPercent = 70;
 
   void asyncState() async {
@@ -183,6 +183,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                       Center(
                         child: Container(
                             alignment: Alignment.center,
+
                             // color: Colors.grey,
                             //padding:const EdgeInsets.all(10.0), //space text edge
                             child: Container(
@@ -227,11 +228,17 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                       ), //Tree
 
                       SizedBox(height: 20),
-                      Text(
-                        _filterUser.useUserName,
-                        textScaleFactor: 2.0,
-                        //style: TextStyle(color: Colors.black),
-                        style: TextStyle(fontSize: 30.0),
+                      Container(
+                        width: _width / 2,
+                        height: _height / 11,
+                        child: FittedBox(
+                          child: AutoSizeText(
+                            _filterUser.useUserName,
+                            textScaleFactor: 2.0,
+                            //style: TextStyle(color: Colors.black),
+                            style: TextStyle(fontSize: 30.0),
+                          ),
+                        ),
                       ),
                       SizedBox(height: _height / 30), //UserName
                       //Spacer(flex:1),
@@ -470,15 +477,27 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                                       Icon(Icons.celebration),
                                                 ),
                                                 SizedBox(height: 5),
-                                                FittedBox(
-                                                  child: AutoSizeText(
-                                                    "$percent % hast Du \nbereits erreicht",
-                                                    style: TextStyle(
-                                                        fontSize: 17.0,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                                  ),
-                                                ),
+                                                percent < 0
+                                                    ? FittedBox(
+                                                        child: AutoSizeText(
+                                                          "0 % hast Du \nbereits erreicht",
+                                                          style: TextStyle(
+                                                              fontSize: 17.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500),
+                                                        ),
+                                                      )
+                                                    : FittedBox(
+                                                        child: AutoSizeText(
+                                                          "$percent % hast Du \nbereits erreicht",
+                                                          style: TextStyle(
+                                                              fontSize: 17.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500),
+                                                        ),
+                                                      ),
 
                                                 /* AutoSizeText(
                                                     _filterUser.UseSavedTrees,
@@ -500,15 +519,15 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                       ),
 
                       SizedBox(height: 20),
-                      Expanded(
-                        child: Container(
+                       Container(
                           //color: Colors.amber,
                           height: 80,
                           child: Align(
                             alignment: Alignment(0.0, 0.0),
                             //child: Center(
-                            child: AspectRatio(
-                              aspectRatio: 9 / 2,
+                            //child: AspectRatio(
+                            //  aspectRatio: 9 / 2,
+                              child: Container(width: _width/1.1,child: FittedBox(
                               child: ElevatedButton(
                                 style: raisedButtonStyle1,
                                 onPressed: () {
@@ -527,20 +546,21 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                   //color: Colors.grey,
                                   padding: const EdgeInsets.all(10.0),
 
-                                  child: Container(
+                                  
+                                    
                                     child: AutoSizeText(
                                       "Jetzt Ziel setzen",
                                       style: TextStyle(
                                           fontSize: 30.0,
                                           fontWeight: FontWeight.w500),
                                     ),
-                                  ),
+                                  
                                 ),
                               ),
-                            ),
+                            ),)),
                           ),
-                        ),
-                      ),
+                        //),
+                      
                       Spacer(
                         flex: 1,
                       ),
