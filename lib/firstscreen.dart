@@ -25,6 +25,8 @@ class _FirstScreenState extends State<FirstScreen> {
   TextEditingController _UsePasswordController;
   TextEditingController _UseCompareController;
   bool passwordfail = false;
+  bool emptyfield1 = false;
+  bool emptyfield2 = false;
   bool registerfail = false;
 
   String _titleProgress;
@@ -48,53 +50,58 @@ class _FirstScreenState extends State<FirstScreen> {
   }
 
   _addUser() {
-    if (_UseMailController.text.isEmpty ||
-        _UseUserNameController.text.isEmpty ||
-        _UsePasswordController.text.isEmpty ||
-        _UseCompareController.text.isEmpty) {
-      print('Empty Fields');
-      registerfail = true;
-      return;
-    }
-    if (_UseMailController.text.isNotEmpty ||
-        _UseUserNameController.text.isNotEmpty ||
-        _UsePasswordController.text.isNotEmpty ||
-        _UseCompareController.text.isNotEmpty) {
-      print(
-          '$_UseMailController, $_UseUserNameController, $_UseCompareController, $_UsePasswordController');
-    } //just to find errors
-
-    if (_UsePasswordController.text != _UseCompareController.text) {
-      // if ("hallo" != "hallo"){
+    if (_UseMailController.text.isEmpty) {
       setState(() {
-        passwordfail = true; //loginfail is bool
-        print('Passwörter ungleich');
-      });
-    } else {
-      Services.addUser(_UseMailController.text, _UseUserNameController.text,
-              _UsePasswordController.text, 0, 0.0, 0)
-          .then((result) async {
-        if ('error' == result) {
-          print('konnte nicht registriert werden.');
-          registerfail = true;
-        } else {
-          print('konnte fast registriert werden');
-          //here we get the id
+      print('Empty Fields');
+      emptyfield1 = true;
+       });
+    } else 
+      if (_UseUserNameController.text.isEmpty) {
+      setState(() {
+      print('Empty Fields');
+      emptyfield2 = true;
+       });
+       } else {
+      if (_UseMailController.text.isNotEmpty ||
+          _UseUserNameController.text.isNotEmpty ||
+          _UsePasswordController.text.isNotEmpty ||
+          _UseCompareController.text.isNotEmpty) {
+        print(
+            '$_UseMailController, $_UseUserNameController, $_UseCompareController, $_UsePasswordController');
+      } //just to find errors
 
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          await prefs.setInt(
-              'registeredUserId', int.parse(result)); //später statt 5 result
-          //_getEmployees(); // Refresh the List after adding each employee...
-          //_clearValues();
-          print('wurde registriert');
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (BuildContext context) => Nav()),
-              ModalRoute.withName('/second'));
+      if (_UsePasswordController.text != _UseCompareController.text) {
+        // if ("hallo" != "hallo"){
+        setState(() {
+          passwordfail = true; //loginfail is bool
+          print('Passwörter ungleich');
+        });
+      } else {
+        Services.addUser(_UseMailController.text, _UseUserNameController.text,
+                _UsePasswordController.text, 0, 0.0, 0)
+            .then((result) async {
+          if ('error' == result) {
+            print('konnte nicht registriert werden.');
+            registerfail = true;
+          } else {
+            print('konnte fast registriert werden');
+            //here we get the id
 
-          _getUser();
-        }
-      });
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            await prefs.setInt(
+                'registeredUserId', int.parse(result)); //später statt 5 result
+            //_getEmployees(); // Refresh the List after adding each employee...
+            //_clearValues();
+            print('wurde registriert');
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (BuildContext context) => Nav()),
+                ModalRoute.withName('/second'));
+
+            _getUser();
+          }
+        });
+      }
     }
   }
 
@@ -117,7 +124,7 @@ class _FirstScreenState extends State<FirstScreen> {
       obscureText: false,
       style: style,
       decoration: InputDecoration(
-          errorText: registerfail ? 'leere Felder' : null,
+          errorText: emptyfield1 ? 'Leeres Feld' : registerfail ? 'dieser Benutzer existierst schon' : null,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Email",
           border:
@@ -128,15 +135,13 @@ class _FirstScreenState extends State<FirstScreen> {
       obscureText: false,
       style: style,
       decoration: InputDecoration(
-          errorText: registerfail ? 'leere Felder' : null,
+          errorText: emptyfield2 ? 'Leeres Feld' : null,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Benutzername",
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
-    final UsePasswordField =
-        
-        TextField(
+    final UsePasswordField = TextField(
       controller: _UsePasswordController,
       obscureText: true,
       style: style,
@@ -145,7 +150,6 @@ class _FirstScreenState extends State<FirstScreen> {
           hintText: "Passwort",
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-      
     );
     final UsePasswordCompareField = TextField(
       controller: _UseCompareController,

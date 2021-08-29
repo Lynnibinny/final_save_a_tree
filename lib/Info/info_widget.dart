@@ -4,6 +4,7 @@ import 'package:save_a_tree/Info/infoAboutus_widget.dart';
 import 'package:save_a_tree/Info/infoProject_widget.dart';
 import 'package:save_a_tree/Info/infoBio_widget.dart';
 import 'package:save_a_tree/Info/infoCulture_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class StartGoalsWidget extends StatefulWidget {
@@ -62,7 +63,9 @@ class StartGoalsState extends State<StartGoalsWidget> {
   ));
 }
   _launchURL() async {
-  const url = 'https://sagittaria.prostevia.ch/spenden/';
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int id = prefs.getInt('registeredUserId');
+  String url = 'https://i-kf.ch/SaveATree/spenden.php?id='+id.toString();
   if (await canLaunch(url)) {
     await launch(url);
   } else {
