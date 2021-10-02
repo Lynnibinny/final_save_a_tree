@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:save_a_tree/Info/info_widget.dart';
+import 'package:save_a_tree/Project/project_widget.dart';
 import 'package:save_a_tree/startprofile_widget.dart';
 import 'Map/startmap_widget.dart';
 
@@ -15,9 +16,9 @@ class _NavState extends State<Nav> {
       0; // current Index to describe which Icon in the Nav Bar is pressed
 
   List<Widget> _widgetOptions = <Widget>[
-    StartGoalsWidget(),
+    StartProjectWidget(),
     StartMapWidget(),
-    //StartComunityWidget(),
+    StartGoalsWidget(),
     StartProfileWidget(),
   ]; //selected Widget = Widget list
 
@@ -62,18 +63,19 @@ class _NavState extends State<Nav> {
 
         items: [
           BottomNavigationBarItem(
-            //index 0
+              //index 2
 
-            icon: new Icon(
-              Icons.eco,
-              color: Colors.white,
-            ),
+              icon: Icon(
+                Icons.favorite,
+                color: Colors.white,
+              ),
 
-            title: new Text(
-              'Info',
-              style: TextStyle(color: Colors.white),
+              title: Text(
+                'Projekte',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
-          ),
+          
           BottomNavigationBarItem(
             //index 1
 
@@ -88,20 +90,20 @@ class _NavState extends State<Nav> {
             ),
           ),
 
-          /*BottomNavigationBarItem(
-              //index 2
+          BottomNavigationBarItem(
+            //index 0
 
-              icon: Icon(
-                Icons.chat_bubble_outline,
-                color: Colors.black,
-              ),
-
-              title: Text(
-                'Community',
-                style: TextStyle(color: Colors.black),
-              ),
+            icon: new Icon(
+              Icons.eco,
+              color: Colors.white,
             ),
-            */
+
+            title: new Text(
+              'Info',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+            
           BottomNavigationBarItem(
             //index 3
 
