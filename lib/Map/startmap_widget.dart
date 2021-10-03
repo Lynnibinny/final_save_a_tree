@@ -74,10 +74,18 @@ class StartMapWidgetState extends State<StartMapWidget> {
     LatLng(-26.99835556, -55.04930556),
   ];
 
+  final List<LatLng> fChafariz = [
+    LatLng(-26.9816000, -55.0939639),
+    LatLng(-26.9819528, -55.1143861),
+    LatLng(-27.0010444, -55.1150278),
+    LatLng(-27.0007028, -55.0973583),
+  ];
+
   LatLng mPuertoLeoni = LatLng(-26.969627380371094, -55.189170837402344);
   LatLng mProvincialPark = LatLng(-26.945327758789062, -54.92672348022461);
   LatLng mColoniaDelicia = LatLng(-27.24620556, -54.35780833);
   LatLng mTupambaE = LatLng(-27.00416667, -55.05451944);
+  LatLng mChafariz = LatLng(-26.9816000, -55.0939639);
 
   BitmapDescriptor customGreenMarker;
   BitmapDescriptor customRedMarker; //class for our custom Marker
@@ -92,10 +100,6 @@ class StartMapWidgetState extends State<StartMapWidget> {
     //set map's colors
     //GoogleMapController controller;
     controller.setMapStyle(MapStyle.mapStyle);
-    /* addPolygon(pos25ha);
-    addPolygon(pos300ha);
-    addMarker(posMarker1);
-    addMarker(posMarker2); */
   }
 
   /* //Test
@@ -137,10 +141,10 @@ class StartMapWidgetState extends State<StartMapWidget> {
     });
   }
 
+  //function to add a green Polygon to the list of polygons
   void addGreenPolygon(List position) {
-    //function to add a Polygon to the list of polygons
-    int _polygonId = _polygons
-        .length; //use the current length of the list to give each polygon a unique id
+    //use the current length of the list to give each polygon a unique id
+    int _polygonId = _polygons.length;
     //print(_polygonId); //test to see if it works
     setState(() {
       _polygons.add(
@@ -155,10 +159,10 @@ class StartMapWidgetState extends State<StartMapWidget> {
     });
   }
 
+  //function to add a red Polygon to the list of polygons
   void addRedPolygon(List position) {
-    //function to add a Polygon to the list of polygons
-    int _polygonId = _polygons
-        .length; //use the current length of the list to give each polygon a unique id
+    //use the current length of the list to give each polygon a unique id
+    int _polygonId = _polygons.length;
     //print(_polygonId); //test to see if it works
     setState(() {
       _polygons.add(

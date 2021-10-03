@@ -51,24 +51,26 @@ class StartGoalsState extends State<StartGoalsWidget> {
     //precacheImage(new AssetImage('assets/BigTree.jpeg'),context);
     super.initState();
   }
+
   void main() {
-  runApp(new Scaffold(
-    body: new Center(
-      child: new ElevatedButton(
-        onPressed: _launchURL,
-        child: new Text('Show Flutter homepage'),
+    runApp(new Scaffold(
+      body: new Center(
+        child: new ElevatedButton(
+          onPressed: _launchURL,
+          child: new Text('Show Flutter homepage'),
+        ),
       ),
-    ),
-  ));
-}
-  _launchURL() async {
-  const url = 'https://sagittaria.prostevia.ch/spenden/';
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
+    ));
   }
-}
+
+  _launchURL() async {
+    const url = 'https://sagittaria.prostevia.ch/spenden/';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   Widget build(BuildContext context) {
     final title = 'Info';
@@ -140,7 +142,7 @@ class StartGoalsState extends State<StartGoalsWidget> {
                       ),
                       Align(
                           alignment: Alignment(0.0,
-                              0.8), //to have the text and the button in the under 20 percentage
+                              0.8), //to have the text and the button in the bottom 20 percent
                           child: FittedBox(
                             //this way it has to fit his parent
                             child: Column(children: [
@@ -165,7 +167,6 @@ class StartGoalsState extends State<StartGoalsWidget> {
                               ElevatedButton(
                                 style: raisedButtonStyle,
                                 onPressed: _launchURL,
-                                
                                 child: Container(
                                   child: AutoSizeText(
                                     'Jetzt spenden',
