@@ -185,15 +185,19 @@ class StartMapWidgetState extends State<StartMapWidget> {
     customRedMarker =
         await getBitmapDescriptorFromSvgAsset(context, 'assets/TreeRed.svg');
 
-    //  await controller.setMapStyle(MapStyle.mapStyle);
-    addGreenPolygon(fPuertoLeoni); //Add areas to the list of polygons
+    //Add areas to the list of polygons
+    addGreenPolygon(fPuertoLeoni);
     addGreenPolygon(fProvincialPark);
     addRedPolygon(fColoniaDelicia);
-    addRedPolygon(fTupambaE); //Add markers to the list of markers
+    addRedPolygon(fTupambaE);
+    addGreenPolygon(fChafariz);
+
+    //Add markers to the list of markers
     addGreenMarker(mPuertoLeoni);
     addGreenMarker(mProvincialPark);
     addRedMarker(mColoniaDelicia);
     addRedMarker(mTupambaE);
+    addGreenMarker(mChafariz);
   }
 
   @override
