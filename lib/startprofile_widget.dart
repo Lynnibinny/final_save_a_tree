@@ -25,8 +25,8 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
   double _height;
   double _width;
 
-  var percent = 0;
-  double filterUserPercent = 70;
+  var percent = -5;
+  int filterUserPercent = 70;
 
   void asyncState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -46,8 +46,8 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
         print('in setState');
         if (_filterUser != null) {
           print('in if filterUser != null');
-          filterUserPercent =
-              calcPercent(_filterUser.useGoals, _filterUser.useSavedTrees);
+          int finalDonated = _filterUser.useDonated.round();
+          filterUserPercent = calcPercent(_filterUser.useGoals, finalDonated);
           print(
               'Percent: $filterUserPercent ${_filterUser.useGoals} ${_filterUser.useSavedTrees}');
         }
@@ -67,9 +67,11 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
     super.initState();
   }
 
-  double calcPercent(int goals, int savedTrees) {
+  int calcPercent(int goals, int finalDonated) {
     if (goals > 0) {
-      return (savedTrees * 100 / goals);
+      double perc = finalDonated / 2 * 100 / goals;
+      var percR = perc.round();
+      return (percR);
     } else {
       return (0);
     }
@@ -120,6 +122,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
     final size = 50.0;
     _height = MediaQuery.of(context).size.height;
     _width = MediaQuery.of(context).size.width;
+
     const SizedBox(height: 30);
 
     //),
@@ -183,6 +186,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                       Center(
                         child: Container(
                             alignment: Alignment.center,
+
                             // color: Colors.grey,
                             //padding:const EdgeInsets.all(10.0), //space text edge
                             child: Container(
@@ -227,11 +231,17 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                       ), //Tree
 
                       SizedBox(height: 20),
-                      Text(
-                        _filterUser.useUserName,
-                        textScaleFactor: 2.0,
-                        //style: TextStyle(color: Colors.black),
-                        style: TextStyle(fontSize: 30.0),
+                      Container(
+                        width: _width / 2,
+                        height: _height / 11,
+                        child: FittedBox(
+                          child: AutoSizeText(
+                            _filterUser.useUserName,
+                            textScaleFactor: 2.0,
+                            //style: TextStyle(color: Colors.black),
+                            style: TextStyle(fontSize: 30.0),
+                          ),
+                        ),
                       ),
                       SizedBox(height: _height / 30), //UserName
                       //Spacer(flex:1),
@@ -277,7 +287,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                                 SizedBox(height: 5),
                                                 FittedBox(
                                                   child: AutoSizeText(
-                                                    "Gerettete \nBäume: ${_filterUser.useSavedTrees}",
+                                                    "Gerettete \nBäume: ${(_filterUser.useDonated / 2).round()}",
                                                     style: TextStyle(
                                                         fontSize: 17.0,
                                                         fontWeight:
@@ -470,15 +480,27 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                                       Icon(Icons.celebration),
                                                 ),
                                                 SizedBox(height: 5),
-                                                FittedBox(
-                                                  child: AutoSizeText(
-                                                    "$percent % hast Du \nbereits erreicht",
-                                                    style: TextStyle(
-                                                        fontSize: 17.0,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                                  ),
-                                                ),
+                                                percent < 0
+                                                    ? FittedBox(
+                                                        child: AutoSizeText(
+                                                          "0 % hast Du \nbereits erreicht",
+                                                          style: TextStyle(
+                                                              fontSize: 17.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500),
+                                                        ),
+                                                      )
+                                                    : FittedBox(
+                                                        child: AutoSizeText(
+                                                          "$percent % hast Du \nbereits erreicht",
+                                                          style: TextStyle(
+                                                              fontSize: 17.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500),
+                                                        ),
+                                                      ),
 
                                                 /* AutoSizeText(
                                                     _filterUser.UseSavedTrees,
@@ -500,47 +522,48 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                       ),
 
                       SizedBox(height: 20),
-                      Expanded(
-                        child: Container(
-                          //color: Colors.amber,
-                          height: 80,
-                          child: Align(
+                      Container(
+                        //color: Colors.amber,
+                        height: 80,
+                        child: Align(
                             alignment: Alignment(0.0, 0.0),
                             //child: Center(
-                            child: AspectRatio(
-                              aspectRatio: 9 / 2,
-                              child: ElevatedButton(
-                                style: raisedButtonStyle1,
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            ProfileGoalsWidget()),
-                                  );
-                                },
-                                //height:
-                                //150, //take care this hight has an effect on the width
-
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  //color: Colors.grey,
-                                  padding: const EdgeInsets.all(10.0),
+                            //child: AspectRatio(
+                            //  aspectRatio: 9 / 2,
+                            child: Container(
+                              width: _width / 1.1,
+                              child: FittedBox(
+                                child: ElevatedButton(
+                                  style: raisedButtonStyle1,
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ProfileGoalsWidget()),
+                                    );
+                                  },
+                                  //height:
+                                  //150, //take care this hight has an effect on the width
 
                                   child: Container(
+                                    alignment: Alignment.center,
+                                    //color: Colors.grey,
+                                    padding: const EdgeInsets.all(10.0),
+
                                     child: AutoSizeText(
                                       "Jetzt Ziel setzen",
                                       style: TextStyle(
-                                          fontSize: 30.0,
+                                          fontSize: 24.0,
                                           fontWeight: FontWeight.w500),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
-                        ),
+                            )),
                       ),
+                      //),
+
                       Spacer(
                         flex: 1,
                       ),

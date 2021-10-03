@@ -5,6 +5,7 @@ class User {
   int useSavedTrees;
   double useDonated;
   int useGoals;
+  
   //String usePassword;
 
   User(
@@ -22,10 +23,10 @@ class User {
         useId: int.parse(json['UseId']),
         useMail: json['UseMail'] as String,
         useUserName: json['UseUserName'] as String,
-        useSavedTrees: int.parse(json['UseSavedTrees']), 
-        useDonated: double.parse(json['UseDonated']), //usePassword: json['UsePassword'] as String,
-        useGoals: int.parse(json['UseGoals'])
-        );
+        useSavedTrees: int.parse(json['UseSavedTrees']),
+        useDonated: double.parse(
+            json['UseDonated']), //usePassword: json['UsePassword'] as String,
+        useGoals: int.parse(json['UseGoals']));
   }
 }
 //data return to database useDonated: json['UseDonated'] as double, useGoals: json['UseGoals'] as int,

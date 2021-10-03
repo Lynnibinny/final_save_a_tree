@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:save_a_tree/nav.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'User.dart';
 import 'services.dart';
@@ -22,6 +23,9 @@ class _LoginState extends State<Login> {
   TextEditingController _UseUserNameController;
   TextEditingController _UsePasswordController;
   bool loginfail = false;
+  bool emptyfields = false;
+  bool emptyfield1 = false;
+  bool emptyfield2 = false;
 
   String _titleProgress;
   @override
@@ -46,10 +50,23 @@ class _LoginState extends State<Login> {
   }
 
   _loginUser() {
-    if (_UseUserNameController.text.isEmpty ||
+    if (_UseUserNameController.text.isEmpty &&
         _UsePasswordController.text.isEmpty) {
       print('Empty Fields');
-      return;
+      emptyfields = true;
+      //loginfail = true;
+
+    }
+    if (_UseUserNameController.text.isEmpty) {
+      print('Empty Fields');
+      emptyfield1 = true;
+      //loginfail = true;
+
+    } else if (_UsePasswordController.text.isEmpty) {
+      print('Empty Fields');
+      emptyfield2 = true;
+      //loginfail = true;
+
     }
     if (_UseUserNameController.text.isNotEmpty ||
         _UsePasswordController.text.isNotEmpty) {
@@ -72,7 +89,11 @@ class _LoginState extends State<Login> {
         //here we get the id
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setInt('registeredUserId', int.parse(result));
-        Navigator.pushReplacementNamed(context, '/second');
+        print('konnte sich einlogen');
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (BuildContext context) => Nav()),
+            ModalRoute.withName('/second'));
         _getUser();
         //_getEmployees(); // Refresh the List after adding each employee...
         //_clearValues();
@@ -94,20 +115,22 @@ class _LoginState extends State<Login> {
   }
 
   Widget build(BuildContext context) {
-    final logError = Text("konnte nicht einlogen");
     final UseUserNameField = TextField(
       controller: _UseUserNameController,
       obscureText: false,
       style: style,
       decoration: InputDecoration(
-          errorText: loginfail
-              ? 'Benutzername oder Passwort stimmen nicht'
-              : null,
+          errorText: emptyfields || emptyfield1
+              ? 'Leeres Feld'
+              : loginfail
+                  ? 'Benutzername oder Passwort stimmen nicht'
+                  : null,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Benutzername",
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
+
     final UsePasswordField =
         /*PasswordField(
       controller: _UsePasswordController,*/
@@ -116,15 +139,17 @@ class _LoginState extends State<Login> {
       obscureText: true,
       style: style,
       decoration: InputDecoration(
-          errorText: loginfail
-              ? 'Benutzername oder Passwort stimmen nicht'
-              : null,
+          errorText: emptyfield2
+              ? 'Leers Feld'
+              : loginfail
+                  ? 'Benutzername oder Passwort stimmen nicht'
+                  : null,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Passwort",
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
-    final backRegistrationButon = Material(
+    final backRegistrationButton = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
       color: Colors.lightGreen[700],
@@ -149,7 +174,6 @@ class _LoginState extends State<Login> {
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
           _loginUser();
-          
         },
         child: Text("Login",
             textAlign: TextAlign.center,
@@ -184,11 +208,9 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   SizedBox(height: 45.0), //SizedBox as a space
-
                   UseUserNameField,
                   SizedBox(height: 25.0),
                   UsePasswordField,
-
                   SizedBox(
                     height: 35.0,
                   ),
@@ -196,7 +218,7 @@ class _LoginState extends State<Login> {
                   SizedBox(
                     height: 15.0,
                   ),
-                  backRegistrationButon,
+                  backRegistrationButton,
                   SizedBox(
                     height: 15.0,
                   ),

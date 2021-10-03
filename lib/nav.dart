@@ -83,7 +83,7 @@ class _NavState extends State<Nav> {
             ),
 
             title: new Text(
-              'Map',
+              'Katre',
               style: TextStyle(color: Colors.white),
             ),
           ),

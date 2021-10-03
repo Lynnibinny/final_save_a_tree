@@ -28,30 +28,32 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
   }
 
   void initState() {
-    Timer timer;
+    
+      Timer timer;
 
-    timer = Timer.periodic(Duration(milliseconds: 300), (_) {
-      print('Percent Update');
-      setState(() {
-        percent += 1;
-        print('in setState');
-        if (_filterUser != null) {
-          print('in if filterUser != null');
-          filterUserPercent =
-              calcPercent(_filterUser.useGoals, _filterUser.useSavedTrees);
-          print(
-              'Percent: $filterUserPercent ${_filterUser.useGoals} ${_filterUser.useSavedTrees}');
-        }
-        if (percent >= filterUserPercent) {
-          timer.cancel();
-          //percent=0;
-        }
+      timer = Timer.periodic(Duration(milliseconds: 300), (_) {
+        print('Percent Update');
+        setState(() {
+          //percent += 1;
+          print('in setState');
+          if (_filterUser != null) {
+            print('in if filterUser != null');
+            filterUserPercent =
+                calcPercent(_filterUser.useGoals, _filterUser.useSavedTrees);
+            print(
+                'Percent: $filterUserPercent ${_filterUser.useGoals} ${_filterUser.useSavedTrees}');
+          }
+          if (percent >= filterUserPercent) {
+            timer.cancel();
+            //percent=0;
+          } else {percent += 1;}
+        });
       });
-    });
-    asyncState();
-    super.initState();
+      asyncState();
+      super.initState();
 
-    _editingController = TextEditingController(text: initialText);
+      _editingController = TextEditingController(text: initialText);
+    
   }
 
   double calcPercent(int goals, int savedTrees) {
@@ -71,8 +73,8 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
   double _height;
   double _width;
 
-  var percent = 0;
-  double filterUserPercent = 0;
+  var percent = -5;
+  double filterUserPercent = 70;
 
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     onPrimary: Colors.black87, //Button Text color
@@ -146,24 +148,26 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
   Widget _editTitleTextField() {
     if (_isEditingText)
       return Center(
-        child: TextField(
-          autofocus: true,
-          obscureText: false,
-          style: style,
-          decoration: InputDecoration(
-              contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-              hintText: "Dein Ziel",
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(32.0))),
-          controller: _useGoalsController,
-          onSubmitted: (newValue) {
-            setState(() {
-              _filterUser.useGoals = int.parse(newValue);
-              _isEditingText = false;
-            });
-            _updateUser();
-          },
-        ),
+        child: Container(
+            width: _width / 1.3,
+            child: TextField(
+              autofocus: true,
+              obscureText: false,
+              style: style,
+              decoration: InputDecoration(
+                  contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                  hintText: "Dein Ziel",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(32.0))),
+              controller: _useGoalsController,
+              onSubmitted: (newValue) {
+                setState(() {
+                  _filterUser.useGoals = int.parse(newValue);
+                  _isEditingText = false;
+                });
+                _updateUser();
+              },
+            )),
       );
     return InkWell(
       onTap: () {
@@ -214,91 +218,92 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
             ],
           ),
         ),
-        child: Scaffold(
-            appBar: AppBar(
-              title: Text(
-                'Ziel',
-                style: TextStyle(color: Colors.black),
-              ),
-              backgroundColor: Color(0x00000000),
-              elevation: 0.0,
-              iconTheme: IconThemeData(
-                color: Colors.black, //to make the back button black
-              ),
-              actions: <Widget>[
-                IconButton(
-                  onPressed: () => Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => Nav()),
-                      ModalRoute.withName('/first')),
-
-                  //_updateUserWithRoot,
-                  //() => Navigator.pop(context),
-                  icon: Icon(
-                    Icons.done,
-                    size: 30.0,
-                    color: Colors.green,
+        child: Center(
+            child: Scaffold(
+                appBar: AppBar(
+                  title: Text(
+                    'Ziel',
+                    style: TextStyle(color: Colors.black),
                   ),
+                  backgroundColor: Color(0x00000000),
+                  elevation: 0.0,
+                  iconTheme: IconThemeData(
+                    color: Colors.black, //to make the back button black
+                  ),
+                  actions: <Widget>[
+                    IconButton(
+                      onPressed: () => Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => Nav()),
+                          ModalRoute.withName('/first')),
+
+                      //_updateUserWithRoot,
+                      //() => Navigator.pop(context),
+                      icon: Icon(
+                        Icons.done,
+                        size: 30.0,
+                        color: Colors.green,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            body: _filterUser == null
-                ? CircularProgressIndicator()
-                : SingleChildScrollView(
-                    child: Container(
-                      child: Padding(
-                        padding: const EdgeInsets.all(36.0),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            //child: AspectRatio(
-                            // aspectRatio: 1 / 2,
-                            children: <Widget>[
-                              //SizedBox(height: _height / 20),
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    shape: BoxShape.circle),
-                                height: _height / 6,
-                                //width: _width / 3,
-                                //padding: EdgeInsets.all(20),
-                                //color: Colors.white,
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Stack(children: [
-                                      ShaderMask(
-                                        shaderCallback: (rect) {
-                                          return LinearGradient(
-                                            begin: Alignment.bottomLeft,
-                                            end: Alignment.topLeft,
-                                            stops: [
-                                              percent / 100,
-                                              percent / 100
-                                            ],
-                                            colors: [
-                                              Colors.lightGreen[500],
-                                              Colors.white,
-                                              //Colors.lightGreen[400],
-                                              // Colors.lightGreen[500],
-                                            ],
-                                          ).createShader(rect);
-                                        },
-                                        child: Container(
-                                          height: _height / 8,
-                                          decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              image: DecorationImage(
-                                                  image: AssetImage(
-                                                      'assets/TreeGreen.png'))),
-                                        ),
-                                      ),
-                                    ]),
-                                  ],
-                                )),
-                              /*Container(
+                body: _filterUser == null
+                    ? CircularProgressIndicator()
+                    : SingleChildScrollView(
+                        child: Container(
+                          child: Padding(
+                              padding: const EdgeInsets.all(36.0),
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  //child: AspectRatio(
+                                  // aspectRatio: 1 / 2,
+                                  children: <Widget>[
+                                    //SizedBox(height: _height / 20),
+                                    Container(
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            shape: BoxShape.circle),
+                                        height: _height / 6,
+                                        //width: _width / 3,
+                                        //padding: EdgeInsets.all(20),
+                                        //color: Colors.white,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Stack(children: [
+                                              ShaderMask(
+                                                shaderCallback: (rect) {
+                                                  return LinearGradient(
+                                                    begin: Alignment.bottomLeft,
+                                                    end: Alignment.topLeft,
+                                                    stops: [
+                                                      percent / 100,
+                                                      percent / 100
+                                                    ],
+                                                    colors: [
+                                                      Colors.lightGreen[500],
+                                                      Colors.white,
+                                                      //Colors.lightGreen[400],
+                                                      // Colors.lightGreen[500],
+                                                    ],
+                                                  ).createShader(rect);
+                                                },
+                                                child: Container(
+                                                  height: _height / 8,
+                                                  decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      image: DecorationImage(
+                                                          image: AssetImage(
+                                                              'assets/TreeGreen.png'))),
+                                                ),
+                                              ),
+                                            ]),
+                                          ],
+                                        )),
+                                    /*Container(
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius:
@@ -347,37 +352,47 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
                                     ],
                                   )),*/
 
-                              /*SizedBox(height: _height / 40),
+                                    /*SizedBox(height: _height / 40),
                   Text("$percent %", style:
                         TextStyle(fontSize: 25.0, fontWeight: FontWeight.w800),),*/
-                              SizedBox(height: _height / 20),
-                              Text(
-                                "Wieviele Bäume möchtest Du retten?",
-                                style: TextStyle(
-                                    fontSize: 17.0,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.all(30.0),
-                                child: _editTitleTextField(),
-                              ),
-                              //SizedBox(height: _height / 20),
-                            //SizedBox(height: _height / 40),
-                            Text(
-                                "So viel Prozent von deinem Ziel hast Du erreicht:",
-                                style: TextStyle(
-                                    fontSize: 17.0,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              SizedBox(height: _height / 20),
-                  Text("$percent %", style:
-                        TextStyle(fontSize: 45.0, 
-                        //fontWeight: FontWeight.w800
-                        ),),
-                        SizedBox(height: _height / 40),
-                            ])
-                      ),
-                    ),
-                  )));
+                                    SizedBox(height: _height / 20),
+                                    Text(
+                                      "Wieviele Bäume möchtest Du retten?",
+                                      style: TextStyle(
+                                          fontSize: 17.0,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.all(30.0),
+                                      child: FittedBox(
+                                        child: _editTitleTextField(),
+                                      ),
+                                    ),
+                                    //SizedBox(height: _height / 20),
+                                    //SizedBox(height: _height / 40),
+                                    Text(
+                                      "So viel Prozent von deinem Ziel hast Du erreicht:",
+                                      style: TextStyle(
+                                          fontSize: 17.0,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    SizedBox(height: _height / 20),
+                                    percent<0 ?
+                                      Text("0%", style: TextStyle(
+                                        fontSize: 45.0,
+                                        //fontWeight: FontWeight.w800
+                                      ),)
+                                      :
+                                      Text(
+                                      "$percent%",
+                                      style: TextStyle(
+                                        fontSize: 45.0,
+                                        //fontWeight: FontWeight.w800
+                                      ),
+                                    ),
+                                    SizedBox(height: _height / 40),
+                                  ])),
+                        ),
+                      ))));
   }
 }
