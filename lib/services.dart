@@ -76,6 +76,7 @@ class Services {
       double useDonated,
       int useGoals) async {
     try {
+      
       var map = Map<String, dynamic>();
       map['action'] = _ADD_USER_ACTION;
       map['UseMail'] = useMail;
