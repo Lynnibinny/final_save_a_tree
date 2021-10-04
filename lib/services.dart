@@ -6,7 +6,7 @@ import 'package:http/http.dart'
 import 'User.dart';
 
 class Services {
-  static const ROOT = 'https://i-kf.ch/SaveATree/user_actions.php';
+  static const ROOT = 'https://i-kf.ch/SaveATree/public/user_actions.php';
   static const _CREATE_TABLE_ACTION = 'CREATE_TABLE';
   static const _GET_ALL_ACTION = 'GET_ALL';
   static const _ADD_USER_ACTION = 'ADD_USER';
@@ -69,14 +69,14 @@ class Services {
 
   // Method to add user to the database...
   static Future<String> addUser(
-    String useMail,
-    String useUserName,
-    String usePassword,
-    int useSavedTrees,
-    double useDonated,
-    int useGoals
-  ) async {
+      String useMail,
+      String useUserName,
+      String usePassword,
+      int useSavedTrees,
+      double useDonated,
+      int useGoals) async {
     try {
+      
       var map = Map<String, dynamic>();
       map['action'] = _ADD_USER_ACTION;
       map['UseMail'] = useMail;

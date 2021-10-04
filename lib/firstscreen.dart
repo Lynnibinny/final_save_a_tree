@@ -28,6 +28,7 @@ class _FirstScreenState extends State<FirstScreen> {
   bool emptyfield1 = false;
   bool emptyfield2 = false;
   bool registerfail = false;
+  bool registerfailId = false;
 
   String _titleProgress;
   @override
@@ -52,16 +53,15 @@ class _FirstScreenState extends State<FirstScreen> {
   _addUser() {
     if (_UseMailController.text.isEmpty) {
       setState(() {
-      print('Empty Fields');
-      emptyfield1 = true;
-       });
-    } else 
-      if (_UseUserNameController.text.isEmpty) {
+        print('Empty Fields');
+        emptyfield1 = true;
+      });
+    } else if (_UseUserNameController.text.isEmpty) {
       setState(() {
-      print('Empty Fields');
-      emptyfield2 = true;
-       });
-       } else {
+        print('Empty Fields');
+        emptyfield2 = true;
+      });
+    } else {
       if (_UseMailController.text.isNotEmpty ||
           _UseUserNameController.text.isNotEmpty ||
           _UsePasswordController.text.isNotEmpty ||
@@ -80,9 +80,16 @@ class _FirstScreenState extends State<FirstScreen> {
         Services.addUser(_UseMailController.text, _UseUserNameController.text,
                 _UsePasswordController.text, 0, 0.0, 0)
             .then((result) async {
-          if ('error' == result) {
+          if ('errorId' == result) {
+            print('User gibt es schon. $result');
+            setState(() {
+              registerfailId = true;
+            });
+          } else if ('error' == result) {
             print('konnte nicht registriert werden.');
-            registerfail = true;
+            setState(() {
+              registerfail = true;
+            });
           } else {
             print('konnte fast registriert werden');
             //here we get the id
@@ -124,18 +131,29 @@ class _FirstScreenState extends State<FirstScreen> {
       obscureText: false,
       style: style,
       decoration: InputDecoration(
-          errorText: emptyfield1 ? 'Leeres Feld' : registerfail ? 'dieser Benutzer existierst schon' : null,
+          errorText: emptyfield1
+              ? 'Leeres Feld'
+              : registerfail
+                  ? 'Registrierung fehlgeschlagen'
+                  : registerfailId
+                      ? 'Dieser Benutzer existierst schon'
+                      : null,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Email",
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
+    print('an errorText vorbei');
     final UseUserNameField = TextField(
       controller: _UseUserNameController,
       obscureText: false,
       style: style,
       decoration: InputDecoration(
-          errorText: emptyfield2 ? 'Leeres Feld' : null,
+          errorText: emptyfield2
+              ? 'Leeres Feld'
+              : registerfailId
+                  ? 'Dieser Benutzer existierst schon'
+                  : null,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Benutzername",
           border:
