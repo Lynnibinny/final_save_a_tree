@@ -142,7 +142,9 @@ class StartMapWidgetState extends State<StartMapWidget> {
       title: title,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 170, 218, 255),
+          //backgroundColor: Color.fromARGB(255, 170, 218, 255), //blue
+          backgroundColor: Color.fromARGB(255, 189, 243, 195), //green
+          //backgroundColor: Color(Colors.black);
           elevation: 0.0,
           title: Text(title,
               style: TextStyle(
