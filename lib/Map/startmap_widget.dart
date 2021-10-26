@@ -120,9 +120,9 @@ class StartMapWidgetState extends State<StartMapWidget> {
     //addRedPolygon(fTajyPoty);
     //addRedPolygon(fTakuapi);
     addGreenPolygon(fGuavirami); //bought
-    //Amba'y Poty missing (bought)
-    //Santo Pipo missing (bought)
-    //Tekoa Guapo'y Poty missing (for sale)
+    //Amba'y Poty MISSING (bought)
+    //Santo Pipo MISSING (bought)
+    //Tekoa Guapo'y Poty MISSING (for sale)
 
     //Add markers to the list of markers
     //addGreenMarker(mPuertoLeoni);

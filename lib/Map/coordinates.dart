@@ -65,7 +65,6 @@ final List<LatLng> fTajyPoty = [
   LatLng(-27.0679028, -55.0482222),
 ];
 
-//70 Ha
 final List<LatLng> fTakuapi = [
   LatLng(-27.0047750, -55.0736611),
   LatLng(-26.9938111, -55.0739278),
@@ -73,10 +72,9 @@ final List<LatLng> fTakuapi = [
   LatLng(-27.0064500, -55.0793861),
 ];
 
-//121 Ha
 final List<LatLng> fGuavirami = [
-  LatLng(-27.0017556, -54.9664222),
   LatLng(-27.0087889, -54.9657278),
+  LatLng(-27.0017556, -54.9664222),
   LatLng(-27.0091611, -54.9537972),
   LatLng(-27.0153556, -54.9532139),
 ];
@@ -87,5 +85,6 @@ LatLng mColoniaDelicia = LatLng(-27.24620556, -54.35780833);
 LatLng mTupambaE = LatLng(-27.00416667, -55.05451944);
 LatLng mChafariz = LatLng(-26.9816000, -55.0939639);
 LatLng mTajyPoty = LatLng(-27.0623750, -55.0494333);
-LatLng mTakuapi = LatLng(-26.9937139, -55.0793861);
-LatLng mGuavirami = LatLng(-27.0017556, -54.9664222);
+LatLng mTakuapi = LatLng(-26.9937139, -55.0793861); //70 Ha, exact coordinates
+LatLng mGuavirami =
+    LatLng(-27.0017556, -54.9664222); //121 Ha, only one coordinate known
