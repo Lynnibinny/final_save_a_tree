@@ -112,20 +112,27 @@ class StartMapWidgetState extends State<StartMapWidget> {
         await getBitmapDescriptorFromSvgAsset(context, 'assets/TreeRed.svg');
 
     //Add areas to the list of polygons
-    addGreenPolygon(fPuertoLeoni);
-    addGreenPolygon(fProvincialPark);
-    addRedPolygon(fColoniaDelicia);
-    addRedPolygon(fTupambaE);
-    addGreenPolygon(fChafariz);
-    addRedPolygon(fTajyPoty);
+    //addGreenPolygon(fPuertoLeoni);
+    addRedPolygon(fProvincialPark); //for sale
+    //addRedPolygon(fColoniaDelicia);
+    addGreenPolygon(fTupambaE); //bought
+    addRedPolygon(fChafariz); //for sale
+    //addRedPolygon(fTajyPoty);
+    //addRedPolygon(fTakuapi);
+    addGreenPolygon(fGuavirami); //bought
+    //Amba'y Poty missing (bought)
+    //Santo Pipo missing (bought)
+    //Tekoa Guapo'y Poty missing (for sale)
 
     //Add markers to the list of markers
-    addGreenMarker(mPuertoLeoni);
-    addGreenMarker(mProvincialPark);
-    addRedMarker(mColoniaDelicia);
-    addRedMarker(mTupambaE);
-    addGreenMarker(mChafariz);
-    addRedMarker(mTajyPoty);
+    //addGreenMarker(mPuertoLeoni);
+    addRedMarker(mProvincialPark);
+    //addRedMarker(mColoniaDelicia);
+    addGreenMarker(mTupambaE);
+    addRedMarker(mChafariz);
+    //addRedMarker(mTajyPoty);
+    //addRedMarker(mTakuapi);
+    addGreenMarker(mGuavirami);
   }
 
   @override
