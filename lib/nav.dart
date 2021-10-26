@@ -63,19 +63,18 @@ class _NavState extends State<Nav> {
 
         items: [
           BottomNavigationBarItem(
-              //index 2
+            //index 2
 
-              icon: Icon(
-                Icons.favorite,
-                color: Colors.white,
-              ),
-
-              title: Text(
-                'Projekte',
-                style: TextStyle(color: Colors.white),
-              ),
+            icon: Icon(
+              Icons.favorite,
+              color: Colors.white,
             ),
-          
+
+            title: Text(
+              'Projekte',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
           BottomNavigationBarItem(
             //index 1
 
@@ -85,11 +84,10 @@ class _NavState extends State<Nav> {
             ),
 
             title: new Text(
-              'Katre',
+              'Karte',
               style: TextStyle(color: Colors.white),
             ),
           ),
-
           BottomNavigationBarItem(
             //index 0
 
@@ -103,7 +101,6 @@ class _NavState extends State<Nav> {
               style: TextStyle(color: Colors.white),
             ),
           ),
-            
           BottomNavigationBarItem(
             //index 3
 
