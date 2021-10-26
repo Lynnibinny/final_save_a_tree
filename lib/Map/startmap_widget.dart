@@ -112,20 +112,27 @@ class StartMapWidgetState extends State<StartMapWidget> {
         await getBitmapDescriptorFromSvgAsset(context, 'assets/TreeRed.svg');
 
     //Add areas to the list of polygons
-    addGreenPolygon(fPuertoLeoni);
-    addGreenPolygon(fProvincialPark);
-    addRedPolygon(fColoniaDelicia);
-    addRedPolygon(fTupambaE);
-    addGreenPolygon(fChafariz);
-    addRedPolygon(fTajyPoty);
+    //addGreenPolygon(fPuertoLeoni);
+    addRedPolygon(fProvincialPark); //for sale
+    //addRedPolygon(fColoniaDelicia);
+    addGreenPolygon(fTupambaE); //bought
+    addRedPolygon(fChafariz); //for sale
+    //addRedPolygon(fTajyPoty);
+    //addRedPolygon(fTakuapi);
+    addGreenPolygon(fGuavirami); //bought
+    //Amba'y Poty MISSING (bought)
+    //Santo Pipo MISSING (bought)
+    //Tekoa Guapo'y Poty MISSING (for sale)
 
     //Add markers to the list of markers
-    addGreenMarker(mPuertoLeoni);
-    addGreenMarker(mProvincialPark);
-    addRedMarker(mColoniaDelicia);
-    addRedMarker(mTupambaE);
-    addGreenMarker(mChafariz);
-    addRedMarker(mTajyPoty);
+    //addGreenMarker(mPuertoLeoni);
+    addRedMarker(mProvincialPark);
+    //addRedMarker(mColoniaDelicia);
+    addGreenMarker(mTupambaE);
+    addRedMarker(mChafariz);
+    //addRedMarker(mTajyPoty);
+    //addRedMarker(mTakuapi);
+    addGreenMarker(mGuavirami);
   }
 
   @override
@@ -142,7 +149,9 @@ class StartMapWidgetState extends State<StartMapWidget> {
       title: title,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 170, 218, 255),
+          //backgroundColor: Color.fromARGB(255, 170, 218, 255), //blue
+          backgroundColor: Color.fromARGB(255, 189, 243, 195), //green
+          //backgroundColor: Color(Colors.black);
           elevation: 0.0,
           title: Text(title,
               style: TextStyle(
