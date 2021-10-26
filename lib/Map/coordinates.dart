@@ -70,9 +70,17 @@ final List<LatLng> fTajyPoty = [
   LatLng(-27.0679028, -55.0482222),
 ];
 
+final List<LatLng> fTakuapi = [
+  LatLng(-27.0047750, -55.0736611),
+  LatLng(-26.9938111, -55.0739278),
+  LatLng(-26.9937139, -55.0792139),
+  LatLng(-27.0064500, -55.0793861),
+];
+
 LatLng mPuertoLeoni = LatLng(-26.969627380371094, -55.189170837402344);
 LatLng mProvincialPark = LatLng(-26.945327758789062, -54.92672348022461);
 LatLng mColoniaDelicia = LatLng(-27.24620556, -54.35780833);
 LatLng mTupambaE = LatLng(-27.00416667, -55.05451944);
 LatLng mChafariz = LatLng(-26.9816000, -55.0939639);
 LatLng mTajyPoty = LatLng(-27.0623750, -55.0494333);
+LatLng mTakuapi = LatLng(-26.9937139, -55.0793861);
