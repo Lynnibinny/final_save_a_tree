@@ -9,7 +9,6 @@ final List<LatLng> fPuertoLeoni = [
 ];
 
 final List<LatLng> fProvincialPark = [
-  //Polygon's edges
   LatLng(-26.9417833, -54.9236667),
   LatLng(-26.9417847, -54.9095361),
   LatLng(-26.9612139, -54.9223056),
@@ -17,7 +16,6 @@ final List<LatLng> fProvincialPark = [
 ];
 
 final List<LatLng> fColoniaDelicia = [
-  //Polygon's edges
   LatLng(-27.23813056, -54.38782778),
   LatLng(-27.23260556, -54.35243889),
   LatLng(-27.23967222, -54.35005),
@@ -31,7 +29,6 @@ final List<LatLng> fColoniaDelicia = [
 ];
 
 final List<LatLng> fTupambaE = [
-  //Polygon's edges
   LatLng(-26.99685, -55.057425),
   LatLng(-26.99925833, -55.05991944),
   LatLng(-27.00076389, -55.05899722),
@@ -51,7 +48,6 @@ final List<LatLng> fTupambaE = [
 ];
 
 final List<LatLng> fChafariz = [
-  //Polygon's edges
   LatLng(-26.9816000, -55.0939639),
   LatLng(-26.9819528, -55.1143861),
   LatLng(-27.0010444, -55.1150278),
@@ -59,7 +55,6 @@ final List<LatLng> fChafariz = [
 ];
 
 final List<LatLng> fTajyPoty = [
-  //Polygon's edges
   LatLng(-27.0623750, -55.0494333),
   LatLng(-27.0623583, -55.0519472),
   LatLng(-27.0646111, -55.0519333),
@@ -70,11 +65,20 @@ final List<LatLng> fTajyPoty = [
   LatLng(-27.0679028, -55.0482222),
 ];
 
+//70 Ha
 final List<LatLng> fTakuapi = [
   LatLng(-27.0047750, -55.0736611),
   LatLng(-26.9938111, -55.0739278),
   LatLng(-26.9937139, -55.0792139),
   LatLng(-27.0064500, -55.0793861),
+];
+
+//121 Ha
+final List<LatLng> fGuavirami = [
+  LatLng(-27.0017556, -54.9664222),
+  LatLng(-27.0087889, -54.9657278),
+  LatLng(-27.0091611, -54.9537972),
+  LatLng(-27.0153556, -54.9532139),
 ];
 
 LatLng mPuertoLeoni = LatLng(-26.969627380371094, -55.189170837402344);
@@ -84,3 +88,4 @@ LatLng mTupambaE = LatLng(-27.00416667, -55.05451944);
 LatLng mChafariz = LatLng(-26.9816000, -55.0939639);
 LatLng mTajyPoty = LatLng(-27.0623750, -55.0494333);
 LatLng mTakuapi = LatLng(-26.9937139, -55.0793861);
+LatLng mGuavirami = LatLng(-27.0017556, -54.9664222);
