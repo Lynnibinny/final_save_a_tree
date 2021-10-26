@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'dart:async';
 import 'package:save_a_tree/services.dart';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Profile/profileArea_widget.dart';
 import 'Profile/profileSettings_widget.dart';
-
 import 'User.dart';
 import 'profileGoals_widget.dart';
 

@@ -1,9 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:save_a_tree/Info/infoAboutus_widget.dart';
-import 'package:save_a_tree/Info/infoProject_widget.dart';
-import 'package:save_a_tree/Info/infoBio_widget.dart';
-import 'package:save_a_tree/Info/infoCulture_widget.dart';
 import 'package:save_a_tree/Project/project_one.dart';
 import 'package:save_a_tree/Project/project_three.dart';
 import 'package:save_a_tree/Project/project_two.dart';
@@ -32,6 +28,8 @@ class StartProjectState extends State<StartProjectWidget> {
   double iTop = 10.0;
   double iRight = 10.0;
   double iSize = 27.0;
+  double _width;
+  double bQuotient = 0.85;
 
   void asyncState() async {
     BigTree = AssetImage('assets/BigTree.jpeg');
@@ -55,30 +53,32 @@ class StartProjectState extends State<StartProjectWidget> {
     //precacheImage(new AssetImage('assets/BigTree.jpeg'),context);
     super.initState();
   }
+
   void main() {
-  runApp(new Scaffold(
-    body: new Center(
-      child: new ElevatedButton(
-        onPressed: _launchURL,
-        child: new Text('Show Flutter homepage'),
+    runApp(new Scaffold(
+      body: new Center(
+        child: new ElevatedButton(
+          onPressed: _launchURL,
+          child: new Text('Show Flutter homepage'),
+        ),
       ),
-    ),
-  ));
-}
+    ));
+  }
+
   _launchURL() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int id = prefs.getInt('registeredUserId');
-  String url = 'https://i-kf.ch/SaveATree/spenden.php?id='+id.toString();
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
+    String url = 'https://sagit.neutics.ch/spenden.php?id=' + id.toString();
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
-}
 
   Widget build(BuildContext context) {
     final title = 'Info';
-
+    _width = MediaQuery.of(context).size.width;
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -151,7 +151,7 @@ class StartProjectState extends State<StartProjectWidget> {
                             //this way it has to fit his parent
                             child: Column(children: [
                               SizedBox(
-                                width: 300,
+                                width: _width * bQuotient,
                                 //height: (MediaQuery.of(context).viewPadding),
                                 child: Center(
                                   child: AutoSizeText(
@@ -171,7 +171,6 @@ class StartProjectState extends State<StartProjectWidget> {
                               ElevatedButton(
                                 style: raisedButtonStyle,
                                 onPressed: _launchURL,
-                                
                                 child: Container(
                                   child: AutoSizeText(
                                     'Jetzt spenden',
@@ -230,7 +229,7 @@ class StartProjectState extends State<StartProjectWidget> {
 
                             children: [
                               SizedBox(
-                                width: 300,
+                                width: _width * bQuotient,
                                 child: Center(
                                   child: Text(
                                     "Westlich von Takuapí:",
@@ -289,7 +288,7 @@ class StartProjectState extends State<StartProjectWidget> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
-                            image: AssetImage('assets/Biodiv.jpeg'),
+                            image: AssetImage('assets/bild3.jpg'),
                             fit: BoxFit.cover),
                       ),
                       child: Stack(children: [
@@ -311,7 +310,7 @@ class StartProjectState extends State<StartProjectWidget> {
 
                               children: [
                                 SizedBox(
-                                  width: 300,
+                                  width: _width * bQuotient,
                                   child: Center(
                                     child: Text(
                                       "Am Rand des \nProvinzparks",
@@ -349,9 +348,6 @@ class StartProjectState extends State<StartProjectWidget> {
                   },
                 ),
               ),
-              
-                
-              
             ],
           ),
         ),
@@ -359,4 +355,3 @@ class StartProjectState extends State<StartProjectWidget> {
     );
   }
 }
-

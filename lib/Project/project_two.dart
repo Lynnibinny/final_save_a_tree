@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-
 class ProjectTwo extends StatelessWidget {
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     onPrimary: Colors.black87, //Button Text color
@@ -49,17 +48,21 @@ class ProjectTwo extends StatelessWidget {
               padding: const EdgeInsets.all(30.0),
               child: Column(
                 children: [
-                  Text('Westlich von Takuapí',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.bold)),
+                  Align(
+                      alignment: Alignment.topLeft,
+                      child: Text('Westlich von Takuapí',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.bold))),
                   SizedBox(
                     height: 20,
                   ),
-                  Text("Fläche so gross wie 14 Fussballfelder für \nUS \$70’000 ",
-                  style: TextStyle(fontSize: 23.0),),
-                   SizedBox(
+                  Text(
+                    "Fläche so gross wie 14 Fussballfelder für \nUS \$70’000 ",
+                    style: TextStyle(fontSize: 23.0),
+                  ),
+                  SizedBox(
                     height: 20,
                   ),
                   Text(
@@ -70,15 +73,15 @@ class ProjectTwo extends StatelessWidget {
                     height: 20,
                   ),
                   Container(
-                          height: 350.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            image: DecorationImage(
-                              image: AssetImage('assets/youngLeader.jpeg'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
+                    height: 350.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      image: DecorationImage(
+                        image: AssetImage('assets/youngLeader.jpeg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                   SizedBox(
                     height: 20,
                   ),

@@ -49,11 +49,14 @@ class InfoBio extends StatelessWidget {
               padding: const EdgeInsets.all(30.0),
               child: Column(
                 children: [
+                  Align(
+                      alignment: Alignment.topLeft,
+                      child:
                   Text('Unsere wertvollste Resource',
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 25.0,
-                          fontWeight: FontWeight.bold)),
+                          fontWeight: FontWeight.bold))),
                   SizedBox(
                     height: 20,
                   ),
@@ -78,7 +81,7 @@ class InfoBio extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    'Die Gefahr der schrumpfenden Biodiversität ist, dass einzele Pflanzen oder Tiere die überhand nehmen. Die Wahrscheinlichkeit, dass einzelne Arten überleben im Falle einer Klimakrise Parasitenbefall, oder bei Krankheiten ist viel geringer als sie wäre bei einer grossen Diversität. Dies kann auch für uns Menschen schwere folgen haben, da unsere Wirtschaft auf der Landwirtschaft basiert die bei immer geringerer Biodiversität schlecht auf andere Sorten umsteigen kann.',
+                    'Die Gefahr der schrumpfenden Biodiversität ist, dass einzele Pflanzen oder Tiere die überhand nehmen. Die Wahrscheinlichkeit, dass einzelne Arten überleben im Falle einer Klimakrise, Parasitenbefall, oder bei Krankheiten ist viel geringer als sie wäre bei einer grossen Diversität. Dies kann auch für uns Menschen schwere folgen haben, da unsere Wirtschaft auf der Landwirtschaft basiert die bei immer geringerer Biodiversität schlecht auf andere Sorten umsteigen kann.',
                     style: TextStyle(fontSize: 20.0),
                   ),
                   SizedBox(

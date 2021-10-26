@@ -34,6 +34,7 @@ dependencies:
   flutter_svg: ^0.21.0+1
   shared_preferences: ^2.0.5
   auto_size_text: ^2.1.0
+  flutter_linkify: ^5.0.2
 
 
 dev_dependencies:
@@ -83,6 +84,12 @@ flutter:
      - assets/Kurt.jpeg
      - assets/harpe.jpeg
      - assets/Butterfly.jpg
+     - assets/medecin.jpg
+     - assets/IndHouseII.jpg
+     - assets/MateTee.jpg
+     - assets/Corn.jpg
+     - assets/bild3.jpg
+    
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

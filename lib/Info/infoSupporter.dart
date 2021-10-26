@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class InfoSupporter extends StatelessWidget {
+  double fontBig = 25;
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -36,18 +39,63 @@ class InfoSupporter extends StatelessWidget {
               padding: const EdgeInsets.all(30.0),
               child: Column(
                 children: [
-                  Text('Die Unterstützer von Save A Tree',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.bold)),
+                  Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                          'Getränkehersteller                                ',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: fontBig,
+                              fontWeight: FontWeight.bold))),
                   SizedBox(
                     height: 20,
                   ),
                   Text(
-                    "Die Mbyá sagen: 'Wir sind nicht arm, wenn wir nicht haben, was wir nicht brauchen. Wir sind arm, wenn wir keinen Wald haben, denn wir sind Teil des Waldes und der Wald ein Teil von uns.'\nDie folgenden Unterstützer tragen mit ihren Produkten dazu bei, dass die Mbyá ihren Wald behalten dürfen:\nBiberevents\nMit folgenden Biopunx-Produkten ermöglichen Sie den Kauf von 62 cm x 62 cm Wald für die Mbyá Guaraní:\nBio-Tango-Tee «Limette» und «Maracuja» 50 cL\nBio-Mate-Tee «Minze» und «Roiboos» 33 cL\n125 g und 500 g Mate-Tee sin palo Biopunx\nhttps://biberevents.ch/biopunx/\nFolgende Fairtrader leisten mit einer Lizenzgebühr von € 0.05/L für den Bio-Tango-Tee «Limette» und «Maracuja» einen Beitrag zum Waldkauf\nEZA Österreich https://shop.eza.cc/produkte.php?suchstr=Getr%C3%A4nke&x=0&y=0\nCTM Italien  https://www.altromercato.it/it_it/catalogsearch/result/?q=Bebida+Mate#more1\nOxfam Belgienhttps://www.oxfamfairtrade.be/fr/categorie/aliments/page/3/\nSiesta Oppi Kanu Shop\nFür jede Buchung eines Bootes auf dem Schiffenensee und Wohlensee wird Fr. 1.00 an das Waldkauf-Projekt überwiesen.\nhttps://www.kanuvermietung.ch/de/fribourg-saane-schiffenensee/\nhttps://www.kanuvermietung.ch/de/bern-aare-wohlensee/",
-                    style: TextStyle(fontSize: 20.0),
+                      "Folgende Fairtrader leisten mit einer Lizenzgebühr von € 0.05/L für den Bio-Tango-Tee «Limette» und «Maracuja» einen Beitrag zum Waldkauf",
+                      style: TextStyle(fontSize: 20.0)),
+                  SizedBox(
+                    height: 30,
                   ),
+                  Linkify(
+                      onOpen: _onOpen,
+                      text:
+                          "EZA Österreich https://shop.eza.cc/produkte.php?suchstr=Getr%C3%A4nke&x=0&y=0",
+                      style: TextStyle(fontSize: 20.0)),
+                  Linkify(
+                      onOpen: _onOpen,
+                      text:
+                          "CTM Italien https://www.altromercato.it/it_it/catalogsearch/result/?q=Bebida+Mate#more1",
+                      style: TextStyle(fontSize: 20.0)),
+                  Linkify(
+                      onOpen: _onOpen,
+                      text:
+                          "Oxfam Belgien https://www.oxfamfairtrade.be/fr/categorie/aliments/page/3/",
+                      style: TextStyle(fontSize: 20.0)),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Align(
+                      alignment: Alignment.topLeft,
+                      child: Text('Biberevents                                ',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: fontBig,
+                              fontWeight: FontWeight.bold))),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                      "Mit diesen Biopunx-Produkten ermöglichen Sie den Kauf von \n62 cm x 62 cm Wald für die Mbyá Guaraní:",
+                      style: TextStyle(fontSize: 20.0)),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Align(
+                      alignment: Alignment.topLeft,
+                      child: Linkify(
+                          onOpen: _onOpen,
+                          text: "https://biberevents.ch/biopunx/",
+                          style: TextStyle(fontSize: 20.0))),
                   SizedBox(
                     height: 20,
                   ),
@@ -56,13 +104,40 @@ class InfoSupporter extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                       image: DecorationImage(
-                        image: AssetImage('assets/harpe.jpeg'),
+                        image: AssetImage('assets/MateTee.jpg'),
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
                   SizedBox(
+                    height: 30,
+                  ),
+                  Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                          'Siesta Oppi Kanu Shop                                ',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: fontBig,
+                              fontWeight: FontWeight.bold))),
+                  SizedBox(
                     height: 20,
+                  ),
+                  Text(
+                      "Für jede Buchung eines Bootes auf dem Schiffenensee und Wohlensee wird Fr. 1.00 an das Waldkauf-Projekt überwiesen.",
+                      style: TextStyle(fontSize: 20.0)),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Align(
+                      alignment: Alignment.topLeft,
+                      child: Linkify(
+                          onOpen: _onOpen,
+                          text:
+                              "https://www.kanuvermietung.ch/de/fribourg-saane-schiffenensee/ \n https://www.kanuvermietung.ch/de/bern-aare-wohlensee/",
+                          style: TextStyle(fontSize: 20.0))),
+                  SizedBox(
+                    height: 30,
                   ),
                   Text(
                     'Unsere Phylosophie ist es, dass niemand zu klein ist, etwas an eine bessere Welt beizutragen. In den Medien wird viel vom Klimawandel und seinen Folgen gesprochen, dies kann das Gefühl von Überforderung auslösen. Es gibt so viele Probleme auf der Welt, ach wo soll ich helfen und wo ist mein Platz? Vielleicht sollten wir alle ein zwei Anligen suchen und uns für deren Bekämpfung einsetzten. Wir müssen nicht die ganze Welt retten, wir sind ja nicht alleine.',
@@ -107,5 +182,13 @@ class InfoSupporter extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _onOpen(LinkableElement link) async {
+    if (await canLaunch(link.url)) {
+      await launch(link.url);
+    } else {
+      throw 'Could not launch $link';
+    }
   }
 }

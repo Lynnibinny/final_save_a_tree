@@ -49,11 +49,14 @@ class ProjectOne extends StatelessWidget {
               padding: const EdgeInsets.all(30.0),
               child: Column(
                 children: [
-                  Text('Wald am Chafaríz, nahe Soberbio:',
+                  Align(
+                      alignment: Alignment.topLeft,
+                      child:
+                  Text('Wald am Chafaríz',
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 25.0,
-                          fontWeight: FontWeight.bold)),
+                          fontWeight: FontWeight.bold))),
                   SizedBox(
                     height: 20,
                   ),

@@ -2,13 +2,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:save_a_tree/User.dart';
 import 'package:save_a_tree/firstscreen.dart';
 import 'package:save_a_tree/login.dart';
-
 import 'package:save_a_tree/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../nav.dart';
 
 class ProfileSettingsWidget extends StatefulWidget {
