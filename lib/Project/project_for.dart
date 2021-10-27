@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-class ProjectThree extends StatelessWidget {
+class ProjectFor extends StatelessWidget {
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     onPrimary: Colors.black87, //Button Text color
     primary: Colors.white, //Button background color
@@ -32,7 +32,7 @@ class ProjectThree extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Tupamba’é',
+            'Gemeinschaft Guaviramí',
             style: TextStyle(color: Colors.black),
           ),
           backgroundColor: Color(0x00000000),
@@ -50,7 +50,7 @@ class ProjectThree extends StatelessWidget {
                 children: [
                   Align(
                       alignment: Alignment.topLeft,
-                      child: Text('Tupamba’é',
+                      child: Text('Gemeinschaft Guaviramí',
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 25.0,
@@ -59,44 +59,29 @@ class ProjectThree extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    "Fläche so gross wie 76 Fussballfelder für \nUS \$Fr. 104’000 ",
+                    "Fläche so gross wie 170 Fussballfelder für \nUS \$179'400",
                     style: TextStyle(fontSize: 23.0),
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  Container(
-                    height: 380.0,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                      image: DecorationImage(
-                        image: AssetImage('assets/youngLeader.jpeg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
                   Text(
-                    'Auch diese Gemeinschaft formierte sich erst nachdem sie sich auf dem Grundstück installiert hatte. Diese 56 Hektaren grenzen an zwei Flüsse, an denen der Wald wenig beeinträchtigt ist. Weiter von diesen entfernt gibt es verschiedene Quellen. In Tupamba’é gab es zuvor Tee- und Matefelder, Tungwälder und später Weiden. Hier regeneriert sich der Wald Stück für Stück. Unter die rasch wachsenden Lichtbaumarten werden Samen von Medizinal-Bäumen gestreut und Fruchtbäume gepflanzt.',
+                    'Diese Gemeinschaft bildete sich aus einer Gruppe von Mbyá, welchen kein fester Lebensraum zur Verfügung stand. Die juristische Person wurde erst gebildet, nachdem sie sich in ihrem Wald eingerichtet hatten. Es handelt sich um 100 Hektaren aus wenig verändertem Urwald bestehend und 21 Hektaren Land, welche einst gerodet und mit schnellwachsenden Pinien bepflanzt wurden. Daraus hat sich in den letzten 20 Jahren wieder ein dichter Wald entwickelt.',
                     style: TextStyle(fontSize: 20.0),
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  /*ElevatedButton(
-                      style: raisedButtonStyle,
-                      onPressed: () {
-                        print('Tapped');
-                      },
-                      child: Container(
-                        child: AutoSizeText(
-                          'Jetzt spenden',
-                          style: TextStyle(
-                              fontSize: 20.0, fontWeight: FontWeight.w500),
-                        ),
-                      )),*/
+                  Container(
+                    height: 280.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      image: DecorationImage(
+                        image: AssetImage('assets/forestPalm.jpeg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                   SizedBox(
                     height: 20,
                   ),

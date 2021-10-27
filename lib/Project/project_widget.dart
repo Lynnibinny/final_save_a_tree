@@ -1,5 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:save_a_tree/Project/done.dart';
+import 'package:save_a_tree/Project/project_for.dart';
 import 'package:save_a_tree/Project/project_one.dart';
 import 'package:save_a_tree/Project/project_three.dart';
 import 'package:save_a_tree/Project/project_two.dart';
@@ -207,7 +209,7 @@ class StartProjectState extends State<StartProjectWidget> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
-                          image: AssetImage('assets/Kids.jpg'),
+                          image: AssetImage('assets/Bananabush.jpeg'),
                           fit: BoxFit.cover),
                     ),
                     child: Stack(children: [
@@ -232,7 +234,7 @@ class StartProjectState extends State<StartProjectWidget> {
                                 width: _width * bQuotient,
                                 child: Center(
                                   child: Text(
-                                    "Westlich von Takuapí:",
+                                    'Valle del Cuña Pirú',
                                     style: TextStyle(
                                       fontSize: 25.0,
                                       color: Colors.white,
@@ -288,6 +290,87 @@ class StartProjectState extends State<StartProjectWidget> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
+                            image: AssetImage('assets/Tukan3.jpeg'),
+                            fit: BoxFit.cover),
+                      ),
+                      child: Stack(children: [
+                        Positioned(
+                          top: iTop,
+                          right: iRight,
+                          child: Icon(
+                            Icons.info_rounded,
+                            size: iSize,
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment(0.0,
+                              0.8), //to have the text and the button in the under 80 percentage
+                          child: FittedBox(
+                            //this way it has to fit his parent
+                            child: Column(
+                              //  padding: const EdgeInsets.all(8.0),
+
+                              children: [
+                                SizedBox(
+                                  width: _width * bQuotient,
+                                  child: Center(
+                                    child: Text(
+                                      "Tupamba’é",
+                                      style: TextStyle(
+                                          fontSize: 25.0, color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ), // as a Space in between
+
+                                ElevatedButton(
+                                    style: raisedButtonStyle,
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => DoneWidget()),
+                                      );
+                                    },
+                                    child: Container(
+                                      child: AutoSizeText(
+                                        'Geschafft!!!',
+                                        style: TextStyle(
+                                            //fontSize: 30.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    )),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ])),
+                  // ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProjectThree()),
+                    );
+                  },
+                ),
+              ),
+              Container(
+                child: new MaterialButton(
+                  padding: EdgeInsets.all(
+                      20.0), //space between picture and all the widgets in it and the boarder
+                  textColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))),
+
+                  minWidth: 200.0,
+                  splashColor: Colors.greenAccent,
+                  //elevation: 8.0,
+                  child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
                             image: AssetImage('assets/bild3.jpg'),
                             fit: BoxFit.cover),
                       ),
@@ -313,7 +396,7 @@ class StartProjectState extends State<StartProjectWidget> {
                                   width: _width * bQuotient,
                                   child: Center(
                                     child: Text(
-                                      "Am Rand des \nProvinzparks",
+                                      "Gemeinschaft Guaviramí",
                                       style: TextStyle(
                                           fontSize: 25.0, color: Colors.white),
                                     ),
@@ -325,10 +408,16 @@ class StartProjectState extends State<StartProjectWidget> {
 
                                 ElevatedButton(
                                     style: raisedButtonStyle,
-                                    onPressed: _launchURL,
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => DoneWidget()),
+                                      );
+                                    },
                                     child: Container(
                                       child: AutoSizeText(
-                                        'Jetzt spenden',
+                                        'Geschafft!!!',
                                         style: TextStyle(
                                             //fontSize: 30.0,
                                             fontWeight: FontWeight.bold),
@@ -343,7 +432,7 @@ class StartProjectState extends State<StartProjectWidget> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ProjectThree()),
+                      MaterialPageRoute(builder: (context) => ProjectFor()),
                     );
                   },
                 ),

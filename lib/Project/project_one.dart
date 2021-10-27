@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-
 class ProjectOne extends StatelessWidget {
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     onPrimary: Colors.black87, //Button Text color
@@ -51,18 +50,19 @@ class ProjectOne extends StatelessWidget {
                 children: [
                   Align(
                       alignment: Alignment.topLeft,
-                      child:
-                  Text('Wald am Chafaríz',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.bold))),
+                      child: Text('Wald am Chafaríz',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.bold))),
                   SizedBox(
                     height: 20,
                   ),
-                  Text("Fläche so gross wie 286 Fussballfelder für \nUS \$600'000",
-                  style: TextStyle(fontSize: 23.0),),
-                   SizedBox(
+                  Text(
+                    "Fläche so gross wie 540 Fussballfelder für \nUS \$600'000",
+                    style: TextStyle(fontSize: 23.0),
+                  ),
+                  SizedBox(
                     height: 20,
                   ),
                   Text(
@@ -73,15 +73,15 @@ class ProjectOne extends StatelessWidget {
                     height: 20,
                   ),
                   Container(
-                          height: 200.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            image: DecorationImage(
-                              image: AssetImage('assets/riverForest.jpeg'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
+                    height: 280.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      image: DecorationImage(
+                        image: AssetImage('assets/riverForest.jpeg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                   SizedBox(
                     height: 20,
                   ),

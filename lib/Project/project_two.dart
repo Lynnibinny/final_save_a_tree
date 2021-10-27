@@ -32,7 +32,7 @@ class ProjectTwo extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Westlich von Takuapí',
+            'Am Rand des Provinzparks „Valle del Cuña Pirú“:',
             style: TextStyle(color: Colors.black),
           ),
           backgroundColor: Color(0x00000000),
@@ -50,7 +50,8 @@ class ProjectTwo extends StatelessWidget {
                 children: [
                   Align(
                       alignment: Alignment.topLeft,
-                      child: Text('Westlich von Takuapí',
+                      child: Text(
+                          'Am Rand des Provinzparks „Valle del Cuña Pirú“:',
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 25.0,
@@ -59,25 +60,25 @@ class ProjectTwo extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    "Fläche so gross wie 14 Fussballfelder für \nUS \$70’000 ",
+                    "Fläche so gross wie 405 Fussballfelder für \nUS \$450’000 ",
                     style: TextStyle(fontSize: 23.0),
                   ),
                   SizedBox(
                     height: 20,
                   ),
                   Text(
-                    'Südlich angrenzend an das Land von Takuapí kann ein Grundstück von 20 Hektaren erworben werden. Der grösste Teil davon ist Wald. Ein Bereich könnte für Hütten und Pflanzungen genutzt werden, auf 4 Hektaren steht ein Yerba Mate-Feld. Verá Mirí (Hilario Agosta) möchte dieses Grundstück für 7 Familien sicherstellen, die momentan noch direkt an einer Strasse wohnen müssen und ihren 12-jährigen Jungen durch einen Unfall auf dieser verloren haben.',
+                    '300 Hektaren könnten angrenzend an den Provinzpark „Valle del Cuña Pirú“ erworben werden.  Dieser unberührte Wald wäre aus ökologischer Sicht und für die Mbyá von grosser Bedeutung. In ihm leben Jaguare. Mario Borjas von Kaa’á Kupé möchte eine neue Gemeinschaft gründen und mit ihr in diesem Wald leben.',
                     style: TextStyle(fontSize: 20.0),
                   ),
                   SizedBox(
                     height: 20,
                   ),
                   Container(
-                    height: 350.0,
+                    height: 250.0,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                       image: DecorationImage(
-                        image: AssetImage('assets/youngLeader.jpeg'),
+                        image: AssetImage('assets/manChild.jpeg'),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -85,10 +86,10 @@ class ProjectTwo extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  Text(
-                    'Sie möchten unbedingt den Ort der Trauer verlassen und ihren Kindern eine sicherere Umgebung bieten. Das Angebot des Verkäufers ist sehr hoch, da er nicht verkaufen muss. Die 20 Hektaren verbinden jedoch zwei Mäander des Cuña Pirú. Die 35 Hektaren in der Schleife des Flusses sind eine gefangene Parzelle ohne Wegrecht. Die 20 Hektaren in der Hand der Mbyá, würden daher die ganze Schleife sichern. Die Mbyá hätten zudem gemäss Artikel 75 der argentinischen Verfassung das Recht, die 35 Hektaren das entspricht 25 Fussballfelder als Teil ihres Lebensraums zu beanspruchen, womit Eingriffe nur noch in Absprache mit ihnen möglich wären. Damit würde diese Parzelle für die weisse Eigentümerschaft praktisch wertlos.',
+                  /*Text(
+                    'Die Gefahr der schrumpfenden Biodiversität ist, dass einzele Pflanzen oder Tiere die überhand nehmen. Die Wahrscheinlichkeit, dass einzelne Arten überleben im Falle einer Klimakrise Parasitenbefall, oder bei Krankheiten ist viel geringer als sie wäre bei einer grossen Diversität. Dies kann auch für uns Menschen schwere folgen haben, da unsere Wirtschaft auf der Landwirtschaft basiert die bei immer geringerer Biodiversität schlecht auf andere Sorten umsteigen kann.',
                     style: TextStyle(fontSize: 20.0),
-                  ),
+                  ),*/
                   SizedBox(
                     height: 20,
                   ),
@@ -116,4 +117,5 @@ class ProjectTwo extends StatelessWidget {
       ),
     );
   }
+  
 }

@@ -139,38 +139,6 @@ class InfoSupporter extends StatelessWidget {
                   SizedBox(
                     height: 30,
                   ),
-                  Text(
-                    'Unsere Phylosophie ist es, dass niemand zu klein ist, etwas an eine bessere Welt beizutragen. In den Medien wird viel vom Klimawandel und seinen Folgen gesprochen, dies kann das Gefühl von Überforderung auslösen. Es gibt so viele Probleme auf der Welt, ach wo soll ich helfen und wo ist mein Platz? Vielleicht sollten wir alle ein zwei Anligen suchen und uns für deren Bekämpfung einsetzten. Wir müssen nicht die ganze Welt retten, wir sind ja nicht alleine.',
-                    style: TextStyle(fontSize: 20.0),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    height: 300.0,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                      image: DecorationImage(
-                        image: AssetImage('assets/Butterfly.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  /*ElevatedButton(
-                      style: raisedButtonStyle,
-                      onPressed: () {
-                        print('Tapped');
-                      },
-                      child: Container(
-                        child: AutoSizeText(
-                          'Jetzt spenden',
-                          style: TextStyle(
-                              fontSize: 20.0, fontWeight: FontWeight.w500),
-                        ),
-                      )),*/
                   SizedBox(
                     height: 20,
                   ),

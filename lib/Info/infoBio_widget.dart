@@ -51,12 +51,11 @@ class InfoBio extends StatelessWidget {
                 children: [
                   Align(
                       alignment: Alignment.topLeft,
-                      child:
-                  Text('Unsere wertvollste Resource',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.bold))),
+                      child: Text('Unsere wertvollste Resource',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.bold))),
                   SizedBox(
                     height: 20,
                   ),
@@ -68,15 +67,15 @@ class InfoBio extends StatelessWidget {
                     height: 20,
                   ),
                   Container(
-                          height: 200.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            image: DecorationImage(
-                              image: AssetImage('assets/Tukan.jpg'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
+                    height: 240.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      image: DecorationImage(
+                        image: AssetImage('assets/Tukan.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                   SizedBox(
                     height: 20,
                   ),
