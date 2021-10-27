@@ -44,7 +44,7 @@ dev_dependencies:
 
 flutter_native_splash:
   color: "#ffffff" 
-  image: assets/tree.png
+  image: assets/TreeGreen.png
   android: true
   ios: true 
 
