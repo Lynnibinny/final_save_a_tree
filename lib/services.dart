@@ -6,7 +6,7 @@ import 'package:http/http.dart'
 import 'User.dart';
 
 class Services {
-  static const ROOT = 'https://i-kf.ch/SaveATree/public/user_actions.php';
+  static const ROOT = 'https://sagit.neutics.ch/user_actions.php';
   static const _CREATE_TABLE_ACTION = 'CREATE_TABLE';
   static const _GET_ALL_ACTION = 'GET_ALL';
   static const _ADD_USER_ACTION = 'ADD_USER';
@@ -76,7 +76,6 @@ class Services {
       double useDonated,
       int useGoals) async {
     try {
-      
       var map = Map<String, dynamic>();
       map['action'] = _ADD_USER_ACTION;
       map['UseMail'] = useMail;

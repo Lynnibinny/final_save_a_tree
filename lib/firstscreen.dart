@@ -232,7 +232,7 @@ class _FirstScreenState extends State<FirstScreen> {
                   SizedBox(
                     height: 155.0,
                     child: Image.asset(
-                      "assets/tree.png",
+                      "assets/TreeGreen.png",
                       height: 10,
                       fit: BoxFit.contain,
                     ),

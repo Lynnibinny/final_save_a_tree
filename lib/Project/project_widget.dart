@@ -1,9 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:save_a_tree/Info/infoAboutus_widget.dart';
-import 'package:save_a_tree/Info/infoProject_widget.dart';
-import 'package:save_a_tree/Info/infoBio_widget.dart';
-import 'package:save_a_tree/Info/infoCulture_widget.dart';
+import 'package:save_a_tree/Project/done.dart';
+import 'package:save_a_tree/Project/project_for.dart';
 import 'package:save_a_tree/Project/project_one.dart';
 import 'package:save_a_tree/Project/project_three.dart';
 import 'package:save_a_tree/Project/project_two.dart';
@@ -32,6 +30,8 @@ class StartProjectState extends State<StartProjectWidget> {
   double iTop = 10.0;
   double iRight = 10.0;
   double iSize = 27.0;
+  double _width;
+  double bQuotient = 0.85;
 
   void asyncState() async {
     BigTree = AssetImage('assets/BigTree.jpeg');
@@ -55,30 +55,32 @@ class StartProjectState extends State<StartProjectWidget> {
     //precacheImage(new AssetImage('assets/BigTree.jpeg'),context);
     super.initState();
   }
+
   void main() {
-  runApp(new Scaffold(
-    body: new Center(
-      child: new ElevatedButton(
-        onPressed: _launchURL,
-        child: new Text('Show Flutter homepage'),
+    runApp(new Scaffold(
+      body: new Center(
+        child: new ElevatedButton(
+          onPressed: _launchURL,
+          child: new Text('Show Flutter homepage'),
+        ),
       ),
-    ),
-  ));
-}
+    ));
+  }
+
   _launchURL() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int id = prefs.getInt('registeredUserId');
-  String url = 'https://i-kf.ch/SaveATree/spenden.php?id='+id.toString();
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
+    String url = 'https://sagit.neutics.ch/spenden.php?id=' + id.toString();
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
-}
 
   Widget build(BuildContext context) {
     final title = 'Info';
-
+    _width = MediaQuery.of(context).size.width;
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -151,7 +153,7 @@ class StartProjectState extends State<StartProjectWidget> {
                             //this way it has to fit his parent
                             child: Column(children: [
                               SizedBox(
-                                width: 300,
+                                width: _width * bQuotient,
                                 //height: (MediaQuery.of(context).viewPadding),
                                 child: Center(
                                   child: AutoSizeText(
@@ -171,7 +173,6 @@ class StartProjectState extends State<StartProjectWidget> {
                               ElevatedButton(
                                 style: raisedButtonStyle,
                                 onPressed: _launchURL,
-                                
                                 child: Container(
                                   child: AutoSizeText(
                                     'Jetzt spenden',
@@ -208,7 +209,7 @@ class StartProjectState extends State<StartProjectWidget> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
-                          image: AssetImage('assets/Kids.jpg'),
+                          image: AssetImage('assets/Bananabush.jpeg'),
                           fit: BoxFit.cover),
                     ),
                     child: Stack(children: [
@@ -230,10 +231,10 @@ class StartProjectState extends State<StartProjectWidget> {
 
                             children: [
                               SizedBox(
-                                width: 300,
+                                width: _width * bQuotient,
                                 child: Center(
                                   child: Text(
-                                    "Westlich von Takuapí:",
+                                    'Valle del Cuña Pirú',
                                     style: TextStyle(
                                       fontSize: 25.0,
                                       color: Colors.white,
@@ -289,7 +290,7 @@ class StartProjectState extends State<StartProjectWidget> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
-                            image: AssetImage('assets/Biodiv.jpeg'),
+                            image: AssetImage('assets/Tukan3.jpeg'),
                             fit: BoxFit.cover),
                       ),
                       child: Stack(children: [
@@ -311,10 +312,10 @@ class StartProjectState extends State<StartProjectWidget> {
 
                               children: [
                                 SizedBox(
-                                  width: 300,
+                                  width: _width * bQuotient,
                                   child: Center(
                                     child: Text(
-                                      "Am Rand des \nProvinzparks",
+                                      "Tupamba’é",
                                       style: TextStyle(
                                           fontSize: 25.0, color: Colors.white),
                                     ),
@@ -326,10 +327,16 @@ class StartProjectState extends State<StartProjectWidget> {
 
                                 ElevatedButton(
                                     style: raisedButtonStyle,
-                                    onPressed: _launchURL,
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => DoneWidget()),
+                                      );
+                                    },
                                     child: Container(
                                       child: AutoSizeText(
-                                        'Jetzt spenden',
+                                        'Geschafft!!!',
                                         style: TextStyle(
                                             //fontSize: 30.0,
                                             fontWeight: FontWeight.bold),
@@ -349,9 +356,87 @@ class StartProjectState extends State<StartProjectWidget> {
                   },
                 ),
               ),
-              
-                
-              
+              Container(
+                child: new MaterialButton(
+                  padding: EdgeInsets.all(
+                      20.0), //space between picture and all the widgets in it and the boarder
+                  textColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))),
+
+                  minWidth: 200.0,
+                  splashColor: Colors.greenAccent,
+                  //elevation: 8.0,
+                  child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                            image: AssetImage('assets/bild3.jpg'),
+                            fit: BoxFit.cover),
+                      ),
+                      child: Stack(children: [
+                        Positioned(
+                          top: iTop,
+                          right: iRight,
+                          child: Icon(
+                            Icons.info_rounded,
+                            size: iSize,
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment(0.0,
+                              0.8), //to have the text and the button in the under 80 percentage
+                          child: FittedBox(
+                            //this way it has to fit his parent
+                            child: Column(
+                              //  padding: const EdgeInsets.all(8.0),
+
+                              children: [
+                                SizedBox(
+                                  width: _width * bQuotient,
+                                  child: Center(
+                                    child: Text(
+                                      "Gemeinschaft Guaviramí",
+                                      style: TextStyle(
+                                          fontSize: 25.0, color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ), // as a Space in between
+
+                                ElevatedButton(
+                                    style: raisedButtonStyle,
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => DoneWidget()),
+                                      );
+                                    },
+                                    child: Container(
+                                      child: AutoSizeText(
+                                        'Geschafft!!!',
+                                        style: TextStyle(
+                                            //fontSize: 30.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    )),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ])),
+                  // ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProjectFor()),
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),
@@ -359,4 +444,3 @@ class StartProjectState extends State<StartProjectWidget> {
     );
   }
 }
-
