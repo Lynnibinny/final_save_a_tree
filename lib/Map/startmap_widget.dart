@@ -28,7 +28,7 @@ class StartMapWidgetState extends State<StartMapWidget> {
     controller.setMapStyle(MapStyle.mapStyle);
   }
 
-  /* //Test
+  /*//Test
   void _ontap(LatLng position) {
     //Add a marker where tapped
     int markerId = _markers.length + 1;
@@ -36,14 +36,15 @@ class StartMapWidgetState extends State<StartMapWidget> {
       _markers.add(Marker(
         markerId: new MarkerId('$markerId'),
         position: position,
-        icon: customMarker,
+        icon: customGreenMarker,
+        infoWindow: InfoWindow(title: "hi"),
       ));
     });
     //print(markerId); //test to see if id-assignement to the markers works
   }
   */
 
-  void addGreenMarker(LatLng position) {
+  void addGreenMarker(LatLng position, String name) {
     int markerId = _markers.length;
 
     setState(() {
@@ -51,11 +52,12 @@ class StartMapWidgetState extends State<StartMapWidget> {
         markerId: MarkerId('$markerId'),
         position: position,
         icon: customGreenMarker,
+        infoWindow: InfoWindow(title: "$name"),
       ));
     });
   }
 
-  void addRedMarker(LatLng position) {
+  void addRedMarker(LatLng position, String name) {
     int markerId = _markers.length;
 
     setState(() {
@@ -63,6 +65,7 @@ class StartMapWidgetState extends State<StartMapWidget> {
         markerId: MarkerId('$markerId'),
         position: position,
         icon: customRedMarker,
+        infoWindow: InfoWindow(title: "$name"),
       ));
     });
   }
@@ -126,13 +129,14 @@ class StartMapWidgetState extends State<StartMapWidget> {
 
     //Add markers to the list of markers
     //addGreenMarker(mPuertoLeoni);
-    addRedMarker(mProvincialPark);
+    addRedMarker(
+        mProvincialPark, "Am Rand des Provinzparks „Valle del Cuña Pirú“");
     //addRedMarker(mColoniaDelicia);
-    addGreenMarker(mTupambaE);
-    addRedMarker(mChafariz);
+    addGreenMarker(mTupambaE, "Tupamba'é");
+    addRedMarker(mChafariz, "Wald am Chafaríz, nahe Soberbio");
     //addRedMarker(mTajyPoty);
     //addRedMarker(mTakuapi);
-    addGreenMarker(mGuavirami);
+    addGreenMarker(mGuavirami, "Gemeinschaft Guaviramí");
   }
 
   @override
@@ -167,6 +171,7 @@ class StartMapWidgetState extends State<StartMapWidget> {
                   polygons: _polygons,
                   initialCameraPosition: _initialCameraPosition,
                   onMapCreated: _onMapCreated,
+                  //onTap: _ontap, //Test
                 ),
         ),
       ),
