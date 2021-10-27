@@ -143,7 +143,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
           //foregroundColor: Colors.white,
           //create title which will be showed in the appbar
 
-          title: const Text('Profile',
+          title: const Text('Profil',
               style: TextStyle(
                 color: Colors.black,
               )),
