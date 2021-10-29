@@ -14,9 +14,7 @@ class StartProfileWidget extends StatefulWidget {
 
 class _StartProfileWidgetState extends State<StartProfileWidget> {
   List<bool> _selections = List.generate(3, (_) => false);
-
   User _filterUser;
-
   List<User> _user = [];
   double _height;
   double _width;
@@ -53,12 +51,6 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
         }
       });
     });
-    //_user = [];
-    //_filterUser = [];
-    //_isUpdating = false;
-    // _titleProgress = widget.title;
-    //_scaffoldKey = GlobalKey(); // key to get the context to show a SnackBar
-    //_proUserNameController = TextEditingController();
     asyncState();
     super.initState();
   }
@@ -159,11 +151,12 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
               ),
               //change current Widget when button was pressed
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ProfileSettingsWidget()),
-                );
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute<void>(
+                        builder: (BuildContext context) =>
+                            ProfileSettingsWidget()),
+                    (route) => false);
               },
             ),
           ],
@@ -346,7 +339,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                                 SizedBox(height: 5),
                                                 FittedBox(
                                                   child: AutoSizeText(
-                                                    "Gespendetes \nGeld: ${_filterUser.useDonated}",
+                                                    "Gespendetes \nGeld: CHF ${_filterUser.useDonated}",
                                                     style: TextStyle(
                                                         fontSize: 17.0,
                                                         fontWeight:
@@ -489,7 +482,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                                       )
                                                     : FittedBox(
                                                         child: AutoSizeText(
-                                                          "$percent % hast Du \nbereits erreicht",
+                                                          "$percent% hast Du \nbereits erreicht",
                                                           style: TextStyle(
                                                               fontSize: 17.0,
                                                               fontWeight:
@@ -531,13 +524,14 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                               child: FittedBox(
                                 child: ElevatedButton(
                                   style: raisedButtonStyle1,
+
                                   onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ProfileGoalsWidget()),
-                                    );
+                                    Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute<void>(
+                                            builder: (BuildContext context) =>
+                                                ProfileGoalsWidget()),
+                                        (route) => false);
                                   },
                                   //height:
                                   //150, //take care this hight has an effect on the width
