@@ -8,7 +8,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="save_a_tree"
+        android:label="Save A Tree"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
                android:value="AIzaSyDVkYduE-eHhvK3gn2CRLmNTH_eAY0OoO4"/>
