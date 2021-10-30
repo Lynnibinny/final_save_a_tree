@@ -59,7 +59,7 @@ class ProjectFor extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    "Fläche so gross wie 170 Fussballfelder für \nUS \$179'400",
+                    "Fläche so gross wie 170 Fussballfelder für \nCHF 179'400",
                     style: TextStyle(fontSize: 23.0),
                   ),
                   SizedBox(

@@ -5,15 +5,26 @@ import 'package:save_a_tree/startprofile_widget.dart';
 import 'Map/startmap_widget.dart';
 
 class Nav extends StatefulWidget {
+  final int index;
+  Nav({this.index});
   @override
-  State<StatefulWidget> createState() {
-    return _NavState();
-  }
+  _NavState createState() => _NavState(index: index);
+
+  // @override
+  // State<StatefulWidget> createState() {
+  //  return _NavState();
+  //}
 }
 
 class _NavState extends State<Nav> {
-  int _currentIndex =
-      0; // current Index to describe which Icon in the Nav Bar is pressed
+  int _currentIndex;
+
+  _NavState({int index}) {
+    _currentIndex = index ?? 0;
+  }
+
+  //int _currentIndex =
+  //    0; // current Index to describe which Icon in the Nav Bar is pressed
 
   List<Widget> _widgetOptions = <Widget>[
     StartProjectWidget(),
@@ -30,24 +41,9 @@ class _NavState extends State<Nav> {
 
   @override
   Widget build(BuildContext context) {
-    /*return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          stops: [0.1, 0.5, 0.7, 0.9],
-          colors: [
-            Colors.lightGreen[200],
-            Colors.lightGreen[300],
-            Colors.lightGreen[400],
-            Colors.lightGreen[500],
-          ],
-        ),
-      ),*/
+    //return Text(_currentIndex.toString());
+
     return Scaffold(
-      /*appBar: AppBar(
-        title: Text('Save A Tree'),
-      ),*/
       body: Center(
         child: _widgetOptions.elementAt(_currentIndex),
       ),

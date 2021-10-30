@@ -14,10 +14,10 @@ class ProfileSettingsWidget extends StatefulWidget {
 }
 
 class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
-
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     onPrimary: Colors.black87, //Button Text color
-    primary: Colors.green,//Color.fromARGB(255, 155, 203, 99), //Button background color
+    primary: Colors
+        .green, //Color.fromARGB(255, 155, 203, 99), //Button background color
     minimumSize: Size(88, 36),
 
     shadowColor: Colors.white54, //?
@@ -175,6 +175,17 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
       ),
       child: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            onPressed: () => Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (_) => Nav(index: 3)),
+                (route) => false),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              size: 20.0,
+              color: Colors.black,
+            ),
+          ),
           title: Text(
             'Einstellungen',
             style: TextStyle(color: Colors.black),
@@ -184,20 +195,6 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
           iconTheme: IconThemeData(
             color: Colors.black, //to make the back button black
           ),
-          actions: <Widget>[
-            IconButton(
-              onPressed: () => Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (BuildContext context) => Nav()),
-                  ModalRoute.withName('/first')), //_updateUserWithRoot,
-              //() => Navigator.pop(context),
-              icon: Icon(
-                Icons.done,
-                size: 30.0,
-                color: Colors.green,
-              ),
-            ),
-          ],
         ),
         body: Center(
           child: _filterUser == null

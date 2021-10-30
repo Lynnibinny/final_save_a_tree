@@ -51,7 +51,7 @@ class ProjectTwo extends StatelessWidget {
                   Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                          'Am Rand des Provinzparks „Valle del Cuña Pirú“:',
+                          'Am Rand des Provinzparks „Valle del Cuña Pirú“',
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 25.0,
@@ -60,14 +60,14 @@ class ProjectTwo extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    "Fläche so gross wie 405 Fussballfelder für \nUS \$450’000 ",
+                    "Fläche so gross wie 405 Fussballfelder für \nCHF 450’000 ",
                     style: TextStyle(fontSize: 23.0),
                   ),
                   SizedBox(
                     height: 20,
                   ),
                   Text(
-                    '300 Hektaren könnten angrenzend an den Provinzpark „Valle del Cuña Pirú“ erworben werden.  Dieser unberührte Wald wäre aus ökologischer Sicht und für die Mbyá von grosser Bedeutung. In ihm leben Jaguare. Mario Borjas von Kaa’á Kupé möchte eine neue Gemeinschaft gründen und mit ihr in diesem Wald leben.',
+                    '300 Hektaren könnten angrenzend an den Provinzpark „Valle del Cuña Pirú“ erworben werden. Dieser unberührte Wald wäre aus ökologischer Sicht und für die Mbyá von grosser Bedeutung. In ihm leben Jaguare. Mario Borjas von Kaa’á Kupé möchte eine neue Gemeinschaft gründen und mit ihr in diesem Wald leben.',
                     style: TextStyle(fontSize: 20.0),
                   ),
                   SizedBox(
@@ -117,5 +117,4 @@ class ProjectTwo extends StatelessWidget {
       ),
     );
   }
-  
 }
