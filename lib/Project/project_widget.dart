@@ -79,7 +79,7 @@ class StartProjectState extends State<StartProjectWidget> {
   }
 
   Widget build(BuildContext context) {
-    final title = 'Info';
+    final title = 'Projekte';
     _width = MediaQuery.of(context).size.width;
     return Container(
       decoration: BoxDecoration(

@@ -77,7 +77,7 @@ class StartGoalsState extends State<StartGoalsWidget> {
 
   Widget build(BuildContext context) {
     _width = MediaQuery.of(context).size.width;
-    final title = 'Projekte';
+    final title = 'Info';
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
