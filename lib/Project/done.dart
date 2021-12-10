@@ -112,9 +112,6 @@ class _DoneWidgetState extends State<DoneWidget> {
                                 ShaderMask(
                                   shaderCallback: (rect) {
                                     return LinearGradient(
-                                      begin: Alignment.bottomLeft,
-                                      end: Alignment.topLeft,
-                                      stops: [percent / 100, percent / 100],
                                       colors: [
                                         Colors.lightGreen[500],
                                         Colors.white,
@@ -138,26 +135,20 @@ class _DoneWidgetState extends State<DoneWidget> {
                       SizedBox(height: _height / 20),
 
                       Text(
-                        "Dieses Projekt haben wir geschafft!!!",
+                        "Dieses Projekt haben wir geschafft!",
                         style: TextStyle(
                             fontSize: 17.0, fontWeight: FontWeight.w500),
                       ),
                       SizedBox(height: _height / 20),
-                      percent < 0
-                          ? Text(
-                              "0%",
-                              style: TextStyle(
-                                fontSize: 45.0,
-                                //fontWeight: FontWeight.w800
-                              ),
-                            )
-                          : Text(
-                              "$percent%",
-                              style: TextStyle(
-                                fontSize: 45.0,
-                                //fontWeight: FontWeight.w800
-                              ),
-                            ),
+
+                      Text(
+                        "100%",
+                        style: TextStyle(
+                          fontSize: 45.0,
+                          //fontWeight: FontWeight.w800
+                        ),
+                      ),
+
                       SizedBox(height: _height / 40),
                     ])),
           ),

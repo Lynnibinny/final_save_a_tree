@@ -66,6 +66,7 @@ class StartMapWidgetState extends State<StartMapWidget> {
         position: position,
         icon: customRedMarker,
         infoWindow: InfoWindow(title: "$name"),
+        
       ));
     });
   }

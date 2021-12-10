@@ -64,7 +64,7 @@ class Services {
 
   static List<User> parseResponse(String responseBody) {
     final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
-    return parsed.map<User>((json) => User.fromJson(json)).toList();
+    return parsed.map<User>((json) => User.fromJson(json)).toList(); //Data response from PHP is converted from json and stored into User
   }
 
   // Method to add user to the database...

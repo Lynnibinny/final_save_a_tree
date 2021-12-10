@@ -100,11 +100,12 @@ class InfoSupporter extends StatelessWidget {
                     height: 20,
                   ),
                   Container(
-                    height: 450.0,
+                    height: 350.0,
+                    width: 300,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                       image: DecorationImage(
-                        image: AssetImage('assets/MateTee.jpg'),
+                        image: AssetImage('assets/MateTeeRB.jpg'),
                         fit: BoxFit.cover,
                       ),
                     ),
