@@ -50,7 +50,7 @@ flutter_native_splash:
   ios: true 
 
 flutter_icons:
-  image_path: assets/tree_outlined03.jpg
+  image_path: assets/TreeLogo.png
   android: true
   ios: true
 
@@ -99,6 +99,8 @@ flutter:
      - assets/Tukan2.jpeg
      - assets/Tukan3.jpeg
      - assets/MateTeeRB.jpg
+     - assets/houses.jpg
+     - assets/TreeLogo.png
 
 
     

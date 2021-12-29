@@ -1,5 +1,15 @@
+/*----------------------------------------------------------------------------------
+services.dart
+
+Author: Lynn Nüesch and Yarina Vetterli
+Date: 10.12.2021
+
+History:
+Version Date Who Changes
+
+Copyright © 2021 Lynn Nüesch und Yarina Vetterli, Switzerland. All rights reserved.
+-----------------------------------------------------------------------------------*/
 import 'dart:convert';
-//import 'dart:html';
 import 'package:http/http.dart'
     as http; // add the http plugin in pubspec.yaml file.
 

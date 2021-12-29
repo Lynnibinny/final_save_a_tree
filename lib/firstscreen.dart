@@ -1,3 +1,14 @@
+/*----------------------------------------------------------------------------------
+firstscreen.dart
+
+Author: Lynn Nüesch and Yarina Vetterli
+Date: 10.12.2021
+
+History:
+Version Date Who Changes
+
+Copyright © 2021 Lynn Nüesch und Yarina Vetterli, Switzerland. All rights reserved.
+-----------------------------------------------------------------------------------*/
 import 'package:flutter/material.dart';
 import 'package:save_a_tree/nav.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,6 +36,7 @@ class _FirstScreenState extends State<FirstScreen> {
   TextEditingController _UsePasswordController;
   TextEditingController _UseCompareController;
   bool passwordfail = false;
+  bool passwordfail1 = false;
   bool emptyfield1 = false;
   bool emptyfield2 = false;
   bool registerfail = false;
@@ -50,7 +62,16 @@ class _FirstScreenState extends State<FirstScreen> {
     });
   }
 
+  
+
   _addUser() {
+    bool validateStructure(String value) {
+    String pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    // r'^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    RegExp regExp = new RegExp(pattern);
+    return regExp.hasMatch(value);
+  }
     if (_UseMailController.text.isEmpty) {
       setState(() {
         print('Empty Fields');
@@ -60,6 +81,11 @@ class _FirstScreenState extends State<FirstScreen> {
       setState(() {
         print('Empty Fields');
         emptyfield2 = true;
+      });
+    } else if (!validateStructure(_UseUserNameController.text)) {
+      setState(() {
+        print('Empty Fields');
+        passwordfail1 = true;
       });
     } else {
       if (_UseMailController.text.isNotEmpty ||
@@ -164,6 +190,9 @@ class _FirstScreenState extends State<FirstScreen> {
       obscureText: true,
       style: style,
       decoration: InputDecoration(
+          errorText: passwordfail1
+              ? 'Mind. 8 Zeichen, Zahlen und Spezialzeichen'
+              : null,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Passwort",
           border:

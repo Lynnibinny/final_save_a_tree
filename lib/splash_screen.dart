@@ -1,3 +1,14 @@
+/*----------------------------------------------------------------------------------
+splash_screen.dart
+
+Author: Lynn Nüesch and Yarina Vetterli
+Date: 10.12.2021
+
+History:
+Version Date Who Changes
+
+Copyright © 2021 Lynn Nüesch und Yarina Vetterli, Switzerland. All rights reserved.
+-----------------------------------------------------------------------------------*/
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'main.dart';

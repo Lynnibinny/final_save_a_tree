@@ -1,8 +1,16 @@
+/*----------------------------------------------------------------------------------
+done.dart
+
+Author: Lynn Nüesch and Yarina Vetterli
+Date: 10.12.2021
+
+History:
+Version Date Who Changes
+
+Copyright © 2021 Lynn Nüesch und Yarina Vetterli, Switzerland. All rights reserved.
+-----------------------------------------------------------------------------------*/
 import 'dart:async';
-
-import 'package:save_a_tree/Project/project_widget.dart';
 import 'package:save_a_tree/User.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -72,7 +80,7 @@ class _DoneWidgetState extends State<DoneWidget> {
               Colors.lightGreen[200],
               Colors.lightGreen[300],
               Colors.lightGreen[400],
-              Colors.lightGreen[500],
+              Colors.lightGreen[400],
             ],
           ),
         ),

@@ -1,3 +1,14 @@
+/*----------------------------------------------------------------------------------
+project_widget.dart
+
+Author: Lynn Nüesch and Yarina Vetterli
+Date: 10.12.2021
+
+History:
+Version Date Who Changes
+
+Copyright © 2021 Lynn Nüesch und Yarina Vetterli, Switzerland. All rights reserved.
+-----------------------------------------------------------------------------------*/
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:save_a_tree/Project/done.dart';
@@ -95,7 +106,7 @@ class StartProjectState extends State<StartProjectWidget> {
             Colors.lightGreen[200],
             Colors.lightGreen[300],
             Colors.lightGreen[400],
-            Colors.lightGreen[500],
+            Colors.lightGreen[400],
           ],
         ),
       ),
@@ -441,7 +452,7 @@ class StartProjectState extends State<StartProjectWidget> {
                   },
                 ),
               ),
-              Container(
+              /*Container(
                 child: new MaterialButton(
                   padding: EdgeInsets.all(
                       20.0), //space between picture and all the widgets in it and the boarder
@@ -683,7 +694,7 @@ class StartProjectState extends State<StartProjectWidget> {
                     );
                   },
                 ),
-              ),
+              ),*/
             ],
           ),
         ),

@@ -1,3 +1,14 @@
+/*----------------------------------------------------------------------------------
+startprofile_widget.dart
+
+Author: Lynn Nüesch and Yarina Vetterli
+Date: 10.12.2021
+
+History:
+Version Date Who Changes
+
+Copyright © 2021 Lynn Nüesch und Yarina Vetterli, Switzerland. All rights reserved.
+-----------------------------------------------------------------------------------*/
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:save_a_tree/services.dart';
@@ -125,7 +136,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
             Colors.lightGreen[200],
             Colors.lightGreen[300],
             Colors.lightGreen[400],
-            Colors.lightGreen[500],
+            Colors.lightGreen[400],
           ],
         ),
       ),
@@ -193,10 +204,10 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                           return LinearGradient(
                                             begin: Alignment.bottomLeft,
                                             end: Alignment.topLeft,
-                                            /*stops: [
+                                            stops: [
                                               percent / 100,
                                               percent / 100
-                                            ],*/
+                                            ],
                                             colors: [
                                               Colors.lightGreen[500],
                                               Colors.white

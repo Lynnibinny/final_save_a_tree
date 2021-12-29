@@ -1,3 +1,14 @@
+/*----------------------------------------------------------------------------------
+infoCulture_widget.dart
+
+Author: Lynn Nüesch and Yarina Vetterli
+Date: 10.12.2021
+
+History:
+Version Date Who Changes
+
+Copyright © 2021 Lynn Nüesch und Yarina Vetterli, Switzerland. All rights reserved.
+-----------------------------------------------------------------------------------*/
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -15,7 +26,7 @@ class InfoCulture extends StatelessWidget {
             Colors.lightGreen[200],
             Colors.lightGreen[300],
             Colors.lightGreen[400],
-            Colors.lightGreen[500],
+            Colors.lightGreen[400],
           ],
         ),
       ),
@@ -71,7 +82,7 @@ class InfoCulture extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                       image: DecorationImage(
-                        image: AssetImage('assets/aroundFire.jpeg'),
+                        image: AssetImage('assets/houses.jpg'),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -109,7 +120,7 @@ class InfoCulture extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                       image: DecorationImage(
-                        image: AssetImage('assets/IndHouseII.jpg'),
+                        image: AssetImage('assets/aroundFire.jpeg'),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -135,7 +146,7 @@ class InfoCulture extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                       image: DecorationImage(
-                        image: AssetImage('assets/medecin.jpg'),
+                        image: AssetImage('assets/IndHouseII.jpg'),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -153,6 +164,19 @@ class InfoCulture extends StatelessWidget {
                   Text(
                       "Die Mbyá Medizinerinnen und Mediziner haben, im Gegensatz zur ausschliesslich mechanistisch und chemisch orientierten Schulmedizin, einen ganzheitlichen Blick auf den Menschen und seine Gesundheit. \n\nDie Lebensaufgabe, welche ein Mensch zu erfüllen hat, ist bei den Mbyá wichtiger Teil der Diagnose. Des Weiteren kennen die Mbyá die Vielfalt der pflanzlichen Sekundärstoffe und deren Wirkung. Dank der enormen Artenvielfalt ist ihr Nutzen viel grösser als derjenige der europäischen Volksmedizin.",
                       style: TextStyle(fontSize: 20.0)),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    height: 250.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      image: DecorationImage(
+                        image: AssetImage('assets/medecin.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                 ],
               ),
               //),

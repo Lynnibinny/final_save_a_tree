@@ -1,3 +1,14 @@
+/*----------------------------------------------------------------------------------
+infoBio_widget.dart
+
+Author: Lynn Nüesch and Yarina Vetterli
+Date: 10.12.2021
+
+History:
+Version Date Who Changes
+
+Copyright © 2021 Lynn Nüesch und Yarina Vetterli, Switzerland. All rights reserved.
+-----------------------------------------------------------------------------------*/
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -26,7 +37,7 @@ class InfoBio extends StatelessWidget {
             Colors.lightGreen[200],
             Colors.lightGreen[300],
             Colors.lightGreen[400],
-            Colors.lightGreen[500],
+            Colors.lightGreen[400],
           ],
         ),
       ),
