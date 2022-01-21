@@ -2,10 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Save A Tree empfiehlt Ihnen ihren Standort NICHT freizugeben. Die App läuft auch so :)</string>
+	<string>Diese App braucht ihren Standort für eine optimale Funktion</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Immer auch wenn die App läuft!</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Ältere Geräte brauchen die Standortfunktion.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Dürfen wir ihren Standort immer verwenden?</string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string></string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -25,7 +35,9 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
