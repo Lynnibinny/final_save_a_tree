@@ -4,20 +4,8 @@
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Diese App braucht ihren Standort für eine optimale Funktion</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Immer auch wenn die App läuft!</string>
-	<key>NSLocationUsageDescription</key>
-	<string>Ältere Geräte brauchen die Standortfunktion.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Dürfen wir ihren Standort immer verwenden?</string>
-	<key>CFBundleGetInfoString</key>
-	<string></string>
-	<key>NSUserTrackingUsageDescription</key>
-	<string></string>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<string>de_DE</string>
 	<key>CFBundleDisplayName</key>
 	<string>Save A Tree</string>
 	<key>CFBundleExecutable</key>

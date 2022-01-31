@@ -14,6 +14,7 @@ import 'package:save_a_tree/nav.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'User.dart';
 import 'services.dart';
+import 'package:email_validator/email_validator.dart';
 
 class FirstScreen extends StatefulWidget {
   FirstScreen({Key key, this.title}) : super(key: key);
@@ -41,6 +42,7 @@ class _FirstScreenState extends State<FirstScreen> {
   bool emptyfield2 = false;
   bool registerfail = false;
   bool registerfailId = false;
+  bool mailstructure = false;
 
   String _titleProgress;
   @override
@@ -62,16 +64,23 @@ class _FirstScreenState extends State<FirstScreen> {
     });
   }
 
-  
-
   _addUser() {
     bool validateStructure(String value) {
-    String pattern =
-        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
-    // r'^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
-    RegExp regExp = new RegExp(pattern);
-    return regExp.hasMatch(value);
-  }
+      String pattern =
+          r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~\+]).{8,}$';
+      RegExp regExp = new RegExp(pattern);
+      print('regExp: ' + value);
+      return regExp.hasMatch(value);
+
+      //return true;
+    }
+
+    bool validateMailStructure(String value) {
+      return EmailValidator.validate(value);
+
+      //return true;
+    }
+
     if (_UseMailController.text.isEmpty) {
       setState(() {
         print('Empty Fields');
@@ -82,9 +91,14 @@ class _FirstScreenState extends State<FirstScreen> {
         print('Empty Fields');
         emptyfield2 = true;
       });
-    } else if (!validateStructure(_UseUserNameController.text)) {
+    } else if (!validateMailStructure(_UseMailController.text)) {
       setState(() {
-        print('Empty Fields');
+        print('not validate mail structure');
+        mailstructure = true;
+      });
+    } else if (!validateStructure(_UsePasswordController.text)) {
+      setState(() {
+        print('passwordfail1');
         passwordfail1 = true;
       });
     } else {
@@ -162,8 +176,10 @@ class _FirstScreenState extends State<FirstScreen> {
               : registerfail
                   ? 'Registrierung fehlgeschlagen'
                   : registerfailId
-                      ? 'Dieser Benutzer existierst schon'
-                      : null,
+                      ? 'Dieser Benutzer existiert schon'
+                      : mailstructure
+                          ? 'Ungültige E-Mail-Adresse'
+                          : null,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Email",
           border:
@@ -178,7 +194,7 @@ class _FirstScreenState extends State<FirstScreen> {
           errorText: emptyfield2
               ? 'Leeres Feld'
               : registerfailId
-                  ? 'Dieser Benutzer existierst schon'
+                  ? 'Dieser Benutzer existiert schon'
                   : null,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Benutzername",

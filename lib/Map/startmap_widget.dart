@@ -14,8 +14,10 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:save_a_tree/Map/mapstyle.dart';
 import 'package:save_a_tree/Map/marker.dart';
 import 'package:save_a_tree/Map/coordinates.dart';
+//import 'package:permission_handler/permission_handler.dart';
 
 class StartMapWidget extends StatefulWidget {
+
   @override
   State<StartMapWidget> createState() => StartMapWidgetState();
 }
@@ -33,6 +35,27 @@ class StartMapWidgetState extends State<StartMapWidget> {
     zoom: 8.5,
   );
 
+  /*String locStatus = 'notquestioned';
+  Future<void> requestLocationPermission() async {
+    final serviceStatusLocation = await Permission.locationWhenInUse.isGranted;
+
+    bool isLocation = serviceStatusLocation == ServiceStatus.enabled;
+
+    final status = await Permission.locationWhenInUse.request();
+
+    if (status == PermissionStatus.granted) {
+      print('Permission Granted');
+      locStatus = 'granted';
+    } else if (status == PermissionStatus.denied) {
+      print('Permission denied');
+      locStatus = 'denied';
+    } else if (status == PermissionStatus.permanentlyDenied) {
+      print('Permission Permanently Denied');
+      locStatus = 'permanentlyDenied';
+      await openAppSettings();
+    }
+  }
+*/
   void _onMapCreated(GoogleMapController controller) {
     //set map's colors
     //GoogleMapController controller;
@@ -77,7 +100,6 @@ class StartMapWidgetState extends State<StartMapWidget> {
         position: position,
         icon: customRedMarker,
         infoWindow: InfoWindow(title: "$name"),
-        
       ));
     });
   }
@@ -178,13 +200,35 @@ class StartMapWidgetState extends State<StartMapWidget> {
           child: _onMapCreated ==
                   null //customRedMarker == null || customGreenMarker == null
               ? CircularProgressIndicator()
-              : GoogleMap(
-                  markers: _markers,
-                  polygons: _polygons,
-                  initialCameraPosition: _initialCameraPosition,
-                  onMapCreated: _onMapCreated,
-                  //onTap: _ontap, //Test
-                ),
+              : //requestLocationPermission(),
+                //locStatus == 'denied'
+                //? 
+                  /*Column(
+                  children: <Widget>[
+                  
+                  Container(
+                      margin: const EdgeInsets.all(10),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.lightBlue,
+                          padding: EdgeInsets.all(8),
+                          textStyle: TextStyle(fontSize: 20),
+                        ),
+                        child: Text('Request Runtime Location Permission'),
+                        onPressed: requestLocationPermission,
+                      ),
+                    ),
+                  */
+                  GoogleMap(
+                      markers: _markers,
+                      polygons: _polygons,
+                      initialCameraPosition: _initialCameraPosition,
+                      onMapCreated: _onMapCreated,
+                      //onTap: _ontap, //Test
+                    ),
+         // ]
+          //),
+      
         ),
       ),
     );
