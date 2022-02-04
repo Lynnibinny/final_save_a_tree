@@ -45,16 +45,15 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
     Timer timer;
 
     timer = Timer.periodic(Duration(milliseconds: 300), (_) {
-      print('Percent Update');
+      //print('Percent Update');
       setState(() {
         percent += 1;
-        print('in setState');
+        //print('in setState');
         if (_filterUser != null) {
-          print('in if filterUser != null');
+          //print('in if filterUser != null');
           int finalDonated = _filterUser.useDonated.round();
           filterUserPercent = calcPercent(_filterUser.useGoals, finalDonated);
-          print(
-              'Percent: $filterUserPercent ${_filterUser.useGoals} ${_filterUser.useSavedTrees}');
+          //print('Percent: $filterUserPercent ${_filterUser.useGoals} ${_filterUser.useSavedTrees}');
         }
         if (percent >= filterUserPercent) {
           timer.cancel();

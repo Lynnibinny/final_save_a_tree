@@ -50,16 +50,15 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
     Timer timer;
 
     timer = Timer.periodic(Duration(milliseconds: 300), (_) {
-      print('Percent Update');
+      //print('Percent Update');
       setState(() {
         percent += 1;
-        print('in setState');
+        //print('in setState');
         if (_filterUser != null) {
-          print('in if filterUser != null');
+          //print('in if filterUser != null');
           int finalDonated = _filterUser.useDonated.round();
           filterUserPercent = calcPercent(_filterUser.useGoals, finalDonated);
-          print(
-              'Percent: $filterUserPercent ${_filterUser.useGoals} ${_filterUser.useSavedTrees}');
+          //print('Percent: $filterUserPercent ${_filterUser.useGoals} ${_filterUser.useSavedTrees}');
         }
         if (percent >= filterUserPercent) {
           timer.cancel();
@@ -120,10 +119,10 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
         .then(
       (result) async {
         if ('error' == result) {
-          print('konnte nicht upgedated werden.');
+          //print('konnte nicht upgedated werden.');
           // error control print("'${_filterUser.useId}', '${_filterUser.useUserName}', '${_filterUser.useMail}', '${_filterUser.useSavedTrees}', '${_filterUser.useDonated}', '${_filterUser.useGoals}'");
         } else {
-          print('konnte ubgedated werden');
+          //print('konnte ubgedated werden');
           //here we get the id
 
         }

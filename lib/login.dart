@@ -63,25 +63,25 @@ class _LoginState extends State<Login> {
   _loginUser() {
     if (_UseUserNameController.text.isEmpty &&
         _UsePasswordController.text.isEmpty) {
-      print('Empty Fields');
+      //print('Empty Fields');
       emptyfields = true;
       //loginfail = true;
 
     }
     if (_UseUserNameController.text.isEmpty) {
-      print('Empty Fields');
+      //print('Empty Fields');
       emptyfield1 = true;
       //loginfail = true;
 
     } else if (_UsePasswordController.text.isEmpty) {
-      print('Empty Fields');
+      //print('Empty Fields');
       emptyfield2 = true;
       //loginfail = true;
 
     }
     if (_UseUserNameController.text.isNotEmpty ||
         _UsePasswordController.text.isNotEmpty) {
-      print('$_UseUserNameController');
+      //print('$_UseUserNameController');
     } //just to find errors
 
     Services.loginUser(
@@ -89,18 +89,18 @@ class _LoginState extends State<Login> {
       _UsePasswordController.text,
     ).then((result) async {
       if ('error' == result) {
-        print('konnte sich nicht einlogen.');
+        //print('konnte sich nicht einlogen.');
         //Navigator.pushNamed(context, '/first');
         // logError;
         setState(() {
           loginfail = true; //loginfail is bool
         });
       } else {
-        print('konnte sich fast einlogen');
+        //print('konnte sich fast einlogen');
         //here we get the id
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setInt('registeredUserId', int.parse(result));
-        print('konnte sich einlogen');
+        //print('konnte sich einlogen');
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (BuildContext context) => Nav()),
@@ -121,7 +121,7 @@ class _LoginState extends State<Login> {
         //_filterEmployees = employees;
       });
       _showProgress(widget.title); // Reset the title...
-      print("Length ${user.length}");
+      //print("Length ${user.length}");
     });
   }
 

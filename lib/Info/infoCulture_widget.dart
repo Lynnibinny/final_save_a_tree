@@ -103,18 +103,7 @@ class InfoCulture extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  /*ElevatedButton(
-                      style: raisedButtonStyle,
-                      onPressed: () {
-                        print('Tapped');
-                      },
-                      child: Container(
-                        child: AutoSizeText(
-                          'Jetzt spenden',
-                          style: TextStyle(
-                              fontSize: 20.0, fontWeight: FontWeight.w500),
-                        ),
-                      )),*/
+
                   Container(
                     height: 250.0,
                     decoration: BoxDecoration(

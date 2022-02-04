@@ -24,10 +24,10 @@ class _DoneWidgetState extends State<DoneWidget> {
     Timer timer;
 
     timer = Timer.periodic(Duration(milliseconds: 300), (_) {
-      print('Percent Update');
+      //print('Percent Update');
       setState(() {
         //percent += 1;
-        print('in setState');
+        //print('in setState');
 
         if (percent >= 100) {
           timer.cancel();

@@ -97,18 +97,7 @@ class InfoBio extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  /*ElevatedButton(
-                      style: raisedButtonStyle,
-                      onPressed: () {
-                        print('Tapped');
-                      },
-                      child: Container(
-                        child: AutoSizeText(
-                          'Jetzt spenden',
-                          style: TextStyle(
-                              fontSize: 20.0, fontWeight: FontWeight.w500),
-                        ),
-                      )),*/
+                  
                   SizedBox(
                     height: 20,
                   ),

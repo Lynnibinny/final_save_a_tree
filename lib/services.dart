@@ -94,10 +94,10 @@ class Services {
       map['UseDonated'] = useDonated.toString();
       map['UseGoals'] = useGoals.toString();
       map['UsePassword'] = usePassword;
-      print(map);
+      //print(map);
       final response = await http.post(ROOT, body: map);
-      print('addUser yey: $useMail, $useUserName');
-      print('addUser Response: ${response.body} ${response.statusCode}');
+      //print('addUser yey: $useMail, $useUserName');
+      //print('addUser Response: ${response.body} ${response.statusCode}');
       if (200 == response.statusCode) {
         return response.body;
       } else {

@@ -43,6 +43,7 @@ class _FirstScreenState extends State<FirstScreen> {
   bool registerfail = false;
   bool registerfailId = false;
   bool mailstructure = false;
+  bool register = false;
 
   String _titleProgress;
   @override
@@ -67,9 +68,8 @@ class _FirstScreenState extends State<FirstScreen> {
   _addUser() {
     bool validateStructure(String value) {
       String pattern =
-          r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~\+]).{8,}$';
+          r'^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[!@#\$&*~\+\(\)\{\}\=\%\/\?\^öäüÖÄÜ£\-\_\;\:\,\.<>§€\[\]\|\¥]).{8,}$';
       RegExp regExp = new RegExp(pattern);
-      print('regExp: ' + value);
       return regExp.hasMatch(value);
 
       //return true;
@@ -81,74 +81,109 @@ class _FirstScreenState extends State<FirstScreen> {
       //return true;
     }
 
-    if (_UseMailController.text.isEmpty) {
-      setState(() {
-        print('Empty Fields');
-        emptyfield1 = true;
-      });
-    } else if (_UseUserNameController.text.isEmpty) {
-      setState(() {
-        print('Empty Fields');
-        emptyfield2 = true;
-      });
-    } else if (!validateMailStructure(_UseMailController.text)) {
-      setState(() {
-        print('not validate mail structure');
-        mailstructure = true;
-      });
-    } else if (!validateStructure(_UsePasswordController.text)) {
-      setState(() {
-        print('passwordfail1');
-        passwordfail1 = true;
-      });
-    } else {
-      if (_UseMailController.text.isNotEmpty ||
-          _UseUserNameController.text.isNotEmpty ||
-          _UsePasswordController.text.isNotEmpty ||
-          _UseCompareController.text.isNotEmpty) {
-        print(
-            '$_UseMailController, $_UseUserNameController, $_UseCompareController, $_UsePasswordController');
-      } //just to find errors
+//mail
+    if (register == false) {
+      register = true;
+      if (_UseMailController.text.isEmpty) {
+        setState(() {
+          print('Empty Fields');
+          emptyfield1 = true;
+          register = false;
+        });
+      } else if (_UseMailController.text.isNotEmpty) {
+        setState(() {
+          print('No Empty Fields');
+          emptyfield1 = false;
+        });
+      }
+      if (!validateMailStructure(_UseMailController.text)) {
+        setState(() {
+          print('not validate mail structure');
+          mailstructure = true;
+          register = false;
+        });
+      } else if (validateMailStructure(_UseMailController.text)) {
+        setState(() {
+          print(' validate mail structure');
+          mailstructure = false;
+        });
+      }
+//UserName
+
+      if (_UseUserNameController.text.isEmpty) {
+        setState(() {
+          print('Empty Fields');
+          register = false;
+          emptyfield2 = true;
+        });
+      } else if (_UseUserNameController.text.isNotEmpty) {
+        setState(() {
+          print('No Empty Fields');
+          emptyfield2 = false;
+        });
+      }
+
+//Password
+
+      if (!validateStructure(_UsePasswordController.text)) {
+        setState(() {
+          print('passwordfail1');
+          register = false;
+          passwordfail1 = true;
+        });
+      } else if (validateStructure(_UsePasswordController.text)) {
+        setState(() {
+          print('No passwordfail1');
+          passwordfail1 = false;
+        });
+      }
 
       if (_UsePasswordController.text != _UseCompareController.text) {
         // if ("hallo" != "hallo"){
         setState(() {
-          passwordfail = true; //loginfail is bool
+          passwordfail = true;
+          register = false;
           print('Passwörter ungleich');
         });
-      } else {
-        Services.addUser(_UseMailController.text, _UseUserNameController.text,
-                _UsePasswordController.text, 0, 0.0, 0)
-            .then((result) async {
-          if ('errorId' == result) {
-            print('User gibt es schon. $result');
-            setState(() {
-              registerfailId = true;
-            });
-          } else if ('error' == result) {
-            print('konnte nicht registriert werden.');
-            setState(() {
-              registerfail = true;
-            });
-          } else {
-            print('konnte fast registriert werden');
-            //here we get the id
-
-            SharedPreferences prefs = await SharedPreferences.getInstance();
-            await prefs.setInt(
-                'registeredUserId', int.parse(result)); //später statt 5 result
-            //_getEmployees(); // Refresh the List after adding each employee...
-            //_clearValues();
-            print('wurde registriert');
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (BuildContext context) => Nav()),
-                ModalRoute.withName('/second'));
-
-            _getUser();
-          }
+      } else if (_UsePasswordController.text == _UseCompareController.text) {
+        setState(() {
+          passwordfail = false;
+          print('Passwörter gleich');
         });
       }
+    }
+    if (register == true) {
+      Services.addUser(_UseMailController.text, _UseUserNameController.text,
+              _UsePasswordController.text, 0, 0.0, 0)
+          .then((result) async {
+        if ('errorId' == result) {
+          print('User gibt es schon. $result');
+          setState(() {
+            registerfailId = true;
+          });
+        } else if ('error' == result) {
+          print('konnte nicht registriert werden.');
+          setState(() {
+            registerfail = true;
+          });
+        } else {
+          print('konnte fast registriert werden');
+          //here we get the id
+
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.setInt(
+              'registeredUserId', int.parse(result)); //später statt 5 result
+          //_getEmployees(); // Refresh the List after adding each employee...
+          //_clearValues();
+          print('wurde registriert');
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (BuildContext context) => Nav()),
+              ModalRoute.withName('/second'));
+
+          _getUser();
+        }
+      });
     }
   }
 
@@ -161,7 +196,7 @@ class _FirstScreenState extends State<FirstScreen> {
         //_filterEmployees = employees;
       });
       _showProgress(widget.title); // Reset the title...
-      print("Length ${user.length}");
+      //print("Length ${user.length}");
     });
   }
 
@@ -185,7 +220,7 @@ class _FirstScreenState extends State<FirstScreen> {
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
-    print('an errorText vorbei');
+    //print('an errorText vorbei');
     final UseUserNameField = TextField(
       controller: _UseUserNameController,
       obscureText: false,

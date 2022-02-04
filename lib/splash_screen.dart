@@ -22,7 +22,7 @@ class SplashScreen extends StatelessWidget {
       Navigator.pushNamedAndRemoveUntil(
           context, Routes.FirstScreenRoute, (route) => false);
     } else {
-      print('RegisteredUserId is: $id' );
+      //print('RegisteredUserId is: $id' );
       Navigator.pushNamedAndRemoveUntil(
           context, Routes.StartProfileRoute, (route) => false);
       //the files which are underneath get removed until they recieve true. But we never want to go back to the SplashScreen. Therefore we have it always on false. with Remove Untile

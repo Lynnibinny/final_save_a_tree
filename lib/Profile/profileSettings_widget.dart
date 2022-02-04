@@ -69,10 +69,10 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
         .then(
       (result) async {
         if ('error' == result) {
-          print('konnte nicht upgedated werden.');
+          //print('konnte nicht upgedated werden.');
           // error control print("'${_filterUser.useId}', '${_filterUser.useUserName}', '${_filterUser.useMail}', '${_filterUser.useSavedTrees}', '${_filterUser.useDonated}', '${_filterUser.useGoals}'");
         } else {
-          print('konnte ubgedated werden');
+          //print('konnte ubgedated werden');
           //here we get the id
 
         }
