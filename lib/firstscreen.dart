@@ -44,6 +44,7 @@ class _FirstScreenState extends State<FirstScreen> {
   bool registerfailId = false;
   bool mailstructure = false;
   bool register = false;
+  bool buttonPressed = false;
 
   String _titleProgress;
   @override
@@ -63,6 +64,101 @@ class _FirstScreenState extends State<FirstScreen> {
     setState(() {
       _titleProgress = message;
     });
+  }
+
+  _mail() {
+    if (buttonPressed == true) {
+      bool validateMailStructure(String value) {
+        return EmailValidator.validate(value);
+
+        //return true;
+      }
+
+      //if (register == false) {
+      //register = true;
+      if (_UseMailController.text.isEmpty) {
+        setState(() {
+          print('Empty Fields');
+          emptyfield1 = true;
+          //register = false;
+        });
+      } else if (_UseMailController.text.isNotEmpty) {
+        setState(() {
+          print('No Empty Fields');
+          emptyfield1 = false;
+        });
+      }
+      if (!validateMailStructure(_UseMailController.text)) {
+        setState(() {
+          print('not validate mail structure');
+          mailstructure = true;
+          //register = false;
+        });
+      } else if (validateMailStructure(_UseMailController.text)) {
+        setState(() {
+          print(' validate mail structure');
+          mailstructure = false;
+        });
+      }
+      //}
+    }
+  }
+
+  _userName() {
+    if (buttonPressed == true) {
+      if (_UseUserNameController.text.isEmpty) {
+        setState(() {
+          print('Empty Fields');
+          //register = false;
+          emptyfield2 = true;
+        });
+      } else if (_UseUserNameController.text.isNotEmpty) {
+        setState(() {
+          print('No Empty Fields');
+          emptyfield2 = false;
+        });
+      }
+    }
+  }
+
+  _password() {
+    if (buttonPressed == true) {
+      bool validateStructure(String value) {
+        String pattern =
+            r'^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[!@#\$&*~\+\(\)\{\}\=\%\/\?\^öäüÖÄÜ£\-\_\;\:\,\.<>§€\[\]\|\¥]).{8,}$';
+        RegExp regExp = new RegExp(pattern);
+        return regExp.hasMatch(value);
+
+        //return true;
+      }
+
+      if (!validateStructure(_UsePasswordController.text)) {
+        setState(() {
+          print('passwordfail1');
+          register = false;
+          passwordfail1 = true;
+        });
+      } else if (validateStructure(_UsePasswordController.text)) {
+        setState(() {
+          print('No passwordfail1');
+          passwordfail1 = false;
+        });
+      }
+
+      if (_UsePasswordController.text != _UseCompareController.text) {
+        // if ("hallo" != "hallo"){
+        setState(() {
+          passwordfail = true;
+          register = false;
+          print('Passwörter ungleich');
+        });
+      } else if (_UsePasswordController.text == _UseCompareController.text) {
+        setState(() {
+          passwordfail = false;
+          print('Passwörter gleich');
+        });
+      }
+    }
   }
 
   _addUser() {
@@ -205,11 +301,14 @@ class _FirstScreenState extends State<FirstScreen> {
       controller: _UseMailController,
       obscureText: false,
       style: style,
+      onChanged: (String value) {
+        _mail();
+      },
       decoration: InputDecoration(
           errorText: emptyfield1
               ? 'Leeres Feld'
               : registerfail
-                  ? 'Registrierung fehlgeschlagen'
+                  ? 'Hast du Netz?'
                   : registerfailId
                       ? 'Dieser Benutzer existiert schon'
                       : mailstructure
@@ -219,12 +318,16 @@ class _FirstScreenState extends State<FirstScreen> {
           hintText: "Email",
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+      //onChanged: ,
     );
     //print('an errorText vorbei');
     final UseUserNameField = TextField(
       controller: _UseUserNameController,
       obscureText: false,
       style: style,
+      onChanged: (String value) {
+        _userName();
+      },
       decoration: InputDecoration(
           errorText: emptyfield2
               ? 'Leeres Feld'
@@ -236,10 +339,14 @@ class _FirstScreenState extends State<FirstScreen> {
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
+
     final UsePasswordField = TextField(
       controller: _UsePasswordController,
       obscureText: true,
       style: style,
+      onChanged: (String value) {
+        _password();
+      },
       decoration: InputDecoration(
           errorText: passwordfail1
               ? 'Mind. 8 Zeichen, Zahlen und Spezialzeichen'
@@ -250,16 +357,19 @@ class _FirstScreenState extends State<FirstScreen> {
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
     final UsePasswordCompareField = TextField(
-      controller: _UseCompareController,
-      obscureText: true,
-      style: style,
-      decoration: InputDecoration(
-          errorText: passwordfail ? 'Passwörter stimmen nicht überein' : null,
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Passwort bestätigen",
-          border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
+        controller: _UseCompareController,
+        obscureText: true,
+        style: style,
+        onChanged: (String value) {
+        _password();
+      },
+        decoration: InputDecoration(
+            errorText: passwordfail ? 'Passwörter stimmen nicht überein' : null,
+            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+            hintText: "Passwort bestätigen",
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+        );
     final loginButton = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
@@ -285,6 +395,7 @@ class _FirstScreenState extends State<FirstScreen> {
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
           _addUser();
+          buttonPressed = true;
           //_getUser();
 
           //Navigator.pushReplacementNamed(context, '/second');

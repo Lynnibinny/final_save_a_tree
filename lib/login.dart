@@ -151,7 +151,7 @@ class _LoginState extends State<Login> {
       style: style,
       decoration: InputDecoration(
           errorText: emptyfield2
-              ? 'Leers Feld'
+              ? 'Leeres Feld'
               : loginfail
                   ? 'Benutzername oder Passwort stimmen nicht'
                   : null,

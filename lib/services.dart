@@ -10,6 +10,7 @@ Version Date Who Changes
 Copyright © 2021 Lynn Nüesch und Yarina Vetterli, Switzerland. All rights reserved.
 -----------------------------------------------------------------------------------*/
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart'
     as http; // add the http plugin in pubspec.yaml file.
 
@@ -30,7 +31,7 @@ class Services {
       var map = Map<String, dynamic>();
       map['action'] = _CREATE_TABLE_ACTION;
       final response = await http.post(ROOT, body: map);
-      print('Create Table Response: ${response.body}');
+      //print('Create Table Response: ${response.body}');
       if (200 == response.statusCode) {
         return response.body;
       } else {
@@ -47,9 +48,9 @@ class Services {
       var map = Map<String, dynamic>();
       map['action'] = _GET_ALL_ACTION;
       final response = await http.post(ROOT, body: map);
-      print('getUser Response: ${response.body}');
+      //print('getUser Response: ${response.body}');
       if (200 == response.statusCode) {
-        print('in the if services get user');
+        //print('in the if services get user');
         List<User> list = parseResponse(response.body);
 
         return list;
@@ -58,7 +59,7 @@ class Services {
             'cannot get the User'); //return "error"; //List<User>();
       }
     } catch (e) {
-      print("sys_get_user_excpt:" + e.toString());
+      //print("sys_get_user_excpt:" + e.toString());
       throw Exception(
           'cannot get the User'); //return List<User>(); // return an empty list on exception/error
     }
@@ -69,12 +70,14 @@ class Services {
     map['action'] = _DELETE_USER_ACTION;
     map['UseId'] = UseId.toString();
     final response = await http.post(ROOT, body: map);
-    print('deleteUser Response: ${response.body}');
+    //print('deleteUser Response: ${response.body}');
   }
 
   static List<User> parseResponse(String responseBody) {
     final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
-    return parsed.map<User>((json) => User.fromJson(json)).toList(); //Data response from PHP is converted from json and stored into User
+    return parsed
+        .map<User>((json) => User.fromJson(json))
+        .toList(); //Data response from PHP is converted from json and stored into User
   }
 
   // Method to add user to the database...
@@ -103,10 +106,14 @@ class Services {
       } else {
         return "error";
       }
-    } catch (e) {
-      print("sysaddus:" + e.toString());
+    } on SocketException {
+      //print("in Socketexception no inet connection adduser");
       return "error";
     }
+    /*catch (e) {
+      print("sysaddus:" + e.toString());
+      return "error";
+    }*/
   }
 
   static Future<String> loginUser(
@@ -118,19 +125,23 @@ class Services {
       map['action'] = _LOGIN_USER_ACTION;
       map['UseUserName'] = useUserName;
       map['UsePassword'] = usePassword;
-      print(map);
+      //print(map);
       final response = await http.post(ROOT, body: map);
-      print('loginUser yey: $useUserName');
-      print('loginUser Response: ${response.body} ${response.statusCode}');
+      //print('loginUser yey: $useUserName');
+      //print('loginUser Response: ${response.body} ${response.statusCode}');
       if (200 == response.statusCode) {
         return response.body;
       } else {
         return "error";
       }
-    } catch (e) {
-      print("loginuser:" + e.toString());
+    } on SocketException {
+      //print("in Socketexception no inet connection loginUser");
       return "error";
     }
+      /*catch (e) {
+      print("loginuser:" + e.toString());
+      return "error";
+    }*/
   }
 
   // Method to update a user in Database...
@@ -150,17 +161,17 @@ class Services {
       map['UseSavedTrees'] = useSavedTrees.toString();
       map['UseDonated'] = useDonated.toString();
       map['UseGoals'] = useGoals.toString();
-      print(map);
+      //print(map);
       final response = await http.post(ROOT, body: map);
-      print('updateUser Response: ${response.body}');
-      print('guliguli');
+      //print('updateUser Response: ${response.body}');
+      //print('guliguli');
       if (200 == response.statusCode) {
         return response.body;
       } else {
         return "error";
       }
     } catch (e) {
-      print("updateUser:" + e.toString());
+      //print("updateUser:" + e.toString());
       return "error";
     }
   }
