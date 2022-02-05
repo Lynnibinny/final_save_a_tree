@@ -108,7 +108,7 @@ class Services {
       }
     } on SocketException {
       //print("in Socketexception no inet connection adduser");
-      return "error";
+      return "errorNet";
     }
     /*catch (e) {
       print("sysaddus:" + e.toString());
@@ -136,7 +136,7 @@ class Services {
       }
     } on SocketException {
       //print("in Socketexception no inet connection loginUser");
-      return "error";
+      return "errorNet";
     }
       /*catch (e) {
       print("loginuser:" + e.toString());

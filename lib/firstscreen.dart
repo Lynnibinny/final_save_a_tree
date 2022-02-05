@@ -45,6 +45,7 @@ class _FirstScreenState extends State<FirstScreen> {
   bool mailstructure = false;
   bool register = false;
   bool buttonPressed = false;
+  bool errorNet = false;
 
   String _titleProgress;
   @override
@@ -262,6 +263,11 @@ class _FirstScreenState extends State<FirstScreen> {
           setState(() {
             registerfail = true;
           });
+        } else if ('errorNet' == result) {
+          print('konnte nicht registriert werden.');
+          setState(() {
+            errorNet = true;
+          });
         } else {
           print('konnte fast registriert werden');
           //here we get the id
@@ -313,7 +319,9 @@ class _FirstScreenState extends State<FirstScreen> {
                       ? 'Dieser Benutzer existiert schon'
                       : mailstructure
                           ? 'Ungültige E-Mail-Adresse'
-                          : null,
+                          : errorNet
+                              ? 'Hast du Netz?'
+                              : null,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Email",
           border:
@@ -357,19 +365,19 @@ class _FirstScreenState extends State<FirstScreen> {
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
     final UsePasswordCompareField = TextField(
-        controller: _UseCompareController,
-        obscureText: true,
-        style: style,
-        onChanged: (String value) {
+      controller: _UseCompareController,
+      obscureText: true,
+      style: style,
+      onChanged: (String value) {
         _password();
       },
-        decoration: InputDecoration(
-            errorText: passwordfail ? 'Passwörter stimmen nicht überein' : null,
-            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-            hintText: "Passwort bestätigen",
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-        );
+      decoration: InputDecoration(
+          errorText: passwordfail ? 'Passwörter stimmen nicht überein' : null,
+          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+          hintText: "Passwort bestätigen",
+          border:
+              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+    );
     final loginButton = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),

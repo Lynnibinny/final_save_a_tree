@@ -37,6 +37,7 @@ class _LoginState extends State<Login> {
   bool emptyfields = false;
   bool emptyfield1 = false;
   bool emptyfield2 = false;
+  bool errorNet = false;
 
   String _titleProgress;
   @override
@@ -95,7 +96,13 @@ class _LoginState extends State<Login> {
         setState(() {
           loginfail = true; //loginfail is bool
         });
-      } else {
+      } else if ('errorNet' == result) {
+        setState(() {
+          errorNet = true; //loginfail is bool
+        });
+      }
+
+      else {
         //print('konnte sich fast einlogen');
         //here we get the id
         SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -135,7 +142,9 @@ class _LoginState extends State<Login> {
               ? 'Leeres Feld'
               : loginfail
                   ? 'Benutzername oder Passwort stimmen nicht'
-                  : null,
+                  : errorNet
+                    ? 'Hast du Netz?'
+                    : null,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Benutzername",
           border:
