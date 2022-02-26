@@ -17,7 +17,6 @@ import 'package:save_a_tree/Map/coordinates.dart';
 //import 'package:permission_handler/permission_handler.dart';
 
 class StartMapWidget extends StatefulWidget {
-
   @override
   State<StartMapWidget> createState() => StartMapWidgetState();
 }
@@ -162,14 +161,14 @@ class StartMapWidgetState extends State<StartMapWidget> {
     //Tekoa Guapo'y Poty MISSING (for sale)
 
     //Add markers to the list of markers
-    //addGreenMarker(mPuertoLeoni);
+    //addGreenMarker(mPuertoLeoni, "Puerto Leoni");
     addRedMarker(
         mProvincialPark, "Am Rand des Provinzparks „Valle del Cuña Pirú“");
-    //addRedMarker(mColoniaDelicia);
+    //addRedMarker(mColoniaDelicia, "Colonia Delicia");
     addGreenMarker(mTupambaE, "Tupamba'é");
     addRedMarker(mChafariz, "Wald am Chafaríz, nahe Soberbio");
-    //addRedMarker(mTajyPoty);
-    //addRedMarker(mTakuapi);
+    //addRedMarker(mTajyPoty, "Tajy Poty");
+    //addRedMarker(mTakuapi, "Takuapí");
     addGreenMarker(mGuavirami, "Gemeinschaft Guaviramí");
   }
 
@@ -201,9 +200,9 @@ class StartMapWidgetState extends State<StartMapWidget> {
                   null //customRedMarker == null || customGreenMarker == null
               ? CircularProgressIndicator()
               : //requestLocationPermission(),
-                //locStatus == 'denied'
-                //? 
-                  /*Column(
+              //locStatus == 'denied'
+              //?
+              /*Column(
                   children: <Widget>[
                   
                   Container(
@@ -219,16 +218,15 @@ class StartMapWidgetState extends State<StartMapWidget> {
                       ),
                     ),
                   */
-                  GoogleMap(
-                      markers: _markers,
-                      polygons: _polygons,
-                      initialCameraPosition: _initialCameraPosition,
-                      onMapCreated: _onMapCreated,
-                      //onTap: _ontap, //Test
-                    ),
-         // ]
+              GoogleMap(
+                  markers: _markers,
+                  polygons: _polygons,
+                  initialCameraPosition: _initialCameraPosition,
+                  onMapCreated: _onMapCreated,
+                  //onTap: _ontap, //Test
+                ),
+          // ]
           //),
-      
         ),
       ),
     );
