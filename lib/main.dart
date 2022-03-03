@@ -12,6 +12,7 @@ Copyright © 2021 Lynn Nüesch und Yarina Vetterli, Switzerland. All rights rese
 import 'package:flutter/material.dart';
 import 'package:save_a_tree/login.dart';
 import 'package:save_a_tree/profileGoals_widget.dart';
+import 'package:save_a_tree/push_notification_service_v1.dart';
 
 import 'package:save_a_tree/splash_screen.dart';
 import 'package:save_a_tree/startprofile_widget.dart';
@@ -19,6 +20,11 @@ import 'package:save_a_tree/startprofile_widget.dart';
 import 'firstscreen.dart';
 import 'nav.dart';
 import 'package:save_a_tree/nav.dart';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'push_notification_service_v1.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
 //import 'dart:async';
 //import 'dart:convert';
 
@@ -31,9 +37,6 @@ class Routes {
   static const StartProfileRoute = '/second';
   static const StartProfileWidgetRoute = '/profile';
   static const ProfileGoalsWidget = '/goal';
-
-
-
 }
 
 void main() async {
@@ -54,9 +57,13 @@ void main() async {
   }
 }*/
 class MyApp extends StatelessWidget {
+  static final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   @override
   Widget build(BuildContext context) {
+    final pushNotificationService = PushNotificationService(_firebaseMessaging);
+    pushNotificationService.initialise();
     return new MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Named Routes Demo',
       theme: ThemeData(
           appBarTheme: AppBarTheme(
@@ -75,7 +82,6 @@ class MyApp extends StatelessWidget {
         '/login': (context) => Login(),
         '/profile': (context) => StartProfileWidget(),
         '/goal': (context) => ProfileGoalsWidget()
-        
       },
     );
   }
