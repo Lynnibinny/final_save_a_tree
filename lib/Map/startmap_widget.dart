@@ -166,8 +166,8 @@ class StartMapWidgetState extends State<StartMapWidget> {
     //addRedMarker(mColoniaDelicia, "Colonia Delicia");
     addGreenMarker(mTupambaE, "Tupamba'é");
     addRedMarker(mChafariz, "Wald am Chafaríz, nahe Soberbio");
-    //addRedMarker(mTajyPoty, "Tajy Poty");
-    //addRedMarker(mTakuapi, "Takuapí");
+    addGreenMarker(mTajyPoty, "Tajy Poty");
+    addGreenMarker(mTakuapi, "Takuapí");
     addGreenMarker(mGuavirami, "Gemeinschaft Guaviramí");
   }
 
