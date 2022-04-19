@@ -30,7 +30,7 @@ class Services {
       // add the parameters to pass to the request. ich glaub da bruche mir gar nüm
       var map = Map<String, dynamic>();
       map['action'] = _CREATE_TABLE_ACTION;
-      final response = await http.post(ROOT, body: map);
+      final response = await http.post(Uri.parse(ROOT), body: map);
       //print('Create Table Response: ${response.body}');
       if (200 == response.statusCode) {
         return response.body;
@@ -43,15 +43,15 @@ class Services {
   }
 
   //method to get user from the database
-  static Future<List<User>> getUser() async {
+  static Future<List<User>?> getUser() async {
     try {
       var map = Map<String, dynamic>();
       map['action'] = _GET_ALL_ACTION;
-      final response = await http.post(ROOT, body: map);
+      final response = await http.post(Uri.parse(ROOT), body: map);
       //print('getUser Response: ${response.body}');
       if (200 == response.statusCode) {
         //print('in the if services get user');
-        List<User> list = parseResponse(response.body);
+        List<User>? list = parseResponse(response.body);
 
         return list;
       } else {
@@ -65,15 +65,15 @@ class Services {
     }
   }
 
-  static Future<List<User>> deleteUser(int UseId) async {
+  static Future<List<User>?> deleteUser(int? UseId) async {
     var map = Map<String, dynamic>();
     map['action'] = _DELETE_USER_ACTION;
     map['UseId'] = UseId.toString();
-    final response = await http.post(ROOT, body: map);
+    final response = await http.post(Uri.parse(ROOT), body: map);
     //print('deleteUser Response: ${response.body}');
   }
 
-  static List<User> parseResponse(String responseBody) {
+  static List<User>? parseResponse(String responseBody) {
     final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
     return parsed
         .map<User>((json) => User.fromJson(json))
@@ -98,7 +98,7 @@ class Services {
       map['UseGoals'] = useGoals.toString();
       map['UsePassword'] = usePassword;
       //print(map);
-      final response = await http.post(ROOT, body: map);
+      final response = await http.post(Uri.parse(ROOT), body: map);
       //print('addUser yey: $useMail, $useUserName');
       //print('addUser Response: ${response.body} ${response.statusCode}');
       if (200 == response.statusCode) {
@@ -126,7 +126,7 @@ class Services {
       map['UseUserName'] = useUserName;
       map['UsePassword'] = usePassword;
       //print(map);
-      final response = await http.post(ROOT, body: map);
+      final response = await http.post(Uri.parse(ROOT), body: map);
       //print('loginUser yey: $useUserName');
       //print('loginUser Response: ${response.body} ${response.statusCode}');
       if (200 == response.statusCode) {
@@ -146,12 +146,12 @@ class Services {
 
   // Method to update a user in Database...
   static Future<String> updateUser(
-      int useId,
-      String useMail,
-      String useUserName,
-      int useSavedTrees,
-      double useDonated,
-      int useGoals) async {
+      int? useId,
+      String? useMail,
+      String? useUserName,
+      int? useSavedTrees,
+      double? useDonated,
+      int? useGoals) async {
     try {
       var map = Map<String, dynamic>();
       map['action'] = _UPDATE_USER_ACTION;
@@ -162,7 +162,7 @@ class Services {
       map['UseDonated'] = useDonated.toString();
       map['UseGoals'] = useGoals.toString();
       //print(map);
-      final response = await http.post(ROOT, body: map);
+      final response = await http.post(Uri.parse(ROOT), body: map);
       //print('updateUser Response: ${response.body}');
       //print('guliguli');
       if (200 == response.statusCode) {

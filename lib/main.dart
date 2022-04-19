@@ -17,6 +17,7 @@ import 'package:save_a_tree/push_notification_service_v1.dart';
 import 'package:save_a_tree/splash_screen.dart';
 import 'package:save_a_tree/startprofile_widget.dart';
 
+import 'firebase_options.dart';
 import 'firstscreen.dart';
 import 'nav.dart';
 import 'package:save_a_tree/nav.dart';
@@ -40,6 +41,12 @@ class Routes {
 }
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  // WidgetsFlutterBinding.ensureInitialized();
+ // await Firebase.initializeApp(
+  //  options: DefaultFirebaseOptions.currentPlatform,
+ // );
   runApp(new MyApp()); //hier kann ich etwas mitgeben, prefs MyApp übergeben
 }
 
@@ -57,12 +64,13 @@ void main() async {
   }
 }*/
 class MyApp extends StatelessWidget {
-  static final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  //static final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   @override
   Widget build(BuildContext context) {
-    final pushNotificationService = PushNotificationService(_firebaseMessaging);
-    pushNotificationService.initialise();
+   // final pushNotificationService = PushNotificationService(_firebaseMessaging);
+  //  pushNotificationService.initialise();
     return new MaterialApp(
+      
       debugShowCheckedModeBanner: false,
       title: 'Named Routes Demo',
       theme: ThemeData(

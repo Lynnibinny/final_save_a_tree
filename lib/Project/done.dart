@@ -21,7 +21,7 @@ class DoneWidget extends StatefulWidget {
 
 class _DoneWidgetState extends State<DoneWidget> {
   void initState() {
-    Timer timer;
+    late Timer timer;
 
     timer = Timer.periodic(Duration(milliseconds: 300), (_) {
       //print('Percent Update');
@@ -42,8 +42,8 @@ class _DoneWidgetState extends State<DoneWidget> {
   }
 
   @override
-  double _height;
-  double _width;
+  late double _height;
+  double? _width;
 
   var percent = -5;
 
@@ -77,10 +77,10 @@ class _DoneWidgetState extends State<DoneWidget> {
             end: Alignment.bottomLeft,
             stops: [0.1, 0.5, 0.7, 0.9],
             colors: [
-              Colors.lightGreen[200],
-              Colors.lightGreen[300],
-              Colors.lightGreen[400],
-              Colors.lightGreen[400],
+              Colors.lightGreen[200]!,
+              Colors.lightGreen[300]!,
+              Colors.lightGreen[400]!,
+              Colors.lightGreen[400]!,
             ],
           ),
         ),
@@ -121,7 +121,7 @@ class _DoneWidgetState extends State<DoneWidget> {
                                   shaderCallback: (rect) {
                                     return LinearGradient(
                                       colors: [
-                                        Colors.lightGreen[500],
+                                        Colors.lightGreen[500]!,
                                         Colors.white,
                                         //Colors.lightGreen[400],
                                         // Colors.lightGreen[500],

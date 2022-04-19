@@ -9,6 +9,7 @@ Version Date Who Changes
 
 Copyright © 2021 Lynn Nüesch und Yarina Vetterli, Switzerland. All rights reserved.
 -----------------------------------------------------------------------------------*/
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:save_a_tree/services.dart';
@@ -25,10 +26,12 @@ class StartProfileWidget extends StatefulWidget {
 
 class _StartProfileWidgetState extends State<StartProfileWidget> {
   List<bool> _selections = List.generate(3, (_) => false);
-  User _filterUser;
-  List<User> _user = [];
-  double _height;
-  double _width;
+  User? _filterUser;
+  List<User>? _user = [];
+  late double _height;
+  late double _width;
+  //late int _totalNotifications;
+  //late final FirebaseMessaging _messaging;
 
   var percent = -5;
   int filterUserPercent = 70;
@@ -42,7 +45,8 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
   }
 
   void initState() {
-    Timer timer;
+    // _totalNotifications = 0;
+    late Timer timer;
 
     timer = Timer.periodic(Duration(milliseconds: 300), (_) {
       //print('Percent Update');
@@ -51,9 +55,11 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
         //print('in setState');
         if (_filterUser != null) {
           //print('in if filterUser != null');
-          int finalDonated = _filterUser.useDonated.round();
-          filterUserPercent = calcPercent(_filterUser.useGoals, finalDonated);
+          int finalDonated = _filterUser!.useDonated!.round();
+          filterUserPercent = calcPercent(_filterUser!.useGoals!, finalDonated);
           //print('Percent: $filterUserPercent ${_filterUser.useGoals} ${_filterUser.useSavedTrees}');
+        } else {
+          timer.cancel();
         }
         if (percent >= filterUserPercent) {
           timer.cancel();
@@ -61,6 +67,13 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
         }
       });
     });
+    /*FirebaseMessaging.onMessage.listen((RemoteMessage event) {
+      print("message recieved");
+      // print(event.notification!.body);
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      print('Message clicked!');
+    });*/
     asyncState();
     super.initState();
   }
@@ -75,14 +88,16 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
     }
   }
 
-  void getUser(int id) {
+  void getUser(int? id) {
     //_showProgress('Loading Employees...');
     Services.getUser().then((user) {
       setState(() {
         _user = user;
         // Initialize to the list from Server when reloading...
-        _filterUser =
-            user.where((userElement) => userElement.useId == id).toList().first;
+        _filterUser = user!
+            .where((userElement) => userElement.useId == id)
+            .toList()
+            .first;
         //output has to be one single user
         //.toList cause "where" does not return a List it just returns a where list
         //we can just use first cause in this list there is one single entry anyways
@@ -132,10 +147,10 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
           end: Alignment.bottomLeft,
           stops: [0.1, 0.5, 0.7, 0.9],
           colors: [
-            Colors.lightGreen[200],
-            Colors.lightGreen[300],
-            Colors.lightGreen[400],
-            Colors.lightGreen[400],
+            Colors.lightGreen[200]!,
+            Colors.lightGreen[300]!,
+            Colors.lightGreen[400]!,
+            Colors.lightGreen[400]!,
           ],
         ),
       ),
@@ -208,7 +223,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                               percent / 100
                                             ],
                                             colors: [
-                                              Colors.lightGreen[500],
+                                              Colors.lightGreen[500]!,
                                               Colors.white
                                               //Colors.lightGreen[400],
                                               // Colors.lightGreen[500],
@@ -235,7 +250,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                         height: _height / 11,
                         child: FittedBox(
                           child: AutoSizeText(
-                            _filterUser.useUserName,
+                            _filterUser!.useUserName!,
                             textScaleFactor: 2.0,
                             //style: TextStyle(color: Colors.black),
                             style: TextStyle(fontSize: 30.0),
@@ -284,7 +299,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                                 SizedBox(height: _height / 100),
                                                 FittedBox(
                                                   child: AutoSizeText(
-                                                    "${(_filterUser.useDonated / 2).round()} Bäume hast \nDu gerettet",
+                                                    "${(_filterUser!.useDonated! / 2).round()} Bäume \nhast Du gerettet",
                                                     style: TextStyle(
                                                         fontSize: 17.0,
                                                         fontWeight:
@@ -346,7 +361,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                                 FittedBox(
                                                   child: AutoSizeText(
                                                     // "CHF ${(_filterUser.useDonated).round()} hast \nDu gespendet",
-                                                    "CHF ${(_filterUser.useDonated).round()}.00 \nhast Du gespendet",
+                                                    "CHF ${_filterUser!.useDonated!.round()}.00 \nhast Du gespendet",
 
                                                     style: TextStyle(
                                                         fontSize: 17.0,
@@ -417,7 +432,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
                                                 SizedBox(height: _height / 100),
                                                 FittedBox(
                                                   child: AutoSizeText(
-                                                    "${_filterUser.useGoals} Bäume zu \nretten ist Dein Ziel",
+                                                    "${_filterUser!.useGoals} Bäume zu \nretten ist Dein Ziel",
                                                     style: TextStyle(
                                                         fontSize: 17.0,
                                                         fontWeight:

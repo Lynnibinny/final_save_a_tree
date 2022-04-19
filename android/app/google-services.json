@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "933544684594",
+    "project_id": "notificationandroid-83673",
+    "storage_bucket": "notificationandroid-83673.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933544684594:android:3107a28c9e5e999dde602b",
+        "android_client_info": {
+          "package_name": "ch.neutics.sagit.saveatree"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "933544684594-ql05f6umgm93cus1mpo1bp3vofj9k07a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGi5iOV4g3tRJTBuXi-5kQqjAe9-OSKX4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "933544684594-ql05f6umgm93cus1mpo1bp3vofj9k07a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

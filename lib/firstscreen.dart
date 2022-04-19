@@ -9,33 +9,44 @@ Version Date Who Changes
 
 Copyright © 2021 Lynn Nüesch und Yarina Vetterli, Switzerland. All rights reserved.
 -----------------------------------------------------------------------------------*/
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:notification_permissions/notification_permissions.dart';
 import 'package:save_a_tree/nav.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'User.dart';
+import 'firebase_options.dart';
 import 'services.dart';
 import 'package:email_validator/email_validator.dart';
 
 class FirstScreen extends StatefulWidget {
-  FirstScreen({Key key, this.title}) : super(key: key);
+  FirstScreen({Key? key, this.title}) : super(key: key);
 
   // This widget is used as our register form. After the splash screen will the user
   // get on this page if he has never logged in before.
 
-  final String title;
+  final String? title;
 
   @override
   _FirstScreenState createState() => _FirstScreenState();
 }
 
-class _FirstScreenState extends State<FirstScreen> {
+class _FirstScreenState extends State<FirstScreen> with WidgetsBindingObserver {
+  late Future<String> permissionStatusFuture;
+
+  var permGranted = "granted";
+  var permDenied = "denied";
+  var permUnknown = "unknown";
+  var permProvisional = "provisional";
+
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
-  List<User> _user;
-  List<User> _filterUser;
-  TextEditingController _UseMailController;
-  TextEditingController _UseUserNameController;
-  TextEditingController _UsePasswordController;
-  TextEditingController _UseCompareController;
+  List<User>? _user;
+  List<User>? _filterUser;
+  TextEditingController? _UseMailController;
+  TextEditingController? _UseUserNameController;
+  TextEditingController? _UsePasswordController;
+  TextEditingController? _UseCompareController;
   bool passwordfail = false;
   bool passwordfail1 = false;
   bool emptyfield1 = false;
@@ -47,10 +58,22 @@ class _FirstScreenState extends State<FirstScreen> {
   bool buttonPressed = false;
   bool errorNet = false;
 
-  String _titleProgress;
+  String? _titleProgress;
+
+  Future<void> _firebaseMessagingBackgroundHandler(
+      RemoteMessage message) async {
+    // If you're going to use other Firebase services in the background, such as Firestore,
+    // make sure you call `initializeApp` before using other Firebase services.
+    await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform);
+    print('Handling a background message ${message.messageId}');
+  }
+
   @override
   void initState() {
     super.initState();
+    permissionStatusFuture = getCheckNotificationPermStatus();
+    WidgetsBinding.instance!.addObserver(this);
     _user = [];
     _titleProgress = widget.title;
     //_scaffoldKey = GlobalKey(); // key to get the context to show a SnackBar
@@ -61,7 +84,25 @@ class _FirstScreenState extends State<FirstScreen> {
     //_getEmployees();
   }
 
-  _showProgress(String message) {
+  Future<String> getCheckNotificationPermStatus() {
+    return NotificationPermissions.getNotificationPermissionStatus()
+        .then((status) {
+      switch (status) {
+        case PermissionStatus.denied:
+          return permDenied;
+        case PermissionStatus.granted:
+          return permGranted;
+        case PermissionStatus.unknown:
+          return permUnknown;
+        case PermissionStatus.provisional:
+          return permProvisional;
+        //default:
+        //  return null;
+      }
+    });
+  }
+
+  _showProgress(String? message) {
     setState(() {
       _titleProgress = message;
     });
@@ -77,25 +118,25 @@ class _FirstScreenState extends State<FirstScreen> {
 
       //if (register == false) {
       //register = true;
-      if (_UseMailController.text.isEmpty) {
+      if (_UseMailController!.text.isEmpty) {
         setState(() {
           print('Empty Fields');
           emptyfield1 = true;
           //register = false;
         });
-      } else if (_UseMailController.text.isNotEmpty) {
+      } else if (_UseMailController!.text.isNotEmpty) {
         setState(() {
           print('No Empty Fields');
           emptyfield1 = false;
         });
       }
-      if (!validateMailStructure(_UseMailController.text)) {
+      if (!validateMailStructure(_UseMailController!.text)) {
         setState(() {
           print('not validate mail structure');
           mailstructure = true;
           //register = false;
         });
-      } else if (validateMailStructure(_UseMailController.text)) {
+      } else if (validateMailStructure(_UseMailController!.text)) {
         setState(() {
           print(' validate mail structure');
           mailstructure = false;
@@ -107,13 +148,13 @@ class _FirstScreenState extends State<FirstScreen> {
 
   _userName() {
     if (buttonPressed == true) {
-      if (_UseUserNameController.text.isEmpty) {
+      if (_UseUserNameController!.text.isEmpty) {
         setState(() {
           print('Empty Fields');
           //register = false;
           emptyfield2 = true;
         });
-      } else if (_UseUserNameController.text.isNotEmpty) {
+      } else if (_UseUserNameController!.text.isNotEmpty) {
         setState(() {
           print('No Empty Fields');
           emptyfield2 = false;
@@ -126,34 +167,34 @@ class _FirstScreenState extends State<FirstScreen> {
     if (buttonPressed == true) {
       bool validateStructure(String value) {
         String pattern =
-            r'^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[!@#\$&*~\+\(\)\{\}\=\%\/\?\^öäüÖÄÜ£\-\_\;\:\,\.<>§€\[\]\|\¥]).{8,}$';
+            r'^(?=.*?[A-Za-z])((?=.*?[0-9])|(?=.*?[!@#\$&*~\+\(\)\{\}\=\%\/\?\^öäüÖÄÜ£\-\_\;\:\,\.<>§€\[\]\|\¥])).{6,}$';
         RegExp regExp = new RegExp(pattern);
         return regExp.hasMatch(value);
 
         //return true;
       }
 
-      if (!validateStructure(_UsePasswordController.text)) {
+      if (!validateStructure(_UsePasswordController!.text)) {
         setState(() {
           print('passwordfail1');
           register = false;
           passwordfail1 = true;
         });
-      } else if (validateStructure(_UsePasswordController.text)) {
+      } else if (validateStructure(_UsePasswordController!.text)) {
         setState(() {
           print('No passwordfail1');
           passwordfail1 = false;
         });
       }
 
-      if (_UsePasswordController.text != _UseCompareController.text) {
+      if (_UsePasswordController!.text != _UseCompareController!.text) {
         // if ("hallo" != "hallo"){
         setState(() {
           passwordfail = true;
           register = false;
           print('Passwörter ungleich');
         });
-      } else if (_UsePasswordController.text == _UseCompareController.text) {
+      } else if (_UsePasswordController!.text == _UseCompareController!.text) {
         setState(() {
           passwordfail = false;
           print('Passwörter gleich');
@@ -165,7 +206,7 @@ class _FirstScreenState extends State<FirstScreen> {
   _addUser() {
     bool validateStructure(String value) {
       String pattern =
-          r'^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[!@#\$&*~\+\(\)\{\}\=\%\/\?\^öäüÖÄÜ£\-\_\;\:\,\.<>§€\[\]\|\¥]).{8,}$';
+          r'^(?=.*?[A-Za-z])((?=.*?[0-9])|(?=.*?[!@#\$&*~\+\(\)\{\}\=\%\/\?\^öäüÖÄÜ£\-\_\;\:\,\.<>§€\[\]\|\¥])).{6,}$';
       RegExp regExp = new RegExp(pattern);
       return regExp.hasMatch(value);
 
@@ -181,25 +222,25 @@ class _FirstScreenState extends State<FirstScreen> {
 //mail
     if (register == false) {
       register = true;
-      if (_UseMailController.text.isEmpty) {
+      if (_UseMailController!.text.isEmpty) {
         setState(() {
           print('Empty Fields');
           emptyfield1 = true;
           register = false;
         });
-      } else if (_UseMailController.text.isNotEmpty) {
+      } else if (_UseMailController!.text.isNotEmpty) {
         setState(() {
           print('No Empty Fields');
           emptyfield1 = false;
         });
       }
-      if (!validateMailStructure(_UseMailController.text)) {
+      if (!validateMailStructure(_UseMailController!.text)) {
         setState(() {
           print('not validate mail structure');
           mailstructure = true;
           register = false;
         });
-      } else if (validateMailStructure(_UseMailController.text)) {
+      } else if (validateMailStructure(_UseMailController!.text)) {
         setState(() {
           print(' validate mail structure');
           mailstructure = false;
@@ -207,13 +248,13 @@ class _FirstScreenState extends State<FirstScreen> {
       }
 //UserName
 
-      if (_UseUserNameController.text.isEmpty) {
+      if (_UseUserNameController!.text.isEmpty) {
         setState(() {
           print('Empty Fields');
           register = false;
           emptyfield2 = true;
         });
-      } else if (_UseUserNameController.text.isNotEmpty) {
+      } else if (_UseUserNameController!.text.isNotEmpty) {
         setState(() {
           print('No Empty Fields');
           emptyfield2 = false;
@@ -222,27 +263,27 @@ class _FirstScreenState extends State<FirstScreen> {
 
 //Password
 
-      if (!validateStructure(_UsePasswordController.text)) {
+      if (!validateStructure(_UsePasswordController!.text)) {
         setState(() {
           print('passwordfail1');
           register = false;
           passwordfail1 = true;
         });
-      } else if (validateStructure(_UsePasswordController.text)) {
+      } else if (validateStructure(_UsePasswordController!.text)) {
         setState(() {
           print('No passwordfail1');
           passwordfail1 = false;
         });
       }
 
-      if (_UsePasswordController.text != _UseCompareController.text) {
+      if (_UsePasswordController!.text != _UseCompareController!.text) {
         // if ("hallo" != "hallo"){
         setState(() {
           passwordfail = true;
           register = false;
           print('Passwörter ungleich');
         });
-      } else if (_UsePasswordController.text == _UseCompareController.text) {
+      } else if (_UsePasswordController!.text == _UseCompareController!.text) {
         setState(() {
           passwordfail = false;
           print('Passwörter gleich');
@@ -250,8 +291,8 @@ class _FirstScreenState extends State<FirstScreen> {
       }
     }
     if (register == true) {
-      Services.addUser(_UseMailController.text, _UseUserNameController.text,
-              _UsePasswordController.text, 0, 0.0, 0)
+      Services.addUser(_UseMailController!.text, _UseUserNameController!.text,
+              _UsePasswordController!.text, 0, 0.0, 0)
           .then((result) async {
         if ('errorId' == result) {
           print('User gibt es schon. $result');
@@ -357,7 +398,7 @@ class _FirstScreenState extends State<FirstScreen> {
       },
       decoration: InputDecoration(
           errorText: passwordfail1
-              ? 'Mind. 8 Zeichen, Zahlen und Spezialzeichen'
+              ? 'Mind. 6 Zeichen, Zahlen und Spezialzeichen'
               : null,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Passwort",
@@ -405,8 +446,19 @@ class _FirstScreenState extends State<FirstScreen> {
           _addUser();
           buttonPressed = true;
           //_getUser();
-
-          //Navigator.pushReplacementNamed(context, '/second');
+          NotificationPermissions.requestNotificationPermissions(
+                  iosSettings: const NotificationSettingsIos(
+                      sound: true,  
+                      alert: true,
+                      badge: true,
+                      ))
+              .then((_) {
+            // when finished, check the permission status
+            setState(() {
+              permissionStatusFuture = getCheckNotificationPermStatus();
+            });
+            //Navigator.pushReplacementNamed(context, '/second');
+          });
         },
         child: Text("Registrieren",
             textAlign: TextAlign.center,

@@ -41,11 +41,11 @@ class StartProjectState extends State<StartProjectWidget> {
     ),
   );
 
-  AssetImage BigTree;
+  AssetImage? BigTree;
   double iTop = 10.0;
   double iRight = 10.0;
   double iSize = 27.0;
-  double _width;
+  late double _width;
   double bQuotient = 0.85;
 
   void asyncState() async {
@@ -84,7 +84,7 @@ class StartProjectState extends State<StartProjectWidget> {
 
   _launchURL() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    int id = prefs.getInt('registeredUserId');
+    int? id = prefs.getInt('registeredUserId');
     String url = 'https://sagit.neutics.ch/spenden.php?id=' + id.toString();
     if (await canLaunch(url)) {
       await launch(url);
@@ -103,10 +103,10 @@ class StartProjectState extends State<StartProjectWidget> {
           end: Alignment.bottomLeft,
           stops: [0.1, 0.5, 0.7, 0.9],
           colors: [
-            Colors.lightGreen[200],
-            Colors.lightGreen[300],
-            Colors.lightGreen[400],
-            Colors.lightGreen[400],
+            Colors.lightGreen[200]!,
+            Colors.lightGreen[300]!,
+            Colors.lightGreen[400]!,
+            Colors.lightGreen[400]!,
           ],
         ),
       ),

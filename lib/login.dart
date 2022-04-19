@@ -16,12 +16,12 @@ import 'User.dart';
 import 'services.dart';
 
 class Login extends StatefulWidget {
-  Login({Key key, this.title}) : super(key: key);
+  Login({Key? key, this.title}) : super(key: key);
 
   // This widget is used as our register form. After the splash screen will the user
   // get on this page if he has never logged in before.
 
-  final String title;
+  final String? title;
 
   @override
   _LoginState createState() => _LoginState();
@@ -29,17 +29,17 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
-  List<User> _user;
-  List<User> _filterUser;
-  TextEditingController _UseUserNameController;
-  TextEditingController _UsePasswordController;
+  List<User>? _user;
+  List<User>? _filterUser;
+  TextEditingController? _UseUserNameController;
+  TextEditingController? _UsePasswordController;
   bool loginfail = false;
   bool emptyfields = false;
   bool emptyfield1 = false;
   bool emptyfield2 = false;
   bool errorNet = false;
 
-  String _titleProgress;
+  String? _titleProgress;
   @override
   void initState() {
     super.initState();
@@ -55,39 +55,39 @@ class _LoginState extends State<Login> {
     //_getEmployees();
   }
 
-  _showProgress(String message) {
+  _showProgress(String? message) {
     setState(() {
       _titleProgress = message;
     });
   }
 
   _loginUser() {
-    if (_UseUserNameController.text.isEmpty &&
-        _UsePasswordController.text.isEmpty) {
+    if (_UseUserNameController!.text.isEmpty &&
+        _UsePasswordController!.text.isEmpty) {
       //print('Empty Fields');
       emptyfields = true;
       //loginfail = true;
 
     }
-    if (_UseUserNameController.text.isEmpty) {
+    if (_UseUserNameController!.text.isEmpty) {
       //print('Empty Fields');
       emptyfield1 = true;
       //loginfail = true;
 
-    } else if (_UsePasswordController.text.isEmpty) {
+    } else if (_UsePasswordController!.text.isEmpty) {
       //print('Empty Fields');
       emptyfield2 = true;
       //loginfail = true;
 
     }
-    if (_UseUserNameController.text.isNotEmpty ||
-        _UsePasswordController.text.isNotEmpty) {
+    if (_UseUserNameController!.text.isNotEmpty ||
+        _UsePasswordController!.text.isNotEmpty) {
       //print('$_UseUserNameController');
     } //just to find errors
 
     Services.loginUser(
-      _UseUserNameController.text,
-      _UsePasswordController.text,
+      _UseUserNameController!.text,
+      _UsePasswordController!.text,
     ).then((result) async {
       if ('error' == result) {
         //print('konnte sich nicht einlogen.');
