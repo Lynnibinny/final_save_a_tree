@@ -9,6 +9,7 @@ Version Date Who Changes
 
 Copyright © 2021 Lynn Nüesch und Yarina Vetterli, Switzerland. All rights reserved.
 -----------------------------------------------------------------------------------*/
+
 import 'package:flutter/material.dart';
 import 'package:save_a_tree/login.dart';
 import 'package:save_a_tree/profileGoals_widget.dart';
@@ -44,9 +45,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   // WidgetsFlutterBinding.ensureInitialized();
- // await Firebase.initializeApp(
+  // await Firebase.initializeApp(
   //  options: DefaultFirebaseOptions.currentPlatform,
- // );
+  // );
   runApp(new MyApp()); //hier kann ich etwas mitgeben, prefs MyApp übergeben
 }
 
@@ -67,10 +68,9 @@ class MyApp extends StatelessWidget {
   //static final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   @override
   Widget build(BuildContext context) {
-   // final pushNotificationService = PushNotificationService(_firebaseMessaging);
-  //  pushNotificationService.initialise();
+    // final pushNotificationService = PushNotificationService(_firebaseMessaging);
+    //  pushNotificationService.initialise();
     return new MaterialApp(
-      
       debugShowCheckedModeBanner: false,
       title: 'Named Routes Demo',
       theme: ThemeData(

@@ -113,20 +113,40 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
     _editingController.dispose();
     super.dispose();
   }
-
+/*new TextField(
+  decoration: new InputDecoration(
+    enabledBorder: const OutlineInputBorder(
+      // width: 0.0 produces a thin "hairline" border
+      borderSide: const BorderSide(color: Colors.grey, width: 0.0),
+    ),
+    border: const OutlineInputBorder(),
+    labelStyle: new TextStyle(color: Colors.green),
+    ...
+  ),
+)*/
   TextEditingController? _useUserNameController;
   Widget _editTextField() {
-    if (_isEditingText)
+    if (_isEditingText) {
       return Center(
         child: TextField(
           autofocus: true,
           obscureText: false,
           style: style,
+          cursorColor: Colors.green,
+           
           decoration: InputDecoration(
-              contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+              contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
               hintText: "neuer Benutzername",
+              
               border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(32.0))),
+                  borderRadius: BorderRadius.circular(32.0),
+                  borderSide: BorderSide(color: Colors.green)
+                  ),
+                  focusedBorder:OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.green, width: 2.0),
+            borderRadius: BorderRadius.circular(32.0),
+          ),
+                  labelStyle: new TextStyle(color: Colors.green)),
           controller: _useUserNameController,
           onSubmitted: (newValue) {
             setState(() {
@@ -137,6 +157,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
           },
         ),
       );
+    }
 
     /*  decoration: InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -209,7 +230,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
         ),
         body: Center(
           child: _filterUser == null
-              ? CircularProgressIndicator()
+              ? CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Colors.green))
               : Center(
                   child: ListView(
                     //child: AspectRatio(

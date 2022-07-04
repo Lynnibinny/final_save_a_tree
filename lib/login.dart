@@ -100,9 +100,7 @@ class _LoginState extends State<Login> {
         setState(() {
           errorNet = true; //loginfail is bool
         });
-      }
-
-      else {
+      } else {
         //print('konnte sich fast einlogen');
         //here we get the id
         SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -143,8 +141,8 @@ class _LoginState extends State<Login> {
               : loginfail
                   ? 'Benutzername oder Passwort stimmen nicht'
                   : errorNet
-                    ? 'Hast du Netz?'
-                    : null,
+                      ? 'Hast du Netz?'
+                      : null,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Benutzername",
           border:
@@ -227,9 +225,9 @@ class _LoginState extends State<Login> {
                       fit: BoxFit.contain,
                     ),
                   ),
-                  SizedBox(height: 45.0), //SizedBox as a space
+                  SizedBox(height: 46.0), //SizedBox as a space
                   UseUserNameField,
-                  SizedBox(height: 25.0),
+                  SizedBox(height: 24.0),
                   UsePasswordField,
                   SizedBox(
                     height: 35.0,
