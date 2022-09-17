@@ -66,7 +66,7 @@ class _FirstScreenState extends State<FirstScreen> with WidgetsBindingObserver {
     // make sure you call `initializeApp` before using other Firebase services.
     await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform);
-    print('Handling a background message ${message.messageId}');
+   // print('Handling a background message ${message.messageId}');
   }
 
   @override
@@ -120,25 +120,25 @@ class _FirstScreenState extends State<FirstScreen> with WidgetsBindingObserver {
       //register = true;
       if (_UseMailController!.text.isEmpty) {
         setState(() {
-          print('Empty Fields');
+          //print('Empty Fields');
           emptyfield1 = true;
           //register = false;
         });
       } else if (_UseMailController!.text.isNotEmpty) {
         setState(() {
-          print('No Empty Fields');
+          //print('No Empty Fields');
           emptyfield1 = false;
         });
       }
       if (!validateMailStructure(_UseMailController!.text)) {
         setState(() {
-          print('not validate mail structure');
+          //print('not validate mail structure');
           mailstructure = true;
           //register = false;
         });
       } else if (validateMailStructure(_UseMailController!.text)) {
         setState(() {
-          print(' validate mail structure');
+          //print(' validate mail structure');
           mailstructure = false;
         });
       }
@@ -150,13 +150,13 @@ class _FirstScreenState extends State<FirstScreen> with WidgetsBindingObserver {
     if (buttonPressed == true) {
       if (_UseUserNameController!.text.isEmpty) {
         setState(() {
-          print('Empty Fields');
+          //print('Empty Fields');
           //register = false;
           emptyfield2 = true;
         });
       } else if (_UseUserNameController!.text.isNotEmpty) {
         setState(() {
-          print('No Empty Fields');
+          //print('No Empty Fields');
           emptyfield2 = false;
         });
       }
@@ -176,13 +176,13 @@ class _FirstScreenState extends State<FirstScreen> with WidgetsBindingObserver {
 
       if (!validateStructure(_UsePasswordController!.text)) {
         setState(() {
-          print('passwordfail1');
+          //print('passwordfail1');
           register = false;
           passwordfail1 = true;
         });
       } else if (validateStructure(_UsePasswordController!.text)) {
         setState(() {
-          print('No passwordfail1');
+          //print('No passwordfail1');
           passwordfail1 = false;
         });
       }
@@ -192,12 +192,12 @@ class _FirstScreenState extends State<FirstScreen> with WidgetsBindingObserver {
         setState(() {
           passwordfail = true;
           register = false;
-          print('Passwörter ungleich');
+          //print('Passwörter ungleich');
         });
       } else if (_UsePasswordController!.text == _UseCompareController!.text) {
         setState(() {
           passwordfail = false;
-          print('Passwörter gleich');
+          //print('Passwörter gleich');
         });
       }
     }
@@ -224,25 +224,25 @@ class _FirstScreenState extends State<FirstScreen> with WidgetsBindingObserver {
       register = true;
       if (_UseMailController!.text.isEmpty) {
         setState(() {
-          print('Empty Fields');
+          //print('Empty Fields');
           emptyfield1 = true;
           register = false;
         });
       } else if (_UseMailController!.text.isNotEmpty) {
         setState(() {
-          print('No Empty Fields');
+          //print('No Empty Fields');
           emptyfield1 = false;
         });
       }
       if (!validateMailStructure(_UseMailController!.text)) {
         setState(() {
-          print('not validate mail structure');
+          //print('not validate mail structure');
           mailstructure = true;
           register = false;
         });
       } else if (validateMailStructure(_UseMailController!.text)) {
         setState(() {
-          print(' validate mail structure');
+          //print(' validate mail structure');
           mailstructure = false;
         });
       }
@@ -250,13 +250,13 @@ class _FirstScreenState extends State<FirstScreen> with WidgetsBindingObserver {
 
       if (_UseUserNameController!.text.isEmpty) {
         setState(() {
-          print('Empty Fields');
+          //print('Empty Fields');
           register = false;
           emptyfield2 = true;
         });
       } else if (_UseUserNameController!.text.isNotEmpty) {
         setState(() {
-          print('No Empty Fields');
+          //print('No Empty Fields');
           emptyfield2 = false;
         });
       }
@@ -265,13 +265,13 @@ class _FirstScreenState extends State<FirstScreen> with WidgetsBindingObserver {
 
       if (!validateStructure(_UsePasswordController!.text)) {
         setState(() {
-          print('passwordfail1');
+          //print('passwordfail1');
           register = false;
           passwordfail1 = true;
         });
       } else if (validateStructure(_UsePasswordController!.text)) {
         setState(() {
-          print('No passwordfail1');
+          //print('No passwordfail1');
           passwordfail1 = false;
         });
       }
@@ -281,12 +281,12 @@ class _FirstScreenState extends State<FirstScreen> with WidgetsBindingObserver {
         setState(() {
           passwordfail = true;
           register = false;
-          print('Passwörter ungleich');
+          //print('Passwörter ungleich');
         });
       } else if (_UsePasswordController!.text == _UseCompareController!.text) {
         setState(() {
           passwordfail = false;
-          print('Passwörter gleich');
+          //print('Passwörter gleich');
         });
       }
     }
@@ -295,22 +295,22 @@ class _FirstScreenState extends State<FirstScreen> with WidgetsBindingObserver {
               _UsePasswordController!.text, 0, 0.0, 0)
           .then((result) async {
         if ('errorId' == result) {
-          print('User gibt es schon. $result');
+          //print('User gibt es schon. $result');
           setState(() {
             registerfailId = true;
           });
         } else if ('error' == result) {
-          print('konnte nicht registriert werden.');
+          //print('konnte nicht registriert werden.');
           setState(() {
             registerfail = true;
           });
         } else if ('errorNet' == result) {
-          print('konnte nicht registriert werden.');
+          //print('konnte nicht registriert werden.');
           setState(() {
             errorNet = true;
           });
         } else {
-          print('konnte fast registriert werden');
+          //print('konnte fast registriert werden');
           //here we get the id
 
           SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -318,7 +318,7 @@ class _FirstScreenState extends State<FirstScreen> with WidgetsBindingObserver {
               'registeredUserId', int.parse(result)); //später statt 5 result
           //_getEmployees(); // Refresh the List after adding each employee...
           //_clearValues();
-          print('wurde registriert');
+          //print('wurde registriert');
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (BuildContext context) => Nav()),

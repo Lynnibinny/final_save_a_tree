@@ -189,7 +189,7 @@ class _StartProfileWidgetState extends State<StartProfileWidget> {
         backgroundColor: Color(0x00000000),
         body: Center(
           child: _filterUser == null
-              ? CircularProgressIndicator()
+              ? CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Colors.green))
               :
               //String trees = _filterUser.UseSavedTrees;
               Column(

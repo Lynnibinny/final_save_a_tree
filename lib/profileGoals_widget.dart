@@ -160,11 +160,16 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
               autofocus: true,
               obscureText: false,
               style: style,
+              cursorColor: Colors.green,
               decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                   hintText: "Dein Ziel",
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(32.0))),
+                      borderRadius: BorderRadius.circular(32.0)),
+                      focusedBorder:OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.green, width: 2.0),
+            borderRadius: BorderRadius.circular(32.0)),
+            labelStyle: new TextStyle(color: Colors.green)),
               controller: _useGoalsController,
               onSubmitted: (newValue) {
                 setState(() {
@@ -250,7 +255,7 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
                 ),
                 body: Center(
                     child: _filterUser == null
-                        ? CircularProgressIndicator()
+                        ? CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Colors.green))
                         : Center(
                             child: ListView(children: <Widget>[
                             //SingleChildScrollView(
