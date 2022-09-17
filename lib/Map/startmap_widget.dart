@@ -14,6 +14,12 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:save_a_tree/Map/mapstyle.dart';
 import 'package:save_a_tree/Map/marker.dart';
 import 'package:save_a_tree/Map/coordinates.dart';
+import 'package:save_a_tree/Project/project_for.dart';
+import 'package:save_a_tree/Project/project_one.dart';
+import 'package:save_a_tree/Project/project_three.dart';
+import 'package:save_a_tree/Project/project_two.dart';
+import 'package:save_a_tree/Project/project_two.dart';
+
 //import 'package:permission_handler/permission_handler.dart';
 
 class StartMapWidget extends StatefulWidget {
@@ -77,7 +83,7 @@ class StartMapWidgetState extends State<StartMapWidget> {
   }
   */
 
-  void addGreenMarker(LatLng position, String name) {
+  void addGreenMarker(LatLng position, String name, StatelessWidget _project) {
     int markerId = _markers.length;
 
     setState(() {
@@ -86,11 +92,40 @@ class StartMapWidgetState extends State<StartMapWidget> {
         position: position,
         icon: customGreenMarker,
         infoWindow: InfoWindow(title: "$name"),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => _project),
+          );
+        },
       ));
     });
   }
 
-  void addRedMarker(LatLng position, String name) {
+  void addEmptyGreenMarker(
+    LatLng position,
+    String name,
+    //StatelessWidget _project
+  ) {
+    int markerId = _markers.length;
+
+    setState(() {
+      _markers.add(Marker(
+        markerId: MarkerId('$markerId'),
+        position: position,
+        icon: customGreenMarker,
+        infoWindow: InfoWindow(title: "$name"),
+        /*onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => _project),
+          );
+        },*/
+      ));
+    });
+  }
+
+  void addRedMarker(LatLng position, String name, StatelessWidget _project) {
     int markerId = _markers.length;
 
     setState(() {
@@ -99,12 +134,64 @@ class StartMapWidgetState extends State<StartMapWidget> {
         position: position,
         icon: customRedMarker,
         infoWindow: InfoWindow(title: "$name"),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => _project),
+          );
+        },
+      ));
+    });
+  }
+
+  void addEmptyRedMarker(
+    LatLng position,
+    String name,
+    //StatelessWidget _project
+  ) {
+    int markerId = _markers.length;
+
+    setState(() {
+      _markers.add(Marker(
+        markerId: MarkerId('$markerId'),
+        position: position,
+        icon: customRedMarker,
+        infoWindow: InfoWindow(title: "$name"),
+        /*onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => _project),
+          );
+        },*/
       ));
     });
   }
 
   //function to add a green Polygon to the list of polygons
-  void addGreenPolygon(List position) {
+  void addGreenPolygon(List position, StatelessWidget _project) {
+    //use the current length of the list to give each polygon a unique id
+    int _polygonId = _polygons.length;
+    //print(_polygonId); //test to see if it works
+    setState(() {
+      _polygons.add(
+        Polygon(
+          polygonId: PolygonId('$_polygonId'),
+          points: position as List<LatLng>,
+          strokeColor: Colors.green.withOpacity(0.5),
+          fillColor: Colors.green.withOpacity(0.5),
+          strokeWidth: 2,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => _project),
+            );
+          },
+        ),
+      );
+    });
+  }
+
+  void addEmptyGreenPolygon(List position) {
     //use the current length of the list to give each polygon a unique id
     int _polygonId = _polygons.length;
     //print(_polygonId); //test to see if it works
@@ -122,7 +209,30 @@ class StartMapWidgetState extends State<StartMapWidget> {
   }
 
   //function to add a red Polygon to the list of polygons
-  void addRedPolygon(List position) {
+  void addRedPolygon(List position, StatelessWidget _project) {
+    //use the current length of the list to give each polygon a unique id
+    int _polygonId = _polygons.length;
+    //print(_polygonId); //test to see if it works
+    setState(() {
+      _polygons.add(
+        Polygon(
+          polygonId: PolygonId('$_polygonId'),
+          points: position as List<LatLng>,
+          strokeColor: Colors.red.withOpacity(0.5),
+          fillColor: Colors.red.withOpacity(0.5),
+          strokeWidth: 2,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => _project),
+            );
+          },
+        ),
+      );
+    });
+  }
+
+  void addEmptyRedPolygon(List position) {
     //use the current length of the list to give each polygon a unique id
     int _polygonId = _polygons.length;
     //print(_polygonId); //test to see if it works
@@ -149,26 +259,26 @@ class StartMapWidgetState extends State<StartMapWidget> {
 
     //Add areas to the list of polygons
     //addGreenPolygon(fPuertoLeoni);
-    addRedPolygon(fProvincialPark); //for sale
+    addRedPolygon(fProvincialPark, ProjectTwo()); //for sale
     //addRedPolygon(fColoniaDelicia);
-    addGreenPolygon(fTupambaE); //bought
-    addRedPolygon(fChafariz); //for sale
-    addGreenPolygon(fTajyPoty); //bought heisst auch Santo Pipo
-    addGreenPolygon(fTakuapi); //baught
-    addGreenPolygon(fGuavirami); //bought
+    addGreenPolygon(fTupambaE, ProjectThree()); //bought
+    addRedPolygon(fChafariz, ProjectOne()); //for sale
+    addEmptyGreenPolygon(fTajyPoty); //bought heisst auch Santo Pipo
+    addEmptyGreenPolygon(fTakuapi); //baught
+    addGreenPolygon(fGuavirami, ProjectFor()); //bought
     //Amba'y Poty MISSING (bought) //bald
     //Tekoa Guapo'y Poty MISSING (for sale) //bald
 
     //Add markers to the list of markers
     //addGreenMarker(mPuertoLeoni, "Puerto Leoni");
-    addRedMarker(
-        mProvincialPark, "Am Rand des Provinzparks „Valle del Cuña Pirú“");
+    addRedMarker(mProvincialPark,
+        "Am Rand des Provinzparks „Valle del Cuña Pirú“", ProjectTwo());
     //addRedMarker(mColoniaDelicia, "Colonia Delicia");
-    addGreenMarker(mTupambaE, "Tupamba'é");
-    addRedMarker(mChafariz, "Wald am Chafaríz, nahe Soberbio");
-    addGreenMarker(mTajyPoty, "Tajy Poty");
-    addGreenMarker(mTakuapi, "Takuapí");
-    addGreenMarker(mGuavirami, "Gemeinschaft Guaviramí");
+    addGreenMarker(mTupambaE, "Tupamba'é", ProjectThree());
+    addRedMarker(mChafariz, "Wald am Chafaríz, nahe Soberbio", ProjectOne());
+    addEmptyGreenMarker(mTajyPoty, "Tajy Poty");
+    addEmptyGreenMarker(mTakuapi, "Takuapí");
+    addGreenMarker(mGuavirami, "Gemeinschaft Guaviramí", ProjectFor());
   }
 
   @override
@@ -195,35 +305,13 @@ class StartMapWidgetState extends State<StartMapWidget> {
               )),
         ),
         body: Center(
-          /*child: _onMapCreated ==
-                  null //customRedMarker == null || customGreenMarker == null
-              ? CircularProgressIndicator()
-              : //requestLocationPermission(),*/
-              //locStatus == 'denied'
-              //?
-              /*Column(
-                  children: <Widget>[
-                  
-                  Container(
-                      margin: const EdgeInsets.all(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.lightBlue,
-                          padding: EdgeInsets.all(8),
-                          textStyle: TextStyle(fontSize: 20),
-                        ),
-                        child: Text('Request Runtime Location Permission'),
-                        onPressed: requestLocationPermission,
-                      ),
-                    ),
-                  */
-             child: GoogleMap(
-                  markers: _markers,
-                  polygons: _polygons,
-                  initialCameraPosition: _initialCameraPosition,
-                  onMapCreated: _onMapCreated,
-                  //onTap: _ontap, //Test
-                ),
+          child: GoogleMap(
+            markers: _markers,
+            polygons: _polygons,
+            initialCameraPosition: _initialCameraPosition,
+            onMapCreated: _onMapCreated,
+            //onTap: _ontap, //Test
+          ),
           // ]
           //),
         ),
