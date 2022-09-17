@@ -40,11 +40,8 @@ dependencies:
   firebase_messaging: ^11.2.13
   firebase_core: ^1.14.0
   cloud_firestore: ^3.1.5
-  notification_permissions: ^0.6.1
   permission_handler: ^9.2.0
-
-
-
+  notification_permissions: ^0.6.1
 
 dev_dependencies:
   flutter_test:
