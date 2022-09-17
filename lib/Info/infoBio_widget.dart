@@ -91,13 +91,12 @@ class InfoBio extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    'Die Gefahr der schrumpfenden Biodiversität ist, dass einzele Pflanzen oder Tiere die Überhand nehmen können. Die Wahrscheinlichkeit, dass einzelne Arten im Falle einer Klimakrise, bei Parasitenbefall, oder bei Krankheiten überleben ist viel geringer als dass sie bei grosser Diversität wäre. Dies kann auch für uns Menschen schwere Folgen haben, da unsere Wirtschaft auf der Landwirtschaft basiert, die bei immer geringerer Biodiversität schlecht auf andere Sorten umsteigen kann.',
+                    'Die Gefahr der schrumpfenden Biodiversität ist, dass einzelne Pflanzen oder Tiere die Überhand nehmen können. Die Wahrscheinlichkeit, dass einzelne Arten im Falle einer Klimakrise, bei Parasitenbefall, oder bei Krankheiten überleben ist viel geringer als dass sie bei grosser Diversität wäre. Dies kann auch für uns Menschen schwere Folgen haben, da unsere Wirtschaft auf der Landwirtschaft basiert, die bei immer geringerer Biodiversität schlecht auf andere Sorten umsteigen kann.',
                     style: TextStyle(fontSize: 20.0),
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  
                   SizedBox(
                     height: 20,
                   ),
