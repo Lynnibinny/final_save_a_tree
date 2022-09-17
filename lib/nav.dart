@@ -9,6 +9,7 @@ Version Date Who Changes
 
 Copyright © 2021 Lynn Nüesch und Yarina Vetterli, Switzerland. All rights reserved.
 -----------------------------------------------------------------------------------*/
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:save_a_tree/Info/info_widget.dart';
 import 'package:save_a_tree/Project/project_widget.dart';
@@ -16,7 +17,7 @@ import 'package:save_a_tree/startprofile_widget.dart';
 import 'Map/startmap_widget.dart';
 
 class Nav extends StatefulWidget {
-  final int index;
+  final int? index;
   Nav({this.index});
   @override
   _NavState createState() => _NavState(index: index);
@@ -28,12 +29,56 @@ class Nav extends StatefulWidget {
 }
 
 class _NavState extends State<Nav> {
-  int _currentIndex;
-
-  _NavState({int index}) {
+  late int _currentIndex;
+  //late int _totalNotifications;
+  _NavState({int? index}) {
     _currentIndex = index ?? 0;
   }
+  Future<void> setupInteractedMessage() async {
+    // Get any messages which caused the application to open from
+    // a terminated state.
+    RemoteMessage? initialMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
 
+    // If the message also contains a data property with a "type" of "chat",
+    // navigate to a chat screen
+    if (initialMessage != null) {
+      _handleMessage(initialMessage);
+    }
+
+    // Also handle any interaction when the app is in the background via a
+    // Stream listener
+    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+  }
+
+  void _handleMessage(RemoteMessage message) {
+    if (message.data['type'] == 'goal') {
+      Navigator.pushNamed(
+        context,
+        '/goal',
+        //arguments: ChatArguments(message),
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseMessaging.instance
+        .getInitialMessage()
+        .then((RemoteMessage? message) {
+      if (message != null) {
+        Navigator.pushNamed(
+          context,
+          '/goal',
+          // arguments: MessageArguments(message, true),
+        );
+      }
+    });
+    // Run code required to handle interacted messages in an async function
+    // as initState() must not be async
+    setupInteractedMessage();
+  }
   //int _currentIndex =
   //    0; // current Index to describe which Icon in the Nav Bar is pressed
 
@@ -62,12 +107,14 @@ class _NavState extends State<Nav> {
         onTap: onTabTapped,
         //elevation: 0.5,
         //backgroundColor: Color(0x00000000),
-        backgroundColor: Colors.white12,
+        // backgroundColor: Colors.white,
         currentIndex: _currentIndex,
 
         type: BottomNavigationBarType
             .fixed, //has to be fixed to get the text and the icons for more then three
-
+        backgroundColor: Colors.black, // <-- This works for fixed
+        selectedItemColor: Colors.lightGreen[400],
+        unselectedItemColor: Colors.white,
         items: [
           BottomNavigationBarItem(
             //index 2
@@ -77,10 +124,7 @@ class _NavState extends State<Nav> {
               color: Colors.white,
             ),
 
-            title: Text(
-              'Projekte',
-              style: TextStyle(color: Colors.white),
-            ),
+            label: 'Projekte',
           ),
           BottomNavigationBarItem(
             //index 1
@@ -89,11 +133,7 @@ class _NavState extends State<Nav> {
               Icons.map_outlined,
               color: Colors.white,
             ),
-
-            title: new Text(
-              'Karte',
-              style: TextStyle(color: Colors.white),
-            ),
+            label: 'Karte',
           ),
           BottomNavigationBarItem(
             //index 0
@@ -102,11 +142,12 @@ class _NavState extends State<Nav> {
               Icons.eco,
               color: Colors.white,
             ),
+            label: 'Info',
 
-            title: new Text(
+            /*title: new Text(
               'Info',
               style: TextStyle(color: Colors.white),
-            ),
+            ),*/
           ),
           BottomNavigationBarItem(
             //index 3
@@ -115,11 +156,12 @@ class _NavState extends State<Nav> {
               Icons.person,
               color: Colors.white,
             ),
+            label: 'Profil',
 
-            title: Text(
+            /*title: Text(
               'Profil',
               style: TextStyle(color: Colors.white),
-            ),
+            ),*/
           ),
         ],
       ),

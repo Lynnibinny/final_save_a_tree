@@ -25,8 +25,8 @@ class StartMapWidgetState extends State<StartMapWidget> {
   Set<Marker> _markers = {};
   Set<Polygon> _polygons = {};
 
-  BitmapDescriptor customGreenMarker;
-  BitmapDescriptor customRedMarker; //class for our custom Marker
+  late BitmapDescriptor customGreenMarker;
+  late BitmapDescriptor customRedMarker; //class for our custom Marker
 
   CameraPosition _initialCameraPosition = CameraPosition(
     //start position of the map
@@ -112,7 +112,7 @@ class StartMapWidgetState extends State<StartMapWidget> {
       _polygons.add(
         Polygon(
           polygonId: PolygonId('$_polygonId'),
-          points: position,
+          points: position as List<LatLng>,
           strokeColor: Colors.green.withOpacity(0.5),
           fillColor: Colors.green.withOpacity(0.5),
           strokeWidth: 2,
@@ -130,7 +130,7 @@ class StartMapWidgetState extends State<StartMapWidget> {
       _polygons.add(
         Polygon(
           polygonId: PolygonId('$_polygonId'),
-          points: position,
+          points: position as List<LatLng>,
           strokeColor: Colors.red.withOpacity(0.5),
           fillColor: Colors.red.withOpacity(0.5),
           strokeWidth: 2,
@@ -195,10 +195,10 @@ class StartMapWidgetState extends State<StartMapWidget> {
               )),
         ),
         body: Center(
-          child: _onMapCreated ==
+          /*child: _onMapCreated ==
                   null //customRedMarker == null || customGreenMarker == null
               ? CircularProgressIndicator()
-              : //requestLocationPermission(),
+              : //requestLocationPermission(),*/
               //locStatus == 'denied'
               //?
               /*Column(
@@ -217,7 +217,7 @@ class StartMapWidgetState extends State<StartMapWidget> {
                       ),
                     ),
                   */
-              GoogleMap(
+             child: GoogleMap(
                   markers: _markers,
                   polygons: _polygons,
                   initialCameraPosition: _initialCameraPosition,

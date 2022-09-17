@@ -10,12 +10,12 @@ Version Date Who Changes
 Copyright © 2021 Lynn Nüesch und Yarina Vetterli, Switzerland. All rights reserved.
 -----------------------------------------------------------------------------------*/
 class User {
-  int useId;
-  String useMail;
-  String useUserName;
-  int useSavedTrees;
-  double useDonated;
-  int useGoals;
+  int? useId;
+  String? useMail;
+  String? useUserName;
+  int? useSavedTrees;
+  double? useDonated;
+  int? useGoals;
   
   //String usePassword;
 
@@ -32,8 +32,8 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
         useId: int.parse(json['UseId']),
-        useMail: json['UseMail'] as String,
-        useUserName: json['UseUserName'] as String,
+        useMail: json['UseMail'] as String?,
+        useUserName: json['UseUserName'] as String?,
         useSavedTrees: int.parse(json['UseSavedTrees']),
         useDonated: double.parse(
             json['UseDonated']), //usePassword: json['UsePassword'] as String,

@@ -39,10 +39,10 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
   );
   List<bool> _selections = List.generate(3, (_) => false);
 
-  User _filterUser;
+  User? _filterUser;
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
 
-  List<User> _user = [];
+  List<User>? _user = [];
   void asyncState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var id = prefs.getInt('registeredUserId');
@@ -52,20 +52,20 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
   }
 
   _deleteUser() {
-    Services.deleteUser(_filterUser.useId); //.then((user) {
+    Services.deleteUser(_filterUser!.useId); //.then((user) {
     //print("Length ${user.length}");
     //);
   }
 
   _updateUser() {
     Services.updateUser(
-            _filterUser.useId,
-            _filterUser.useMail,
-            _filterUser.useUserName,
+            _filterUser!.useId,
+            _filterUser!.useMail,
+            _filterUser!.useUserName,
             //_useUserNameController.text,
-            _filterUser.useSavedTrees,
-            _filterUser.useDonated,
-            _filterUser.useGoals)
+            _filterUser!.useSavedTrees,
+            _filterUser!.useDonated,
+            _filterUser!.useGoals)
         .then(
       (result) async {
         if ('error' == result) {
@@ -81,17 +81,17 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
   }
 
   bool _isEditingText = false;
-  TextEditingController _editingController;
+  late TextEditingController _editingController;
   String initialText = "neuer Name";
 
-  void getUser(int id) {
+  void getUser(int? id) {
     //_showProgress('Loading Employees...');
     Services.getUser().then((user) {
       setState(() {
         _user = user;
         // Initialize to the list from Server when reloading...
         _filterUser =
-            user.where((userElement) => userElement.useId == id).toList().first;
+            user!.where((userElement) => userElement.useId == id).toList().first;
         //output has to be one single user
         //.toList cause "where" does not return a List it just returns a where list
         //we can just use first cause in this list there is one single entry anyways
@@ -114,7 +114,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
     super.dispose();
   }
 
-  TextEditingController _useUserNameController;
+  TextEditingController? _useUserNameController;
   Widget _editTextField() {
     if (_isEditingText)
       return Center(
@@ -130,7 +130,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
           controller: _useUserNameController,
           onSubmitted: (newValue) {
             setState(() {
-              _filterUser.useUserName = newValue;
+              _filterUser!.useUserName = newValue;
               _isEditingText = false;
             });
             _updateUser();
@@ -153,7 +153,7 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
       child: Row(
         children: <Widget>[
           Text(
-            _filterUser.useUserName,
+            _filterUser!.useUserName!,
             style: TextStyle(
               color: Colors.black,
               fontSize: 18.0,
@@ -177,10 +177,10 @@ class _ProfileSettingsWidgetState extends State<ProfileSettingsWidget> {
           end: Alignment.bottomLeft,
           stops: [0.1, 0.5, 0.7, 0.9],
           colors: [
-            Colors.lightGreen[200],
-            Colors.lightGreen[300],
-            Colors.lightGreen[400],
-            Colors.lightGreen[400],
+            Colors.lightGreen[200]!,
+            Colors.lightGreen[300]!,
+            Colors.lightGreen[400]!,
+            Colors.lightGreen[400]!,
           ],
         ),
       ),

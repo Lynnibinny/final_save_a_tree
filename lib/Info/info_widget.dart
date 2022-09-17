@@ -35,8 +35,8 @@ class StartGoalsState extends State<StartGoalsWidget> {
       borderRadius: BorderRadius.all(Radius.circular(5)),
     ),
   );
-  AssetImage BigTree;
-  double _width;
+  AssetImage? BigTree;
+  late double _width;
   double iTop = 10.0;
   double iRight = 10.0;
   double iSize = 27.0;
@@ -77,7 +77,7 @@ class StartGoalsState extends State<StartGoalsWidget> {
 
   _launchURL() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    int id = prefs.getInt('registeredUserId');
+    int? id = prefs.getInt('registeredUserId');
     String url = 'https://i-kf.ch/SaveATree/spenden.php?id=' + id.toString();
     if (await canLaunch(url)) {
       await launch(url);
@@ -96,10 +96,10 @@ class StartGoalsState extends State<StartGoalsWidget> {
           end: Alignment.bottomLeft,
           stops: [0.1, 0.5, 0.7, 0.9],
           colors: [
-            Colors.lightGreen[200],
-            Colors.lightGreen[300],
-            Colors.lightGreen[400],
-            Colors.lightGreen[400],
+            Colors.lightGreen[200]!,
+            Colors.lightGreen[300]!,
+            Colors.lightGreen[400]!,
+            Colors.lightGreen[400]!,
           ],
         ),
       ),

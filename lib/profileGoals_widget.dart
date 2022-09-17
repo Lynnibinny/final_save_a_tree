@@ -31,10 +31,10 @@ class ProfileGoalsWidget extends StatefulWidget {
 
 class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
   List<bool> _selections = List.generate(3, (_) => false);
-  User _filterUser;
-  List<User> _user = [];
-  double _height;
-  double _width;
+  User? _filterUser;
+  List<User>? _user = [];
+  late double _height;
+  late double _width;
 
   var percent = -5;
   int filterUserPercent = 70;
@@ -47,7 +47,7 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
   }
 
   void initState() {
-    Timer timer;
+    late Timer timer;
 
     timer = Timer.periodic(Duration(milliseconds: 300), (_) {
       //print('Percent Update');
@@ -56,8 +56,8 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
         //print('in setState');
         if (_filterUser != null) {
           //print('in if filterUser != null');
-          int finalDonated = _filterUser.useDonated.round();
-          filterUserPercent = calcPercent(_filterUser.useGoals, finalDonated);
+          int finalDonated = _filterUser!.useDonated!.round();
+          filterUserPercent = calcPercent(_filterUser!.useGoals!, finalDonated);
           //print('Percent: $filterUserPercent ${_filterUser.useGoals} ${_filterUser.useSavedTrees}');
         }
         if (percent >= filterUserPercent) {
@@ -82,7 +82,7 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
 
   @override
   void dispose() {
-    _editingController.dispose();
+    _editingController?.dispose();
     super.dispose();
   }
 
@@ -102,20 +102,20 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
 
   _deleteUser() {
-    Services.deleteUser(_filterUser.useId); //.then((user) {
+    Services.deleteUser(_filterUser!.useId); //.then((user) {
     //print("Length ${user.length}");
     //);
   }
 
   _updateUser() {
     Services.updateUser(
-            _filterUser.useId,
-            _filterUser.useMail,
-            _filterUser.useUserName,
+            _filterUser!.useId,
+            _filterUser!.useMail,
+            _filterUser!.useUserName,
             //_useUserNameController.text,
-            _filterUser.useSavedTrees,
-            _filterUser.useDonated,
-            _filterUser.useGoals)
+            _filterUser!.useSavedTrees,
+            _filterUser!.useDonated,
+            _filterUser!.useGoals)
         .then(
       (result) async {
         if ('error' == result) {
@@ -131,16 +131,16 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
   }
 
   bool _isEditingText = false;
-  TextEditingController _editingController;
+  TextEditingController? _editingController;
   String initialText = "neuer Name";
-  void getUser(int id) {
+  void getUser(int? id) {
     //_showProgress('Loading Employees...');
     Services.getUser().then((user) {
       setState(() {
         _user = user;
         // Initialize to the list from Server when reloading...
         _filterUser =
-            user.where((userElement) => userElement.useId == id).toList().first;
+            user!.where((userElement) => userElement.useId == id).toList().first;
         //output has to be one single user
         //.toList cause "where" does not return a List it just returns a where list
         //we can just use first cause in this list there is one single entry anyways
@@ -150,7 +150,7 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
     });
   }
 
-  TextEditingController _useGoalsController;
+  TextEditingController? _useGoalsController;
   Widget _editTitleTextField() {
     if (_isEditingText)
       return Center(
@@ -168,7 +168,7 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
               controller: _useGoalsController,
               onSubmitted: (newValue) {
                 setState(() {
-                  _filterUser.useGoals = int.parse(newValue);
+                  _filterUser!.useGoals = int.parse(newValue);
                   _isEditingText = false;
                 });
                 _updateUser();
@@ -188,7 +188,7 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
             width: _width / 13,
           ),
           Text(
-            _filterUser.useGoals.toString(),
+            _filterUser!.useGoals.toString(),
             style: TextStyle(
               color: Colors.black,
               fontSize: 45.0,
@@ -217,10 +217,10 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
             end: Alignment.bottomLeft,
             stops: [0.1, 0.5, 0.7, 0.9],
             colors: [
-              Colors.lightGreen[200],
-              Colors.lightGreen[300],
-              Colors.lightGreen[400],
-              Colors.lightGreen[400],
+              Colors.lightGreen[200]!,
+              Colors.lightGreen[300]!,
+              Colors.lightGreen[400]!,
+              Colors.lightGreen[400]!,
             ],
           ),
         ),
@@ -228,16 +228,16 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
             child: Scaffold(
                 appBar: AppBar(
                   leading: IconButton(
-            onPressed: () => Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (_) => Nav(index: 3)),
-                (route) => false),
-            icon: Icon(
-              Icons.arrow_back_ios,
-              size: 20.0,
-              color: Colors.black,
-            ),
-          ),
+                    onPressed: () => Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (_) => Nav(index: 3)),
+                        (route) => false),
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      size: 20.0,
+                      color: Colors.black,
+                    ),
+                  ),
                   title: Text(
                     'Ziel',
                     style: TextStyle(color: Colors.black),
@@ -247,7 +247,6 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
                   iconTheme: IconThemeData(
                     color: Colors.black, //to make the back button black
                   ),
-                  
                 ),
                 body: Center(
                     child: _filterUser == null
@@ -292,7 +291,7 @@ class _ProfileGoalsWidgetState extends State<ProfileGoalsWidget> {
                                                         ],
                                                         colors: [
                                                           Colors
-                                                              .lightGreen[500],
+                                                              .lightGreen[500]!,
                                                           Colors.white,
                                                           //Colors.lightGreen[400],
                                                           // Colors.lightGreen[500],

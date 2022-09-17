@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "159744480614",
+    "project_id": "save-a-tree",
+    "storage_bucket": "save-a-tree.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:159744480614:android:d53ccce76eb349605ae4a7",
+        "android_client_info": {
+          "package_name": "ch.neutics.sagit.saveatree"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "159744480614-5oofer0634mt1n514ga8vlj8thi8kbpt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ch.neutics.sagit.saveatree",
+            "certificate_hash": "1c2e2d513e40b3c644389b92e768062aa63039bf"
+          }
+        },
+        {
+          "client_id": "159744480614-8vtpmqt84upmah4o8k9i8ocebr7alm1h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKEYy1ckcyTyvHXUx-pjL48vB8PDrM6p8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "159744480614-8vtpmqt84upmah4o8k9i8ocebr7alm1h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "159744480614-rhaksqp14p891jvtbg3nr5r9uqbikq2d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ch.neutics.sagit.saveatree"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
