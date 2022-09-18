@@ -263,7 +263,7 @@ class StartMapWidgetState extends State<StartMapWidget> {
     //addRedPolygon(fColoniaDelicia);
     addGreenPolygon(fTupambaE, ProjectThree()); //bought
     addRedPolygon(fChafariz, ProjectOne()); //for sale
-    addEmptyGreenPolygon(fTajyPoty); //bought heisst auch Santo Pipo
+    addEmptyGreenPolygon(fSantoPipo); //bought heisst auch Santo Pipo
     addEmptyGreenPolygon(fTakuapi); //baught
     addGreenPolygon(fGuavirami, ProjectFor()); //bought
     //Amba'y Poty MISSING (bought) //bald
@@ -276,7 +276,7 @@ class StartMapWidgetState extends State<StartMapWidget> {
     //addRedMarker(mColoniaDelicia, "Colonia Delicia");
     addGreenMarker(mTupambaE, "Tupamba'é", ProjectThree());
     addRedMarker(mChafariz, "Wald am Chafaríz, nahe Soberbio", ProjectOne());
-    addEmptyGreenMarker(mTajyPoty, "Tajy Poty");
+    addEmptyGreenMarker(mSantoPipo, "Santo Pipo");
     addEmptyGreenMarker(mTakuapi, "Takuapí");
     addGreenMarker(mGuavirami, "Gemeinschaft Guaviramí", ProjectFor());
   }
