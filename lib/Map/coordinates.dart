@@ -76,7 +76,7 @@ final List<LatLng> fSantoPipo = [
   LatLng(-27.0679028, -55.0482222),
 ];
 
-/*final List<LatLng> fTakuapi = [
+/*final List<LatLng> fTakuapi02 = [  //(!) don't delete 
   LatLng(-27.0047750, -55.0736611),
   LatLng(-26.9938111, -55.0739278),
   LatLng(-26.9937139, -55.0792139),
@@ -113,6 +113,6 @@ LatLng mTupambaE = LatLng(-27.00416667, -55.05451944);
 LatLng mChafariz = LatLng(-26.9816000, -55.0939639);
 LatLng mSantoPipo = LatLng(-27.0623750, -55.0494333);
 LatLng mTakuapi = LatLng(-26.9937139, -55.0792139);
-//Another Takuapí supposed to be 70 Ha, exact coordinates
+//Another Takuapí02 supposed to be 70 Ha, exact coordinates
 LatLng mGuavirami =
     LatLng(-27.0017556, -54.9664222); //121 Ha, only one coordinate known
