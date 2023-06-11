@@ -106,13 +106,39 @@ final List<LatLng> fGuavirami = [
   LatLng(-26.9986889, -54.9532639),
 ];
 
+final List<LatLng> fTapeMiri = [
+  LatLng(-26.9401861, 	-54.9361250),
+  LatLng(-54.9361250, 	-54.9332917),
+  LatLng(-26.0075417, 	-54.0163750),
+  LatLng(-26.0099917, 	-54.9000139),
+  LatLng(-26.0114722, 	-54.9324806),
+  LatLng(-26.0112639, 	-54.0135667),
+  LatLng(-26.0123000, 	-54.0102278),
+  LatLng(-26.0104694,	  -54.0093056),
+  LatLng(-26.0090750,	  -54.0063528),
+  LatLng(-26.0087500, 	-54.0053250),
+  LatLng(-26.0101194, 	-54.0047639),
+  LatLng(-26.0109917, 	-54.0042389),
+  LatLng(-26.0113889, 	-54.0023583),
+  LatLng(-26.0163306, 	-54.8971000),
+  LatLng(-26.9550861, 	-54.8974056),
+  LatLng(-26.0055472, 	-54.9052778),
+  LatLng(-26.0032778, 	-54.0067250),
+  LatLng(-26.0031694, 	-54.0113556),
+  LatLng(-26.0038528, 	-54.0120333),
+  LatLng(-26.0037139, 	-54.0128167),
+  LatLng(-26.0044778, 	-54.0135694),
+  LatLng(-26.0044556, 	-54.0144111),
+  LatLng(-26.0038806, 	-54.0148944),
+  LatLng(-26.9478917, 	-54.9386389),
+];
+
 LatLng mPuertoLeoni = LatLng(-26.969627380371094, -55.189170837402344);
 LatLng mProvincialPark = LatLng(-26.945327758789062, -54.92672348022461);
 LatLng mColoniaDelicia = LatLng(-27.24620556, -54.35780833);
 LatLng mTupambaE = LatLng(-27.00416667, -55.05451944);
 LatLng mChafariz = LatLng(-26.9816000, -55.0939639);
 LatLng mSantoPipo = LatLng(-27.0623750, -55.0494333);
-LatLng mTakuapi = LatLng(-26.9937139, -55.0792139);
-//Another Takuapí02 supposed to be 70 Ha, exact coordinates
-LatLng mGuavirami =
-    LatLng(-27.0017556, -54.9664222); //121 Ha, only one coordinate known
+LatLng mTakuapi = LatLng(-26.9937139, -55.0792139); //Another Takuapí02 supposed to be 70 Ha, exact coordinates
+LatLng mGuavirami = LatLng(-27.0017556, -54.9664222); //121 Ha, only one coordinate known
+LatLng mTapeMiri = LatLng(-26.9401861, 	-54.9361250); //313 Ha, pictures
